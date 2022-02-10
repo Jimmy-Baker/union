@@ -27,7 +27,7 @@
     <navigation>
       <ul class ="row">
         <?php if($session->is_logged_in()) { ?>
-        <li class="four columns">User: <?= $session->username; ?>
+        <li class="four columns">User: <?= $session->email; ?>
         <li class="four columns"><a href="<?= url_for('/staff/index.php'); ?>">Menu</a></li>
         <li class="four columns"><a href="<?= url_for('/staff/logout.php'); ?>">Logout</a></li>
         <?php } ?>

@@ -3,15 +3,34 @@
 class User extends DatabaseObject {
 
   static protected $table_name = "users";
-  static protected $db_columns = ['id', 'first_name', 'last_name', 'email', 'username', 'hashed_password', 'user_level'];
+  static protected $db_columns = ['id', 'first_name', 'last_name', 'middle_name', 'preferred_name', 'birth_date', 'group_id', 'avatar_url', 'street_address', 'city', 'zip', 'state_abv', 'country_abv', 'email', 'phone_primary', 'phone_p_country', 'phone_secondary', 'phone_s_country', 'first_name_emergency', 'last_name_emergency', 'phone_emergency', 'phone_e_country', 'password_hash', 'access_abv', 'created_at'];
 
   public $id;
   public $first_name;
   public $last_name;
+  public $middle_name;
+  public $preferred_name;
+  public $birth_date;
+  public $group_id;
+  public $avatar_url;
+  public $street_address;
+  public $city;
+  public $zip;
+  public $state_abv;
+  public $country_abv;
   public $email;
-  public $username;
-  protected $hashed_password;
-  public $user_level;
+  public $phone_primary;
+  public $phone_p_country;
+  public $phone_secondary;
+  public $phone_s_country;
+  public $first_name_emergency;
+  public $last_name_emergency;
+  public $phone_emergency;
+  public $phone_e_country;
+  protected $password_hash;
+  public $access_abv;
+  public $created_at;
+  
   public $password;
   public $confirm_password;
   protected $password_required = true;
@@ -19,9 +38,26 @@ class User extends DatabaseObject {
   public function __construct($args=[]) {
     $this->first_name = $args['first_name'] ?? '';
     $this->last_name = $args['last_name'] ?? '';
+    $this->middle_name = $args['middle_name'] ?? '';
+    $this->preferred_name = $args['preferred_name'] ?? '';
+    $this->birth_date = $args['birth_date'] ?? '';
+    $this->group_id = $args['group_id'] ?? '';
+    $this->avatar_url = $args['avatar_url'] ?? '';
+    $this->street_address = $args['street_address'] ?? '';
+    $this->city = $args['city'] ?? '';
+    $this->zip = $args['zip'] ?? '';
+    $this->state_abv = $args['state_abv'] ?? '';
+    $this->country_abv = $args['country_abv'] ?? '';
     $this->email = $args['email'] ?? '';
-    $this->username = $args['username'] ?? '';
-    $this->user_level = $args['user_level'] ?? '';
+    $this->phone_primary = $args['phone_primary'] ?? '';
+    $this->phone_p_country = $args['phone_p_country'] ?? '';
+    $this->phone_secondary = $args['phone_secondary'] ?? '';
+    $this->phone_s_country = $args['phone_s_country'] ?? '';
+    $this->first_name_emergency = $args['first_name_emergency'] ?? '';
+    $this->last_name_emergency = $args['last_name_emergency'] ?? '';
+    $this->phone_emergency = $args['phone_emergency'] ?? '';
+    $this->phone_e_country = $args['phone_e_country'] ?? '';
+    
     $this->password = $args['password'] ?? '';
     $this->confirm_password = $args['confirm_password'] ?? '';
   }
@@ -36,12 +72,12 @@ class User extends DatabaseObject {
    * @param {property} $this->password
    *   
    **/
-  protected function set_hashed_password() {
-    $this->hashed_password = password_hash($this->password, PASSWORD_BCRYPT);
+  protected function set_password_hash() {
+    $this->password_hash = password_hash($this->password, PASSWORD_BCRYPT);
   }
 
   public function verify_password($password) {
-    return password_verify($password, $this->hashed_password);
+    return password_verify($password, $this->password_hash);
   }
 
   /**   
@@ -51,7 +87,7 @@ class User extends DatabaseObject {
    * 
    **/
   protected function create() {
-    $this->set_hashed_password();
+    $this->set_password_hash();
     return parent::create();
   }
 
@@ -63,7 +99,7 @@ class User extends DatabaseObject {
    **/
   protected function update() {
     if($this->password != '') {
-      $this->set_hashed_password();
+      $this->set_password_hash();
       // validate password
     } else {
       // password not being updated, skip hashing and validation
@@ -95,12 +131,12 @@ class User extends DatabaseObject {
       $this->error_array[] = ["#email", "Email must be a valid format."];
     }
 
-    if(is_blank($this->username)) {
-      $this->error_array[] = ["#username", "Username cannot be blank."];
-    } elseif (!has_length($this->username, array('min' => 8, 'max' => 255))) {
-      $this->error_array[] = ["#username", "Username must be between 8 and 255 characters."];
-    } elseif (!has_unique_username($this->username, $this->id ?? 0)) {
-      $this->error_array[] = ["#username","Username not allowed. Try another."];
+    if(is_blank($this->email)) {
+      $this->error_array[] = ["#email", "email cannot be blank."];
+    } elseif (!has_length($this->email, array('min' => 8, 'max' => 255))) {
+      $this->error_array[] = ["#email", "email must be between 8 and 255 characters."];
+    } elseif (!has_unique_email($this->email, $this->id ?? 0)) {
+      $this->error_array[] = ["#email","email not allowed. Try another."];
     }
 
     if($this->password_required) {
@@ -125,16 +161,16 @@ class User extends DatabaseObject {
       }
     }
     
-    if(!isset($this->user_level)) {
-      $this->error_array[] = ["#user_level", "User level must be selected"];
+    if(!isset($this->access_abv)) {
+      $this->error_array[] = ["#access_abv", "User level must be selected"];
     }
 
     return $this->error_array;
   }
 
-  static public function find_by_username($username) {
+  static public function find_by_email($email) {
     $sql = "SELECT * FROM " . static::$table_name . " ";
-    $sql .= "WHERE username='" . self::$database->escape_string($username) . "'";
+    $sql .= "WHERE email='" . self::$database->escape_string($email) . "'";
     $obj_array = static::find_by_sql($sql);
     if(!empty($obj_array)) {
       return array_shift($obj_array);

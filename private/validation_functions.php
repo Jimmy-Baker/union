@@ -93,13 +93,13 @@
     return preg_match($email_regex, $value) === 1;
   }
 
-  // has_unique_username('johnqpublic')
-  // * Validates uniqueness of user.username
-  // * For new records, provide only the username.
+  // has_unique_email('johnqpublic')
+  // * Validates uniqueness of user.email
+  // * For new records, provide only the email.
   // * For existing records, provide current ID as second argument
-  //   has_unique_username('johnqpublic', 4)
-  function has_unique_username($username, $current_id="0") {
-    $user = User::find_by_username($username);
+  //   has_unique_email('johnqpublic', 4)
+  function has_unique_email($email, $current_id="0") {
+    $user = User::find_by_email($email);
     if($user === false || $user->id == $current_id) {
       // is unique
       return true;
