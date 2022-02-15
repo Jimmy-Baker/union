@@ -38,39 +38,30 @@ if(is_post_request()) {
 ?>
 
 <?php $page_title = 'Log in'; ?>
-<?php include(SHARED_PATH . '/user-header.php'); ?>
+<?php include(SHARED_PATH . '/public-header.php'); ?>
 
-<div id="content" class="main">
-  <div class="row">
-    <div class="four columns offset-by-four">
-      <h1>Log in</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="four columns offset-by-four">
-      <?php echo display_errors($error_array); ?>
-    </div>
-  </div>
+<main class="container-md p-4 mt-5" id="main">
+
   <form action="login.php" method="post">
-    <div class="row">
-      <div class="four columns offset-by-four">
-        <label for="email">email: </label>
-        <input type="text" name="email" value="<?php echo h($email); ?>" />
-      </div>
+    <h1>Log In</h1>
+    <div class="mb-3">
+      <label for="inputEmail" class="form-label">Email Address</label>
+      <input type="email" name="email" value="<?php echo h($email); ?>" class="form-control" id="inputEmail">
     </div>
-    <div class="row">
-      <div class="four columns offset-by-four">
-        <label for="password">Password: </label>
-        <input type="password" name="password" value="">
-      </div>
+    <div class="mb-3">
+      <label for="inputPassword" class="form-label">Password</label>
+      <input type="password" name="password" value="" class="form-control" id="inputPassword" aria-describedby="passwordHelp">
+      <div id="passwordHelp" class="form-text">Can't remember your password? Contact us for assistance.</div>
     </div>
-    <div class="row">
-      <div class="four columns offset-by-four">
-        <button type="submit" class="button-primary" name="submit">Submit</button>
-      </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="inputRemember">
+      <label class="form-check-label" for="inputRemember">Remember Me</label>
     </div>
+    <button type="submit" name="submit" class="btn btn-primary">Log In</button>
   </form>
 
-</div>
+  <?php echo display_errors($error_array); ?>
+</main>
+
 
 <?php include(SHARED_PATH . '/user-footer.php'); ?>
