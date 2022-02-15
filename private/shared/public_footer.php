@@ -1,7 +1,7 @@
 
     <footer class="row">
       <div class="twelve columns">
-      <p>Copyright <?= date('Y'); ?>, WNC Birds</p>
+      <p>Copyright <?= date('Y'); ?>, Union Climbing</p>
       <div>
     </footer>
 

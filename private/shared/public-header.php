@@ -8,7 +8,7 @@
 
 <html lang="en">
   <head>
-    <title>WNC Birds <?php if(isset($page_title)) { echo '- ' . h($page_title); } ?></title>
+    <title>Union Climbing <?php if(isset($page_title)) { echo '- ' . h($page_title); } ?></title>
     <meta charset="utf-8">
     <link rel="stylesheet" media="all" href="<?= url_for('/stylesheets/normalize.css'); ?>" />
     <link rel="stylesheet" media="all" href="<?= url_for('/stylesheets/skeleton.css'); ?>" />
@@ -22,7 +22,7 @@
     <header class="row">
       <div class="twelve columns">
         <h1>
-          <a href="<?= url_for('/index.php'); ?>">WNC Birds</a>
+          <a href="<?= url_for('/index.php'); ?>">Union Climbing</a>
         </h1>
       <div>
     </header>
