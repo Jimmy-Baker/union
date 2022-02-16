@@ -22,7 +22,7 @@
     <script src="<?= url_for("/node_modules/bootstrap/dist/js/bootstrap.min.js");?>" defer></script>
   </head>
 
-  <body class="container pt-5">
+  <body class="container-fluid px-0 pt-5">
     <nav class="navbar navbar-dark navbar-expand-sm bg-primary fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"><img src="<?=url_for("/img/union-logo.svg");?>" alt="United mountains logo." width="45">Union</a>
@@ -59,7 +59,7 @@
                 </ul>
               </li> -->
             </ul>
-            <form class="d-flex" action="<?=url_for("/users/login.php");?>">
+            <form class="d-flex" action="<?=url_for("/app/login.php");?>">
               <button class="btn btn-outline-light" type="submit">Log In</button>
             </form>
           </div>

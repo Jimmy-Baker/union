@@ -11,7 +11,7 @@
     <li class="row"><a class="button button-primary" href="<?= url_for('/staff/birds/birds.php'); ?>">Edit Birds</a></li>
     <?php if($session->user_level == 'a') {
       echo '<li class="row"><a class="button button-primary" href="';
-      echo url_for('/staff/users/users.php');
+      echo url_for('/staff/app/users.php');
       echo '">Edit Users</a></li>';
       }   
     ?>

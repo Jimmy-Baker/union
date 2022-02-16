@@ -25,7 +25,20 @@ if(is_post_request()) {
     if($user != false && $user->verify_password($password)) {
       // Mark user as logged in
       $session->login($user);
-      redirect_to(url_for('/staff/index.php'));
+      
+      switch ($session->access_abv) {
+        case "AA":
+          redirect_to(url_for('/app/admin/index.php'));
+          break;
+        case "GS":
+          redirect_to(url_for('/app/staff/index.php'));
+          break; 
+        case "GM":
+          redirect_to(url_for('app/staff/index.php'));
+          break;
+        default:
+          redirect_to(url_for('app/member/index.php'));
+      }
     } else {
       // email not found or password does not match
       $error_array[] = ["#log_in", "Log in was unsuccessful."];
