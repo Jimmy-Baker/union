@@ -51,4 +51,34 @@ if(!function_exists('money_format')) {
   }
 }
 
+//format datetime to a recognizable date
+function format_date($datetime) {
+  $date = date_create($datetime);
+  return date_format($date, "n-d-Y");
+}
+
+//format integers to a recognizable phone numnber
+function format_phone($country, $phone) {
+  if (strlen($phone) != 10) {
+    $string = format_call($country, $phone);
+   } else {
+    if ($country == null || $country == 1)  {
+      $string = ''; 
+    } else {
+     $string = '+'.$country;
+    }
+    $area = substr($phone, 0, 3);
+    $three = substr($phone, 3, 3);
+    $last = substr($phone, 6);
+    $string .= ' (' . $area . ') ' . $three . '-' . $last;
+   }
+  return $string;
+}
+
+function format_call($country, $phone) {
+  ($country == null || $country == 1) ? $string = '' : $string = '+'.$country;
+  $string .= $phone;
+  return $string;
+}
+
 ?>

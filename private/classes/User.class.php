@@ -178,6 +178,17 @@ class User extends DatabaseObject {
       return false;
     }
   }
+  
+  static public function find_by_access($access) {
+    $sql = "SELECT * FROM " . static::$table_name . " ";
+    $sql .= "WHERE access_abv = '" . self::$database->escape_string($access) . "'";
+    $obj_array = static::find_by_sql($sql);
+    if(!empty($obj_array)) {
+      return array_shift($obj_array);
+    } else {
+      return false;
+    }
+  }
 
 }
 
