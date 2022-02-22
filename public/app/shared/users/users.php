@@ -9,7 +9,7 @@ include(SHARED_PATH . '/user-header.php');
 $users = User::find_all();
 $admins = User::find_by_access("AA");
 $managers = User::find_by_access("GM");
-$staff = User::find_by_access("GS");
+$staffs = User::find_by_access("GS");
 $members = User::find_by_access("MM");
 
 ?>
@@ -48,14 +48,11 @@ $members = User::find_by_access("MM");
               <th>Email</th>
               <th>Access</th>
               <th>First&nbsp;Name</th>
-              <th>Middle&nbsp;Name</th>
               <th>Last&nbsp;Name</th>
               <th>City</th>
               <th>State</th>
               <th>Phone</th>
               <th>Birth&nbsp;Date</th>
-              <th>&nbsp;</th>
-              <th>&nbsp;</th>
               <th>&nbsp;</th>
             </tr>
           </thead>
@@ -66,25 +63,196 @@ $members = User::find_by_access("MM");
               <td><?= h($user->email) ?></td>
               <td><?= h($user->access_abv) ?></td>
               <td><?= h($user->first_name) ?></td>
-              <td><?= h($user->middle_name) ?></td>
               <td><?= h($user->last_name) ?></td>
               <td><?= h($user->city) ?></td>
               <td><?= h($user->state_abv) ?></td>
               <td><?= format_phone(h($user->phone_p_country), h($user->phone_primary)) ?></td>
               <td><?= format_date(h($user->birth_date)) ?></td>
-              <td><a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a></td>
-              <td><a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a></td>
-              <td><a class="btn btn-primary" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a></td>
+              <td>
+                <div class="btn-group" role="group" aria-label="user actions">
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                </div>
+              </td>
             </tr>
             <?php } ?>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="tab-pane fade" id="pills-admin" role="tabpanel" aria-labelledby="pills-admin-tab">All Admin</div>
-    <div class="tab-pane fade" id="pills-manager" role="tabpanel" aria-labelledby="pills-manager-tab">All Gym Managers</div>
-    <div class="tab-pane fade" id="pills-staff" role="tabpanel" aria-labelledby="pills-staff-tab">All Gym Staff</div>
-    <div class="tab-pane fade" id="pills-member" role="tabpanel" aria-labelledby="pills-member-tab">All Members</div>
+    <div class="tab-pane fade" id="pills-admin" role="tabpanel" aria-labelledby="pills-admin-tab">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <caption>List of all admins</caption>
+          <thead class="table-primary">
+            <tr>
+              <th>ID</th>
+              <th>Email</th>
+              <th>Group&nbsp;ID</th>
+              <th>First&nbsp;Name</th>
+              <th>Last&nbsp;Name</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Phone</th>
+              <th>Birth&nbsp;Date</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach($admins as $admin) { ?>
+            <tr class="align-middle text-nowrap">
+              <td><?= h($admin->id) ?></td>
+              <td><?= h($admin->email) ?></td>
+              <td><a href="<?= url_for('/app/shared/groups/view.php?id=' . h(u($admin->group_id))); ?>"><?= h($admin->group_id) ?></a></td>
+              <td><?= h($admin->first_name) ?></td>
+              <td><?= h($admin->last_name) ?></td>
+              <td><?= h($admin->city) ?></td>
+              <td><?= h($admin->state_abv) ?></td>
+              <td><?= format_phone(h($admin->phone_p_country), h($admin->phone_primary)) ?></td>
+              <td><?= format_date(h($admin->birth_date)) ?></td>
+              <td>
+                <div class="btn-group" role="group" aria-label="user actions">
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                </div>
+              </td>
+            </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="pills-manager" role="tabpanel" aria-labelledby="pills-manager-tab">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <caption>List of all gym managers</caption>
+          <thead class="table-primary">
+            <tr>
+              <th>ID</th>
+              <th>Email</th>
+              <th>Group&nbsp;ID</th>
+              <th>First&nbsp;Name</th>
+              <th>Last&nbsp;Name</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Phone</th>
+              <th>Birth&nbsp;Date</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach($managers as $manager) { ?>
+            <tr class="align-middle text-nowrap">
+              <td><?= h($manager->id) ?></td>
+              <td><?= h($manager->email) ?></td>
+              <td><a href="<?= url_for('/app/shared/groups/view.php?id=' . h(u($manager->group_id))); ?>"><?= h($manager->group_id) ?></a></td>
+              <td><?= h($manager->first_name) ?></td>
+              <td><?= h($manager->last_name) ?></td>
+              <td><?= h($manager->city) ?></td>
+              <td><?= h($manager->state_abv) ?></td>
+              <td><?= format_phone(h($manager->phone_p_country), h($manager->phone_primary)) ?></td>
+              <td><?= format_date(h($manager->birth_date)) ?></td>
+              <td>
+                <div class="btn-group" role="group" aria-label="user actions">
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                </div>
+              </td>
+            </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="pills-staff" role="tabpanel" aria-labelledby="pills-staff-tab">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <caption>List of all gym staff</caption>
+          <thead class="table-primary">
+            <tr>
+              <th>ID</th>
+              <th>Email</th>
+              <th>Group&nbsp;ID</th>
+              <th>First&nbsp;Name</th>
+              <th>Last&nbsp;Name</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Phone</th>
+              <th>Birth&nbsp;Date</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach($staffs as $staff) { ?>
+            <tr class="align-middle text-nowrap">
+              <td><?= h($staff->id) ?></td>
+              <td><?= h($staff->email) ?></td>
+              <td><a href="<?= url_for('/app/shared/groups/view.php?id=' . h(u($staff->group_id))); ?>"><?= h($staff->group_id) ?></a></td>
+              <td><?= h($staff->first_name) ?></td>
+              <td><?= h($staff->last_name) ?></td>
+              <td><?= h($staff->city) ?></td>
+              <td><?= h($staff->state_abv) ?></td>
+              <td><?= format_phone(h($staff->phone_p_country), h($staff->phone_primary)) ?></td>
+              <td><?= format_date(h($staff->birth_date)) ?></td>
+              <td>
+                <div class="btn-group" role="group" aria-label="user actions">
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                </div>
+              </td>
+            </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="pills-member" role="tabpanel" aria-labelledby="pills-member-tab">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <caption>List of all members</caption>
+          <thead class="table-primary">
+            <tr>
+              <th>ID</th>
+              <th>Email</th>
+              <th>Group&nbsp;ID</th>
+              <th>First&nbsp;Name</th>
+              <th>Last&nbsp;Name</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Phone</th>
+              <th>Birth&nbsp;Date</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach($members as $member) { ?>
+            <tr class="align-middle text-nowrap">
+              <td><?= h($member->id) ?></td>
+              <td><?= h($member->email) ?></td>
+              <td><a href="<?= url_for('/app/shared/groups/view.php?id=' . h(u($member->group_id))); ?>"><?= h($member->group_id) ?></a></td>
+              <td><?= h($member->first_name) ?></td>
+              <td><?= h($member->last_name) ?></td>
+              <td><?= h($member->city) ?></td>
+              <td><?= h($member->state_abv) ?></td>
+              <td><?= format_phone(h($member->phone_p_country), h($member->phone_primary)) ?></td>
+              <td><?= format_date(h($member->birth_date)) ?></td>
+              <td>
+                <div class="btn-group" role="group" aria-label="user actions">
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                </div>
+              </td>
+            </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
 </main>

@@ -4,38 +4,29 @@ require_once('../../../private/initialize.php');
 
 require_login();
 
-if(!isset($_GET['id'])) {
-  redirect_to(url_for('/staff/users/users.php'));
-}
-$id = $_GET['id'];
-$user = User::find_by_id($id);
-if($user == false) {
-  redirect_to(url_for('/staff/users/users.php'));
-}
-
 if(is_post_request()) {
 
-  // Save record using post parameters
+  // Create record using post parameters
   $args = $_POST['user'];
-  $user->merge_attributes($args);
+  $user = new User($args);
   $result = $user->save();
 
   if($result === true) {
-    $session->message('The user was updated successfully.');
-    redirect_to(url_for('/staff/users/show.php?id=' . $id));
+    $new_id = $user->id;
+    $session->message('The user was created successfully.');
+    redirect_to(url_for('/staff/users/show.php?id=' . $new_id));
   } else {
     // show errors
   }
 
 } else {
-
   // display the form
-
+  $user = new User;
 }
 
 ?>
 
-<?php $page_title = 'Edit User'; ?>
+<?php $page_title = 'Create User'; ?>
 <?php include(SHARED_PATH . '/user-header.php'); ?>
 
 <div id="main">
@@ -45,19 +36,23 @@ if(is_post_request()) {
   <div class="user">
     <div class="row">
       <div class="six columns offset-by-three">
-        <h1>Edit User</h1>
+        <h1>Create User</h1>
       </div>
     </div>
-    <?= display_errors($user->error_array); ?>
+    <div class="row">
+      <div class="six columns offset-by-three">
+        <?= display_errors($user->error_array); ?>
+      </div>
+    </div>
 
-    <form action="<?= url_for('/staff/users/edit.php?id=' . h(u($id))); ?>" method="post">
+    <form action="<?= url_for('/staff/users/new.php'); ?>" method="post">
 
       <?php include('form_fields.php'); ?>
 
       <div id="operations" class="row">
         <div class="six columns offset-by-three">
-          <button type="submit" class="button-primary">Edit User</button>
-        </div>
+          <button class="button-primary" type="submit">Create User</button>
+        </div>  
       </div>
     </form>
 

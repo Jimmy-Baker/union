@@ -34,6 +34,8 @@ class User extends DatabaseObject {
   public $password;
   public $confirm_password;
   protected $password_required = true;
+  
+  public const USER_TYPES = ['AA'=>'Administrator','GM'=>'Gym Manager', 'GS'=>'Gym Staff','MM'=>'Member'];
 
   public function __construct($args=[]) {
     $this->first_name = $args['first_name'] ?? '';
@@ -63,7 +65,7 @@ class User extends DatabaseObject {
   }
 
   public function full_name() {
-    return $this->first_name . " " . $this->last_name;
+    return $this->first_name . " " . $this->middle_name . " " . $this->last_name;
   }
 
   /**  
@@ -179,17 +181,15 @@ class User extends DatabaseObject {
     }
   }
   
-  static public function find_by_access($access) {
+  static public function find_by_access($access_abv) {
     $sql = "SELECT * FROM " . static::$table_name . " ";
-    $sql .= "WHERE access_abv = '" . self::$database->escape_string($access) . "'";
-    $obj_array = static::find_by_sql($sql);
-    if(!empty($obj_array)) {
-      return array_shift($obj_array);
-    } else {
-      return false;
-    }
+    $sql .= "WHERE access_abv='" . self::$database->escape_string($access_abv) . "'";
+    return static::find_by_sql($sql);
   }
-
+  
+  public function user_type() {
+      return self::USER_TYPES[$this->access_abv]; 
+  }
 }
 
 ?>

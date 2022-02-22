@@ -81,4 +81,9 @@ function format_call($country, $phone) {
   return $string;
 }
 
+function format_address($street, $city, $state, $zip, $country) {
+  $string = $street . ', ' . $city . ', ' . $state . ' ' . $zip . ', ' . $country;
+  return $string;
+}
+
 ?>
