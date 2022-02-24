@@ -81,6 +81,22 @@ class Session {
   public function clear_message() {
     unset($_SESSION['message']);
   }
+  
+  public function dashboard() {
+    switch ($this->access_abv) {
+      case "AA":
+        return url_for('/app/admin/index.php');
+        break;
+      case "GS":
+        return url_for('/app/staff/index.php');
+        break; 
+      case "GM":
+        return url_for('app/staff/index.php');
+        break;
+      default:
+        return url_for('app/member/index.php');
+    }
+  }
 }
 
 ?>
