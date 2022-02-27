@@ -31,6 +31,8 @@ class User extends DatabaseObject {
   public $access_abv;
   public $created_at;
   
+  public $upload_img;
+  public $upload_name;
   public $password;
   public $confirm_password;
   protected $password_required = true;

@@ -57,6 +57,11 @@ function format_date($datetime) {
   return date_format($date, "n-d-Y");
 }
 
+function html_date($datetime) {
+  $date = date_create($datetime);
+  return date_format($date, "Y-m-d");
+}
+
 //format integers to a recognizable phone numnber
 function format_phone($country, $phone) {
   if (strlen($phone) != 10) {
