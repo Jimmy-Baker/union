@@ -14,8 +14,18 @@ $members = User::find_by_access("MM");
 
 ?>
 
-<header class="p-5 bg-dark text-light">
-  <h1>Manage Users</h1>
+<header>
+  <div class="p-5 bg-dark text-light">
+    <h1>Manage Users</h1>
+  </div>
+  <div class="container-md p-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Users</a></li>
+      </ol>
+    </nav>
+  </div>
 </header>
 
 <main class="container-md p-4" id="main">
@@ -67,7 +77,7 @@ $members = User::find_by_access("MM");
               <td><?= h($user->city) ?></td>
               <td><?= h($user->state_abv) ?></td>
               <td><?= format_phone(h($user->phone_p_country), h($user->phone_primary)) ?></td>
-              <td><?= format_date(h($user->birth_date)) ?></td>
+              <td><?= format_date(h($user->birth_date, '-')) ?></td>
               <td>
                 <div class="btn-group" role="group" aria-label="user actions">
                   <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>

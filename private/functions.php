@@ -52,9 +52,9 @@ if(!function_exists('money_format')) {
 }
 
 //format datetime to a recognizable date
-function format_date($datetime) {
+function format_date($datetime, $unit) {
   $date = date_create($datetime);
-  return date_format($date, "n-d-Y");
+  return date_format($date, "n".$unit."d".$unit."Y");
 }
 
 function html_date($datetime) {

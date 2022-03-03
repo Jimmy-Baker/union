@@ -15,8 +15,19 @@ $page_title = 'User: ' . h($user->full_name());
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 
-<header class="p-5 bg-dark text-light">
-  <h1>User Information</h1>
+<header>
+  <div class="p-5 bg-dark text-light">
+    <h1>User Information</h1>
+  </div>
+  <div class="container-md p-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="<?= url_for('app/shared/users/users.php'); ?>">Users</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><?= $user->full_name() ?></li>
+      </ol>
+    </nav>
+  </div>
 </header>
 
 <main class="container-md p-4" id="main">

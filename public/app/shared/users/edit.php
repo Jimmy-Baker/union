@@ -26,6 +26,8 @@ if(is_post_request()) {
   } else {
     // show errors
   }
+} else {
+  //display the form
 }
 
 ?>
@@ -38,7 +40,8 @@ if(is_post_request()) {
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="<?= url_for('app/shared/users/view.php'); ?>">Users</a></li>
+        <li class="breadcrumb-item"><a href="<?= url_for('app/shared/users/users.php'); ?>">Users</a></li>
+        <li class="breadcrumb-item"><a href="<?= url_for('app/shared/users/view.php?id=' . $user->id); ?>"><?= $user->full_name(); ?></a></li>
         <li class="breadcrumb-item active" aria-current="page">Edit User</li>
       </ol>
     </nav>
