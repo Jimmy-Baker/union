@@ -4,7 +4,7 @@ class DatabaseObject {
 
   static protected $database;
   static protected $table_name = "";
-  static protected $columns = [];
+  static protected $db_columns = [];
   public $error_array = [];
 
   static public function set_database($database) {
@@ -67,13 +67,14 @@ class DatabaseObject {
   protected function create() {
     $this->validate();
     if(!empty($this->error_array)) { return false; }
-
+    
     $attributes = $this->sanitized_attributes();
     $sql = "INSERT INTO " . static::$table_name . " (";
     $sql .= join(', ', array_keys($attributes));
-    $sql .= ") VALUES ('";
-    $sql .= join("', '", array_values($attributes));
-    $sql .= "')";
+    $sql .= ") VALUES (";
+    $prepared_attributes = array_map('quote_null', array_values($attributes));
+    $sql .= join(", ", $prepared_attributes);
+    $sql .= ")";
     $result = self::$database->query($sql);
     if($result) {
       $this->id = self::$database->insert_id;
@@ -88,7 +89,7 @@ class DatabaseObject {
     $attributes = $this->sanitized_attributes();
     $attribute_pairs = [];
     foreach($attributes as $key => $value) {
-      $attribute_pairs[] = "{$key}='{$value}'";
+      $attribute_pairs[] = "{$key}=".quote_null($value);
     }
 
     $sql = "UPDATE " . static::$table_name . " SET ";
@@ -119,7 +120,7 @@ class DatabaseObject {
   // Properties which have database columns, excluding ID - Made a xchange here ($db_columns as $column => $columns as column)
   public function attributes() {
     $attributes = [];
-    foreach(static::$columns as $column) {
+    foreach(static::$db_columns as $column) {
       if($column == 'id') { continue; }
       $attributes[$column] = $this->$column;
     }

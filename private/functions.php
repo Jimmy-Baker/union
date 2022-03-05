@@ -91,4 +91,20 @@ function format_address($street, $city, $state, $zip, $country) {
   return $string;
 }
 
+function quote_null($a) {
+  if ($a === '') {
+    return 'null';
+  } else {
+    return "'" . $a . "'";
+  }
+}
+
+function d($string="") {
+  if ($string == "") {
+    return '-';
+  } else {
+    return htmlspecialchars($string);
+  }
+}
+
 ?>

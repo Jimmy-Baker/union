@@ -237,7 +237,7 @@ $accesses = User::USER_TYPES;
         <label for="inputAccessAbv" class="col-form-label">User Type</label>
       </div>
       <div class="col-md-7">
-        <select name="user[access_abv]" class="form-select" id="inputAccessAbv">
+        <select name="user[access_abv]" class="form-select" id="inputAccessAbv" required>
           <?php foreach($accesses as $abv=>$access) { ?>
           <option value="<?= $abv ?>" <?= ($user->access_abv == $abv) ? 'selected' : '';?>><?= $access; ?></option>
           <?php } ?>
@@ -250,7 +250,7 @@ $accesses = User::USER_TYPES;
         <label for="inputPassword" class="col-form-label">Password</label>
       </div>
       <div class="col-md-7">
-        <input type="password" name="user[password]" value="<?php echo h($user->password); ?>" class="form-control" id="inputPassword">
+        <input type="password" name="user[password]" value="<?php echo h($user->password); ?>" class="form-control" id="inputPassword" required>
       </div>
     </div>
 
@@ -259,7 +259,7 @@ $accesses = User::USER_TYPES;
         <label for="inputConfirmPassword" class="col-form-label">Confirm Password</label>
       </div>
       <div class="col-md-7">
-        <input type="password" name="user[confirm_password]" value="<?php echo h($user->confirm_password); ?>" class="form-control" id="inputConfirmPassword">
+        <input type="password" name="user[confirm_password]" value="<?php echo h($user->confirm_password); ?>" class="form-control" id="inputConfirmPassword" required>
       </div>
     </div>
   </div>

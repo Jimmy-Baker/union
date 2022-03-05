@@ -5,6 +5,10 @@ class User extends DatabaseObject {
   static protected $table_name = "users";
   static protected $db_columns = ['id', 'first_name', 'last_name', 'middle_name', 'preferred_name', 'birth_date', 'group_id', 'avatar_url', 'street_address', 'city', 'zip', 'state_abv', 'country_abv', 'email', 'phone_primary', 'phone_p_country', 'phone_secondary', 'phone_s_country', 'first_name_emergency', 'last_name_emergency', 'phone_emergency', 'phone_e_country', 'password_hash', 'access_abv', 'created_at'];
 
+  public function table() {
+    return static::$table_name;
+  }
+  
   public $id;
   public $first_name;
   public $last_name;
@@ -37,7 +41,7 @@ class User extends DatabaseObject {
   public $confirm_password;
   protected $password_required = true;
   
-  public const USER_TYPES = ['AA'=>'Administrator','GM'=>'Gym Manager', 'GS'=>'Gym Staff','MM'=>'Member'];
+  public const USER_TYPES = ['AA'=>'Administrator','GM'=>'Gym Manager', 'GS'=>'Gym Staff','MM'=>'Member', ''=>'None'];
 
   public function __construct($args=[]) {
     $this->first_name = $args['first_name'] ?? '';
@@ -61,6 +65,7 @@ class User extends DatabaseObject {
     $this->last_name_emergency = $args['last_name_emergency'] ?? '';
     $this->phone_emergency = $args['phone_emergency'] ?? '';
     $this->phone_e_country = $args['phone_e_country'] ?? '';
+    $this->access_abv = $args['access_abv'] ?? '';
     
     $this->password = $args['password'] ?? '';
     $this->confirm_password = $args['confirm_password'] ?? '';
@@ -118,13 +123,13 @@ class User extends DatabaseObject {
     if(is_blank($this->first_name)) {
       $this->error_array[] = ["#first_name", "First name cannot be blank."];
     } elseif (!has_length($this->first_name, array('min' => 2, 'max' => 255))) {
-      $this->error_array[] = ["#first_name", "First name must be between 2 and 255 characters."];
+      $this->error_array[] = ["#first_name", "First name must be between 2 and 64 characters."];
     }
 
     if(is_blank($this->last_name)) {
       $this->error_array[] = ["#last_name", "Last name cannot be blank."];
     } elseif (!has_length($this->last_name, array('min' => 2, 'max' => 255))) {
-      $this->error_array[] = ["#last_name", "Last name must be between 2 and 255 characters."];
+      $this->error_array[] = ["#last_name", "Last name must be between 2 and 64 characters."];
     }
 
     if(is_blank($this->email)) {
@@ -146,14 +151,14 @@ class User extends DatabaseObject {
     if($this->password_required) {
       if(is_blank($this->password)) {
         $this->error_array[] = ["#password", "Password cannot be blank."];
-      } elseif (!has_length($this->password, array('min' => 12))) {
-        $this->error_array[] = ["#password", "Password must contain 12 or more characters"];
+      } elseif (!has_length($this->password, array('min' => 8))) {
+        $this->error_array[] = ["#password", "Password must contain 8 or more characters"];
       } elseif (!preg_match('/[A-Z]/', $this->password)) {
         $this->error_array[] = ["#password", "Password must contain at least 1 uppercase letter"];
       } elseif (!preg_match('/[a-z]/', $this->password)) {
         $this->error_array[] = ["#password", "Password must contain at least 1 lowercase letter"];
-      } elseif (!preg_match('/[0-9]/', $this->password)) {
-        $this->error_array[] = ["#password", "Password must contain at least 1 number"];
+      // } elseif (!preg_match('/[0-9]/', $this->password)) {
+      //   $this->error_array[] = ["#password", "Password must contain at least 1 number"];
       } elseif (!preg_match('/[^A-Za-z0-9\s]/', $this->password)) {
         $this->error_array[] = ["#password", "Password must contain at least 1 symbol"];
       }
@@ -166,7 +171,7 @@ class User extends DatabaseObject {
     }
     
     if(!isset($this->access_abv)) {
-      $this->error_array[] = ["#access_abv", "User level must be selected"];
+      $this->error_array[] = ["#access_abv", "User access must be selected"];
     }
 
     return $this->error_array;

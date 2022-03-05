@@ -19,12 +19,23 @@ $members = User::find_by_access("MM");
     <h1>Manage Users</h1>
   </div>
   <div class="container-md p-4">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Users</a></li>
-      </ol>
-    </nav>
+    <div class="row justify-content-between">
+      <nav aria-label="breadcrumb" class="col-auto">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Users</a></li>
+        </ol>
+      </nav>
+      <div class="col-auto d-none d-sm-block">
+        <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="userMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          User Options
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuLink">
+          <li><a class="dropdown-item text-end" href="<?= url_for('app/shared/users/new.php'); ?>">New User</a></li>
+          <li><a class="dropdown-item text-end" href="<?= url_for('app/shared/users/search.php'); ?>">Find A User</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -47,7 +58,7 @@ $members = User::find_by_access("MM");
       <button class="nav-link" id="pills-member-tab" data-bs-toggle="pill" data-bs-target="#pills-member" type="button" role="tab" aria-controls="pills-member" aria-selected="false">Members</button>
     </li>
   </ul>
-  <div class="tab-content" id="pills-tabContent">
+  <div class="tab-content mb-4" id="pills-tabContent">
     <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
       <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -77,12 +88,12 @@ $members = User::find_by_access("MM");
               <td><?= h($user->city) ?></td>
               <td><?= h($user->state_abv) ?></td>
               <td><?= format_phone(h($user->phone_p_country), h($user->phone_primary)) ?></td>
-              <td><?= format_date(h($user->birth_date, '-')) ?></td>
+              <td><?= format_date(h($user->birth_date), "-") ?></td>
               <td>
                 <div class="btn-group" role="group" aria-label="user actions">
                   <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
                   <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
-                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                  <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
                 </div>
               </td>
             </tr>
@@ -120,12 +131,12 @@ $members = User::find_by_access("MM");
               <td><?= h($admin->city) ?></td>
               <td><?= h($admin->state_abv) ?></td>
               <td><?= format_phone(h($admin->phone_p_country), h($admin->phone_primary)) ?></td>
-              <td><?= format_date(h($admin->birth_date)) ?></td>
+              <td><?= format_date(h($admin->birth_date), "-") ?></td>
               <td>
                 <div class="btn-group" role="group" aria-label="user actions">
                   <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
                   <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
-                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                  <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
                 </div>
               </td>
             </tr>
@@ -163,12 +174,12 @@ $members = User::find_by_access("MM");
               <td><?= h($manager->city) ?></td>
               <td><?= h($manager->state_abv) ?></td>
               <td><?= format_phone(h($manager->phone_p_country), h($manager->phone_primary)) ?></td>
-              <td><?= format_date(h($manager->birth_date)) ?></td>
+              <td><?= format_date(h($manager->birth_date), "-") ?></td>
               <td>
                 <div class="btn-group" role="group" aria-label="user actions">
                   <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
                   <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
-                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                  <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
                 </div>
               </td>
             </tr>
@@ -206,12 +217,12 @@ $members = User::find_by_access("MM");
               <td><?= h($staff->city) ?></td>
               <td><?= h($staff->state_abv) ?></td>
               <td><?= format_phone(h($staff->phone_p_country), h($staff->phone_primary)) ?></td>
-              <td><?= format_date(h($staff->birth_date)) ?></td>
+              <td><?= format_date(h($staff->birth_date), "-") ?></td>
               <td>
                 <div class="btn-group" role="group" aria-label="user actions">
                   <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
                   <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
-                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                  <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
                 </div>
               </td>
             </tr>
@@ -249,12 +260,12 @@ $members = User::find_by_access("MM");
               <td><?= h($member->city) ?></td>
               <td><?= h($member->state_abv) ?></td>
               <td><?= format_phone(h($member->phone_p_country), h($member->phone_primary)) ?></td>
-              <td><?= format_date(h($member->birth_date)) ?></td>
+              <td><?= format_date(h($member->birth_date), "-") ?></td>
               <td>
                 <div class="btn-group" role="group" aria-label="user actions">
                   <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
                   <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
-                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                  <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
                 </div>
               </td>
             </tr>
@@ -264,5 +275,15 @@ $members = User::find_by_access("MM");
       </div>
     </div>
   </div>
+  <div class="row justify-content-evenly" role="toolbar" aria-label="User toolbar">
+    <div class="col-sm-4 col-md-3 mb-3 d-grid">
+      <a class="btn btn-primary" href="<?= url_for('app/shared/users/search.php'); ?>">Find A User</a>
+    </div>
+    <div class="col-sm-4 col-md-3 mb-3 d-grid">
+      <a class="btn btn-primary" href="<?= url_for('app/shared/users/new.php'); ?>">Create A User</a>
+    </div>
+  </div>
 
 </main>
+
+<?php include(SHARED_PATH . '/user-footer.php'); ?>

@@ -1,11 +1,10 @@
 <?php
-
-require_once('../../../private/initialize.php');
-
+require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
+$page_title = 'New User';
+include(SHARED_PATH . '/user-header.php'); 
 
 if(is_post_request()) {
-
   // Create record using post parameters
   $args = $_POST['user'];
   $user = new User($args);
@@ -14,50 +13,42 @@ if(is_post_request()) {
   if($result === true) {
     $new_id = $user->id;
     $session->message('The user was created successfully.');
-    redirect_to(url_for('/staff/users/show.php?id=' . $new_id));
+    redirect_to(url_for('/app/shared/users/view.php?id=' . $new_id));
   } else {
-    // show errors
+    echo('<p>User Not Saved</p>');
+    echo('<p>'. $user->table() .'</p>');
   }
-
 } else {
-  // display the form
+  echo('<p>No User</p>'); 
   $user = new User;
 }
-
 ?>
 
-<?php $page_title = 'Create User'; ?>
-<?php include(SHARED_PATH . '/user-header.php'); ?>
-
-<div id="main">
-
-  <a class="back-link" href="<?= url_for('/staff/users/users.php'); ?>">&laquo; Back to List</a>
-
-  <div class="user">
-    <div class="row">
-      <div class="six columns offset-by-three">
-        <h1>Create User</h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="six columns offset-by-three">
-        <?= display_errors($user->error_array); ?>
-      </div>
-    </div>
-
-    <form action="<?= url_for('/staff/users/new.php'); ?>" method="post">
-
-      <?php include('form_fields.php'); ?>
-
-      <div id="operations" class="row">
-        <div class="six columns offset-by-three">
-          <button class="button-primary" type="submit">Create User</button>
-        </div>  
-      </div>
-    </form>
-
+<header>
+  <div class="p-5 bg-dark text-light">
+    <h1>New User Information</h1>
   </div>
+  <div class="container-md p-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="<?= url_for('app/shared/users/users.php'); ?>">Users</a></li>
+        <li class="breadcrumb-item active" aria-current="page">New User</li>
+      </ol>
+    </nav>
+  </div>
+</header>
 
-</div>
+<main class="container-md p-4" id="main">
+
+  <?= display_errors($user->error_array); ?>
+  <form action="<?= url_for('/app/shared/users/new.php'); ?>" method="post">
+
+    <?php include('form_fields.php'); ?>
+
+    <button type="submit" name="submit" class="btn btn-primary">Create User</button>
+  </form>
+
+</main>
 
 <?php include(SHARED_PATH . '/user-footer.php'); ?>
