@@ -15,11 +15,9 @@ if(is_post_request()) {
     $session->message('The user was created successfully.');
     redirect_to(url_for('/app/shared/users/view.php?id=' . $new_id));
   } else {
-    echo('<p>User Not Saved</p>');
-    echo('<p>'. $user->table() .'</p>');
+
   }
 } else {
-  echo('<p>No User</p>'); 
   $user = new User;
 }
 ?>
