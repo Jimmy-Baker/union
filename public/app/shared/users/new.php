@@ -27,13 +27,25 @@ if(is_post_request()) {
     <h1>New User Information</h1>
   </div>
   <div class="container-md p-4">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="<?= url_for('app/shared/users/users.php'); ?>">Users</a></li>
-        <li class="breadcrumb-item active" aria-current="page">New User</li>
-      </ol>
-    </nav>
+    <div class="row justify-content-between">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/users/users.php'); ?>">Users</a></li>
+          <li class="breadcrumb-item active" aria-current="page">New User</li>
+        </ol>
+      </nav>
+      <div class="col-auto d-none d-sm-block">
+        <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="userMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          User Menu
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end text-end" aria-labelledby="userMenuLink">
+          <li><a class="dropdown-item" href="<?= url_for('app/shared/users/users.php'); ?>">All Users</a></li>
+          <li><a class="dropdown-item active" href="<?= url_for('app/shared/users/new.php'); ?>">New User</a></li>
+          <li><a class="dropdown-item" href="<?= url_for('app/shared/users/search.php'); ?>">Find Users</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </header>
 

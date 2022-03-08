@@ -23,7 +23,7 @@
     <script src="<?= url_for("/node_modules/bootstrap/dist/js/bootstrap.min.js");?>" defer></script>
   </head>
 
-  <body class="container-fluid px-0 pt-5">
+  <body class="container-fluid px-0 pt-5 vh-100">
     <nav class="navbar navbar-dark navbar-expand-sm bg-primary fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"><img src="<?=url_for("/img/union-logo.svg");?>" alt="United mountains logo." width="45">Union</a>
