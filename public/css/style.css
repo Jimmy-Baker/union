@@ -1,3 +1,10 @@
 .btn.btn-raise {
   margin-top: -7px;
 }
+
+#back-to-top {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}

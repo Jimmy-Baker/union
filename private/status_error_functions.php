@@ -9,6 +9,30 @@ function require_login() {
   }
 }
 
+function require_access($abv) {
+  global $session;
+  $types = ['XX'=>0,'AA'=>1,'GM'=>2,'GS'=>3,'MM'=>4];
+  if(!array_key_exists($abv, $types)){
+    redirect_to($session->dashboard());
+  } elseif($types[$session->access_abv] > $types[$abv]) {
+    redirect_to($session->dashboard());
+  }  
+}
+
+function test_access($abv) {
+  global $session;
+  $types = ['XX'=>0,'AA'=>1,'GM'=>2,'GS'=>3,'MM'=>4];
+  if(!array_key_exists($abv, $types)){
+    return false;
+  } elseif($types[$session->access_abv] > $types[$abv]) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+
+
 
 function display_errors($error_array=array()) {
   $output = '';

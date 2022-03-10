@@ -135,9 +135,9 @@ $members = User::find_by_access("MM");
                   <td><?= format_phone(h($admin->phone_p_country), h($admin->phone_primary)) ?></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
-                      <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($admin->id))); ?>">View</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($admin->managerid))); ?>">Edit</a>
+                      <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($admin->id))); ?>">Delete</a>
                     </div>
                   </td>
                 </tr>
@@ -176,9 +176,9 @@ $members = User::find_by_access("MM");
                   <td><?= format_phone(h($manager->phone_p_country), h($manager->phone_primary)) ?></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
-                      <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($manager->id))); ?>">View</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($manager->id))); ?>">Edit</a>
+                      <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($manager->id))); ?>">Delete</a>
                     </div>
                   </td>
                 </tr>
@@ -217,9 +217,9 @@ $members = User::find_by_access("MM");
                   <td><?= format_phone(h($staff->phone_p_country), h($staff->phone_primary)) ?></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
-                      <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($staff->id))); ?>">View</a>
+                      <a class="btn btn-primary" href="<member?= url_for('/app/shared/users/edit.php?id=' . h(u($staff->id))); ?>">Edit</a>
+                      <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($staff->id))); ?>">Delete</a>
                     </div>
                   </td>
                 </tr>
@@ -258,9 +258,9 @@ $members = User::find_by_access("MM");
                   <td><?= format_phone(h($member->phone_p_country), h($member->phone_primary)) ?></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
-                      <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($member->id))); ?>">View</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($member->id))); ?>">Edit</a>
+                      <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($member->id))); ?>">Delete</a>
                     </div>
                   </td>
                 </tr>

@@ -17,10 +17,10 @@
     <link rel="stylesheet" href="<?= url_for("/node_modules/@fortawesome/fontawesome-free/css/all.min.css");?>">
     <link rel="stylesheet" href="https://use.typekit.net/fup0mom.css">
     <link rel="stylesheet" href="<?= url_for("/css/style.css");?>">
-
     <script src="<?= url_for("/node_modules/jquery/dist/jquery.slim.min.js");?>" defer></script>
     <script src="<?= url_for("/node_modules/@popperjs/core/dist/umd/popper.min.js");?>" defer></script>
     <script src="<?= url_for("/node_modules/bootstrap/dist/js/bootstrap.min.js");?>" defer></script>
+    <script src="<?= url_for("js/display.js");?>" defer></script>
   </head>
 
   <body class="container-fluid px-0 pt-5 vh-100">
@@ -45,6 +45,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Gyms</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Events</a>
               </li>
               <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -4,10 +4,6 @@ class User extends DatabaseObject {
 
   static protected $table_name = "users";
   static protected $db_columns = ['id', 'first_name', 'last_name', 'middle_name', 'preferred_name', 'birth_date', 'group_id', 'avatar_url', 'street_address', 'city', 'zip', 'state_abv', 'country_abv', 'email', 'phone_primary', 'phone_p_country', 'phone_secondary', 'phone_s_country', 'first_name_emergency', 'last_name_emergency', 'phone_emergency', 'phone_e_country', 'password_hash', 'access_abv', 'created_at'];
-
-  public function table() {
-    return static::$table_name;
-  }
   
   public $id;
   public $first_name;
