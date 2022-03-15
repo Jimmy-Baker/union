@@ -44,7 +44,9 @@ if(is_post_request()) {
 
 <header>
   <div class="p-5 bg-dark text-light">
-    <h1>Delete User</h1>
+    <div class="container-fluid py-3">
+      <h1>Delete User</h1>
+    </div>
   </div>
   <div class="container-md p-4">
     <div class="row justify-content-between">
@@ -81,7 +83,7 @@ if(is_post_request()) {
 
 <main class="container-md p-4" id="main">
   <form action="<?= url_for('/app/shared/users/delete.php?id=' . h(u($id))); ?>" method="post">
-    <fieldset class="card col-md-10 mx-auto mb-4">
+    <fieldset class="card shadow col-md-10 mx-auto mb-4">
       <legend class="card-header">Profile Information</legend>
       <div class="card-body">
         <div class="card-text">
@@ -104,14 +106,16 @@ if(is_post_request()) {
             <dd class="col-sm-9"><?= h($user->email); ?></dd>
             <dt class="col-sm-3">Primary Phone</dt>
             <dd class="col-sm-9"><?= h(format_phone($user->phone_p_country, $user->phone_primary)); ?></dd>
+          </dl>
         </div>
+      </div>
     </fieldset>
     <div class="row justify-content-evenly">
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
-        <a class="btn btn-outline-primary" href="<?= url_for('app/shared/users/view.php?id=' . $user->id); ?>">Cancel Deletion</a>
+        <a class="btn shadow btn-outline-primary" href="<?= url_for('app/shared/users/view.php?id=' . $user->id); ?>">Cancel Deletion</a>
       </div>
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
-        <button type="submit" name="submit" class="btn btn-danger">Confirm Deletion</button>
+        <button type="submit" name="submit" class="btn shadow btn-danger">Confirm Deletion</button>
       </div>
     </div>
   </form>

@@ -33,7 +33,9 @@ if(is_post_request()) {
 
 <header>
   <div class="p-5 bg-dark text-light">
-    <h1>Edit User Information</h1>
+    <div class="container-fluid py-3">
+      <h1>Edit User Information</h1>
+    </div>
   </div>
   <div class="container-md p-4">
     <div class="row justify-content-between">
@@ -76,10 +78,10 @@ if(is_post_request()) {
 
     <div class="row justify-content-evenly">
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
-        <a class="btn btn-outline-primary" href="<?= url_for('app/shared/users/view.php?id=' . $user->id); ?>">Cancel Edits</a>
+        <a class="btn shadow btn-outline-primary" href="<?= url_for('app/shared/users/view.php?id=' . $user->id); ?>">Cancel Edits</a>
       </div>
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
-        <button type="submit" name="submit" class="btn btn-primary">Submit Edits</button>
+        <button type="submit" name="submit" class="btn shadow btn-primary">Submit Edits</button>
       </div>
     </div>
   </form>

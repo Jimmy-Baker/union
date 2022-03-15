@@ -1,5 +1,5 @@
 <?php
-require_once('../../private/initialize.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 
 $error_array = [];
 $email = '';

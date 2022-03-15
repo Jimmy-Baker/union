@@ -31,7 +31,9 @@ if(is_post_request()) {
 
 <header>
   <div class="p-5 bg-dark text-light">
-    <h1>Find Users</h1>
+    <div class="container-fluid py-3">
+      <h1>Find Users</h1>
+    </div>
   </div>
   <div class="container-md p-4">
     <div class="row justify-content-between">
@@ -47,7 +49,7 @@ if(is_post_request()) {
           User Menu
         </a>
         <ul class="dropdown-menu dropdown-menu-end text-end" aria-labelledby="userMenuLink">
-        <li><a class="dropdown-item" href="<?= url_for('app/shared/users/users.php'); ?>">All Users</a></li>
+          <li><a class="dropdown-item" href="<?= url_for('app/shared/users/users.php'); ?>">All Users</a></li>
           <li><a class="dropdown-item" href="<?= url_for('app/shared/users/new.php'); ?>">New User</a></li>
           <li><a class="dropdown-item active" href="<?= url_for('app/shared/users/search.php'); ?>">Find Users</a></li>
         </ul>
@@ -58,7 +60,7 @@ if(is_post_request()) {
 
 <main class="container-md p-4" id="main">
   <form action="<?= url_for('/app/shared/users/search.php#results'); ?>" method="POST" class="mb-5">
-    <fieldset class="card col-md-10 mx-auto mb-4">
+    <fieldset class="card shadow col-md-10 mx-auto mb-4">
       <legend class="card-header">Search Criteria</legend>
       <div class="card-body">
 
@@ -99,7 +101,7 @@ if(is_post_request()) {
 
     <div class="row justify-content-evenly" role="toolbar" aria-label="User toolbar">
       <div class="col-sm-4 col-md-3 d-grid">
-        <button class="btn btn-primary" type="submit">Search For Users</button>
+        <button class="btn shadow btn-primary" type="submit">Search For Users</button>
       </div>
     </div>
   </form>
@@ -107,7 +109,7 @@ if(is_post_request()) {
   <?php if (isset($users)) { ?>
   <hr class="w-50 mx-auto">
 
-  <div class="card mx-auto mt-5" id="results">
+  <div class="card shadow mx-auto mt-5" id="results">
     <div class="card-header fs-4">Search Results</div>
     <div class="card-body">
       <div class="table-responsive">

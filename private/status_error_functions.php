@@ -31,7 +31,15 @@ function test_access($abv) {
   }
 }
 
-
+function access(array $a, array $c) {
+  global $session;
+  $key = array_search($session->access_abv, $a);
+  if($key !== false) {
+    return $c[$key];
+  } else {
+    return false;
+  }
+}
 
 
 function display_errors($error_array=array()) {

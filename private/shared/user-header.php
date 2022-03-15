@@ -26,28 +26,28 @@
   <body class="container-fluid px-0 pt-5 vh-100">
     <nav class="navbar navbar-dark navbar-expand-sm bg-primary fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="<?=url_for("/img/union-logo.svg");?>" alt="United mountains logo." width="45">Union</a>
+        <a class="navbar-brand" href="<?= url_for("index.php"); ?>"><img src="<?=url_for("/img/union-logo.svg");?>" alt="United mountains logo." width="45">Union</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-          <div class="offcanvas-header">
+        <div class="offcanvas bg-primary offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header text-white">
             <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link <?= ($page_title == 'Home') ? "active" : ''; ?>" aria-current="page" href="<?= url_for("index.php"); ?>">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Passes</a>
+                <a class="nav-link <?= ($page_title == 'Passes') ? "active" : ''; ?>" href="<?= url_for("passes.php"); ?>">Passes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Gyms</a>
+                <a class="nav-link <?= ($page_title == 'Partner Gyms') ? "active" : ''; ?>" href="<?= url_for("gyms.php"); ?>">Gyms</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Events</a>
+                <a class="nav-link <?= ($page_title == 'Events') ? "active" : ''; ?>" href="<?= url_for("events.php"); ?>">Events</a>
               </li>
               <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -63,15 +63,13 @@
                 </ul>
               </li> -->
             </ul>
-            <span class="navbar-text pe-3">
-              Hello, <?= $session->preferred_name ?>
-            </span>
-            <form class="d-flex" action="<?=url_for("/app/logout.php");?>">
-              <button class="btn btn-outline-light" type="submit">Log Out</button>
+            <form class="d-flex row pe-sm-4 pt-4 pt-sm-0" action="<?=url_for("/app/logout.php");?>">
+              <button class="col-auto btn btn-outline-light ms-2 ms-sm-0 order-sm-1" type="submit">Log Out</button>
+              <span class="col-sm-auto nav-link order-sm-0 text-white-50" href="<?= url_for("app/signup.php"); ?>">Hello, <a href="<?= $session->dashboard(); ?>" class="active text-light"><?= $session->name; ?></a></span>
             </form>
           </div>
         </div>
       </div>
     </nav>
 
-    <?= display_session_message(); ?>
+    <!-- <?= display_session_message(); ?> -->

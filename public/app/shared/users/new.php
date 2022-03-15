@@ -24,7 +24,9 @@ if(is_post_request()) {
 
 <header>
   <div class="p-5 bg-dark text-light">
-    <h1>New User Information</h1>
+    <div class="container-fluid py-3">
+      <h1>New User Information</h1>
+    </div>
   </div>
   <div class="container-md p-4">
     <div class="row justify-content-between">
@@ -56,7 +58,7 @@ if(is_post_request()) {
 
     <?php include('form_fields.php'); ?>
 
-    <button type="submit" name="submit" class="btn btn-primary">Create User</button>
+    <button type="submit" name="submit" class="btn shadow btn-primary">Create User</button>
   </form>
 
 </main>

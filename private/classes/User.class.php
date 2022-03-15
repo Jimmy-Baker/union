@@ -61,7 +61,7 @@ class User extends DatabaseObject {
     $this->last_name_emergency = $args['last_name_emergency'] ?? '';
     $this->phone_emergency = $args['phone_emergency'] ?? '';
     $this->phone_e_country = $args['phone_e_country'] ?? '';
-    $this->access_abv = $args['access_abv'] ?? '';
+    $this->access_abv = $args['access_abv'] ?? 'MM';
     
     $this->password = $args['password'] ?? '';
     $this->confirm_password = $args['confirm_password'] ?? '';
@@ -71,12 +71,16 @@ class User extends DatabaseObject {
     return $this->first_name . " " . $this->middle_name . " " . $this->last_name;
   }
 
-  /**  
-   * Use built-in PHP methods to encrypt a property/password  
-   * 
-   * @param {property} $this->password
-   *   
-   **/
+  public function name() {
+    switch ($this->preferred_name) {
+      case '':
+        return $this->first_name;
+        break;
+      default:
+        return $this->preferred_name;
+    }
+  }
+  
   protected function set_password_hash() {
     $this->password_hash = password_hash($this->password, PASSWORD_BCRYPT);
   }
@@ -85,23 +89,11 @@ class User extends DatabaseObject {
     return password_verify($password, $this->password_hash);
   }
 
-  /**   
-   * Modify DatabaseObject::create() to encrypt the password before instantiation  
-   * 
-   * @returns {object} parent::create() (new instance of a DBO) 
-   * 
-   **/
   protected function create() {
     $this->set_password_hash();
     return parent::create();
   }
 
-  /**   
-   * Modifies DatabaseObject::update() to encrypt the password before updating  
-   * 
-   * @returns {object} parent::update() (updated instance of a DBO) 
-   * 
-   **/
   protected function update() {
     if($this->password != '') {
       $this->set_password_hash();

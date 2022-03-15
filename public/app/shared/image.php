@@ -1,4 +1,4 @@
-<?php require_once('../../../private/initialize.php'); ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">

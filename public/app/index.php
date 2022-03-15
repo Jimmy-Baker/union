@@ -1,4 +1,4 @@
-<?php require_once('../../private/initialize.php'); ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php'); ?>
 
 <?php require_login(); ?>
 
@@ -15,7 +15,7 @@
       echo '">Edit Users</a></li>';
       }   
     ?>
-  </ul> 
+  </ul>
 
 </div>
 

@@ -14,7 +14,9 @@ $actives = Pass::find_active();
 
 <header>
   <div class="p-5 bg-dark text-light">
-    <h1>Manage Passes</h1>
+    <div class="container-fluid py-3">
+      <h1>Manage Passes</h1>
+    </div>
   </div>
   <div class="container-md p-4">
     <div class="row justify-content-between">
@@ -39,7 +41,7 @@ $actives = Pass::find_active();
 </header>
 
 <main class="container-md p-4" id="main">
-  <div class="card mx-auto mb-4">
+  <div class="card shadow mx-auto mb-4">
     <div class="card-header">
       <ul class="nav nav-pills" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
@@ -124,7 +126,7 @@ $actives = Pass::find_active();
                   <td>
                     <div class="btn-group" role="group" aria-label="pass actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/passes/view.php?id=' . h(u($active->id))); ?>">View</a>
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/passes/edit.php?id=' . h(u($active->id))); ?>">Edit</a>
+                      <a class="btn btn-warning" href="<?= url_for('/app/shared/passes/edit.php?id=' . h(u($active->id))); ?>">Edit</a>
                       <a class="btn btn-danger" href="<?= url_for('/app/shared/passes/delete.php?id=' . h(u($active->id))); ?>">Delete</a>
                     </div>
                   </td>
@@ -163,7 +165,7 @@ $actives = Pass::find_active();
                   <td>
                     <div class="btn-group" role="group" aria-label="pass actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/passes/view.php?id=' . h(u($expired->id))); ?>">View</a>
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/passes/edit.php?id=' . h(u($expired->id))); ?>">Edit</a>
+                      <a class="btn btn-warning" href="<?= url_for('/app/shared/passes/edit.php?id=' . h(u($expired->id))); ?>">Edit</a>
                       <a class="btn btn-danger" href="<?= url_for('/app/shared/passes/delete.php?id=' . h(u($expired->id))); ?>">Delete</a>
                     </div>
                   </td>
@@ -178,10 +180,10 @@ $actives = Pass::find_active();
   </div>
   <div class="row justify-content-evenly" role="toolbar" aria-label="Pass toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn btn-primary" href="<?= url_for('app/shared/passes/search.php'); ?>">Find Passes</a>
+      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/passes/search.php'); ?>">Find Passes</a>
     </div>
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn btn-primary" href="<?= url_for('app/shared/passes/new.php'); ?>">Create A Pass</a>
+      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/passes/new.php'); ?>">Create A Pass</a>
     </div>
   </div>
 

@@ -16,7 +16,9 @@ $members = User::find_by_access("MM");
 
 <header>
   <div class="p-5 bg-dark text-light">
-    <h1>Manage Users</h1>
+    <div class="container-fluid py-3">
+      <h1>Manage Users</h1>
+    </div>
   </div>
   <div class="container-md p-4">
     <div class="row justify-content-between">
@@ -41,7 +43,7 @@ $members = User::find_by_access("MM");
 </header>
 
 <main class="container-md p-4" id="main">
-  <div class="card mx-auto mb-4">
+  <div class="card shadow mx-auto mb-4">
     <div class="card-header">
       <ul class="nav nav-pills" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
@@ -95,7 +97,7 @@ $members = User::find_by_access("MM");
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
+                      <a class="btn btn-warning" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
                       <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
                     </div>
                   </td>
@@ -136,7 +138,7 @@ $members = User::find_by_access("MM");
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($admin->id))); ?>">View</a>
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($admin->managerid))); ?>">Edit</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($admin->id))); ?>">Edit</a>
                       <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($admin->id))); ?>">Delete</a>
                     </div>
                   </td>
@@ -177,7 +179,7 @@ $members = User::find_by_access("MM");
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($manager->id))); ?>">View</a>
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($manager->id))); ?>">Edit</a>
+                      <a class="btn btn-warning" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($manager->id))); ?>">Edit</a>
                       <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($manager->id))); ?>">Delete</a>
                     </div>
                   </td>
@@ -218,7 +220,7 @@ $members = User::find_by_access("MM");
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($staff->id))); ?>">View</a>
-                      <a class="btn btn-primary" href="<member?= url_for('/app/shared/users/edit.php?id=' . h(u($staff->id))); ?>">Edit</a>
+                      <a class="btn btn-warning" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($staff->id))); ?>">Edit</a>
                       <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($staff->id))); ?>">Delete</a>
                     </div>
                   </td>
@@ -259,7 +261,7 @@ $members = User::find_by_access("MM");
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($member->id))); ?>">View</a>
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($member->id))); ?>">Edit</a>
+                      <a class="btn btn-warning" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($member->id))); ?>">Edit</a>
                       <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($member->id))); ?>">Delete</a>
                     </div>
                   </td>
@@ -274,10 +276,10 @@ $members = User::find_by_access("MM");
   </div>
   <div class="row justify-content-evenly" role="toolbar" aria-label="User toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn btn-primary" href="<?= url_for('app/shared/users/search.php'); ?>">Find Users</a>
+      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/users/search.php'); ?>">Find Users</a>
     </div>
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn btn-primary" href="<?= url_for('app/shared/users/new.php'); ?>">Create A User</a>
+      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/users/new.php'); ?>">Create A User</a>
     </div>
   </div>
 

@@ -10,7 +10,7 @@ $today = date('Y-m-d');
 $accesses = User::USER_TYPES; 
 ?>
 
-<fieldset class="card col-md-10 mx-auto mb-4">
+<fieldset class="card shadow col-md-10 mx-auto mb-4">
   <legend class="card-header">Profile Information</legend>
   <div class="card-body">
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -75,7 +75,7 @@ $accesses = User::USER_TYPES;
   </div>
 </fieldset>
 
-<fieldset class="card col-md-10 mx-auto mb-4">
+<fieldset class="card shadow col-md-10 mx-auto mb-4">
   <legend class="card-header">Location Information</legend>
   <div class="card-body">
     <div class=" row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -136,7 +136,7 @@ $accesses = User::USER_TYPES;
   </div>
 </fieldset>
 
-<fieldset class="card col-md-10 mx-auto mb-4">
+<fieldset class="card shadow col-md-10 mx-auto mb-4">
   <legend class="card-header">Contact Information</legend>
   <div class="card-body">
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -155,13 +155,13 @@ $accesses = User::USER_TYPES;
       </div>
       <div class="col-md-7">
         <div class="row ms-0 input-group">
-          <input type="tel" name="user[phone_p_country]" value="<?php echo h($user->phone_p_country); ?>" class="form-control col" id="inputPhonePCountry" list="countryPrefixes" required>
+          <input type="tel" name="user[phone_p_country]" value="<?php echo h($user->phone_p_country); ?>" class="form-control col" id="inputPhonePCountry" list="countryPrefixes" aria-labelledby="inputPhonePrimary" required>
           <datalist id="countryPrefixes">
             <?php foreach($countries as $country) { ?>
             <option value="<?= $country->country_prefix ?>" <?= ($user->phone_p_country == $country->country_prefix) ? 'selected' : '';?>><?= $country->country_name; ?></option>
             <?php } ?>
           </datalist>
-          <input type="tel" name="user[phone_primary]" value="<?php echo h($user->phone_primary); ?>" class="form-control col" id="inputPhonePrimary" aria-describedby="phonePrimaryHelp" required>
+          <input type="tel" name="user[phone_primary]" value="<?php echo h($user->phone_primary); ?>" class="form-control col w-50" id="inputPhonePrimary" aria-describedby="phonePrimaryHelp" required>
         </div>
       </div>
       <div id="phonePrimaryHelp" class="form-text offset-md-3">Maximum of 12 Digits</div>
@@ -174,7 +174,7 @@ $accesses = User::USER_TYPES;
       <div class="col-md-7">
         <div class="row ms-0 input-group">
           <input type="tel" name="user[phone_s_country]" value="<?php echo h($user->phone_s_country); ?>" class="form-control col" id="inputPhoneSCountry" list="countryPrefixes">
-          <input type="tel" name="user[phone_secondary]" value="<?php echo h($user->phone_secondary); ?>" class="form-control col" id="inputPhoneSecondary" aria-describedby="phoneSecondaryHelp">
+          <input type="tel" name="user[phone_secondary]" value="<?php echo h($user->phone_secondary); ?>" class="form-control col w-50" id="inputPhoneSecondary" aria-describedby="phoneSecondaryHelp">
         </div>
       </div>
       <div id="phoneSecondaryHelp" class="form-text offset-md-3">Maximum of 12 Digits</div>
@@ -182,12 +182,12 @@ $accesses = User::USER_TYPES;
   </div>
 </fieldset>
 
-<fieldset class="card col-md-10 mx-auto mb-4">
+<fieldset class="card shadow col-md-10 mx-auto mb-4">
   <legend class="card-header">Emergency Contact Information</legend>
   <div class="card-body">
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
       <div class="col-md-3 text-md-end">
-        <label for="inputEmergencyFirst" class="col-form-label">Emergency Contact First Name</label>
+        <label for="inputEmergencyFirst" class="col-form-label">Contact First Name</label>
       </div>
       <div class="col-md-7">
         <input type="text" name="user[first_name_emergency]" value="<?php echo h($user->first_name_emergency); ?>" class="form-control" id="inputEmergencyFirst" aria-describedby="emergencyFirstHelp" required>
@@ -197,7 +197,7 @@ $accesses = User::USER_TYPES;
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
       <div class="col-md-3 text-md-end">
-        <label for="inputEmergencyLast" class="col-form-label">Emergency Contact Last Name</label>
+        <label for="inputEmergencyLast" class="col-form-label">Contact Last Name</label>
       </div>
       <div class="col-md-7">
         <input type="text" name="user[last_name_emergency]" value="<?php echo h($user->last_name_emergency); ?>" class="form-control" id="inputEmergencyLast" aria-describedby="emergencyLastHelp" required>
@@ -207,7 +207,7 @@ $accesses = User::USER_TYPES;
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
       <div class="col-md-3 text-md-end">
-        <label for="inputPhoneEmergency" class="col-form-label">Emergency Phone</label>
+        <label for="inputPhoneEmergency" class="col-form-label">Contact's Phone</label>
       </div>
       <div class="col-md-7">
         <div class="row ms-0 input-group">
@@ -220,7 +220,7 @@ $accesses = User::USER_TYPES;
   </div>
 </fieldset>
 
-<fieldset class="card col-md-10 mx-auto mb-4">
+<fieldset class="card shadow col-md-10 mx-auto mb-4">
   <legend class="card-header">Access Information</legend>
   <div class="card-body">
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -250,7 +250,7 @@ $accesses = User::USER_TYPES;
         <label for="inputPassword" class="col-form-label">Password</label>
       </div>
       <div class="col-md-7">
-        <input type="password" name="user[password]" value="<?php echo h($user->password); ?>" class="form-control" id="inputPassword" required>
+        <input type="password" name="user[password]" value="<?php echo h($user->password); ?>" class="form-control" id="inputPassword">
       </div>
     </div>
 
@@ -259,7 +259,7 @@ $accesses = User::USER_TYPES;
         <label for="inputConfirmPassword" class="col-form-label">Confirm Password</label>
       </div>
       <div class="col-md-7">
-        <input type="password" name="user[confirm_password]" value="<?php echo h($user->confirm_password); ?>" class="form-control" id="inputConfirmPassword" required>
+        <input type="password" name="user[confirm_password]" value="<?php echo h($user->confirm_password); ?>" class="form-control" id="inputConfirmPassword">
       </div>
     </div>
   </div>

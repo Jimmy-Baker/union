@@ -7,7 +7,9 @@ include(SHARED_PATH . '/user-header.php');
 
 <header>
   <div class="p-5 bg-dark text-light">
-    <h1 class="display-1">Administrator Dashboard</h1>
+    <div class="container-fluid py-3">
+      <h1 class="display-2">Administrator Dashboard</h1>
+    </div>
   </div>
   <div class="container-md p-4">
     <div class="row justify-content-between">
@@ -35,17 +37,17 @@ include(SHARED_PATH . '/user-header.php');
     <div class="card shadow col-12 col-md-6 px-0">
       <div class="row align-items-center">
         <div class="col-4">
-          <img src="<?= $session->avatar_url; ?>" class="img-fluid img-thumbnail m-3" alt="<?= $session->preferred_name; ?> profile photo." height="200" width="200">
+          <img src="<?= $session->avatar_url; ?>" class="img-fluid img-thumbnail m-3" alt="<?= $session->name; ?> profile photo." height="200" width="200">
         </div>
         <div class="col-8">
           <div class="card-body">
-            <h3 class="card-title"><?= $session->preferred_name; ?></h3>
+            <h3 class="card-title"><?= $session->name; ?></h3>
             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
             <p class="card-text"><small class="text-muted">Logged in as Administrator</small></p>
           </div>
         </div>
       </div>
-    </div>
+      <!-- </div>
     <div class="col card shadow me-2 ms-md-3 px-0">
       <h5 class="card-header">Link group</h5>
       <div class="card-body row row-cols-1 g-2">
@@ -61,7 +63,7 @@ include(SHARED_PATH . '/user-header.php');
         <a class="col btn btn-primary ">Button</a>
         <a class="col btn btn-primary ">Button</a>
       </div>
-    </div>
+    </div> -->
   </section>
 
   <section class="accordion shadow" id="accordionTools">
@@ -94,7 +96,7 @@ include(SHARED_PATH . '/user-header.php');
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <div class="card-body text-end pt-0">
-                  <a href="#" class="btn btn-primary">Manage Groups</a>
+                  <a href="<?= url_for("/app/shared/groups/groups.php"); ?>" class="btn btn-primary">Manage Groups</a>
                 </div>
               </div>
             </div>
@@ -106,7 +108,7 @@ include(SHARED_PATH . '/user-header.php');
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <div class="card-body text-end pt-0">
-                  <a href="#" class="btn btn-primary">Manage Gyms</a>
+                  <a href="<?= url_for("/app/shared/gyms/gyms.php"); ?>" class="btn btn-primary">Manage Gyms</a>
                 </div>
               </div>
             </div>
@@ -118,7 +120,7 @@ include(SHARED_PATH . '/user-header.php');
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <div class="card-body text-end pt-0">
-                  <a href="#" class="btn btn-primary">Manage Locations</a>
+                  <a href="<?= url_for("/app/shared/locations/locations.php"); ?>" class="btn btn-primary">Manage Locations</a>
                 </div>
               </div>
             </div>
@@ -130,7 +132,7 @@ include(SHARED_PATH . '/user-header.php');
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <div class="card-body text-end pt-0">
-                  <a href="#" class="btn btn-primary">Manage Events</a>
+                  <a href="<?= url_for("/app/shared/events/events.php"); ?>" class="btn btn-primary">Manage Events</a>
                 </div>
               </div>
             </div>

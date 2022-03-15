@@ -2,10 +2,10 @@
 
 class Session {
 
-  private $user_id;
+  public $user_id;
   public $email;
   public $access_abv;
-  public $preferred_name;
+  public $name;
   private $last_login;
 
   public const MAX_LOGIN_AGE = 60*60*24; // 1 day
@@ -22,7 +22,7 @@ class Session {
       $this->user_id = $_SESSION['user_id'] = $user->id;
       $this->email = $_SESSION['email'] = $user->email;
       $this->access_abv = $_SESSION['access_abv'] = $user->access_abv;
-      $this->preferred_name = $_SESSION['preferred_name'] = $user->preferred_name;
+      $this->name = $_SESSION['name'] = $user->name();
       $this->avatar_url = $_SESSION['avatar_url'] = $user->avatar_url;
       $this->last_login = $_SESSION['last_login'] = time();
     }
@@ -38,13 +38,13 @@ class Session {
     unset($_SESSION['user_id']);
     unset($_SESSION['email']);
     unset($_SESSION['access_abv']);
-    unset($_SESSION['preferred_name']);
+    unset($_SESSION['name']);
     unset($_SESSION['avatar_url']);
     unset($_SESSION['last_login']);
     unset($this->user_id);
     unset($this->email);
     unset($this->access_abv);
-    unset($this->preferred_name);
+    unset($this->name);
     unset($this->avatar_url);
     unset($this->last_login);
     return true;
@@ -55,7 +55,7 @@ class Session {
       $this->user_id = $_SESSION['user_id'];
       $this->email = $_SESSION['email'];
       $this->access_abv = $_SESSION['access_abv'];
-      $this->preferred_name = $_SESSION['preferred_name'];
+      $this->name = $_SESSION['name'];
       $this->avatar_url = $_SESSION['avatar_url'];
       $this->last_login = $_SESSION['last_login'];
     }

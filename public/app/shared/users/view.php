@@ -17,7 +17,9 @@ include(SHARED_PATH . '/user-header.php');
 
 <header>
   <div class="p-5 bg-dark text-light">
-    <h1>User Information</h1>
+    <div class="container-fluid py-3">
+      <h1>User Information</h1>
+    </div>
   </div>
   <div class="container-md p-4">
     <div class="row justify-content-between">
@@ -52,7 +54,7 @@ include(SHARED_PATH . '/user-header.php');
 </header>
 
 <main class=" container-md p-4" id="main">
-  <div class="card col-md-10 mx-auto mb-4">
+  <div class="card shadow col-md-10 mx-auto mb-4">
     <div class="card-header fs-4"><?= h($user->user_type()); ?></div>
     <div class="card-body">
       <div class="row">
@@ -91,6 +93,7 @@ include(SHARED_PATH . '/user-header.php');
               <dd class="col-sm-8"><?= d(format_phone($user->phone_e_country, $user->phone_emergency)); ?></dd>
               <dt class="col-sm-4 text-sm-end">Created On</dt>
               <dd class="col-sm-8"><?= d($user->created_at); ?></dd>
+            </dl>
           </div>
         </div>
       </div>
@@ -98,10 +101,10 @@ include(SHARED_PATH . '/user-header.php');
   </div>
   <div class="row justify-content-evenly" role="toolbar" aria-label="User toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn btn-primary" href="<?= url_for('app/shared/users/edit.php?id='. h(u($user->id))); ?>">Edit This User</a>
+      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/users/edit.php?id='. h(u($user->id))); ?>">Edit This User</a>
     </div>
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn btn-danger" href="<?= url_for('app/shared/users/delete.php?id='. h(u($user->id))); ?>">Delete This User</a>
+      <a class="btn shadow btn-danger" href="<?= url_for('app/shared/users/delete.php?id='. h(u($user->id))); ?>">Delete This User</a>
     </div>
   </div>
 </main>
