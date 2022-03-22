@@ -27,7 +27,7 @@ $locations = Location::find_all();
         <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="locationMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           Location Menu
         </a>
-        <ul class="dropdown-menu dropdown-menu-end text-end" aria-labelledby="locationMenuLink">
+        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="locationMenuLink">
           <li><a class="dropdown-item active" href="<?= url_for('app/shared/locations/locations.php'); ?>">All Locations</a></li>
           <li><a class="dropdown-item" href="<?= url_for('app/shared/locations/new.php'); ?>">New Location</a></li>
           <li><a class="dropdown-item" href="<?= url_for('app/shared/locations/search.php'); ?>">Find Locations</a></li>
@@ -74,10 +74,13 @@ $locations = Location::find_all();
                   <td><?= h($location->state_abv) ?></td>
                   <td><?= format_phone(h($location->phone_p_country), h($location->phone_primary)) ?></td>
                   <td>
-                    <div class="btn-location" role="location" aria-label="location actions">
+                    <div class="btn-group" role="group" aria-label="location actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/locations/view.php?id=' . h(u($location->id))); ?>">View</a>
-                      <a class="btn btn-warning" href="<?= url_for('/app/shared/locations/edit.php?id=' . h(u($location->id))); ?>">Edit</a>
-                      <a class="btn btn-danger" href="<?= url_for('/app/shared/locations/delete.php?id=' . h(u($location->id))); ?>">Delete</a>
+                      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                      <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/locations/edit.php?id=' . h(u($location->id))); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/locations/delete.php?id=' . h(u($location->id))); ?>">Delete</a></li>
+                      </ul>
                     </div>
                   </td>
                 </tr>

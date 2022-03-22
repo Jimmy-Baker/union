@@ -30,7 +30,7 @@ $actives = Pass::find_active();
         <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="passMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           Pass Menu
         </a>
-        <ul class="dropdown-menu dropdown-menu-end text-end" aria-labelledby="passMenuLink">
+        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="passMenuLink">
           <li><a class="dropdown-item active" href="<?= url_for('app/shared/passes/passes.php'); ?>">All Passes</a></li>
           <li><a class="dropdown-item" href="<?= url_for('app/shared/passes/new.php'); ?>">New Pass</a></li>
           <li><a class="dropdown-item" href="<?= url_for('app/shared/passes/search.php'); ?>">Find Passes</a></li>
@@ -87,8 +87,11 @@ $actives = Pass::find_active();
                   <td>
                     <div class="btn-group" role="group" aria-label="pass actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/passes/view.php?id=' . h(u($pass->id))); ?>">View</a>
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/passes/edit.php?id=' . h(u($pass->id))); ?>">Edit</a>
-                      <a class="btn btn-danger" href="<?= url_for('/app/shared/passes/delete.php?id=' . h(u($pass->id))); ?>">Delete</a>
+                      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                      <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/edit.php?id=' . h(u($pass->id))); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/delete.php?id=' . h(u($pass->id))); ?>">Delete</a></li>
+                      </ul>
                     </div>
                   </td>
                 </tr>
@@ -126,8 +129,11 @@ $actives = Pass::find_active();
                   <td>
                     <div class="btn-group" role="group" aria-label="pass actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/passes/view.php?id=' . h(u($active->id))); ?>">View</a>
-                      <a class="btn btn-warning" href="<?= url_for('/app/shared/passes/edit.php?id=' . h(u($active->id))); ?>">Edit</a>
-                      <a class="btn btn-danger" href="<?= url_for('/app/shared/passes/delete.php?id=' . h(u($active->id))); ?>">Delete</a>
+                      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                      <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/edit.php?id=' . h(u($active->id))); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/delete.php?id=' . h(u($active->id))); ?>">Delete</a></li>
+                      </ul>
                     </div>
                   </td>
                 </tr>
@@ -165,8 +171,11 @@ $actives = Pass::find_active();
                   <td>
                     <div class="btn-group" role="group" aria-label="pass actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/passes/view.php?id=' . h(u($expired->id))); ?>">View</a>
-                      <a class="btn btn-warning" href="<?= url_for('/app/shared/passes/edit.php?id=' . h(u($expired->id))); ?>">Edit</a>
-                      <a class="btn btn-danger" href="<?= url_for('/app/shared/passes/delete.php?id=' . h(u($expired->id))); ?>">Delete</a>
+                      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                      <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/edit.php?id=' . h(u($expired->id))); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/delete.php?id=' . h(u($expired->id))); ?>">Delete</a></li>
+                      </ul>
                     </div>
                   </td>
                 </tr>

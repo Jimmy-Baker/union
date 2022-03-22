@@ -6,6 +6,7 @@ class Session {
   public $email;
   public $access_abv;
   public $name;
+  public $location;
   private $last_login;
 
   public const MAX_LOGIN_AGE = 60*60*24; // 1 day
@@ -23,6 +24,7 @@ class Session {
       $this->email = $_SESSION['email'] = $user->email;
       $this->access_abv = $_SESSION['access_abv'] = $user->access_abv;
       $this->name = $_SESSION['name'] = $user->name();
+      $this->location = $_SESSION['location'] = $user->primary_location;
       $this->avatar_url = $_SESSION['avatar_url'] = $user->avatar_url;
       $this->last_login = $_SESSION['last_login'] = time();
     }

@@ -3,7 +3,7 @@
 class User extends DatabaseObject {
 
   static protected $table_name = "users";
-  static protected $db_columns = ['id', 'first_name', 'last_name', 'middle_name', 'preferred_name', 'birth_date', 'group_id', 'avatar_url', 'street_address', 'city', 'zip', 'state_abv', 'country_abv', 'email', 'phone_primary', 'phone_p_country', 'phone_secondary', 'phone_s_country', 'first_name_emergency', 'last_name_emergency', 'phone_emergency', 'phone_e_country', 'password_hash', 'access_abv', 'created_at'];
+  static protected $db_columns = ['id', 'first_name', 'last_name', 'middle_name', 'preferred_name', 'birth_date', 'group_id', 'avatar_url', 'street_address', 'city', 'zip', 'state_abv', 'country_abv', 'email', 'phone_primary', 'phone_p_country', 'phone_secondary', 'phone_s_country', 'first_name_emergency', 'last_name_emergency', 'phone_emergency', 'phone_e_country', 'password_hash', 'access_abv', 'created_at', 'primary_location'];
   
   public $id;
   public $first_name;
@@ -30,6 +30,7 @@ class User extends DatabaseObject {
   protected $password_hash;
   public $access_abv;
   public $created_at;
+  public $primary_location;
   
   public $upload_img;
   public $upload_name;
@@ -62,6 +63,7 @@ class User extends DatabaseObject {
     $this->phone_emergency = $args['phone_emergency'] ?? '';
     $this->phone_e_country = $args['phone_e_country'] ?? '';
     $this->access_abv = $args['access_abv'] ?? 'MM';
+    $this->primary_location = $args['primary_location'] ?? '';
     
     $this->password = $args['password'] ?? '';
     $this->confirm_password = $args['confirm_password'] ?? '';
@@ -184,6 +186,18 @@ class User extends DatabaseObject {
   
   public function user_type() {
       return self::USER_TYPES[$this->access_abv]; 
+  }
+  
+  public function punch_count($location) {
+    return $location;
+  }
+  
+  public function check_in($location) {
+    if(!self::punch_count($location)) {
+      return false;
+    } else {
+      return $location;
+    }
   }
 }
 

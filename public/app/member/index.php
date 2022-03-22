@@ -20,7 +20,7 @@ include(SHARED_PATH . '/user-header.php');
         <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="userMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           Dashboard Menu
         </a>
-        <ul class="dropdown-menu dropdown-menu-end text-end" aria-labelledby="userMenuLink">
+        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="userMenuLink">
           <li>
             <p class="dropdown-header">I may get rid of this</p>
           </li>

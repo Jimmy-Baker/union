@@ -34,7 +34,7 @@ include(SHARED_PATH . '/user-header.php');
         <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="gymMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           Gym Menu
         </a>
-        <ul class="dropdown-menu dropdown-menu-end text-end" aria-labelledby="gymMenuLink">
+        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="gymMenuLink">
           <li><a class="dropdown-item" href="<?= url_for('app/shared/gyms/gyms.php'); ?>">All Gyms</a></li>
           <li><a class="dropdown-item" href="<?= url_for('app/shared/gyms/new.php'); ?>">New Gym</a></li>
           <li>

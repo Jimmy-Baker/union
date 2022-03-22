@@ -27,7 +27,7 @@ $gyms = Gym::find_all();
         <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="gymMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           Gym Menu
         </a>
-        <ul class="dropdown-menu dropdown-menu-end text-end" aria-labelledby="gymMenuLink">
+        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="gymMenuLink">
           <li><a class="dropdown-item active" href="<?= url_for('app/shared/gyms/gyms.php'); ?>">All Gyms</a></li>
           <li><a class="dropdown-item" href="<?= url_for('app/shared/gyms/new.php'); ?>">New Gym</a></li>
           <li><a class="dropdown-item" href="<?= url_for('app/shared/gyms/search.php'); ?>">Find Gyms</a></li>
@@ -68,10 +68,13 @@ $gyms = Gym::find_all();
                   <td><?= h($gym->gym_name) ?></td>
                   <td><?= h($gym->website) ?></td>
                   <td>
-                    <div class="btn-gym" role="gym" aria-label="gym actions">
+                    <div class="btn-group" role="group" aria-label="gym actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/gyms/view.php?id=' . h(u($gym->id))); ?>">View</a>
-                      <a class="btn btn-warning" href="<?= url_for('/app/shared/gyms/edit.php?id=' . h(u($gym->id))); ?>">Edit</a>
-                      <a class="btn btn-danger" href="<?= url_for('/app/shared/gyms/delete.php?id=' . h(u($gym->id))); ?>">Delete</a>
+                      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                      <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/gyms/edit.php?id=' . h(u($gym->id))); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/gyms/delete.php?id=' . h(u($gym->id))); ?>">Delete</a></li>
+                      </ul>
                     </div>
                   </td>
                 </tr>

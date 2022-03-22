@@ -26,7 +26,16 @@
   <body class="container-fluid px-0 pt-5 vh-100">
     <nav class="navbar navbar-dark shadow navbar-expand-sm bg-primary fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="<?=url_for("/img/union-logo.svg");?>" alt="United mountains logo." width="45">Union</a>
+        <a class="navbar-brand col-auto py-0" href="#">
+          <div class="row align-items-center">
+            <div class="col">
+              <img src="<?=url_for("/img/union-logo.svg");?>" alt="United mountains logo." width="45">
+            </div>
+            <div class="col ps-0">
+              <h1 class="d-inline-block h2 mb-0 col">Union</h1>
+            </div>
+          </div>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>

@@ -40,4 +40,9 @@ class PassItem extends DatabaseObject {
     }
   }
   
+  public function redeem_punch() {
+    $this->used = $this->used + 1;
+    $this->save();
+  }
+  
 }

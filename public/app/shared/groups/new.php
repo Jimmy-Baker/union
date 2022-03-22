@@ -41,7 +41,7 @@ if(is_post_request()) {
         <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="groupMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           Group Menu
         </a>
-        <ul class="dropdown-menu dropdown-menu-end text-end" aria-labelledby="groupMenuLink">
+        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="groupMenuLink">
           <li><a class="dropdown-item" href="<?= url_for('app/shared/groups/groups.php'); ?>">All Groups</a></li>
           <li><a class="dropdown-item active" href="<?= url_for('app/shared/groups/new.php'); ?>">New Group</a></li>
           <li><a class="dropdown-item" href="<?= url_for('app/shared/groups/search.php'); ?>">Find Groups</a></li>

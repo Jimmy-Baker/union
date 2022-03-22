@@ -32,7 +32,7 @@ $members = User::find_by_access("MM");
         <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="userMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           User Menu
         </a>
-        <ul class="dropdown-menu dropdown-menu-end text-end" aria-labelledby="userMenuLink">
+        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="userMenuLink">
           <li><a class="dropdown-item active" href="<?= url_for('app/shared/users/users.php'); ?>">All Users</a></li>
           <li><a class="dropdown-item" href="<?= url_for('app/shared/users/new.php'); ?>">New User</a></li>
           <li><a class="dropdown-item" href="<?= url_for('app/shared/users/search.php'); ?>">Find Users</a></li>
@@ -97,8 +97,11 @@ $members = User::find_by_access("MM");
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
-                      <a class="btn btn-warning" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
-                      <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                      <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a></li>
+                      </ul>
                     </div>
                   </td>
                 </tr>
@@ -138,8 +141,11 @@ $members = User::find_by_access("MM");
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($admin->id))); ?>">View</a>
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($admin->id))); ?>">Edit</a>
-                      <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($admin->id))); ?>">Delete</a>
+                      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                      <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($admin->id))); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($admin->id))); ?>">Delete</a></li>
+                      </ul>
                     </div>
                   </td>
                 </tr>
@@ -179,8 +185,11 @@ $members = User::find_by_access("MM");
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($manager->id))); ?>">View</a>
-                      <a class="btn btn-warning" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($manager->id))); ?>">Edit</a>
-                      <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($manager->id))); ?>">Delete</a>
+                      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                      <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($manager->id))); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($manager->id))); ?>">Delete</a></li>
+                      </ul>
                     </div>
                   </td>
                 </tr>
@@ -220,8 +229,11 @@ $members = User::find_by_access("MM");
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($staff->id))); ?>">View</a>
-                      <a class="btn btn-warning" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($staff->id))); ?>">Edit</a>
-                      <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($staff->id))); ?>">Delete</a>
+                      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                      <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($staff->id))); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($staff->id))); ?>">Delete</a></li>
+                      </ul>
                     </div>
                   </td>
                 </tr>
@@ -261,8 +273,11 @@ $members = User::find_by_access("MM");
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($member->id))); ?>">View</a>
-                      <a class="btn btn-warning" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($member->id))); ?>">Edit</a>
-                      <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($member->id))); ?>">Delete</a>
+                      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                      <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($member->id))); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($member->id))); ?>">Delete</a></li>
+                      </ul>
                     </div>
                   </td>
                 </tr>

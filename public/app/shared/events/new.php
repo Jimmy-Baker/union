@@ -41,7 +41,7 @@ if(is_post_request()) {
         <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="eventMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           Event Menu
         </a>
-        <ul class="dropdown-menu dropdown-menu-end text-end" aria-labelledby="eventMenuLink">
+        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="eventMenuLink">
           <li><a class="dropdown-item" href="<?= url_for('app/shared/events/events.php'); ?>">All Events</a></li>
           <li><a class="dropdown-item active" href="<?= url_for('app/shared/events/new.php'); ?>">New Event</a></li>
           <li><a class="dropdown-item" href="<?= url_for('app/shared/events/search.php'); ?>">Find Events</a></li>

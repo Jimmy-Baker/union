@@ -34,7 +34,7 @@ include(SHARED_PATH . '/user-header.php');
         <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="passMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           Pass Menu
         </a>
-        <ul class="dropdown-menu dropdown-menu-end text-end" aria-labelledby="passMenuLink">
+        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="passMenuLink">
           <li><a class="dropdown-item" href="<?= url_for('app/shared/passes/passes.php'); ?>">All Passes</a></li>
           <li><a class="dropdown-item" href="<?= url_for('app/shared/passes/new.php'); ?>">New Pass</a></li>
           <li><a class="dropdown-item" href="<?= url_for('app/shared/passes/search.php'); ?>">Find Passes</a></li>

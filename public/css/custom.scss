@@ -1,0 +1,57 @@
+@import '../node_modules/bootstrap/scss/_functions.scss';
+@import '../node_modules/bootstrap/scss/_variables.scss';
+@import url('https://use.typekit.net/fup0mom.css');
+
+$theme-colors: (
+	primary: #213e66,
+	secondary: #fea91b,
+	success: #537a5a,
+	info: #86b4ed,
+	warning: #f97068,
+	danger: #93032e,
+	light: #ecd4af,
+	dark: #000b29,
+	primary-rgb: rgb(33, 62, 102),
+	secondary-rgb: rgb(254, 169, 27),
+	success-rgb: rgb(83, 122, 90),
+	info-rgb: rgb(134, 180, 237),
+	warning-rgb: rgb(249, 112, 104),
+	danger-rgb: rgb(147, 3, 46),
+	light-rbg: rgb(236, 212, 175),
+	dark-rgb: rgb(0, 11, 41)
+);
+
+$primary: #213e66 !default;
+$secondary: #fea91b !default;
+$success: #537a5a !default;
+$info: #86b4ed !default;
+$warning: #f97068 !default;
+$danger: #93032e !default;
+$light: #ecd4af !default;
+$dark: #000b29 !default;
+
+$font-family-sans-serif: 'Proxima Nova', system-ui, -apple-system, 'Segoe UI',
+	Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+	'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;
+
+$headings-font-family: 'Cubano Sharp' !default;
+
+$font-family-base: 'Proxima Nova' !default;
+
+// @import '../node_modules/bootstrap/scss/utilities.scss';
+// @import '../node_modules/bootstrap/scss/utilities/api';
+
+// $utilities: map-merge(
+// 	$utilities,
+// 	(
+// 		'shadow':
+// 			map-merge(
+// 				map-get($utilities, 'shadow'),
+// 				(
+// 					responsive: true
+// 				)
+// 			)
+// 	)
+// );
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';

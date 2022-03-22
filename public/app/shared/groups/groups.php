@@ -27,7 +27,7 @@ $groups = Group::find_all();
         <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="groupMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           Group Menu
         </a>
-        <ul class="dropdown-menu dropdown-menu-end text-end" aria-labelledby="groupMenuLink">
+        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="groupMenuLink">
           <li><a class="dropdown-item active" href="<?= url_for('app/shared/groups/groups.php'); ?>">All Groups</a></li>
           <li><a class="dropdown-item" href="<?= url_for('app/shared/groups/new.php'); ?>">New Group</a></li>
           <li><a class="dropdown-item" href="<?= url_for('app/shared/groups/search.php'); ?>">Find Groups</a></li>
@@ -70,8 +70,11 @@ $groups = Group::find_all();
                   <td>
                     <div class="btn-group" role="group" aria-label="group actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/groups/view.php?id=' . h(u($group->id))); ?>">View</a>
-                      <a class="btn btn-warning" href="<?= url_for('/app/shared/groups/edit.php?id=' . h(u($group->id))); ?>">Edit</a>
-                      <a class="btn btn-danger" href="<?= url_for('/app/shared/groups/delete.php?id=' . h(u($group->id))); ?>">Delete</a>
+                      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                      <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/groups/edit.php?id=' . h(u($group->id))); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/groups/delete.php?id=' . h(u($group->id))); ?>">Delete</a></li>
+                      </ul>
                     </div>
                   </td>
                 </tr>
