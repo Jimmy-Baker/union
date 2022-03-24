@@ -21,7 +21,7 @@ if(is_post_request()) {
   $result = $gym->save();
 
   if($result === true) {
-    $session->message('The gym was updated successfully.');
+    $session->message('The gym was updated successfully.', 'success');
     redirect_to(url_for('/app/shared/gyms/view.php?id=' . $id));
   } else {
     echo $result;

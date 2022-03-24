@@ -18,7 +18,7 @@ if(is_post_request()) {
 
   // Delete event
   $result = $event->delete();
-  $session->message('The event was deleted successfully.');
+  $session->message('The event was deleted successfully.', 'success');
   redirect_to(url_for('/app/shared/events/events.php'));
 
 } else {
@@ -32,7 +32,7 @@ if(is_post_request()) {
   $result = $event->save();
 
   if($result === true) {
-    $session->message('The event was updated successfully.');
+    $session->message('The event was updated successfully.', 'success');
     redirect_to(url_for('/app/shared/events/view.php?id=' . $id));
   } else {
     echo $result;

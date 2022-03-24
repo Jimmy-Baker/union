@@ -12,7 +12,7 @@ if(is_post_request()) {
 
   if($result === true) {
     $new_id = $gym->id;
-    $session->message('The gym was created successfully.');
+    $session->message('The gym was created successfully.', 'success');
     redirect_to(url_for('/app/shared/gyms/view.php?id=' . $new_id));
   } else {
 

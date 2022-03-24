@@ -25,6 +25,7 @@ if(is_post_request()) {
     if($user != false && $user->verify_password($password)) {
       // Mark user as logged in
       $session->login($user);
+      $session->message('Your login was successful!', 'success');
       
       switch ($session->access_abv) {
         case "AA":
@@ -41,7 +42,7 @@ if(is_post_request()) {
       }
     } else {
       // email not found or password does not match
-      $error_array[] = ["#log_in", "Log in was unsuccessful."];
+      $session->message('That email and password combination was incorrect.', 'warning');
     }
 
   }
@@ -54,16 +55,15 @@ if(is_post_request()) {
 <?php include(SHARED_PATH . '/public-header.php'); ?>
 
 <main class="container-md p-4 mt-5" id="main">
-
   <form action="login.php" method="post">
     <h1>Log In</h1>
     <div class="mb-3">
       <label for="inputEmail" class="form-label">Email Address</label>
-      <input type="email" name="email" value="<?php echo h($email); ?>" class="form-control" id="inputEmail">
+      <input type="email" name="email" value="<?php echo h($email); ?>" class="form-control" id="inputEmail" required>
     </div>
     <div class="mb-3">
       <label for="inputPassword" class="form-label">Password</label>
-      <input type="password" name="password" value="" class="form-control" id="inputPassword" aria-describedby="passwordHelp">
+      <input type="password" name="password" value="" class="form-control" id="inputPassword" aria-describedby="passwordHelp" required>
       <div id="passwordHelp" class="form-text">Can't remember your password? Contact us for assistance.</div>
     </div>
     <div class="mb-3 form-check">

@@ -14,7 +14,7 @@ class Pass extends DatabaseObject {
   public $expires_on;
   public $pause_on;
   
-  public const PASS_TYPES = ['AA'=>'Administrator','GM'=>'Gym Manager', 'GS'=>'Gym Staff','MM'=>'Member', ''=>'None'];
+  public const PASS_TYPES = ['A'=>'Administrator','B'=>'Unlimited', 'C'=>'Conditional','D'=>'Base Pass', 'E'=>'Premier Pass', 'F'=>'Premier Pass'];
   
   public function __construct($args=[]) {
     $this->id = $args['id'] ?? '';
@@ -28,18 +28,8 @@ class Pass extends DatabaseObject {
   }
   
   public function pass_type() {
-    switch ($this->pass_type) {
-      case 'AA': return self::PASS_TYPES[0];
-        break;
-      case 'GM': return self::PASS_TYPES[1];
-        break;
-      case 'GS': return self::PASS_TYPES[2];
-        break;
-      case 'MM': return self::PASS_TYPES[3];
-        break;
-      case '': return self::PASS_TYPES[4];
-        break;
-    }
+    $key = $this->pass_type;
+    return self::PASS_TYPES[$key];
   }
   
   static public function find_expired(){

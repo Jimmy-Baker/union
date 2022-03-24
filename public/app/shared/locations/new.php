@@ -12,7 +12,7 @@ if(is_post_request()) {
 
   if($result === true) {
     $new_id = $location->id;
-    $session->message('The location was created successfully.');
+    $session->message('The location was created successfully.', 'success');
     redirect_to(url_for('/app/shared/locations/view.php?id=' . $new_id));
   } else {
 

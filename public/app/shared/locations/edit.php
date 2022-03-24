@@ -21,7 +21,7 @@ if(is_post_request()) {
   $result = $location->save();
 
   if($result === true) {
-    $session->message('The location was updated successfully.');
+    $session->message('The location was updated successfully.', 'success');
     redirect_to(url_for('/app/shared/locations/view.php?id=' . $id));
   } else {
     echo $result;

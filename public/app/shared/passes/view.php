@@ -7,6 +7,7 @@ if(!isset($_GET['id'])) {
 }
 $id = $_GET['id'];
 $pass = Pass::find_by_id($id);
+$punches = PassItem::find_by_pass($id);
 if($pass == false) {
   redirect_to(url_for('/app/shared/passes/passes.php'));
 }
@@ -58,43 +59,55 @@ include(SHARED_PATH . '/user-header.php');
     <div class="card-header fs-4"><?= h($pass->pass_type()); ?></div>
     <div class="card-body">
       <div class="row">
-        <h1 class="card-title"><?= h($pass->id); ?><span class="card-subtitle text-muted"> (#<?= h($pass->id); ?>)</span></h1>
+        <h1 class="card-title">#<?= h($pass->id); ?></h1>
       </div>
       <div class="row mt-4">
         <div class="col-lg-4 order-lg-last d-grid d-lg-block">
-          <img src="<?= h($pass->avatar_url); ?>" class="rounded img-thumbnail mx-auto mb-2" alt="<?= $pass->preferred_name ?>'s profile picture." height="200" width="200">
         </div>
         <div class="col-lg-8 order-lg-first">
           <div class="card-text">
             <dl class="row">
-              <dt class="col-sm-4 text-sm-end">First Name</dt>
-              <dd class="col-sm-8"><?= d($pass->first_name); ?></dd>
-              <dt class="col-sm-4 text-sm-end">Middle Name</dt>
-              <dd class="col-sm-8"><?= d($pass->middle_name); ?></dd>
-              <dt class="col-sm-4 text-sm-end">Last Name</dt>
-              <dd class="col-sm-8"><?= d($pass->last_name); ?></dd>
-              <dt class="col-sm-4 text-sm-end">Preferred Name</dt>
-              <dd class="col-sm-8"><?= d($pass->preferred_name); ?></dd>
-              <dt class="col-sm-4 text-sm-end">Birth Date</dt>
-              <dd class="col-sm-8"><?= d(format_date($pass->birth_date, "-")); ?></dd>
-              <dt class="col-sm-4 text-sm-end">Group ID</dt>
-              <dd class="col-sm-8"><?= d($pass->group_id); ?></dd>
-              <dt class="col-sm-4 text-sm-end">Address</dt>
-              <dd class="col-sm-8"><?= d(format_address($pass->street_address, $pass->city, $pass->state_abv, $pass->zip, $pass->country_abv)); ?></dd>
-              <dt class="col-sm-4 text-sm-end">Email</dt>
-              <dd class="col-sm-8"><?= d($pass->email); ?></dd>
-              <dt class="col-sm-4 text-sm-end">Primary Phone</dt>
-              <dd class="col-sm-8"><?= d(format_phone($pass->phone_p_country, $pass->phone_primary)); ?></dd>
-              <dt class="col-sm-4 text-sm-end">Secondary Phone</dt>
-              <dd class="col-sm-8"><?= d(format_phone($pass->phone_s_country, $pass->phone_secondary)); ?></dd>
-              <dt class="col-sm-4 text-sm-end">Emergency Contact</dt>
-              <dd class="col-sm-8"><?= d($pass->first_name_emergency) . ' ' . d($pass->last_name_emergency); ?></dd>
-              <dt class="col-sm-4 text-sm-end">Emergency Phone</dt>
-              <dd class="col-sm-8"><?= d(format_phone($pass->phone_e_country, $pass->phone_emergency)); ?></dd>
-              <dt class="col-sm-4 text-sm-end">Created On</dt>
+              <dt class="col-sm-4 text-sm-end">User ID</dt>
+              <dd class="col-sm-8"><?= d($pass->user_id); ?></dd>
+              <dt class="col-sm-4 text-sm-end">Active</dt>
+              <dd class="col-sm-8"><?= d($pass->is_active); ?></dd>
+              <dt class="col-sm-4 text-sm-end">Pass Type</dt>
+              <dd class="col-sm-8"><?= d($pass->pass_type); ?></dd>
+              <dt class="col-sm-4 text-sm-end">Created</dt>
               <dd class="col-sm-8"><?= d($pass->created_at); ?></dd>
+              <dt class="col-sm-4 text-sm-end">Active On</dt>
+              <dd class="col-sm-8"><?= d($pass->active_on); ?></dd>
+              <dt class="col-sm-4 text-sm-end">Expires On</dt>
+              <dd class="col-sm-8"><?= d($pass->expires_on); ?></dd>
+            </dl>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="card shadow col-md-10 mx-auto mb-4">
+    <div class="card-header fs-4"><?= h($pass->pass_type()); ?></div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <caption>List of visits</caption>
+          <thead class="table-primary">
+            <tr>
+              <th>Gym ID</th>
+              <th>Assigned</th>
+              <th>Used</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach($punches as $punch) { ?>
+            <tr class="align-middle text-nowrap">
+              <td><?= h($punch->gym_id) ?></td>
+              <td><?= h($punch->assigned) ?></td>
+              <td><?= h($punch->used) ?></td>
+            </tr>
+            <?php } ?>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

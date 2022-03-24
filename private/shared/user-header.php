@@ -72,4 +72,4 @@
       </div>
     </nav>
 
-    <!-- <?= display_session_message(); ?> -->
+    <?= display_session_message(); ?>

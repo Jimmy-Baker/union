@@ -29,15 +29,10 @@ class PassItem extends DatabaseObject {
     }
   }
   
-  public function find_by_pass($pass_id) {
+  static public function find_by_pass($pass_id) {
     $sql = "SELECT * FROM " . static::$table_name . " ";
     $sql .= "WHERE pass_id='" . self::$database->escape_string($pass_id) . "'";
-    $obj_array = static::find_by_sql($sql);
-    if(!empty($obj_array)) {
-      return array_shift($obj_array);
-    } else {
-      return false;
-    }
+    return static::find_by_sql($sql);
   }
   
   public function redeem_punch() {

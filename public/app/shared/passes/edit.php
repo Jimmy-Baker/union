@@ -21,7 +21,7 @@ if(is_post_request()) {
   $result = $pass->save();
 
   if($result === true) {
-    $session->message('The pass was updated successfully.');
+    $session->message('The pass was updated successfully.', 'success');
     redirect_to(url_for('/app/shared/passes/view.php?id=' . $id));
   } else {
     echo $result;

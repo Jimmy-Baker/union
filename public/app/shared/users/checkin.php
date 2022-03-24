@@ -4,7 +4,37 @@ require_login();
 $page_title = 'Find Users';
 include(SHARED_PATH . '/user-header.php'); 
 
+$location = Location::find_by_id($_SESSION['location']);
+$occupant = $location->capacity;
+
 if(is_post_request()) {
+  // validate location has space
+  if($location->occupants )
+  
+  
+  // determine user to check in
+  
+  
+  
+  // determine if user's pass contains location's gym
+  
+  
+  
+  // determine if user's pass has redeemable punch
+  
+  
+  
+  // add user to attendance list
+  
+  
+  
+  // add 1 to used punches
+  
+  
+  
+  // report success or failure
+  
+  
   // Create record using post parameters
   $sql = "SELECT * FROM users WHERE ";
   if (isset($_POST['inputValue1'])) {

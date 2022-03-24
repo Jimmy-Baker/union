@@ -41,12 +41,14 @@ class Session {
     unset($_SESSION['email']);
     unset($_SESSION['access_abv']);
     unset($_SESSION['name']);
+    unset($_SESSION['location']);
     unset($_SESSION['avatar_url']);
     unset($_SESSION['last_login']);
     unset($this->user_id);
     unset($this->email);
     unset($this->access_abv);
     unset($this->name);
+    unset($this->location);
     unset($this->avatar_url);
     unset($this->last_login);
     return true;
@@ -58,6 +60,7 @@ class Session {
       $this->email = $_SESSION['email'];
       $this->access_abv = $_SESSION['access_abv'];
       $this->name = $_SESSION['name'];
+      $this->location = $_SESSION['location'];
       $this->avatar_url = $_SESSION['avatar_url'];
       $this->last_login = $_SESSION['last_login'];
     }
@@ -73,10 +76,11 @@ class Session {
     }
   }
 
-  public function message($msg="") {
+  public function message($msg="", $class="") {
     if(!empty($msg)) {
       // Then this is a "set" message
       $_SESSION['message'] = $msg;
+      $_SESSION['message_class'] = $class;
       return true;
     } else {
       // Then this is a "get" message
@@ -86,6 +90,7 @@ class Session {
 
   public function clear_message() {
     unset($_SESSION['message']);
+    unset($_SESSION['message_class']);
   }
   
   public function dashboard() {

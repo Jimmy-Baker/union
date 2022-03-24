@@ -76,9 +76,10 @@ function error_css($error_array=array()){
 function display_session_message() {
   global $session;
   $msg = $session->message();
+  $class = $_SESSION['message_class'] ?? 'primary'; 
   if(isset($msg) && $msg != '') {
     $session->clear_message();
-    return '<div id="message">' . h($msg) . '</div>';
+    return '<div class="container fixed-message"><div class="alert alert-'. $class . ' alert-dismissible fade show" id="message" role="alert">' . h($msg) . '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div></div>';
   }
 }
 

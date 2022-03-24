@@ -21,7 +21,7 @@ if(is_post_request()) {
   $result = $group->save();
 
   if($result === true) {
-    $session->message('The group was updated successfully.');
+    $session->message('The group was updated successfully.', 'success');
     redirect_to(url_for('/app/shared/groups/view.php?id=' . $id));
   } else {
     echo $result;
