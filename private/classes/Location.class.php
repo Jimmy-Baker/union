@@ -15,7 +15,7 @@ class Location extends DatabaseObject {
   public $country_abv;
   public $phone_primary;
   public $photo_data;
-  public $attendance_data;
+  public $attendance_data = [];
   public $capacity;
   
   public function __construct($args=[]) {
@@ -28,7 +28,7 @@ class Location extends DatabaseObject {
     $this->country_abv = $args['country_abv'] ?? '';
     $this->phone_primary = $args['phone_primary'] ?? '';
     $this->photo_data = $args['photo_data'] ?? '';
-    $this->attendance_data = $args['attendance_data'] ?? '';
+    $this->attendance_data = $args['attendance_data'] ?? [];
     $this->capacity = $args['capacity'] ?? '';
   }
   
@@ -39,5 +39,21 @@ class Location extends DatabaseObject {
   public function available() {
     return ($this->capacity - jnc($this->attendance_data));
   }
+  
+  public function full_name($sep = null) {
+    $gym_name = Gym::return_param_by_id("gym_name", $this->gym_id);
+    if(isset($sep)){
+      return $gym_name . ' ' . $sep . ' ' . $this->location_name;
+    } else {
+      return $gym_name . ' ' . $this->location_name;
+    }
+  }
+  
+  public function check_in($user) { 
+    $item = array("id"=>$user->id, "name"=>$user->full_name(), "in"=>timestamp(), "out"=>null);
+    $this->attendance_data[] = $item;
+    $result = $this->save();
+    return $result;
+  } 
   
 }

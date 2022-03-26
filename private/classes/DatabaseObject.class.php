@@ -72,6 +72,7 @@ class DatabaseObject {
     // but automatically assignment is easier and re-usable
     foreach($record as $property => $value) {
       if(property_exists($object, $property)) {
+        $value = isJSON($value) ? json_decode($value) : $value;
         $object->$property = $value;
       }
     }
@@ -152,6 +153,7 @@ class DatabaseObject {
   protected function sanitized_attributes() {
     $sanitized = [];
     foreach($this->attributes() as $key => $value) {
+      $value = is_array($value) ? json_encode($value) : $value;
       $sanitized[$key] = self::$database->escape_string($value);
     }
     return $sanitized;

@@ -62,6 +62,10 @@ function html_date($datetime) {
   return date_format($date, "Y-m-d");
 }
 
+function timestamp() {
+  return date("Y-m-d H:i:s");
+}
+
 //format integers to a recognizable phone numnber
 function format_phone($country, $phone) {
   if (strlen($phone) != 10) {
@@ -115,9 +119,11 @@ function isJSON($string){
 function jnc($json) {
   if(is_null($json)){
     return 0;
-  } elseif(isJSON($json)) {
+  } else {
     return count($json);
   }
 }
+
+
 
 ?>

@@ -26,8 +26,17 @@ if(is_post_request()) {
               // check if user has punch remaining
               if($punch->available() > 0) {
                 // check user in
-                $punch->redeem_punch();
-                $session->message("The user was successfully checked in.", "success");
+                $debit = $punch->redeem_punch();
+                if($debit) {
+                  $credit = $location->check_in($user);
+                  if($credit) {
+                    $session->message("The user was successfully checked in", "success");
+                  } else {
+                    $session->message("The user could not be added to the attendance list.", "warning");
+                  }
+                } else {
+                $session->message("A punch could not be debited.", "warning");
+                }
               } else {
                 $session->message("The user does not have remaining punches.", "warning");
               }
@@ -54,9 +63,7 @@ if(is_post_request()) {
   } else {
     $session->message("Your location is not set.", "warning");
   }
-  
-  
-  $users = User::find_by_sql($sql);
+    
 } else {
 
 }

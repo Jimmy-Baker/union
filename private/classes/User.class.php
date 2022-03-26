@@ -70,7 +70,8 @@ class User extends DatabaseObject {
   }
 
   public function full_name() {
-    return $this->first_name . " " . $this->middle_name . " " . $this->last_name;
+    $middle = ($this->middle_name = '') ? $this->middle_name . " " : "";
+    return $this->first_name . " " . $middle . $this->last_name;
   }
 
   public function name() {
