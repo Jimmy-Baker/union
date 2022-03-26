@@ -16,7 +16,6 @@ class Event extends DatabaseObject {
   public $photo_data;
   
   public function __construct($args=[]) {
-    $this->id = $args['id'] ?? '';
     $this->start_date = $args['start_date'] ?? '';
     $this->end_date = $args['end_date'] ?? '';
     $this->location_id = $args['location_id'] ?? '';

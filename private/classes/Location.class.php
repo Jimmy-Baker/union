@@ -19,7 +19,6 @@ class Location extends DatabaseObject {
   public $capacity;
   
   public function __construct($args=[]) {
-    $this->id = $args['id'] ?? '';
     $this->gym_id = $args['gym_id'] ?? '';
     $this->location_name = $args['location_name'] ?? '';
     $this->street_address = $args['street_address'] ?? '';

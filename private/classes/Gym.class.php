@@ -11,7 +11,6 @@ class Gym extends DatabaseObject {
   public $avatar_url;
   
   public function __construct($args=[]) {
-    $this->id = $args['id'] ?? '';
     $this->gym_name = $args['gym_name'] ?? '';
     $this->website = $args['website'] ?? '';
     $this->avatar_url = $args['avatar_url'] ?? '';

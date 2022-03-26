@@ -5,13 +5,57 @@ $page_title = 'Provision A Pass';
 include(SHARED_PATH . '/user-header.php'); 
 
 $pass_types = PASS::PASS_TYPES;
+$gyms = Gym::find_all();
 
 if(is_post_request()) {
-  $args = $_POST['user'];
-  $pass = new Pass($args);
-  $result = $user->save();
+  switch ($_POST['inputParameter1']) {
+    case "id":
+      $user = User::find_by_id($_POST['inputValue1']);
+      break;
+    case "email":
+      $user = User::find_by_email($_POST['inputValue1']);
+      break;
+    case "phone_primary":
+      $user = User::find_by_phone($_POST['inputValue1']);
+      break;
+  }
+  if($user){
+    $args = $_POST['pass'];
+    $args['user_id'] = $user->id;
+    $args['is_active'] = '0';
+    $pass = new Pass($args);
+    $result = $pass->save();
+    if($result){
+      foreach($gyms as $gym){
+        $li_args['pass_id'] = $pass->id;
+        $li_args['gym_id'] = $gym->id;
+        switch($pass->pass_type){
+          case 'D':
+            $li_args['assigned'] = 1;
+            break;
+          case 'E':
+            $li_args['assigned'] = 2;
+            break;
+          case 'F':
+            $li_args['assigned'] = 5;
+            break;
+        }
+        $li_args['used'] = 0;
+        
+        $punch = new PassItem($li_args);
+        $li_result = $punch->save();
+        if(!$li_result){
+          $session->message("failed to update", "warning");
+          exit("failure");
+        }
+      };
+      $session->message("Pass provisioned successfully.", "primary");
+    };
+  } else {
+    // user sql query failed
+    $session->message("That user could not be found", "warning");
+  }
   
-  $users = User::find_by_sql($sql);
 } else {
 
 }
@@ -78,11 +122,11 @@ if(is_post_request()) {
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
           <div class="col-md-3 text-md-end">
-            <label for="passType" class="col-form-label">Pass Type</label>
+            <label for="pass_type" class="col-form-label">Pass Type</label>
           </div>
           <div class="col-md-7">
             <div class="row ms-0">
-              <select class="form-select" aria-label="Parameter selection for following text input" name="passType" value="<?= $_POST['pass_type'] ?? '';?>" required>
+              <select class="form-select" aria-label="Select pass type." name="pass[pass_type]" id="inputPassType" required>
                 <?php foreach ($pass_types as $abv=>$name) { 
                   if($abv != 'A' && $abv != 'B' && $abv != 'C') {?>
                 <option value="<?= $abv ?>"><?= $name ?></option>
@@ -98,7 +142,7 @@ if(is_post_request()) {
 
     <div class="row justify-content-evenly" role="toolbar" aria-label="User toolbar">
       <div class="col-sm-4 col-md-3 d-grid">
-        <button class="btn shadow btn-primary" type="submit">Check In User</button>
+        <button class="btn shadow btn-primary" type="submit">Provision Pass</button>
       </div>
     </div>
   </form>

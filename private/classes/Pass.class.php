@@ -17,7 +17,6 @@ class Pass extends DatabaseObject {
   public const PASS_TYPES = ['A'=>'Administrator','B'=>'Unlimited', 'C'=>'Conditional','D'=>'Base Pass', 'E'=>'Union Pass', 'F'=>'Premier Pass'];
   
   public function __construct($args=[]) {
-    $this->id = $args['id'] ?? '';
     $this->user_id = $args['user_id'] ?? '';
     $this->is_active = $args['is_active'] ?? '';
     $this->pass_type = $args['pass_type'] ?? '';

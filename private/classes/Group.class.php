@@ -10,7 +10,6 @@ class Group extends DatabaseObject {
   public $type_abv;
   
   public function __construct($args=[]) {
-    $this->id = $args['id'] ?? '';
     $this->leader_id = $args['leader_id'] ?? '';
     $this->type_abv = $args['type_abv'] ?? '';
   }

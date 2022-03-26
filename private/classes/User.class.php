@@ -178,6 +178,17 @@ class User extends DatabaseObject {
     }
   }
   
+  static public function find_by_phone($phone) {
+    $sql = "SELECT * FROM " . static::$table_name . " ";
+    $sql .= "WHERE phone_primary='" . self::$database->escape_string($phone) . "'";
+    $obj_array = static::find_by_sql($sql);
+    if(!empty($obj_array)) {
+      return array_shift($obj_array);
+    } else {
+      return false;
+    }
+  }
+  
   static public function find_by_access($access_abv) {
     $sql = "SELECT * FROM " . static::$table_name . " ";
     $sql .= "WHERE access_abv='" . self::$database->escape_string($access_abv) . "'";
