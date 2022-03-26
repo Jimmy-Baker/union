@@ -6,7 +6,11 @@ class Session {
   public $email;
   public $access_abv;
   public $name;
+  public $avatar_url;
   public $location;
+  public $location_name;
+  public $gym;
+  public $gym_name;
   private $last_login;
 
   public const MAX_LOGIN_AGE = 60*60*24; // 1 day
@@ -24,8 +28,11 @@ class Session {
       $this->email = $_SESSION['email'] = $user->email;
       $this->access_abv = $_SESSION['access_abv'] = $user->access_abv;
       $this->name = $_SESSION['name'] = $user->name();
-      $this->location = $_SESSION['location'] = $user->primary_location;
       $this->avatar_url = $_SESSION['avatar_url'] = $user->avatar_url;
+      $this->location = $_SESSION['location'] = $user->primary_location;
+      $this->location_name = $_SESSION['location_name'] = Location::return_param_by_id("location_name", $this->location);
+      $this->gym = $_SESSION['gym'] = Location::return_param_by_id("gym_id", $this->location);
+      $this->gym_name = $_SESSION['gym_name'] = Gym::return_param_by_id("gym_name", $this->gym);
       $this->last_login = $_SESSION['last_login'] = time();
     }
     return true;
@@ -41,16 +48,23 @@ class Session {
     unset($_SESSION['email']);
     unset($_SESSION['access_abv']);
     unset($_SESSION['name']);
-    unset($_SESSION['location']);
     unset($_SESSION['avatar_url']);
+    unset($_SESSION['location']);
+    unset($_SESSION['location_name']);
+    unset($_SESSION['gym']);
+    unset($_SESSION['gym_name']);
     unset($_SESSION['last_login']);
     unset($this->user_id);
     unset($this->email);
     unset($this->access_abv);
     unset($this->name);
-    unset($this->location);
     unset($this->avatar_url);
+    unset($this->location);
+    unset($this->location_name);
+    unset($this->gym);
+    unset($this->gym_name);
     unset($this->last_login);
+    
     return true;
   }
 
@@ -60,8 +74,11 @@ class Session {
       $this->email = $_SESSION['email'];
       $this->access_abv = $_SESSION['access_abv'];
       $this->name = $_SESSION['name'];
-      $this->location = $_SESSION['location'];
       $this->avatar_url = $_SESSION['avatar_url'];
+      $this->location = $_SESSION['location'];
+      $this->location_name = $_SESSION['location_name'];
+      $this->gym = $_SESSION['gym'];
+      $this->location_name = $_SESSION['gym_name'];
       $this->last_login = $_SESSION['last_login'];
     }
   }
@@ -107,6 +124,10 @@ class Session {
       default:
         return url_for('app/member/index.php');
     }
+  }
+  
+  public function gym_location() {
+    return $this->gym_name . "" . $this->location_name;
   }
 }
 

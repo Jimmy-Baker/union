@@ -107,4 +107,17 @@ function d($string="") {
   }
 }
 
+function isJSON($string){
+  json_decode($string);
+  return json_last_error() === JSON_ERROR_NONE;
+}
+
+function jnc($json) {
+  if(is_null($json)){
+    return 0;
+  } elseif(isJSON($json)) {
+    return count($json);
+  }
+}
+
 ?>

@@ -34,7 +34,11 @@ class Location extends DatabaseObject {
   }
   
   public function occupants() {
-    
+    return jnc($this->attendance_data);
+  }
+  
+  public function available() {
+    return ($this->capacity - jnc($this->attendance_data));
   }
   
 }

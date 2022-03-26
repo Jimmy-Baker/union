@@ -1,13 +1,13 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
-$page_title = 'New User';
+$page_title = 'New Pass';
 include(SHARED_PATH . '/user-header.php'); 
 
 if(is_post_request()) {
   // Create record using post parameters
   $args = $_POST['user'];
-  $user = new User($args);
+  $pass = new Pass($args);
   $result = $user->save();
 
   if($result === true) {

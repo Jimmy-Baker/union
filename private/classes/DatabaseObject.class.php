@@ -43,6 +43,28 @@ class DatabaseObject {
       return false;
     }
   }
+  
+  static public function find_by_param($param, $value){
+    $sql = "SELECT * FROM " . static::$table_name . " ";
+    $sql .= "WHERE " . $param . "='" . self::$database->escape_string($value) . "' LIMIT 1";
+    $obj_array = static::find_by_sql($sql);
+    if(!empty($obj_array)) {
+      return array_shift($obj_array);
+    } else {
+      return false;
+    }
+  }
+  
+  static public function return_param_by_id($param, $id) {
+    $sql = "SELECT " . self::$database->escape_string($param) . " FROM " . static::$table_name . " ";
+    $sql .= "WHERE id='" . self::$database->escape_string($id) . "'";
+    $obj_array = static::find_by_sql($sql);
+    if(!empty($obj_array)) {
+      return array_shift($obj_array)->$param;
+    } else {
+      return false;
+    }
+  }
 
   static protected function instantiate($record) {
     $object = new static;
@@ -149,6 +171,8 @@ class DatabaseObject {
     // but, for example, we can't call $user->update() after
     // calling $user->delete().
   }
+  
+  
 
 }
 

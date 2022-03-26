@@ -189,6 +189,7 @@ class User extends DatabaseObject {
   }
   
   public function punch_count($location) {
+    $sql = "SELECT * FROM locations WHERE pass_id='" . $this->active_pass . "'";
     return $location;
   }
   

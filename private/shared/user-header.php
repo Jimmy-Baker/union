@@ -1,6 +1,7 @@
 <?php 
   if(!isset($page_title)) { $page_title = 'User Area'; }
   $page = substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], "/") + 1);
+  
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +25,7 @@
   </head>
 
   <body class="container-fluid px-0 pt-5 vh-100">
-    <nav class="navbar navbar-dark navbar-expand-sm bg-primary fixed-top">
+    <nav class="navbar navbar-dark navbar-expand-md bg-primary fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="<?= url_for("index.php"); ?>"><img src="<?=url_for("/img/union-logo.svg");?>" alt="United mountains logo." width="45">Union</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -63,9 +64,23 @@
                 </ul>
               </li> -->
             </ul>
-            <form class="d-flex row pe-sm-4 pt-4 pt-sm-0" action="<?=url_for("/app/logout.php");?>">
-              <button class="col-auto btn btn-outline-light ms-2 ms-sm-0 order-sm-1" type="submit">Log Out</button>
-              <span class="col-sm-auto nav-link order-sm-0 text-white-50" href="<?= url_for("app/signup.php"); ?>">Hello, <a href="<?= $session->dashboard(); ?>" class="active text-light"><?= $session->name; ?></a></span>
+            <form class="d-flex row pe-md-4 pt-4 pt-md-0" action="<?=url_for("/app/logout.php");?>">
+              <span class="col-md-auto nav-link text-white-50" href="<?= url_for("app/signup.php"); ?>">Hello, <a href="<?= $session->dashboard(); ?>" class="active text-light"><?= $session->name; ?></a></span>
+              <div class="col-auto btn-group ps-3 ps-md-0">
+                <a href="#" class="btn btn-outline-light"><?= $session->location_name ?></a>
+                <button type="button" class="btn btn-outline-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu bg-light dropdown-menu-end text-end">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="#">Separated link</a></li>
+                </ul>
+              </div>
+              <button class="col-auto btn btn-outline-light ms-0 ms-md-0" type="submit">Log Out</button>
             </form>
           </div>
         </div>

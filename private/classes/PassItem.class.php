@@ -35,6 +35,18 @@ class PassItem extends DatabaseObject {
     return static::find_by_sql($sql);
   }
   
+  static public function find_by_pass_and_gym($pass_id, $gym_id) {
+    $sql = "SELECT * FROM " . static::$table_name . " ";
+    $sql .= "WHERE pass_id='" . self::$database->escape_string($pass_id) . "' ";
+    $sql .= "AND gym_id='" . self::$database->escape_string($gym_id) . "'";
+    $obj_array = static::find_by_sql($sql);
+    if(!empty($obj_array)) {
+      return array_shift($obj_array);
+    } else {
+      return false;
+    }
+  }
+  
   public function redeem_punch() {
     $this->used = $this->used + 1;
     $this->save();

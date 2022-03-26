@@ -14,7 +14,7 @@ class Pass extends DatabaseObject {
   public $expires_on;
   public $pause_on;
   
-  public const PASS_TYPES = ['A'=>'Administrator','B'=>'Unlimited', 'C'=>'Conditional','D'=>'Base Pass', 'E'=>'Premier Pass', 'F'=>'Premier Pass'];
+  public const PASS_TYPES = ['A'=>'Administrator','B'=>'Unlimited', 'C'=>'Conditional','D'=>'Base Pass', 'E'=>'Union Pass', 'F'=>'Premier Pass'];
   
   public function __construct($args=[]) {
     $this->id = $args['id'] ?? '';
@@ -93,5 +93,16 @@ class Pass extends DatabaseObject {
 
     return $this->error_array;
   } 
+  
+  static public function find_users_active_pass($user_id) {
+    $sql = "SELECT * FROM " . static::$table_name . " ";
+    $sql .= "WHERE user_id='" . $user_id . "' AND is_active=1 ORDER BY created_at LIMIT 1";
+    $obj_array = static::find_by_sql($sql);
+    if(!empty($obj_array)) {
+      return array_shift($obj_array);
+    } else {
+      return false;
+    }
+  }
   
 }

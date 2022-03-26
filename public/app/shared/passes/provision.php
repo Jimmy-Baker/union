@@ -1,60 +1,15 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
-$page_title = 'User Check In';
+$page_title = 'Provision A Pass';
 include(SHARED_PATH . '/user-header.php'); 
 
-$location = Location::find_by_id($_SESSION['location']);
-$gym = Gym::find_by_id($location->gym_id);
+$pass_types = PASS::PASS_TYPES;
 
 if(is_post_request()) {
-  //validate location is set
-  if($location) {
-    // validate location has space
-    if($location->available() > 0) {
-      // determine user to check in
-      $sql = "SELECT * FROM users WHERE ";
-      if (isset($_POST['inputValue1'])) {
-        $user = User::find_by_param($_POST['inputParameter1'], $_POST['inputValue1']);
-        if ($user) {
-          // determine pass to evaluate
-          $pass = Pass::find_users_active_pass($user->id);
-          if($pass){
-            //user has an active pass
-            $punch = PassItem::find_by_pass_and_gym($pass->id, $gym->id);
-            if($punch){
-              // check if user has punch remaining
-              if($punch->available() > 0) {
-                // check user in
-                $punch->redeem_punch();
-                $session->message("The user was successfully checked in.", "success");
-              } else {
-                $session->message("The user does not have remaining punches.", "warning");
-              }
-            } else {
-              // punch could not be found within pass
-              $session->message("User's pass does not include this gym.", "warning");
-            }
-          } else {
-            // active pass not found
-            $session->message("User does not have an active pass.", "warning");
-          }
-        } else {
-          //user not found
-          $session->message("The member was not found.", "warning");
-        }
-      } else {
-        // if parameter was null
-        $session->message("A valid entry is required.", "warning");
-      }
-    } else {
-      // if location is full
-      $session->message("The location is currently at maximum capacity.", "warning");
-    }
-  } else {
-    $session->message("Your location is not set.", "warning");
-  }
-  
+  $args = $_POST['user'];
+  $pass = new Pass($args);
+  $result = $user->save();
   
   $users = User::find_by_sql($sql);
 } else {
@@ -73,8 +28,8 @@ if(is_post_request()) {
       <nav aria-label="breadcrumb" class="col-auto">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
-          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/users/users.php'); ?>">Users</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Find Users</a></li>
+          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/passes/passes.php'); ?>">Passes</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Pass Provision</a></li>
         </ol>
       </nav>
       <div class="col-auto d-none d-sm-block">
@@ -92,7 +47,7 @@ if(is_post_request()) {
 </header>
 
 <main class="container-md p-4" id="main">
-  <form action="<?= url_for('/app/shared/users/checkin.php#results'); ?>" method="POST" class="mb-5">
+  <form action="<?= url_for('/app/shared/passes/provision.php'); ?>" method="POST" class="mb-5">
     <fieldset class="card shadow col-md-10 mx-auto mb-4">
       <legend class="card-header">User Information</legend>
       <div class="card-body">
@@ -115,7 +70,30 @@ if(is_post_request()) {
         </div>
       </div>
 
+    </fieldset>
+
+    <fieldset class="card shadow col-md-10 mx-auto mb-4">
+      <legend class="card-header">User Information</legend>
+      <div class="card-body">
+
+        <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
+          <div class="col-md-3 text-md-end">
+            <label for="passType" class="col-form-label">Pass Type</label>
+          </div>
+          <div class="col-md-7">
+            <div class="row ms-0">
+              <select class="form-select" aria-label="Parameter selection for following text input" name="passType" value="<?= $_POST['pass_type'] ?? '';?>" required>
+                <?php foreach ($pass_types as $abv=>$name) { 
+                  if($abv != 'A' && $abv != 'B' && $abv != 'C') {?>
+                <option value="<?= $abv ?>"><?= $name ?></option>
+                <?php }} ?>
+              </select>
+            </div>
+          </div>
+          <div id="passTypeHelp" class="form-text offset-md-3">Maximum of 32 Characters</div>
+        </div>
       </div>
+
     </fieldset>
 
     <div class="row justify-content-evenly" role="toolbar" aria-label="User toolbar">

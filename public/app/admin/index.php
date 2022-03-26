@@ -172,7 +172,32 @@ include(SHARED_PATH . '/user-header.php');
       </h2>
       <div id="collapseStaff" class="accordion-collapse collapse" aria-labelledby="headingStaff" data-bs-parent="#accordionTools">
         <div class="accordion-body">
-          <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element.
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            <div class="col">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title">User Check In</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Gym Staff</h6>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <div class="card-body text-end pt-0">
+                  <a href="<?= url_for("/app/shared/users/checkin.php"); ?>" class="btn btn-primary">Check In Users</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title">Pass Provision</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Gym Staff</h6>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <div class="card-body text-end pt-0">
+                  <a href="<?= url_for("/app/shared/groups/groups.php"); ?>" class="btn btn-primary">Provide A Pass</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
