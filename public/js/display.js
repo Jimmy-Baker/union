@@ -1,4 +1,12 @@
+var myModal = document.getElementById('myModal');
+var myInput = document.getElementById('myInput');
+
 window.addEventListener('scroll', topButton);
+if (myModal) {
+	myModal.addEventListener('shown.bs.modal', function () {
+		myInput.focus();
+	});
+}
 
 function topButton() {
 	const TOP_BUTTON = document.querySelector('#back-to-top');

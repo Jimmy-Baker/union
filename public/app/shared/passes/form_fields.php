@@ -15,7 +15,7 @@ $today = date('Y-m-d');
         <label for="inputUserID" class="col-form-label">Associated User ID</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="pass[user_id]" value="<?php echo h($pass->user_id); ?>" class="form-control" id="inputUserID" maxlength="32" aria-describedby="userIDHelp" required>
+        <input type="text" name="pass[user_id]" value="<?= h($pass->user_id); ?>" class="form-control" id="inputUserID" maxlength="32" aria-describedby="userIDHelp" required>
       </div>
       <div id="userIDHelp" class="form-text offset-md-3">Maximum of 10 digits</div>
     </div>
@@ -38,7 +38,7 @@ $today = date('Y-m-d');
         <label for="inputPassType" class="col-form-label">Pass Type</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="pass[pass_type]" value="<?php echo h($pass->pass_type); ?>" class="form-control" id="inputPassType" aria-describedby="passTypeHelp" maxlength="32">
+        <input type="text" name="pass[pass_type]" value="<?= h($pass->pass_type); ?>" class="form-control" id="inputPassType" aria-describedby="passTypeHelp" maxlength="32">
       </div>
       <div id="passTypeHelp" class="form-text offset-md-3">Maximum of 32 characters</div>
     </div>
@@ -48,7 +48,7 @@ $today = date('Y-m-d');
         <label for="inputCreatedAt" class="col-form-label">Created</label>
       </div>
       <div class="col-md-7">
-        <input type="date" name="user[created_at]" value="<?php echo h(html_date($pass->created_at)); ?>" class="form-control" id="inputCreatedAt" aria-describedby="lastNameHelp" readonly>
+        <input type="date" name="user[created_at]" value="<?= h(html_date($pass->created_at)); ?>" class="form-control" id="inputCreatedAt" aria-describedby="lastNameHelp" readonly>
       </div>
       <div id="createdAtHelp" class="form-text offset-md-3">Maximum of 32 characters</div>
     </div>
@@ -58,7 +58,7 @@ $today = date('Y-m-d');
         <label for="inputActiveOn" class="col-form-label">Active On</label>
       </div>
       <div class="col-md-7">
-        <input type="date" name="pass[active_on]" value="<?php echo h($pass->active_on); ?>" class="form-control" aria-describedby="activeOnHelp" id="inputActiveOn">
+        <input type="date" name="pass[active_on]" value="<?= h($pass->active_on); ?>" class="form-control" aria-describedby="activeOnHelp" id="inputActiveOn">
       </div>
       <div id="activeOnHelp" class="form-text offset-md-3">Maximum of 32 characters</div>
     </div>
@@ -68,7 +68,7 @@ $today = date('Y-m-d');
         <label for="inputExpiresOn" class="col-form-label">Expires On</label>
       </div>
       <div class="col-md-7">
-        <input type="date" name="pass[expires_on]" value="<?php echo h(html_date($pass->expires_on)); ?>" class="form-control" id="inputExpiresOn" aria-describedby="expiresOnHelp" readonly>
+        <input type="date" name="pass[expires_on]" value="<?= h(html_date($pass->expires_on)); ?>" class="form-control" id="inputExpiresOn" aria-describedby="expiresOnHelp" readonly>
       </div>
       <div id="expiresOnHelp" class="form-text offset-md-3">Must be between 01/01/1902 and <?= format_date($today, "/"); ?></div>
     </div>

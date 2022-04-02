@@ -30,13 +30,14 @@ $danger: #93032e !default;
 $light: #ecd4af !default;
 $dark: #000b29 !default;
 
-$font-family-sans-serif: 'Proxima Nova', system-ui, -apple-system, 'Segoe UI',
-	Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
-	'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;
+$font-family-sans-serif: 'Proxima Nova', proxima-nova, system-ui, -apple-system,
+	'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans',
+	sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+	'Noto Color Emoji' !default;
 
-$headings-font-family: 'Cubano Sharp' !default;
+$headings-font-family: 'cubano-sharp' !default;
 
-$font-family-base: 'Proxima Nova' !default;
+$font-family-base: 'proxima-nova' !default;
 
 // @import '../node_modules/bootstrap/scss/utilities.scss';
 // @import '../node_modules/bootstrap/scss/utilities/api';

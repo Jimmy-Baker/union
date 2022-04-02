@@ -19,7 +19,7 @@ $accesses = User::USER_TYPES;
         <label for="inputLocationName" class="col-form-label">Location Name</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="location[location_name]" value="<?php echo h($location->location_name); ?>" class="form-control" id="inputLocationName" maxlength="32" aria-describedby="locationNameHelp" required>
+        <input type="text" name="location[location_name]" value="<?= h($location->location_name); ?>" class="form-control" id="inputLocationName" maxlength="32" aria-describedby="locationNameHelp" required>
       </div>
       <div id="locationNameHelp" class="form-text offset-md-3">Maximum of 32 characters</div>
     </div>
@@ -29,7 +29,7 @@ $accesses = User::USER_TYPES;
         <label for="inputGymID" class="col-form-label">Gym ID</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="location[gym_id]" value="<?php echo h($location->gym_id); ?>" class="form-control" id="inputGymID" aria-describedby="gymIDHelp" maxlength="32">
+        <input type="text" name="location[gym_id]" value="<?= h($location->gym_id); ?>" class="form-control" id="inputGymID" aria-describedby="gymIDHelp" maxlength="32">
       </div>
       <div id="gymIDHelp" class="form-text offset-md-3">Maximum of 32 characters</div>
     </div>
@@ -40,7 +40,7 @@ $accesses = User::USER_TYPES;
           <label for="inputStreetAddress" class="col-form-label">Street Address</label>
         </div>
         <div class="col-md-7">
-          <input type="text" name="location[street_address]" value="<?php echo h($location->street_address); ?>" class="form-control" id="inputStreetAddress" maxlength="64" aria-describedby="streetAddressHelp" required>
+          <input type="text" name="location[street_address]" value="<?= h($location->street_address); ?>" class="form-control" id="inputStreetAddress" maxlength="64" aria-describedby="streetAddressHelp" required>
         </div>
         <div id="streetAddressHelp" class="form-text offset-md-3">Maximum of 64 characters</div>
       </div>
@@ -50,7 +50,7 @@ $accesses = User::USER_TYPES;
           <label for="inputCity" class="col-form-label">City</label>
         </div>
         <div class="col-md-7">
-          <input type="text" name="location[city]" value="<?php echo h($location->city); ?>" class="form-control" id="inputCity" maxlength="64" aria-describedby="cityHelp" required>
+          <input type="text" name="location[city]" value="<?= h($location->city); ?>" class="form-control" id="inputCity" maxlength="64" aria-describedby="cityHelp" required>
         </div>
         <div id="cityHelp" class="form-text offset-md-3">Maximum of 64 characters</div>
       </div>
@@ -73,7 +73,7 @@ $accesses = User::USER_TYPES;
           <label for="inputZip" class="col-form-label">Zip Code</label>
         </div>
         <div class="col-md-7">
-          <input type="text" name="location[zip]" value="<?php echo h($location->zip); ?>" class="form-control" id="inputZip" minlength="5" maxlength="5">
+          <input type="text" name="location[zip]" value="<?= h($location->zip); ?>" class="form-control" id="inputZip" minlength="5" maxlength="5">
         </div>
         <div id="preferredNameHelp" class="form-text offset-md-3">Must be 5 characters</div>
       </div>
@@ -97,13 +97,13 @@ $accesses = User::USER_TYPES;
         </div>
         <div class="col-md-7">
           <div class="row ms-0 input-location">
-            <input type="tel" name="location[phone_p_country]" value="<?php echo h($location->phone_p_country); ?>" class="form-control col" id="inputPhonePCountry" list="countryPrefixes" aria-labelledby="inputPhonePrimary" required>
+            <input type="tel" name="location[phone_p_country]" value="<?= h($location->phone_p_country); ?>" class="form-control col" id="inputPhonePCountry" list="countryPrefixes" aria-labelledby="inputPhonePrimary" required>
             <datalist id="countryPrefixes">
               <?php foreach($countries as $country) { ?>
               <option value="<?= $country->country_prefix ?>" <?= ($location->phone_p_country == $country->country_prefix) ? 'selected' : '';?>><?= $country->country_name; ?></option>
               <?php } ?>
             </datalist>
-            <input type="tel" name="location[phone_primary]" value="<?php echo h($location->phone_primary); ?>" class="form-control col w-50" id="inputPhonePrimary" aria-describedby="phonePrimaryHelp" required>
+            <input type="tel" name="location[phone_primary]" value="<?= h($location->phone_primary); ?>" class="form-control col w-50" id="inputPhonePrimary" aria-describedby="phonePrimaryHelp" required>
           </div>
         </div>
         <div id="phonePrimaryHelp" class="form-text offset-md-3">Maximum of 12 Digits</div>

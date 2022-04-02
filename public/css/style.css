@@ -24,3 +24,11 @@
 .alert-dismissible .btn-close {
   padding: .75rem 1rem;
 }
+
+#index-hd {
+  background: url(/public/img/background.png) center/cover no-repeat;
+}
+
+.ppx[value] {
+  text-align: right;
+}

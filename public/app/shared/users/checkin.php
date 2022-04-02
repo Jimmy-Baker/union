@@ -28,7 +28,7 @@ if(is_post_request()) {
                 // check user in
                 $debit = $punch->redeem_punch();
                 if($debit) {
-                  $credit = $location->check_in($user);
+                  $credit = Attendance::clock_in($user->id, $location->id);
                   if($credit) {
                     $session->message("The user was successfully checked in", "success");
                   } else {

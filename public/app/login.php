@@ -59,7 +59,7 @@ if(is_post_request()) {
     <h1>Log In</h1>
     <div class="mb-3">
       <label for="inputEmail" class="form-label">Email Address</label>
-      <input type="email" name="email" value="<?php echo h($email); ?>" class="form-control" id="inputEmail" required>
+      <input type="email" name="email" value="<?= h($email); ?>" class="form-control" id="inputEmail" required>
     </div>
     <div class="mb-3">
       <label for="inputPassword" class="form-label">Password</label>
@@ -73,7 +73,7 @@ if(is_post_request()) {
     <button type="submit" name="submit" class="btn btn-primary">Log In</button>
   </form>
 
-  <?php echo display_errors($error_array); ?>
+  <?= display_errors($error_array); ?>
 </main>
 
 

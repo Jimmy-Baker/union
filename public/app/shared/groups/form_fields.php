@@ -18,7 +18,7 @@ $accesses = User::USER_TYPES;
         <label for="inputLeaderID" class="col-form-label">Leader ID</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="group[leader_id]" value="<?php echo h($group->leader_id); ?>" class="form-control" id="inputLeaderID" maxlength="32" aria-describedby="leaderIDHelp" required>
+        <input type="text" name="group[leader_id]" value="<?= h($group->leader_id); ?>" class="form-control" id="inputLeaderID" maxlength="32" aria-describedby="leaderIDHelp" required>
       </div>
       <div id="leaderIDHelp" class="form-text offset-md-3">Maximum of 32 characters</div>
     </div>
@@ -28,7 +28,7 @@ $accesses = User::USER_TYPES;
         <label for="inputGroupType" class="col-form-label">Group Type</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="group[group_type]" value="<?php echo h($group->group_type); ?>" class="form-control" id="inputGroupType" aria-describedby="groupTypeHelp" maxlength="32">
+        <input type="text" name="group[group_type]" value="<?= h($group->group_type); ?>" class="form-control" id="inputGroupType" aria-describedby="groupTypeHelp" maxlength="32">
       </div>
       <div id="groupTypeHelp" class="form-text offset-md-3">Maximum of 32 characters</div>
     </div>

@@ -28,7 +28,7 @@ $accesses = User::USER_TYPES;
         <label for="inputGymName" class="col-form-label">Gym Name</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="gym[gym_name]" value="<?php echo h($gym->gym_name); ?>" class="form-control" id="inputGymName" maxlength="32" aria-describedby="gymNameHelp" required>
+        <input type="text" name="gym[gym_name]" value="<?= h($gym->gym_name); ?>" class="form-control" id="inputGymName" maxlength="32" aria-describedby="gymNameHelp" required>
       </div>
       <div id="gymNameHelp" class="form-text offset-md-3">Maximum of 32 characters</div>
     </div>
@@ -38,7 +38,7 @@ $accesses = User::USER_TYPES;
         <label for="inputWebsite" class="col-form-label">Website</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="gym[website]" value="<?php echo h($gym->website); ?>" class="form-control" id="inputWebsite" aria-describedby="websiteHelp" maxlength="32">
+        <input type="text" name="gym[website]" value="<?= h($gym->website); ?>" class="form-control" id="inputWebsite" aria-describedby="websiteHelp" maxlength="32">
       </div>
       <div id="websiteHelp" class="form-text offset-md-3">Maximum of 32 characters</div>
     </div>

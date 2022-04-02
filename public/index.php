@@ -9,7 +9,7 @@ if($session->is_logged_in()){
 ?>
 
 <header>
-  <div class="p-5 bg-dark text-light">
+  <div class="p-5 bg-dark text-light" id="index-hd">
     <div class="container-fluid py-3">
       <h1 class="display-2">Freedom to Climb</h1>
       <p>Unlock climbing access nation-wide with the largest network of independently-owned gyms. Introducing the Union Pass, available now!</p>

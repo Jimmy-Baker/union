@@ -13,7 +13,7 @@ if($session->is_logged_in()){
     <div class="container-fluid py-3">
       <h1 class="display-2">Partner Gyms</h1>
       <p>Unlock climbing access nation-wide with the largest network of independently-owned gyms. Introducing the Union Pass, available now!</p>
-      <a class="btn btn-primary" href="#" role="button">Explore Passes</a>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal">Explore Passes</button>
     </div>
   </div>
 </header>
@@ -33,4 +33,5 @@ if($session->is_logged_in()){
   </div>
 </main>
 
+<?php include(PUBLIC_PATH . '/app/image.php'); ?>
 <?php include(SHARED_PATH . '/public-footer.php'); ?>
