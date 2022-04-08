@@ -13,6 +13,12 @@ $accesses = User::USER_TYPES;
 
 ?>
 
+<datalist id="countryPrefixes">
+  <?php foreach($countries as $country) { ?>
+  <option value="<?= $country->country_prefix ?>" <?= ($user->phone_p_country == $country->country_prefix) ? 'selected' : '';?>><?= $country->country_name; ?></option>
+  <?php } ?>
+</datalist>
+
 <fieldset class="card shadow col-md-10 mx-auto mb-4">
   <legend class="card-header">Profile Information</legend>
   <div class="card-body">
@@ -23,8 +29,9 @@ $accesses = User::USER_TYPES;
       </div>
       <div class="col-md-7">
         <img src="<?= h($user->avatar_url); ?>" class="rounded img-thumbnail mx-auto mb-2" alt="<?= $user->preferred_name ?>'s profile picture." height="200" width="200">
-        <input type="text" value="<?= $user->avatar_url; ?>" name="user[avatar_url]" class="form-control" id="inputAvatarURL" readonly>
+        <input type="text" value="<?= $user->avatar_url; ?>" name="user[avatar_url]" class="form-control" id="inputAvatarURL" aria-describedby="helpAvatarURL" readonly>
       </div>
+      <div id="helpAvatarURL" class="form-text" offset-md-3></div>
     </div>
     <?php } ?>
 
@@ -121,7 +128,7 @@ $accesses = User::USER_TYPES;
         <label for="inputZip" class="col-form-label">Zip Code</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="user[zip]" value="<?= h($user->zip); ?>" class="form-control" id="inputZip" minlength="5" maxlength="5" aria-describedby="helpZip">
+        <input type="text" name="user[zip]" value="<?= h($user->zip); ?>" class="form-control" id="inputZip" min="0" max="99999" aria-describedby="helpZip">
       </div>
       <div id="helpZip" class="form-text offset-md-3">Must be 5 characters</div>
     </div>
@@ -131,11 +138,12 @@ $accesses = User::USER_TYPES;
         <label for="inputCountryAbv" class="col-form-label">Country</label>
       </div>
       <div class="col-md-7">
-        <select name="user[country_abv]" class="form-select" id="inputCountryAbv">
+        <select name="user[country_abv]" class="form-select country" id="inputCountryAbv" aria-describedby="helpCountryAbv" required>
           <?php foreach($countries as $country) { ?>
-          <option value="<?= $country->abv ?>" <?= ($user->country_abv == $country->abv) ? 'selected' : '';?>><?= $country->country_name; ?></option>
+          <option value="<?= $country->abv ?>" <?= (($user->country_abv == $country->abv) || (($user->country_abv == '') && ($country->abv == 'US'))) ? 'selected' : '';?>><?= $country->country_name; ?></option>
           <?php } ?>
         </select>
+        <div id="helpCountryAbv" class="form-text offset-md-3"></div>
       </div>
     </div>
   </div>
@@ -160,13 +168,8 @@ $accesses = User::USER_TYPES;
       </div>
       <div class="col-md-7">
         <div class="row ms-0 input-group">
-          <input type="tel" name="user[phone_p_country]" value="<?= default_prefix($user->phone_p_country); ?>" class="form-control col ppx" id="inputPhonePCountry" list="countryPrefixes" aria-labelledby="inputPhonePrimary" required>
-          <datalist id="countryPrefixes">
-            <?php foreach($countries as $country) { ?>
-            <option value="<?= $country->country_prefix ?>" <?= ($user->phone_p_country == $country->country_prefix) ? 'selected' : '';?>><?= $country->country_name; ?></option>
-            <?php } ?>
-          </datalist>
-          <input type="tel" name="user[phone_primary]" value="<?= h($user->phone_primary); ?>" class="form-control col w-50" id="inputPhonePrimary" aria-describedby="phonePrimary" required>
+          <input type="tel" name="user[phone_p_country]" value="<?= h($user->phone_p_country); ?>" class="form-control col ppx" id="inputPhonePCountry" list="countryPrefixes" aria-labelledby="inputPhonePrimary" readonly>
+          <input type="tel" name="user[phone_primary]" value="<?= h($user->phone_primary); ?>" class="form-control col w-75" id="inputPhonePrimary" aria-describedby="phonePrimary" required>
         </div>
       </div>
       <div id="phonePrimary" class="form-text offset-md-3">Maximum of 12 Digits</div>
@@ -178,8 +181,8 @@ $accesses = User::USER_TYPES;
       </div>
       <div class="col-md-7">
         <div class="row ms-0 input-group">
-          <input type="tel" name="user[phone_s_country]" value="<?= default_prefix($user->phone_s_country); ?>" class="form-control col ppx" id="inputPhoneSCountry" list="countryPrefixes">
-          <input type="tel" name="user[phone_secondary]" value="<?= h($user->phone_secondary); ?>" class="form-control col w-50" id="inputPhoneSecondary" aria-describedby="phoneSecondary">
+          <input type="tel" name="user[phone_s_country]" value="<?= h($user->phone_s_country); ?>" class="form-control col ppx" id="inputPhoneSCountry" list="countryPrefixes" aria-labelledby="inputPhoneSecondary" readonly>
+          <input type="tel" name="user[phone_secondary]" value="<?= h($user->phone_secondary); ?>" class="form-control col w-75" id="inputPhoneSecondary" aria-describedby="phoneSecondary">
         </div>
       </div>
       <div id="phoneSecondary" class="form-text offset-md-3">Maximum of 12 Digits</div>
@@ -216,8 +219,8 @@ $accesses = User::USER_TYPES;
       </div>
       <div class="col-md-7">
         <div class="row ms-0 input-group">
-          <input type="tel" name="user[phone_e_country]" value="<?= default_prefix($user->phone_e_country); ?>" class="form-control col ppx" id="inputPhoneECountry" list="countryPrefixes">
-          <input type="tel" name="user[phone_emergency]" value="<?= h($user->phone_emergency); ?>" class="form-control col" id="inputPhoneEmergency" aria-describedby="helpPhoneEmergency" required>
+          <input type="tel" name="user[phone_e_country]" value="<?= h($user->phone_e_country); ?>" class="form-control col ppx" id="inputPhoneECountry" list="countryPrefixes" aria-labelledby="inputPhoneEmergency" readonly>
+          <input type="tel" name="user[phone_emergency]" value="<?= h($user->phone_emergency); ?>" class="form-control col w-75" id="inputPhoneEmergency" aria-describedby="helpPhoneEmergency" required>
         </div>
       </div>
       <div id="helpPhoneEmergency" class="form-text offset-md-3">Maximum of 12 Digits</div>
@@ -228,6 +231,7 @@ $accesses = User::USER_TYPES;
 <fieldset class="card shadow col-md-10 mx-auto mb-4">
   <legend class="card-header">Access Information</legend>
   <div class="card-body">
+    <?php if(defined('exists')) { ?>
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
       <div class="col-md-3 text-md-end">
         <label for="inputGroupID" class="col-form-label">Group ID</label>
@@ -236,6 +240,7 @@ $accesses = User::USER_TYPES;
         <input type="text" name="user[group_id]" value="<?= h($user->group_id); ?>" class="form-control" id="inputGroupID" maxlength="6">
       </div>
     </div>
+    <?php } ?>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
       <div class="col-md-3 text-md-end">
@@ -269,3 +274,6 @@ $accesses = User::USER_TYPES;
     </div>
   </div>
 </fieldset>
+
+<script src="<?= url_for("js/country_ppx.js") ?>" defer></script>
+<script src="<?= url_for('node_modules/inputmask/dist/jquery.inputmask.js') ?>" defer></script>

@@ -124,6 +124,18 @@ function jnc($json) {
   }
 }
 
+function default_prefix($input) {
+  if($input == '') {
+    return h('+1');
+  } else {
+    return h($input);
+  }
+}
 
+function random_six() {
+  $factory = new RandomLib\Factory;
+  $generator = $factory->getLowStrengthGenerator();
+  return $generator->generateString(6, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+}
 
 ?>

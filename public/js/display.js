@@ -1,11 +1,24 @@
-var myModal = document.getElementById('myModal');
-var myInput = document.getElementById('myInput');
-
 window.addEventListener('scroll', topButton);
-if (myModal) {
-	myModal.addEventListener('shown.bs.modal', function () {
-		myInput.focus();
-	});
+hideMessage();
+
+function focusModal() {
+	var myModal = document.getElementById('myModal');
+	var myInput = document.getElementById('myInput');
+	if (myModal) {
+		myModal.addEventListener('shown.bs.modal', function () {
+			myInput.focus();
+		});
+	}
+}
+
+function hideMessage() {
+	var alertNode = document.querySelector('.alert');
+	if (alertNode) {
+		var alert = new bootstrap.Alert(alertNode);
+		setTimeout(() => {
+			alert.close();
+		}, 5000);
+	}
 }
 
 function topButton() {

@@ -14,7 +14,7 @@ class Location extends DatabaseObject {
   public $state_abv;
   public $country_abv;
   public $phone_primary;
-  public $photo_data;
+  public $photo_data = [];
   public $attendance_data = [];
   public $capacity;
   
@@ -27,17 +27,17 @@ class Location extends DatabaseObject {
     $this->state_abv = $args['state_abv'] ?? '';
     $this->country_abv = $args['country_abv'] ?? '';
     $this->phone_primary = $args['phone_primary'] ?? '';
-    $this->photo_data = $args['photo_data'] ?? '';
+    $this->photo_data = $args['photo_data'] ?? [];
     $this->attendance_data = $args['attendance_data'] ?? [];
     $this->capacity = $args['capacity'] ?? '';
   }
   
   public function occupants() {
-    return jnc($this->attendance_data);
+    return Attendance::currently_in($this->id);
   }
   
   public function available() {
-    return ($this->capacity - jnc($this->attendance_data));
+    return ($this->capacity - $this->occupants());
   }
   
   public function full_name($sep = null) {
@@ -49,11 +49,22 @@ class Location extends DatabaseObject {
     }
   }
   
-  public function check_in($user) { 
-    $item = array("id"=>$user->id, "name"=>$user->full_name(), "in"=>timestamp(), "out"=>null);
-    $this->attendance_data[] = $item;
-    $result = $this->save();
-    return $result;
-  } 
+  static public function array_all_both_names() {
+    $sql = "SELECT locations.id, gyms.gym_name, locations.location_name FROM " . static::$table_name;
+    $sql .= " INNER JOIN gyms ON locations.gym_id=gyms.id;";
+    $results = self::$database->query($sql);
+    $array = [];
+    while($record = $results->fetch_assoc()){
+      $array[] = $record;
+    }
+    return $array;   
+  }
+  
+  // public function check_in($user) { 
+  //   $item = array("id"=>$user->id, "name"=>$user->full_name(), "in"=>timestamp(), "out"=>null);
+  //   $this->attendance_data[] = $item;
+  //   $result = $this->save();
+  //   return $result;
+  // } 
   
 }

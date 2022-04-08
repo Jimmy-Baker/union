@@ -29,6 +29,9 @@
   background: url(/public/img/background.png) center/cover no-repeat;
 }
 
+.ppx {}
+
 .ppx[value] {
   text-align: right;
+  width: 3rem !important;
 }

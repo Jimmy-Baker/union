@@ -72,12 +72,12 @@
                   <span class="visually-hidden">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu bg-light dropdown-menu-end text-end">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="<?= $session->dashboard(); ?>">My Dashboard</a></li>
+                  <li><a class="dropdown-item" href="#">Change Location</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>
-                  <li><a class="dropdown-item" href="#">Separated link</a></li>
+                  <li><a class="dropdown-item" href="<?=url_for("/app/logout.php");?>">Logout</a></li>
                 </ul>
               </div>
               <button class="col-auto btn btn-outline-light ms-0 ms-md-0" type="submit">Log Out</button>

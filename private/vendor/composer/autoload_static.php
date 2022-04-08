@@ -24,6 +24,7 @@ class ComposerStaticInit0f46f76650b54337aa7e81c696f2b833
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
             'Psr\\Cache\\' => 10,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
@@ -56,8 +57,8 @@ class ComposerStaticInit0f46f76650b54337aa7e81c696f2b833
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -66,6 +67,10 @@ class ComposerStaticInit0f46f76650b54337aa7e81c696f2b833
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Monolog\\' => 
         array (
@@ -105,6 +110,23 @@ class ComposerStaticInit0f46f76650b54337aa7e81c696f2b833
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'S' => 
+        array (
+            'SecurityLib' => 
+            array (
+                0 => __DIR__ . '/..' . '/ircmaxell/security-lib/lib',
+            ),
+        ),
+        'R' => 
+        array (
+            'RandomLib' => 
+            array (
+                0 => __DIR__ . '/..' . '/ircmaxell/random-lib/lib',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
@@ -114,6 +136,7 @@ class ComposerStaticInit0f46f76650b54337aa7e81c696f2b833
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit0f46f76650b54337aa7e81c696f2b833::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit0f46f76650b54337aa7e81c696f2b833::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit0f46f76650b54337aa7e81c696f2b833::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit0f46f76650b54337aa7e81c696f2b833::$classMap;
 
         }, null, ClassLoader::class);

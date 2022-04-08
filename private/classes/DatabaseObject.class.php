@@ -107,8 +107,9 @@ class DatabaseObject {
 
   protected function update() {
     $this->validate();
+    
     if(!empty($this->error_array)) { return false; }
-
+    
     $attributes = $this->sanitized_attributes();
     $attribute_pairs = [];
     foreach($attributes as $key => $value) {
@@ -119,6 +120,7 @@ class DatabaseObject {
     $sql .= join(', ', $attribute_pairs);
     $sql .= " WHERE id='" . self::$database->escape_string($this->id) . "' ";
     $sql .= "LIMIT 1";
+    var_dump($sql);
     $result = self::$database->query($sql);
     return $result;
   }
