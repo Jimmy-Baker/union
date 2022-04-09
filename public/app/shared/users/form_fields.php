@@ -25,13 +25,18 @@ $accesses = User::USER_TYPES;
     <?php if(defined('exists')) { ?>
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
       <div class="col-md-3 text-md-end">
-        <label for="inputAvatarURL" class="col-form-label">Avatar</label>
+        <label for="inputSavedImage1" class="col-form-label">Avatar</label>
       </div>
       <div class="col-md-7">
+        <?php if($user->avatar_url != ''){ ?>
         <img src="<?= h($user->avatar_url); ?>" class="rounded img-thumbnail mx-auto mb-2" alt="<?= $user->preferred_name ?>'s profile picture." height="200" width="200">
-        <input type="text" value="<?= $user->avatar_url; ?>" name="user[avatar_url]" class="form-control" id="inputAvatarURL" aria-describedby="helpAvatarURL" readonly>
+        <?php } ?>
+        <div class="input-group">
+          <input type="text" value="<?= $user->avatar_url; ?>" name="image1" class="form-control" id="inputSavedImage1" aria-describedby="helpSavedImage1" readonly>
+          <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#uploadModal">Upload Image</button>
+        </div>
       </div>
-      <div id="helpAvatarURL" class="form-text" offset-md-3></div>
+      <div id="helpSavedImage1" class="form-text" offset-md-3></div>
     </div>
     <?php } ?>
 
@@ -274,6 +279,8 @@ $accesses = User::USER_TYPES;
     </div>
   </div>
 </fieldset>
+
+<?php include(PUBLIC_PATH . '/app/shared/upload.php'); ?>
 
 <script src="<?= url_for("js/country_ppx.js") ?>" defer></script>
 <script src="<?= url_for('node_modules/inputmask/dist/jquery.inputmask.js') ?>" defer></script>

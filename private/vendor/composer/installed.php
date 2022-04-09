@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'f59af8ae73e862bb595b29248bbcb7f47269523d',
+        'reference' => 'ee178d492ad0400d2df39d64cb5a52321dfa72e7',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'f59af8ae73e862bb595b29248bbcb7f47269523d',
+            'reference' => 'ee178d492ad0400d2df39d64cb5a52321dfa72e7',
             'dev_requirement' => false,
         ),
         'firebase/php-jwt' => array(
@@ -212,6 +212,15 @@
             'install_path' => __DIR__ . '/../rize/uri-template',
             'aliases' => array(),
             'reference' => '2a874863c48d643b9e2e254ab288ec203060a0b8',
+            'dev_requirement' => false,
+        ),
+        'samayo/bulletproof' => array(
+            'pretty_version' => 'v4.0.1',
+            'version' => '4.0.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../samayo/bulletproof',
+            'aliases' => array(),
+            'reference' => '4e485530522c0f3af81eba3955f1c459401cdd54',
             'dev_requirement' => false,
         ),
         'symfony/deprecation-contracts' => array(

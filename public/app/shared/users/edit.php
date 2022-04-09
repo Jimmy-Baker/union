@@ -11,12 +11,25 @@ if($user == false) {
   redirect_to(url_for('/app/shared/users/users.php'));
 }
 
-$page_title = 'Edit User: ' . h($user->full_name());
-include(SHARED_PATH . '/user-header.php'); 
-
-if(is_post_request()) {
+if(is_post_request()) {  
   // Save record using post parameters
   $args = $_POST['user'];
+  // if image uploaded, process and update avatarURL
+  if($_POST['image1']) {
+    $file = new Bulletproof\Image($_FILES);
+    $file->setLocation('upload/profile');
+    
+    if ($file["image1"]){
+      $upload = $file->upload();
+      if($upload) {
+        $args['avatar_url'] = $upload->getFullPath();
+      } else {
+        $session->message('Image could not be uploaded', 'warning');
+      }
+    }
+    
+  };
+  var_dump($args);
   $user->merge_attributes($args);
   $result = $user->save();
 
@@ -29,6 +42,10 @@ if(is_post_request()) {
 } else {
   //display the form
 }
+
+$page_title = 'Edit User: ' . h($user->full_name());
+include(SHARED_PATH . '/user-header.php'); 
+
 ?>
 
 <header>
@@ -72,8 +89,9 @@ if(is_post_request()) {
 
 <main class="container-md p-4" id="main">
   <?= display_errors($user->error_array); ?>
-  <form action="<?= url_for('/app/shared/users/edit.php?id=' . h(u($id))); ?>" method="post">
+  <form action="<?= url_for('/app/shared/users/edit.php?id=' . h(u($id))); ?>" method="post" enctype="multipart/form-data">
 
+    <?php define('exists', true); ?>
     <?php include('form_fields.php'); ?>
 
     <div class="row justify-content-evenly">
