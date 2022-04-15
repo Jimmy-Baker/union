@@ -67,4 +67,10 @@ class Location extends DatabaseObject {
   //   return $result;
   // } 
   
+  protected function validate() {
+    $this-> error_array = [];
+    
+    
+  }
+  
 }
