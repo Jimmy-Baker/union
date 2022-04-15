@@ -46,7 +46,7 @@ function crop($image, $mimeType, $imgWidth, $imgHeight, $newWidth, $newHeight)
     }
 
     $temp = imagecreatetruecolor($newWidth, $newHeight);
-    imageAlphaBlending($temp, false);
+    imageAlphaBlending($temp, true);
     imageSaveAlpha($temp, true);
     imagecopyresampled(
         $temp,

@@ -28,6 +28,8 @@
   require_once('database_functions.php');
   require_once('validation_functions.php');
   require_once('vendor/autoload.php');
+  require_once('vendor/samayo/bulletproof/src/utils/func.image-crop.php');
+  require_once('vendor/samayo/bulletproof/src/utils/func.image-resize.php');
 
   // Load class definitions manually
 

@@ -16,20 +16,49 @@ if(is_post_request()) {
   $args = $_POST['user'];
   // if image uploaded, process and update avatarURL
   if($_POST['image1']) {
+
     $file = new Bulletproof\Image($_FILES);
-    $file->setLocation('upload/profile');
     
     if ($file["image1"]){
+      $file->setName($user->id . '-profile');
+      $file->setSize(8, 2097152);
+      $file->setMime(array('jpeg', 'jpg', 'png'));
+      $file->setLocation($_SERVER['DOCUMENT_ROOT'] . '/public/upload/profile');
+      
       $upload = $file->upload();
       if($upload) {
         $args['avatar_url'] = $upload->getFullPath();
+        if($upload->getWidth() >= $upload->getHeight()){
+          $idealHeight = 200;
+          $idealWidth = (200/$upload->getHeight()) * $upload->getWidth();
+        } else {
+          $idealWidth = 200;
+          $idealHeight = (200/$upload->getWidth()) * $upload->getHeight();
+        }
+        $resize = bulletproof\utils\resize(
+          $upload->getFullPath(), 
+          $upload->getMime(),
+          $upload->getWidth(),
+          $upload->getHeight(),
+          $idealWidth,
+          $idealHeight,
+          true
+        );
+        $crop = bulletproof\utils\crop(
+          $upload->getFullPath(), 
+          $upload->getMime(),
+          $upload->getWidth(),
+          $upload->getHeight(),
+          200,
+          200
+        );
       } else {
         $session->message('Image could not be uploaded', 'warning');
       }
     }
     
   };
-  var_dump($args);
+  
   $user->merge_attributes($args);
   $result = $user->save();
 

@@ -54,7 +54,7 @@ if(is_post_request()) {
 <main class="container-md p-4" id="main">
 
   <?= display_errors($user->error_array); ?>
-  <form action="<?= url_for('/app/shared/users/new.php'); ?>" method="post">
+  <form action="<?= url_for('/app/shared/users/new.php'); ?>" method="post" class="needs-validation" novalidate>
 
     <?php include('form_fields.php'); ?>
 

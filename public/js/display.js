@@ -1,6 +1,7 @@
 window.addEventListener('scroll', topButton);
 hideMessage();
 modal();
+resetForm();
 
 function modal() {
 	var uploadModal = document.getElementById('uploadModal');
@@ -74,5 +75,35 @@ function topButton() {
 		});
 	} else {
 		TOP_BUTTON.style.display = 'none';
+	}
+}
+
+function resetForm() {
+	const FORM = document.querySelector('.needs-validation');
+	if (FORM) {
+		FORM.addEventListener(
+			'submit',
+			function (event) {
+				if (!FORM.checkValidity()) {
+					event.preventDefault();
+					event.stopPropagation();
+					var firstFix = document.querySelector(
+						'input:invalid, select:invalid'
+					);
+					firstFix.scrollIntoView({ block: 'center' });
+				}
+				FORM.classList.add('was-validated');
+			},
+			false
+		);
+	}
+
+	const FIXES = document.querySelectorAll('.is-invalid');
+	if (FIXES) {
+		FIXES.forEach(fix => {
+			fix.addEventListener('input', e => {
+				fix.classList.remove('is-invalid');
+			});
+		});
 	}
 }

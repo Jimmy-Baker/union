@@ -100,7 +100,7 @@ $accesses = User::USER_TYPES;
         <label for="inputStreetAddress" class="col-form-label">Street Address</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="user[street_address]" value="<?= h($user->street_address); ?>" class="form-control" id="inputStreetAddress" maxlength="64" aria-describedby="helpStreetAddress" required>
+        <input type="text" name="user[street_address]" value="<?= h($user->street_address); ?>" class="form-control" id="inputStreetAddress" minlength="6" maxlength="64" aria-describedby="helpStreetAddress" required>
       </div>
       <div id="helpStreetAddress" class="form-text offset-md-3">Maximum of 64 characters</div>
     </div>
@@ -110,7 +110,7 @@ $accesses = User::USER_TYPES;
         <label for="inputCity" class="col-form-label">City</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="user[city]" value="<?= h($user->city); ?>" class="form-control" id="inputCity" maxlength="64" aria-describedby="helpCity" required>
+        <input type="text" name="user[city]" value="<?= h($user->city); ?>" class="form-control" id="inputCity" minlength="2" maxlength="64" aria-describedby="helpCity" required>
       </div>
       <div id="helpCity" class="form-text offset-md-3">Maximum of 64 characters</div>
     </div>
@@ -133,7 +133,7 @@ $accesses = User::USER_TYPES;
         <label for="inputZip" class="col-form-label">Zip Code</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="user[zip]" value="<?= h($user->zip); ?>" class="form-control" id="inputZip" min="0" max="99999" aria-describedby="helpZip">
+        <input type="text" name="user[zip]" value="<?= h($user->zip); ?>" class="form-control" id="inputZip" minlength="5" maxlength="5" aria-describedby="helpZip" required>
       </div>
       <div id="helpZip" class="form-text offset-md-3">Must be 5 characters</div>
     </div>
@@ -174,10 +174,10 @@ $accesses = User::USER_TYPES;
       <div class="col-md-7">
         <div class="row ms-0 input-group">
           <input type="tel" name="user[phone_p_country]" value="<?= h($user->phone_p_country); ?>" class="form-control col ppx" id="inputPhonePCountry" list="countryPrefixes" aria-labelledby="inputPhonePrimary" readonly>
-          <input type="tel" name="user[phone_primary]" value="<?= h($user->phone_primary); ?>" class="form-control col w-75" id="inputPhonePrimary" aria-describedby="phonePrimary" required>
+          <input type="tel" name="user[phone_primary]" value="<?= h($user->phone_primary); ?>" class="form-control col w-75" id="inputPhonePrimary" aria-describedby="helpPhonePrimary" minlength="10" maxlength="12" required>
         </div>
       </div>
-      <div id="phonePrimary" class="form-text offset-md-3">Maximum of 12 Digits</div>
+      <div id="helpPhonePrimary" class="form-text offset-md-3">Maximum of 12 Digits</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -187,7 +187,7 @@ $accesses = User::USER_TYPES;
       <div class="col-md-7">
         <div class="row ms-0 input-group">
           <input type="tel" name="user[phone_s_country]" value="<?= h($user->phone_s_country); ?>" class="form-control col ppx" id="inputPhoneSCountry" list="countryPrefixes" aria-labelledby="inputPhoneSecondary" readonly>
-          <input type="tel" name="user[phone_secondary]" value="<?= h($user->phone_secondary); ?>" class="form-control col w-75" id="inputPhoneSecondary" aria-describedby="phoneSecondary">
+          <input type="tel" name="user[phone_secondary]" value="<?= h($user->phone_secondary); ?>" class="form-control col w-75" maxlength="12" id="inputPhoneSecondary" aria-describedby="phoneSecondary">
         </div>
       </div>
       <div id="phoneSecondary" class="form-text offset-md-3">Maximum of 12 Digits</div>
@@ -225,7 +225,7 @@ $accesses = User::USER_TYPES;
       <div class="col-md-7">
         <div class="row ms-0 input-group">
           <input type="tel" name="user[phone_e_country]" value="<?= h($user->phone_e_country); ?>" class="form-control col ppx" id="inputPhoneECountry" list="countryPrefixes" aria-labelledby="inputPhoneEmergency" readonly>
-          <input type="tel" name="user[phone_emergency]" value="<?= h($user->phone_emergency); ?>" class="form-control col w-75" id="inputPhoneEmergency" aria-describedby="helpPhoneEmergency" required>
+          <input type="tel" name="user[phone_emergency]" value="<?= h($user->phone_emergency); ?>" class="form-control col w-75" id="inputPhoneEmergency" aria-describedby="helpPhoneEmergency" maxlength="12" required>
         </div>
       </div>
       <div id="helpPhoneEmergency" class="form-text offset-md-3">Maximum of 12 Digits</div>
@@ -265,7 +265,7 @@ $accesses = User::USER_TYPES;
         <label for="inputPassword" class="col-form-label">Password</label>
       </div>
       <div class="col-md-7">
-        <input type="password" name="user[password]" value="<?= h($user->password); ?>" class="form-control" id="inputPassword">
+        <input type="password" name="user[password]" value="<?= h($user->password); ?>" class="form-control" id="inputPassword" <?php if(!defined('exists')) {'required';} ?>>
       </div>
     </div>
 
@@ -274,7 +274,7 @@ $accesses = User::USER_TYPES;
         <label for="inputConfirmPassword" class="col-form-label">Confirm Password</label>
       </div>
       <div class="col-md-7">
-        <input type="password" name="user[confirm_password]" value="<?= h($user->confirm_password); ?>" class="form-control" id="inputConfirmPassword">
+        <input type="password" name="user[confirm_password]" value="<?= h($user->confirm_password); ?>" class="form-control" id="inputConfirmPassword" <?php if(!defined('exists')) {'required';} ?>>
       </div>
     </div>
   </div>

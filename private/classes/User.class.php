@@ -112,63 +112,165 @@ class User extends DatabaseObject {
     $this->error_array = [];
 
     if(is_blank($this->first_name)) {
-      $this->error_array[] = ["#first_name", "First name cannot be blank."];
-    } elseif (!has_length($this->first_name, array('min' => 2, 'max' => 255))) {
-      $this->error_array[] = ["#first_name", "First name must be between 2 and 64 characters."];
+      $this->error_array += ["FirstName" => "First name cannot be blank."];
+    } elseif (!has_length($this->first_name, array('min' => 1, 'max' => 32))) {
+      $this->error_array += ["FirstName" => "First name must be less than 32 characters."];
+    } elseif (is_padded($this->first_name)) {
+      $this->error_array += ["FirstName" => "First name cannot start or end with a space."];
+    } elseif (!is_valid_name($this->first_name)) {
+      $this->error_array += ["FirstName" => "First name can only contain letters, dashes, and spaces."];
     }
 
     if(is_blank($this->last_name)) {
-      $this->error_array[] = ["#last_name", "Last name cannot be blank."];
-    } elseif (!has_length($this->last_name, array('min' => 2, 'max' => 255))) {
-      $this->error_array[] = ["#last_name", "Last name must be between 2 and 64 characters."];
+      $this->error_array += ["LastName" => "Last name cannot be blank."];
+    } elseif (!has_length($this->last_name, array('min' => 1, 'max' => 32))) {
+      $this->error_array += ["LastName" => "Last name must be less than 32 characters."];
+    } elseif (is_padded($this->last_name)) {
+      $this->error_array += ["LastName" => "Last name cannot start or end with a space."];
+    } elseif (!is_valid_name($this->last_name)) {
+      $this->error_array += ["LastName" => "Last name can only contain letters, dashes, and spaces."];
     }
 
+    if(!has_length($this->middle_name, array('max' => 32))) {
+      $this->error_array += ["MiddleName" => "Middle name must be less than 32 characters."];
+    } elseif (is_padded($this->middle_name)) {
+      $this->error_array += ["MiddleName" => "Middle name cannot start or end with a space."];
+    } elseif (!is_valid_name($this->middle_name)) {
+      $this->error_array += ["MiddleName" => "Middle name can only contain letters, dashes, and spaces."];
+    }
+    
+    if(!has_length($this->preferred_name, array('max' => 32))) {
+      $this->error_array += ["PreferredName" => "Preferred name must be less than 32 characters."];
+    } elseif (is_padded($this->preferred_name)) {
+      $this->error_array += ["PreferredName" => "Preferred name cannot start or end with a space."];
+    } elseif (!is_valid_name($this->preferred_name)) {
+      $this->error_array += ["PreferredName" => "Preferred name can only contain letters, dashes, and spaces."];
+    }
+    
+    if(is_blank($this->birth_date)) {
+      $this->error_array += ["BirthDate" => "Birth date cannot be blank."];
+    } elseif (!has_date($this->birth_date, array('min' => '1902-01-01', 'max' => 'now'))) {
+      $this->error_array += ["BirthDate" => "Must be between in the past 100 years."];
+    }
+    
+    if(is_blank($this->street_address)) {
+      $this->error_array += ["StreetAddress" => "Street address cannot be blank."];
+    } elseif (!has_length($this->street_address, array('min' => 6, 'max'=>64))) {
+      $this->error_array += ["StreetAddress" => "Street address must be between 6 and 64 characters."];
+    } elseif (is_padded($this->street_address)) {
+      $this->error_array += ["StreetAddress" => "Street address cannot start or end with a space."];
+    }
+    
+    if(is_blank($this->city)) {
+      $this->error_array += ["City" => "City cannot be blank."];
+    } elseif (!is_valid_name($this->city)) {
+      $this->error_array += ["City" => "City can only contain letters, dashes, and spaces."];
+    } elseif (!has_length($this->password, array('min'=>2, 'max'=>64))) {
+      $this->error_array += ["City" => "City must contain 2 or more characters."];
+    } 
+    
+    if(is_blank($this->state_abv)) {
+      $this->error_array += ["State" => "State must be selected."];
+    }
+    
+    if(is_blank($this->zip)) {
+      $this->error_array += ["Zip" => "Zip code cannot be blank."];
+    } elseif (!ctype_digit($this->zip)) {
+      $this->error_array += ["Zip" => "Zip code can only contain numerals."];
+    } elseif (!has_length($this->zip, array('exact' => 5))) {
+      $this->error_array += ["Zip" => "Zip code must be exactly 5 digits."];
+    }
+      
+    if(is_blank($this->country_abv)) {
+      $this->error_array += ["CountryAbv" => "Country must be selected."];
+    }
+    
     if(is_blank($this->email)) {
-      $this->error_array[] = ["#email", "Email cannot be blank."];
+      $this->error_array += ["Email" => "Email cannot be blank."];
     } elseif (!has_length($this->email, array('max' => 255))) {
-      $this->error_array[] = ["#last_name", "Last name must be less than 255 characters."];
+      $this->error_array += ["Email" => "Email must be less than 255 characters."];
+    } elseif (is_padded($this->email)) {
+      $this->error_array += ["Email" => "Email cannot start or end with a space."];
     } elseif (!has_valid_email_format($this->email)) {
-      $this->error_array[] = ["#email", "Email must be a valid format."];
-    }
-
-    if(is_blank($this->email)) {
-      $this->error_array[] = ["#email", "email cannot be blank."];
-    } elseif (!has_length($this->email, array('min' => 8, 'max' => 255))) {
-      $this->error_array[] = ["#email", "email must be between 8 and 255 characters."];
+      $this->error_array += ["Email" => "Email must be a valid format."];
     } elseif (!has_unique_email($this->email, $this->id ?? 0)) {
-      $this->error_array[] = ["#email","email not allowed. Try another."];
+      $this->error_array += ["Email" => "This email is unavailable for registration."];
     }
 
-    if($this->password_required) {
-      if(is_blank($this->password)) {
-        $this->error_array[] = ["#password", "Password cannot be blank."];
-      } elseif (!has_length($this->password, array('min' => 8))) {
-        $this->error_array[] = ["#password", "Password must contain 8 or more characters"];
-      } elseif (!preg_match('/[A-Z]/', $this->password)) {
-        $this->error_array[] = ["#password", "Password must contain at least 1 uppercase letter"];
-      } elseif (!preg_match('/[a-z]/', $this->password)) {
-        $this->error_array[] = ["#password", "Password must contain at least 1 lowercase letter"];
-      // } elseif (!preg_match('/[0-9]/', $this->password)) {
-      //   $this->error_array[] = ["#password", "Password must contain at least 1 number"];
-      } elseif (!preg_match('/[^A-Za-z0-9\s]/', $this->password)) {
-        $this->error_array[] = ["#password", "Password must contain at least 1 symbol"];
-      }
-
-      if(is_blank($this->confirm_password)) {
-        $this->error_array[] = ["#confirm_password", "Confirm password cannot be blank."];
-      } elseif ($this->password !== $this->confirm_password) {
-        $this->error_array[] = ["#confirm_password", "Password and confirm password must match."];
+    if(is_blank($this->phone_primary)) {
+      $this->error_array += ["PhonePrimary" => "Primary phone cannot be blank."];
+    } elseif (!ctype_digit($this->phone_primary)) {
+      $this->error_array += ["PhonePrimary" => "Primary phone can only contain numerals."];
+    } elseif (!has_length($this->phone_primary, array('min' => 10, 'max'=>12))) {
+      $this->error_array += ["PhonePrimary" => "Primary phone must be 10 to 12 digits."];
+    }
+    
+    if (!is_blank($this->phone_secondary)) {
+      if (!has_length($this->phone_secondary, array('min' => 10, 'max'=>12))) {
+        $this->error_array += ["PhoneSecondary" => "Secondary phone must be 10 to 12 digits."];
+      } elseif (!ctype_digit($this->phone_primary)) {
+        $this->error_array += ["PhoneSecondary" => "Secondary phone can only contain numerals."];
       }
     }
     
+    if(is_blank($this->first_name_emergency)) {
+      $this->error_array += ["EmergencyFirst" => "Contact\'s first name cannot be blank."];
+    } elseif (!has_length($this->first_name_emergency, array('min' => 1, 'max' => 32))) {
+      $this->error_array += ["EmergencyFirst" => "Contact\'s first name must be less than 32 characters."];
+    } elseif (is_padded($this->first_name_emergency)) {
+      $this->error_array += ["EmergencyFirst" => "Contact\'s first name cannot start or end with a space."];
+    } elseif (!is_valid_name($this->first_name_emergency)) {
+      $this->error_array += ["EmergencyFirst" => "Contact\'s first name can only contain letters, dashes, and spaces."];
+    }
+    
+    if(is_blank($this->last_name_emergency)) {
+      $this->error_array += ["EmergencyLast" => "Contact\'s last name cannot be blank."];
+    } elseif (!has_length($this->last_name_emergency, array('min' => 1, 'max' => 32))) {
+      $this->error_array += ["EmergencyLast" => "Contact\'s last name must be less than 32 characters."];
+    } elseif (is_padded($this->last_name_emergency)) {
+      $this->error_array += ["EmergencyLast" => "Contact\'s last name cannot start or end with a space."];
+    } elseif (!is_valid_name($this->last_name_emergency)) {
+      $this->error_array += ["EmergencyLast" => "Contact\'s last name can only contain letters, dashes, and spaces."];
+    }
+    
+    if(is_blank($this->phone_emergency)) {
+      $this->error_array += ["PhoneEmergency" => "Contact\'s phone cannot be blank."];
+    } elseif (!has_length($this->phone_emergency, array('min' => 10, 'max'=>12))) {
+      $this->error_array += ["PhoneEmergency" => "Secondary phone must be 10 to 12 digits."];
+    } elseif (!ctype_digit($this->phone_emergency)) {
+      $this->error_array += ["PhoneEmergency" => "Contact\'s phone can only contain numerals."];
+    }
+    
     if(!isset($this->access_abv)) {
-      $this->error_array[] = ["#access_abv", "User access must be selected"];
+      $this->error_array += ["AccessAbv" => "User access must be selected."];
+    }
+    
+    if($this->password_required) {
+      if(is_blank($this->password)) {
+        $this->error_array += ["Password" => "Password cannot be blank."];
+      } elseif (!has_length($this->password, array('min' => 8))) {
+        $this->error_array += ["Password" => "Password must contain 8 or more characters."];
+      } elseif (!preg_match('/[A-Z]/', $this->password)) {
+        $this->error_array += ["Password" => "Password must contain at least 1 uppercase letter."];
+      } elseif (!preg_match('/[a-z]/', $this->password)) {
+        $this->error_array += ["Password" => "Password must contain at least 1 lowercase letter."];
+      } elseif (!preg_match('/[^A-Za-z0-9\s]/', $this->password)) {
+        $this->error_array += ["Password" => "Password must contain at least 1 symbol."];
+      } elseif (has_spaces($this->password)) {
+        $this->error_array += ["Password" => "Password cannot contain spaces."];
+      }
+
+      if(is_blank($this->confirm_password)) {
+        $this->error_array += ["ConfirmPassword" => "Confirm password cannot be blank."];
+      } elseif ($this->password !== $this->confirm_password) {
+        $this->error_array += ["ConfirmPassword" => "Password and confirm password must match."];
+      }
     }
 
     return $this->error_array;
   }
 
-  static public function find_by_email($email) {
+  public static function find_by_email($email) {
     $sql = "SELECT * FROM " . static::$table_name . " ";
     $sql .= "WHERE email='" . self::$database->escape_string($email) . "'";
     $obj_array = static::find_by_sql($sql);

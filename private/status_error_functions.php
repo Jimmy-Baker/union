@@ -41,37 +41,30 @@ function access(array $a, array $c) {
   }
 }
 
+function test_path(){
+  echo basename($_SERVER["SCRIPT_NAME"]);
+}
+
 
 function display_errors($error_array=array()) {
-  $output = '';
   if(!empty($error_array)) {
-    $output .= "<div class=\"errors\">";
-    $output .= "Please fix the following errors:";
-    $output .= "<ul>";
-    foreach($error_array as $error) {
-      $output .= "<li>" . h($error[1]) . "</li>";
+    $script = "<script defer>";
+    foreach($error_array as $field_name=>$message) {
+      $input = ('input'.$field_name);
+      $help = ('help'.$field_name);
+      $script .= "var input = document.getElementById('$input');";
+      $script .= "var help = document.getElementById('$help');";
+      $script .= "if(input){";
+      $script .= "input.className += ' is-invalid';";
+      $script .= "} if(help) {";
+      $script .= "help.innerText = '$message';";
+      $script .= "help.className += ' text-danger';";
+      $script .= "}";
     }
-    $output .= "</ul>";
-    $output .= "</div>";
+    $script .= "</script>";
+    return $script;
   }
-  return $output;
 }
-
-function error_css($error_array=array()){
-  $output = '';
-  if(!empty($error_array)) {
-    
-    $output .="<script>";
-    foreach($error_array as $key=>$value){
-      
-      $output .="element_" . $key . "=document.querySelector('". $value[0] ."');";
-      $output .="element_" . $key . ".classList.add('inputerror');";
-    }
-    $output .="</script>";
-  }
-  return $output;
-}
-
 
 function display_session_message() {
   global $session;

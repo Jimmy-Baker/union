@@ -108,5 +108,54 @@
       return false;
     }
   }
-
+  
+  function has_date_greater_than($value, $min) {
+    return $value > $min;
+  }
+  
+  function has_date_less_than($value, $max) {
+    return $value < $max;
+  }
+  
+  function has_date($value, $options) {
+    if(isset($options['min']) && !has_date_greater_than(strtotime($value), strtotime($options['min'] . ' + 1 day'))) {
+      return false;
+    } elseif(isset($options['max']) && !has_date_less_than(strtotime($value), strtotime($options['max'] . ' + 1 day'))) {
+      return false;
+    } elseif(isset($options['exact']) && !has_length_exactly(strtotime($value), strtotime($options['exact']))) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  
+  function is_padded($string) {
+    if ($string == trim($string)) {
+      return false;
+    } else {
+      return true;
+    };
+  }
+  
+  function has_spaces($string) {
+    if(strpos($string, ' ')){
+      return true;
+    } elseif(preg_match('/\s/', $string)) {
+      return true;
+    } else {
+      return false;
+    };
+  }
+  
+  function is_valid_name($string) {
+    if(preg_match('/[^a-z\s-]/i',$string)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  
+  // ctype_alnum($string)
+  // ctype_alpha($string)
+  // ctype_digit($string)
 ?>
