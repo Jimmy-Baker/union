@@ -70,7 +70,59 @@ class Location extends DatabaseObject {
   protected function validate() {
     $this-> error_array = [];
     
+    if(is_blank($this->location_name)) {
+      $this->error_array += ["LocationName" => "Location name cannot be blank."];
+    } elseif (!has_length($this->location_name, array('min' => 1, 'max' => 32))) {
+      $this->error_array += ["LocationName" => "Location name must be less than 32 characters."];
+    } elseif (has_padding($this->location_name)) {
+      $this->error_array += ["LocationName" => "Location name cannot start or end with a space."];
+    } elseif (!has_valid_name($this->location_name)) {
+      $this->error_array += ["LocationName" => "Location name can only contain letters, dashes, and spaces."];
+    }
+        
+    if(is_blank($this->gym_id)) {
+      $this->gym_id += ["GymId" => "Gym ID must be selected."];
+    }
+        
+    if(is_blank($this->street_address)) {
+      $this->error_array += ["StreetAddress" => "Street address cannot be blank."];
+    } elseif (!has_length($this->street_address, array('min' => 6, 'max'=>64))) {
+      $this->error_array += ["StreetAddress" => "Street address must be between 6 and 64 characters."];
+    } elseif (has_padding($this->street_address)) {
+      $this->error_array += ["StreetAddress" => "Street address cannot start or end with a space."];
+    }
     
+    if(is_blank($this->city)) {
+      $this->error_array += ["City" => "City cannot be blank."];
+    } elseif (!has_valid_name($this->city)) {
+      $this->error_array += ["City" => "City can only contain letters, dashes, and spaces."];
+    } elseif (!has_length($this->password, array('min'=>2, 'max'=>64))) {
+      $this->error_array += ["City" => "City must contain 2 or more characters."];
+    } 
+    
+    if(is_blank($this->state_abv)) {
+      $this->error_array += ["State" => "State must be selected."];
+    }
+    
+    if(is_blank($this->zip)) {
+      $this->error_array += ["Zip" => "Zip code cannot be blank."];
+    } elseif (!ctype_digit($this->zip)) {
+      $this->error_array += ["Zip" => "Zip code can only contain numerals."];
+    } elseif (!has_length($this->zip, array('exact' => 5))) {
+      $this->error_array += ["Zip" => "Zip code must be exactly 5 digits."];
+    }
+    
+    if(is_blank($this->country_abv)) {
+      $this->error_array += ["CountryAbv" => "Country must be selected."];
+    }
+    
+    if(is_blank($this->phone_primary)) {
+      $this->error_array += ["PhonePrimary" => "Primary phone cannot be blank."];
+    } elseif (!ctype_digit($this->phone_primary)) {
+      $this->error_array += ["PhonePrimary" => "Primary phone can only contain numerals."];
+    } elseif (!has_length($this->phone_primary, array('min' => 10, 'max'=>12))) {
+      $this->error_array += ["PhonePrimary" => "Primary phone must be 10 to 12 digits."];
+    }      
   }
   
 }

@@ -129,7 +129,7 @@
     }
   }
   
-  function is_padded($string) {
+  function has_padding($string) {
     if ($string == trim($string)) {
       return false;
     } else {
@@ -147,12 +147,16 @@
     };
   }
   
-  function is_valid_name($string) {
-    if(preg_match('/[^a-z\s-]/i',$string)) {
-      return false;
-    } else {
-      return true;
-    }
+  function has_valid_name($string) {
+    return !preg_match('/[^a-z\s-]/i',$string);
+  }
+  
+  function has_valid_url($website) {
+    return preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website);
+  }
+  
+  function has_decimal_format($string) {
+    return preg_match('/([0-9]+\.[0-9]+)/', $string);
   }
   
   // ctype_alnum($string)

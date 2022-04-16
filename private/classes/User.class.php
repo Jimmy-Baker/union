@@ -115,9 +115,9 @@ class User extends DatabaseObject {
       $this->error_array += ["FirstName" => "First name cannot be blank."];
     } elseif (!has_length($this->first_name, array('min' => 1, 'max' => 32))) {
       $this->error_array += ["FirstName" => "First name must be less than 32 characters."];
-    } elseif (is_padded($this->first_name)) {
+    } elseif (has_padding($this->first_name)) {
       $this->error_array += ["FirstName" => "First name cannot start or end with a space."];
-    } elseif (!is_valid_name($this->first_name)) {
+    } elseif (!has_valid_name($this->first_name)) {
       $this->error_array += ["FirstName" => "First name can only contain letters, dashes, and spaces."];
     }
 
@@ -125,25 +125,25 @@ class User extends DatabaseObject {
       $this->error_array += ["LastName" => "Last name cannot be blank."];
     } elseif (!has_length($this->last_name, array('min' => 1, 'max' => 32))) {
       $this->error_array += ["LastName" => "Last name must be less than 32 characters."];
-    } elseif (is_padded($this->last_name)) {
+    } elseif (has_padding($this->last_name)) {
       $this->error_array += ["LastName" => "Last name cannot start or end with a space."];
-    } elseif (!is_valid_name($this->last_name)) {
+    } elseif (!has_valid_name($this->last_name)) {
       $this->error_array += ["LastName" => "Last name can only contain letters, dashes, and spaces."];
     }
 
     if(!has_length($this->middle_name, array('max' => 32))) {
       $this->error_array += ["MiddleName" => "Middle name must be less than 32 characters."];
-    } elseif (is_padded($this->middle_name)) {
+    } elseif (has_padding($this->middle_name)) {
       $this->error_array += ["MiddleName" => "Middle name cannot start or end with a space."];
-    } elseif (!is_valid_name($this->middle_name)) {
+    } elseif (!has_valid_name($this->middle_name)) {
       $this->error_array += ["MiddleName" => "Middle name can only contain letters, dashes, and spaces."];
     }
     
     if(!has_length($this->preferred_name, array('max' => 32))) {
       $this->error_array += ["PreferredName" => "Preferred name must be less than 32 characters."];
-    } elseif (is_padded($this->preferred_name)) {
+    } elseif (has_padding($this->preferred_name)) {
       $this->error_array += ["PreferredName" => "Preferred name cannot start or end with a space."];
-    } elseif (!is_valid_name($this->preferred_name)) {
+    } elseif (!has_valid_name($this->preferred_name)) {
       $this->error_array += ["PreferredName" => "Preferred name can only contain letters, dashes, and spaces."];
     }
     
@@ -157,13 +157,13 @@ class User extends DatabaseObject {
       $this->error_array += ["StreetAddress" => "Street address cannot be blank."];
     } elseif (!has_length($this->street_address, array('min' => 6, 'max'=>64))) {
       $this->error_array += ["StreetAddress" => "Street address must be between 6 and 64 characters."];
-    } elseif (is_padded($this->street_address)) {
+    } elseif (has_padding($this->street_address)) {
       $this->error_array += ["StreetAddress" => "Street address cannot start or end with a space."];
     }
     
     if(is_blank($this->city)) {
       $this->error_array += ["City" => "City cannot be blank."];
-    } elseif (!is_valid_name($this->city)) {
+    } elseif (!has_valid_name($this->city)) {
       $this->error_array += ["City" => "City can only contain letters, dashes, and spaces."];
     } elseif (!has_length($this->password, array('min'=>2, 'max'=>64))) {
       $this->error_array += ["City" => "City must contain 2 or more characters."];
@@ -189,7 +189,7 @@ class User extends DatabaseObject {
       $this->error_array += ["Email" => "Email cannot be blank."];
     } elseif (!has_length($this->email, array('max' => 255))) {
       $this->error_array += ["Email" => "Email must be less than 255 characters."];
-    } elseif (is_padded($this->email)) {
+    } elseif (has_padding($this->email)) {
       $this->error_array += ["Email" => "Email cannot start or end with a space."];
     } elseif (!has_valid_email_format($this->email)) {
       $this->error_array += ["Email" => "Email must be a valid format."];
@@ -217,9 +217,9 @@ class User extends DatabaseObject {
       $this->error_array += ["EmergencyFirst" => "Contact\'s first name cannot be blank."];
     } elseif (!has_length($this->first_name_emergency, array('min' => 1, 'max' => 32))) {
       $this->error_array += ["EmergencyFirst" => "Contact\'s first name must be less than 32 characters."];
-    } elseif (is_padded($this->first_name_emergency)) {
+    } elseif (has_padding($this->first_name_emergency)) {
       $this->error_array += ["EmergencyFirst" => "Contact\'s first name cannot start or end with a space."];
-    } elseif (!is_valid_name($this->first_name_emergency)) {
+    } elseif (!has_valid_name($this->first_name_emergency)) {
       $this->error_array += ["EmergencyFirst" => "Contact\'s first name can only contain letters, dashes, and spaces."];
     }
     
@@ -227,9 +227,9 @@ class User extends DatabaseObject {
       $this->error_array += ["EmergencyLast" => "Contact\'s last name cannot be blank."];
     } elseif (!has_length($this->last_name_emergency, array('min' => 1, 'max' => 32))) {
       $this->error_array += ["EmergencyLast" => "Contact\'s last name must be less than 32 characters."];
-    } elseif (is_padded($this->last_name_emergency)) {
+    } elseif (has_padding($this->last_name_emergency)) {
       $this->error_array += ["EmergencyLast" => "Contact\'s last name cannot start or end with a space."];
-    } elseif (!is_valid_name($this->last_name_emergency)) {
+    } elseif (!has_valid_name($this->last_name_emergency)) {
       $this->error_array += ["EmergencyLast" => "Contact\'s last name can only contain letters, dashes, and spaces."];
     }
     

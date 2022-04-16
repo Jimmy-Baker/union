@@ -14,4 +14,16 @@ class Group extends DatabaseObject {
     $this->type_abv = $args['type_abv'] ?? '';
   }
   
+  protected function validate() {
+    $this->error_array = [];
+
+    if(is_blank($this->leader_id)) {
+      $this->error_array += ["LeaderID" => "Group type cannot be blank."];
+    }
+    
+    if(is_blank($this->type_abv)) {
+      $this->error_array += ["GroupType" => "Group type cannot be blank."];
+    }
+  }
+  
 }

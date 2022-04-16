@@ -52,7 +52,7 @@ $today = date('Y-m-d');
         <label for="inputEventName" class="col-form-label">Event Name</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="event[event_name]" value="<?= h($event->event_name); ?>" class="form-control" aria-describedby="helpEventName" maxlength="32" id="inputEventName">
+        <input type="text" name="event[event_name]" value="<?= h($event->event_name); ?>" class="form-control" aria-describedby="helpEventName" maxlength="32" id="inputEventName" required>
       </div>
       <div id="helpEventName" class="form-text offset-md-3">Maximum of 32 characters</div>
     </div>

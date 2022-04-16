@@ -17,10 +17,10 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 
   <body>
     <?= strtotime('now'); ?>
-    <p>Peter <?= is_valid_name('Peter'); ?></p>
-    <p>Pe-ter <?= is_valid_name('Pe-ter'); ?></p>
-    <p>Pe ter <?= is_valid_name('Pe ter'); ?></p>
-    <p>Pe9er <?= is_valid_name('Pe0er'); ?></p>
+    <p>Peter <?= has_valid_name('Peter'); ?></p>
+    <p>Pe-ter <?= has_valid_name('Pe-ter'); ?></p>
+    <p>Pe ter <?= has_valid_name('Pe ter'); ?></p>
+    <p>Pe9er <?= has_valid_name('Pe0er'); ?></p>
   </body>
 
 </html>
