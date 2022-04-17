@@ -28,10 +28,10 @@
       <div class="container-fluid">
         <a class="navbar-brand col-auto py-0" href="#">
           <div class="row align-items-center">
-            <div class="col">
+            <div class="col pe-0">
               <img src="<?=url_for("/img/union-logo.svg");?>" alt="United mountains logo." width="45">
             </div>
-            <div class="col ps-0">
+            <div class="col ps-1">
               <h1 class="d-inline-block h2 mb-0 col">Union</h1>
             </div>
           </div>
@@ -39,7 +39,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="offcanvas offcanvas-end bg-primary" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas offcanvas-end bg-primary" tabindex="-1" id="offcanvasNavbar" data-bs-scroll="true" aria-labelledby="offcanvasNavbarLabel">
           <div class="offcanvas-header text-white">
             <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
             <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -72,7 +72,6 @@
                 </ul>
               </li> -->
             </ul>
-
             <form class="d-flex row pe-sm-4 pt-4 pt-sm-0" action="<?=url_for("/app/login.php");?>">
               <button class="col-auto btn btn-outline-light ms-2 ms-sm-0 order-sm-1" type="submit">Log In</button>
               <a class="col-sm-auto nav-link text-light order-sm-0" href="<?= url_for("/app/signup.php"); ?>">Sign Up</a>

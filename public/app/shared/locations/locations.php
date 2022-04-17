@@ -10,7 +10,7 @@ $locations = Location::find_all();
 ?>
 
 <header>
-  <div class="p-5 bg-dark text-light">
+  <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
       <h1>Manage Locations</h1>
     </div>
@@ -23,16 +23,10 @@ $locations = Location::find_all();
           <li class="breadcrumb-item active" aria-current="page">Locations</a></li>
         </ol>
       </nav>
-      <div class="col-auto d-none d-sm-block">
-        <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="locationMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          Location Menu
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="locationMenuLink">
-          <li><a class="dropdown-item active" href="<?= url_for('app/shared/locations/locations.php'); ?>">All Locations</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/locations/new.php'); ?>">New Location</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/locations/search.php'); ?>">Find Locations</a></li>
-        </ul>
-      </div>
+      <?php 
+        define('drop_menu', TRUE);
+        include('drop_menu.php'); 
+      ?>
     </div>
   </div>
 </header>
@@ -47,45 +41,12 @@ $locations = Location::find_all();
       </ul>
     </div>
     <div class="card-body">
-
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
           <div class="table-responsive">
             <table class="table table-striped table-hover">
               <caption>List of all locations</caption>
-              <thead class="table-primary">
-                <tr>
-                  <th>ID</th>
-                  <th>Gym ID</th>
-                  <th>Location Name</th>
-                  <th>City</th>
-                  <th>State</th>
-                  <th>Phone</th>
-                  <th>&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php foreach($locations as $location) { ?>
-                <tr class="align-middle text-nowrap">
-                  <td><?= h($location->id) ?></td>
-                  <td><?= h($location->gym_id) ?></td>
-                  <td><?= h($location->location_name) ?></td>
-                  <td><?= h($location->city) ?></td>
-                  <td><?= h($location->state_abv) ?></td>
-                  <td><?= format_phone(h($location->phone_p_country), h($location->phone_primary)) ?></td>
-                  <td>
-                    <div class="btn-group" role="group" aria-label="location actions">
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/locations/view.php?id=' . h(u($location->id))); ?>">View</a>
-                      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
-                      <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/locations/edit.php?id=' . h(u($location->id))); ?>">Edit</a></li>
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/locations/delete.php?id=' . h(u($location->id))); ?>">Delete</a></li>
-                      </ul>
-                    </div>
-                  </td>
-                </tr>
-                <?php } ?>
-              </tbody>
+              <?php include_once('table_contents.php'); ?>
             </table>
           </div>
         </div>

@@ -32,7 +32,7 @@ if(is_post_request()) {
 ?>
 
 <header>
-  <div class="p-5 bg-dark text-light">
+  <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
       <h1>Edit Gym Information</h1>
     </div>
@@ -47,24 +47,10 @@ if(is_post_request()) {
           <li class="breadcrumb-item active" aria-current="page">Edit Gym</li>
         </ol>
       </nav>
-      <div class="col-auto d-none d-sm-block">
-        <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="gymMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          Gym Menu
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="gymMenuLink">
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/gyms/gyms.php'); ?>">All Gyms</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/gyms/new.php'); ?>">New Gym</a></li>
-          <li>
-            <hr class="drowndown-divider my-2">
-          </li>
-          <li>
-            <h4 class="dropdown-header fs-6 text-dark">Gym ID: <?= $gym->id ?></h4>
-          </li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/gyms/view.php?id=' . $gym->id); ?>">View Gym</a></li>
-          <li><a class="dropdown-item active" href="<?= url_for('app/shared/gyms/edit.php?id=' . $gym->id); ?>">Edit Gym</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/gyms/edit.php?id=' . $gym->id); ?>">Delete Gym</a></li>
-        </ul>
-      </div>
+      <?php 
+        define('drop_menu', TRUE);
+        include_once('drop_menu.php'); 
+      ?>
     </div>
   </div>
 </header>

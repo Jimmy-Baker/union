@@ -6,7 +6,7 @@ include(SHARED_PATH . '/user-header.php');
 ?>
 
 <header>
-  <div class="p-5 bg-dark text-light">
+  <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
       <h1 class="display-2">Gym <?= access(["GM", "GS"], ["Manager ", "Staff "]) ?>Dashboard</h1>
     </div>

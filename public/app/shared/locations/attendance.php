@@ -2,16 +2,63 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 $page_title = 'Attendance List';
+
+
+if(is_post_request()) {
+  //validate a method is provided
+  switch ($_POST['method']) {
+    case 'delete':
+      {
+        if(isset($_POST['id'])){
+          $record = Attendance::find_by_id($_POST['id']);
+          if($record){
+            $result = $record->delete();
+            if($result) {
+              $session->message("The attendance record was deleted.", "success");
+            } else {
+              $session->message("The attendance record could not be found.", "warning");
+            }
+          } else {
+            $session->message("The attendance record could not be found.", "warning");
+          }
+        } else {
+          $session->message("The attendance record could not be processed.", "warning");
+        }
+      };
+      break;
+    case 'checkout':
+      {
+        if(isset($_POST['id'])){
+          $record = Attendance::find_by_id($_POST['id']);
+          if($record->time_out == null) {
+            $result = $record->check_out();
+            if($result) {
+              $session->message("The user was checked out.", "success");
+            } else {
+              $session->message("The check out could not be processed.", "warning");
+            }
+          } else {
+            $session->message("A check out has already been recorded.", "warning");
+          }
+        } else {
+          $session->message("The attendance record could not be processed.", "warning");
+        }
+      };
+      break;
+    default:
+      //no method provided in post request
+      break;
+  }
+}
+
+$location = Location::find_expanded_by_id($session->location);
+$participants = Attendance::today_list_expanded($location->id);
+
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 
-<?php
-$location = Location::find_by_id($session->location);
-$participants = $location->attendance_data;
-?>
-
 <header>
-  <div class="p-5 bg-dark text-light">
+  <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
       <h1><?= $page_title ?></h1>
     </div>
@@ -22,8 +69,8 @@ $participants = $location->attendance_data;
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
           <li class="breadcrumb-item"><a href="<?= url_for('app/shared/locations/locations.php'); ?>">Locations</a></li>
-          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/locations/view.php?id=' . $location->id); ?>"><?= $location->full_name(); ?></a></li>
-          <li class="breadcrumb-item active" aria-current="page">Locations</a></li>
+          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/locations/view.php?id=' . $location->id); ?>"><?= h($location->gym_name) . ' ' . h($location->location_name); ?></a></li>
+          <li class="breadcrumb-item active" aria-current="page">Attendance</a></li>
         </ol>
       </nav>
       <?php 
@@ -33,8 +80,6 @@ $participants = $location->attendance_data;
     </div>
   </div>
 </header>
-
-<?php var_dump($participants); ?>
 
 <main class="container-md p-4" id="main">
   <div class="card shadow mx-auto mb-4">
@@ -54,7 +99,7 @@ $participants = $location->attendance_data;
               <caption>List of all checked in users</caption>
               <thead class="table-primary">
                 <tr>
-                  <th>ID</th>
+                  <th>User ID</th>
                   <th>Name</th>
                   <th>Time In</th>
                   <th>Time Out</th>
@@ -62,24 +107,26 @@ $participants = $location->attendance_data;
                 </tr>
               </thead>
               <tbody>
-                <?php foreach($participants as $participant) { ?>
+                <?php if($participants){foreach($participants as $participant) { ?>
                 <tr class="align-middle text-nowrap">
-                  <td><?= h($participant->id) ?></td>
-                  <td><?= h($participant->name) ?></td>
-                  <td><?= h($participant->in) ?></td>
-                  <td><?= h($participant->out) ?></td>
+                  <td><?= h($participant->user_id) ?></td>
+                  <td><?= h($participant->first_name) . ' ' . h($participant->last_name) ?></td>
+                  <td><?= h($participant->time_in) ?></td>
+                  <td><?= h($participant->time_out) ?></td>
                   <td>
-                    <div class="btn-group" role="group" aria-label="location actions">
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/locations/view.php?id=' . h(u($participant->id))); ?>">View</a>
-                      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
-                      <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/locations/edit.php?id=' . h(u($participant->id))); ?>">Edit</a></li>
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/locations/delete.php?id=' . h(u($participant->id))); ?>">Delete</a></li>
-                      </ul>
-                    </div>
+                    <form method="POST" action="<?= url_for('/app/shared/locations/attendance.php'); ?>">
+                      <input type="hidden" name="id" value="<?= h($participant->id) ?>">
+                      <div class="btn-group" role="group" aria-label="location actions">
+                        <button class="btn btn-primary" type="submit" name="method" value="checkout">Check Out</button>
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
+                          <li><button type="submit" class="dropdown-item" name="method" value="delete">Delete Check In</button></li>
+                        </ul>
+                      </div>
+                    </form>
                   </td>
                 </tr>
-                <?php } ?>
+                <?php }} ?>
               </tbody>
             </table>
           </div>

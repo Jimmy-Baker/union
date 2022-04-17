@@ -44,15 +44,34 @@ class DatabaseObject {
     }
   }
   
-  static public function find_by_param($param, $value){
-    $sql = "SELECT * FROM " . static::$table_name . " ";
-    $sql .= "WHERE " . $param . "='" . self::$database->escape_string($value) . "' LIMIT 1";
+  static public function find_one_random() {
+    $sql = "SELECT * FROM " . static::$table_name;
+    $sql .= " AS r1 JOIN (SELECT CEIL(RAND() *";
+    $sql .= " (SELECT MAX(id) FROM " . static::$table_name . ")) AS id) AS r2";
+    $sql .= " WHERE r1.id >= r2.id ORDER BY r1.id ASC LIMIT 1;";
     $obj_array = static::find_by_sql($sql);
     if(!empty($obj_array)) {
       return array_shift($obj_array);
     } else {
       return false;
     }
+  }
+  
+  static public function find_by_param($param, $value){
+    $sql = "SELECT * FROM " . static::$table_name . " ";
+    $sql .= "WHERE " . self::$database->escape_string($param) . "='" . self::$database->escape_string($value) . "' LIMIT 1";
+    $obj_array = static::find_by_sql($sql);
+    if(!empty($obj_array)) {
+      return array_shift($obj_array);
+    } else {
+      return false;
+    }
+  }
+
+  static public function find_all_by_param($param, $value){
+    $sql = "SELECT * FROM " . static::$table_name . " ";
+    $sql .= "WHERE " . self::$database->escape_string($param) . "='" . self::$database->escape_string($value) . "'";
+    return static::find_by_sql($sql);
   }
   
   static public function return_param_by_id($param, $id) {
@@ -120,7 +139,6 @@ class DatabaseObject {
     $sql .= join(', ', $attribute_pairs);
     $sql .= " WHERE id='" . self::$database->escape_string($this->id) . "' ";
     $sql .= "LIMIT 1";
-    var_dump($sql);
     $result = self::$database->query($sql);
     return $result;
   }

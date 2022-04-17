@@ -3,7 +3,7 @@
 class Location extends DatabaseObject {
 
   static protected $table_name = "locations";
-  static protected $db_columns = ['id', 'gym_id', 'location_name', 'street_address', 'city', 'zip', 'state_abv', 'country_abv', 'phone_primary', 'photo_data', 'attendance_data', 'capacity'];
+  static protected $db_columns = ['id', 'gym_id', 'location_name', 'street_address', 'city', 'zip', 'state_abv', 'country_abv', 'phone_p_country', 'phone_primary', 'photo_data', 'attendance_data', 'capacity'];
   
   public $id;
   public $gym_id;
@@ -13,6 +13,7 @@ class Location extends DatabaseObject {
   public $zip;
   public $state_abv;
   public $country_abv;
+  public $phone_p_country;
   public $phone_primary;
   public $photo_data = [];
   public $attendance_data = [];
@@ -26,6 +27,7 @@ class Location extends DatabaseObject {
     $this->zip = $args['zip'] ?? '';
     $this->state_abv = $args['state_abv'] ?? '';
     $this->country_abv = $args['country_abv'] ?? '';
+    $this->phone_p_country = $args['phone_p_country'] ?? '';
     $this->phone_primary = $args['phone_primary'] ?? '';
     $this->photo_data = $args['photo_data'] ?? [];
     $this->attendance_data = $args['attendance_data'] ?? [];
@@ -33,7 +35,7 @@ class Location extends DatabaseObject {
   }
   
   public function occupants() {
-    return Attendance::currently_in($this->id);
+    return Attendance::current_count($this->id);
   }
   
   public function available() {
@@ -49,23 +51,47 @@ class Location extends DatabaseObject {
     }
   }
   
-  static public function array_all_both_names() {
-    $sql = "SELECT locations.id, gyms.gym_name, locations.location_name FROM " . static::$table_name;
-    $sql .= " INNER JOIN gyms ON locations.gym_id=gyms.id;";
+  static public function find_all_locations_expanded() {
+    $sql = "SELECT locations.*, states.state_name, states.region, gyms.gym_name, gyms.website FROM locations INNER JOIN states ON locations.state_abv=states.abv INNER JOIN gyms ON locations.gym_id=gyms.id;";
     $results = self::$database->query($sql);
     $array = [];
     while($record = $results->fetch_assoc()){
-      $array[] = $record;
+      $object = (object) $record;
+      // foreach($object as $prop=>$value){
+      //   $value = $value;
+      // }
+      $array[] = $object;
     }
-    return $array;   
+    return $array; 
   }
   
-  // public function check_in($user) { 
-  //   $item = array("id"=>$user->id, "name"=>$user->full_name(), "in"=>timestamp(), "out"=>null);
-  //   $this->attendance_data[] = $item;
-  //   $result = $this->save();
-  //   return $result;
-  // } 
+  static public function find_random_expanded() {
+    $sql = "SELECT * FROM (SELECT locations.*, states.state_name, states.region, gyms.gym_name, gyms.website FROM locations INNER JOIN states ON locations.state_abv=states.abv INNER JOIN gyms ON locations.gym_id=gyms.id) AS r1 JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM locations)) AS id) AS r2 WHERE r1.id >= r2.id ORDER BY r1.id ASC LIMIT 1;";
+    $results = self::$database->query($sql);
+    $array = [];
+    while($record = $results->fetch_assoc()){
+      $object = (object) $record;
+      // foreach($object as $prop=>$value){
+      //   $value = h($value);
+      // }
+      $array[] = $object;
+    }
+    return array_shift($array);
+  }
+  
+  static public function find_expanded_by_id($id) {
+    $sql = "SELECT locations.*, states.state_name, states.region, gyms.gym_name, gyms.website FROM locations INNER JOIN states ON locations.state_abv=states.abv INNER JOIN gyms ON locations.gym_id=gyms.id WHERE locations.id='" . parent::$database->escape_string($id) . "';";
+    $results = self::$database->query($sql);
+    $array = [];
+    while($record = $results->fetch_assoc()){
+      $object = (object) $record;
+      // foreach($object as $prop=>$value){
+      //   $value = $value;
+      // }
+      $array[] = $object;
+    }
+    return array_shift($array); 
+  }
   
   protected function validate() {
     $this-> error_array = [];

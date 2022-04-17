@@ -7,7 +7,11 @@
 
 </body>
 
-<?= display_errors($user->error_array) ?>
+<?php 
+  if(isset($user->error_array)) {
+    echo display_errors($user->error_array);
+  }
+?>
 
 </html>
 

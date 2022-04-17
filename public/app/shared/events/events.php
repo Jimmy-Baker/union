@@ -10,7 +10,7 @@ $events = Event::find_all();
 ?>
 
 <header>
-  <div class="p-5 bg-dark text-light">
+  <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
       <h1>Manage Events</h1>
     </div>

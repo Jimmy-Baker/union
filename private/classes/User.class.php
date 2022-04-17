@@ -109,6 +109,7 @@ class User extends DatabaseObject {
   }
 
   protected function validate() {
+    
     $this->error_array = [];
 
     if(is_blank($this->first_name)) {
@@ -298,6 +299,17 @@ class User extends DatabaseObject {
     return static::find_by_sql($sql);
   }
   
+  static public function find_expanded_pass_by_param($param, $value){
+    $sql = "SELECT users.id, passes.id AS pass_id FROM users INNER JOIN passes ON users.id=passes.user_id";
+    $sql .= " WHERE users." . self::$database->escape_string($param) . "='" . self::$database->escape_string($value) . "'";
+    $sql .= " AND passes.is_active=1 ORDER BY passes.created_at LIMIT 1";
+    $results = self::$database->query($sql);
+    while($record = $results->fetch_assoc()){
+      $object = (object) $record;
+    }
+    return $object;
+  }
+  
   public function user_type() {
       return self::USER_TYPES[$this->access_abv]; 
   }
@@ -307,13 +319,6 @@ class User extends DatabaseObject {
     return $location;
   }
   
-  public function check_in($location) {
-    if(!self::punch_count($location)) {
-      return false;
-    } else {
-      return $location;
-    }
-  }
 }
 
 ?>

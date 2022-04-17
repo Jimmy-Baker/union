@@ -8,19 +8,19 @@ if(is_post_request()) {
   // Create record using post parameters
   $sql = "SELECT * FROM locations WHERE ";
   if (isset($_POST['inputValue1'])) {
-    $sql .= $_POST['inputParameter1'] . " = '" . $_POST['inputValue1'] . "'";
+    $sql .= $_POST['inputParameter1'] . " LIKE '%" . $_POST['inputValue1'] . "%'";
   };
   if (isset($_POST['inputValue2'])) {
-    $sql .= "AND " . $_POST['inputParameter2'] . " = '" . $_POST['inputValue2'] . "'";
+    $sql .= "AND " . $_POST['inputParameter2'] . " LIKE '%" . $_POST['inputValue2'] . "%'";
   };
   if (isset($_POST['inputValue3'])) {
-    $sql .= "AND " . $_POST['inputParameter3'] . " = '" . $_POST['inputValue3'] . "'";
+    $sql .= "AND " . $_POST['inputParameter3'] . " LIKE '%" . $_POST['inputValue3'] . "%'";
   };
   if (isset($_POST['inputValue4'])) {
-    $sql .= "AND " . $_POST['inputParameter4'] . " = '" . $_POST['inputValue4'] . "'";
+    $sql .= "AND " . $_POST['inputParameter4'] . " LIKE '%" . $_POST['inputValue4'] . "%'";
   };
   if (isset($_POST['inputValue5'])) {
-    $sql .= "AND " . $_POST['inputParameter5'] . " = '" . $_POST['inputValue5'] . "'";
+    $sql .= "AND " . $_POST['inputParameter5'] . " LIKE '%" . $_POST['inputValue5'] . "%'";
   };
   
   $locations = Location::find_by_sql($sql);
@@ -30,7 +30,7 @@ if(is_post_request()) {
 ?>
 
 <header>
-  <div class="p-5 bg-dark text-light">
+  <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
       <h1>Find Locations</h1>
     </div>
@@ -44,16 +44,10 @@ if(is_post_request()) {
           <li class="breadcrumb-item active" aria-current="page">Find Locations</a></li>
         </ol>
       </nav>
-      <div class="col-auto d-none d-sm-block">
-        <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="locationMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          Location Menu
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="locationMenuLink">
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/locations/locations.php'); ?>">All Locations</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/locations/new.php'); ?>">New Location</a></li>
-          <li><a class="dropdown-item active" href="<?= url_for('app/shared/locations/search.php'); ?>">Find Locations</a></li>
-        </ul>
-      </div>
+      <?php 
+        define('drop_menu', TRUE);
+        include('drop_menu.php'); 
+      ?>
     </div>
   </div>
 </header>
@@ -69,7 +63,7 @@ if(is_post_request()) {
             <label for="inputParameter1" class="col-form-label">Parameter</label>
           </div>
           <div class="col-md-7">
-            <div class="row ms-0 input-location">
+            <div class="row ms-0 input-group">
               <select class="form-select" aria-label="Parameter selection for following text input" name="inputParameter1" value="<?= $_POST['inputParamater1'] ?? '';?>" required>
                 <option value="location_name">Location Name</option>
                 <option value="gym_id">Gym ID</option>
@@ -115,10 +109,8 @@ if(is_post_request()) {
           <thead class="table-primary">
             <tr>
               <th>ID</th>
-              <th>Email</th>
-              <th>Access</th>
-              <th>First&nbsp;Name</th>
-              <th>Last&nbsp;Name</th>
+              <th>Gym ID</th>
+              <th>Location Name</th>
               <th>City</th>
               <th>State</th>
               <th>Phone</th>
@@ -129,18 +121,19 @@ if(is_post_request()) {
             <?php foreach($locations as $location) { ?>
             <tr class="align-middle text-nowrap">
               <td><?= h($location->id) ?></td>
-              <td><?= h($location->email) ?></td>
-              <td><?= h($location->access_abv) ?></td>
-              <td><?= h($location->first_name) ?></td>
-              <td><?= h($location->last_name) ?></td>
+              <td><a href="<?= url_for('/app/shared/gyms/view.php?id=' . h(u($location->gym_id))); ?>"><?= h($location->gym_id) ?></a></td>
+              <td><?= h($location->location_name) ?></td>
               <td><?= h($location->city) ?></td>
               <td><?= h($location->state_abv) ?></td>
-              <td><?= format_phone(h($location->phone_p_country), h($location->phone_primary)) ?></td>
+              <td><a href="<?= 'tel:' . format_call(h($location->phone_p_country), h($location->phone_primary)) ?>"><?= format_phone(h($location->phone_p_country), h($location->phone_primary)) ?></a></td>
               <td>
-                <div class="btn-location" role="location" aria-label="location actions">
+                <div class="btn-group" role="group" aria-label="location actions">
                   <a class="btn btn-primary" href="<?= url_for('/app/shared/locations/view.php?id=' . h(u($location->id))); ?>">View</a>
-                  <a class="btn btn-primary" href="<?= url_for('/app/shared/locations/edit.php?id=' . h(u($location->id))); ?>">Edit</a>
-                  <a class="btn btn-danger" href="<?= url_for('/app/shared/locations/delete.php?id=' . h(u($location->id))); ?>">Delete</a>
+                  <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                  <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
+                    <li><a class="dropdown-item" href="<?= url_for('/app/shared/locations/edit.php?id=' . h(u($location->id))); ?>">Edit</a></li>
+                    <li><a class="dropdown-item" href="<?= url_for('/app/shared/locations/delete.php?id=' . h(u($location->id))); ?>">Delete</a></li>
+                  </ul>
                 </div>
               </td>
             </tr>

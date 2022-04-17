@@ -23,7 +23,7 @@ if(is_post_request()) {
 ?>
 
 <header>
-  <div class="p-5 bg-dark text-light">
+  <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
       <h1>New Location Information</h1>
     </div>
@@ -37,16 +37,10 @@ if(is_post_request()) {
           <li class="breadcrumb-item active" aria-current="page">New Location</li>
         </ol>
       </nav>
-      <div class="col-auto d-none d-sm-block">
-        <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="locationMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          Location Menu
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="locationMenuLink">
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/locations/locations.php'); ?>">All Locations</a></li>
-          <li><a class="dropdown-item active" href="<?= url_for('app/shared/locations/new.php'); ?>">New Location</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/locations/search.php'); ?>">Find Locations</a></li>
-        </ul>
-      </div>
+      <?php 
+        define('drop_menu', TRUE);
+        include('drop_menu.php'); 
+      ?>
     </div>
   </div>
 </header>

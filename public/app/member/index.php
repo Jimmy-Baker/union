@@ -6,7 +6,7 @@ include(SHARED_PATH . '/user-header.php');
 ?>
 
 <header>
-  <div class="p-5 bg-dark text-light">
+  <div class="p-5 bg-primary text-light">
     <h1 class="display-2">Member Dashboard</h1>
   </div>
   <div class="container-md p-4">

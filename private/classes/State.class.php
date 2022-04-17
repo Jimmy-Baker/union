@@ -3,10 +3,11 @@
 class State extends DatabaseObject {
 
   static protected $table_name = "states";
-  static protected $db_columns = ['abv', 'state_name'];
+  static protected $db_columns = ['abv', 'state_name', 'region'];
   
   public $abv;
   public $state_name;
+  public $region;
   
   public function __construct($args=[]) {
     $this->abv = $args['abv'] ?? '';

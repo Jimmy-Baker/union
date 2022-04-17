@@ -7,11 +7,12 @@ if(!isset($_GET['id'])) {
 }
 $id = $_GET['id'];
 $location = Location::find_by_id($id);
+$gym = Gym::find_by_id($location->gym_id);
 if($location == false) {
   redirect_to(url_for('/app/shared/locations/locations.php'));
 }
 
-$page_title = 'Edit Location: ' . h($location->full_name());
+$page_title = 'Edit Location: ' . h($gym->gym_name) . ' ' . h($location->location_name);
 include(SHARED_PATH . '/user-header.php'); 
 
 if(is_post_request()) {
@@ -32,7 +33,7 @@ if(is_post_request()) {
 ?>
 
 <header>
-  <div class="p-5 bg-dark text-light">
+  <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
       <h1>Edit Location Information</h1>
     </div>
@@ -43,29 +44,14 @@ if(is_post_request()) {
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
           <li class="breadcrumb-item"><a href="<?= url_for('app/shared/locations/locations.php'); ?>">Locations</a></li>
-          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/locations/view.php?id=' . $location->id); ?>"><?= $location->full_name(); ?></a></li>
+          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/locations/view.php?id=' . $location->id); ?>"><?= h($gym->gym_name) . ' ' . h($location->location_name); ?></a></li>
           <li class="breadcrumb-item active" aria-current="page">Edit Location</li>
         </ol>
       </nav>
-      <div class="col-auto d-none d-sm-block">
-        <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="locationMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          Location Menu
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="locationMenuLink">
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/locations/locations.php'); ?>">All Locations</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/locations/new.php'); ?>">New Location</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/locations/search.php'); ?>">Find Locations</a></li>
-          <li>
-            <hr class="drowndown-divider my-2">
-          </li>
-          <li>
-            <h4 class="dropdown-header fs-6 text-dark">Location ID: <?= $location->id ?></h4>
-          </li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/locations/view.php?id=' . $location->id); ?>">View Location</a></li>
-          <li><a class="dropdown-item active" href="<?= url_for('app/shared/locations/edit.php?id=' . $location->id); ?>">Edit Location</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/locations/edit.php?id=' . $location->id); ?>">Delete Location</a></li>
-        </ul>
-      </div>
+      <?php 
+        define('drop_menu', TRUE);
+        include('drop_menu.php'); 
+      ?>
     </div>
   </div>
 </header>

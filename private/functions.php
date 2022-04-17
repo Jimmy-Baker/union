@@ -74,12 +74,12 @@ function format_phone($country, $phone) {
     if ($country == null || $country == 1)  {
       $string = ''; 
     } else {
-     $string = '+'.$country;
+     $string = '+'.$country.' ';
     }
     $area = substr($phone, 0, 3);
     $three = substr($phone, 3, 3);
     $last = substr($phone, 6);
-    $string .= ' (' . $area . ') ' . $three . '-' . $last;
+    $string .= '(' . $area . ') ' . $three . '-' . $last;
    }
   return $string;
 }

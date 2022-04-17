@@ -43,7 +43,7 @@ if(is_post_request()) {
 ?>
 
 <header>
-  <div class="p-5 bg-dark text-light">
+  <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
       <h1>Delete Group</h1>
     </div>

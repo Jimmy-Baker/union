@@ -1,3 +1,22 @@
+body {
+  background-color: #F7EDDE !important;
+}
+
+
+.btn-outline-primary {
+  background-color: #fff;
+}
+
+.card,
+.accordion-item {
+  border-color: var(--bs-primary);
+}
+
+/* .card-header {
+  background-color: var(--bs-dark);
+  color: var(--bs-white);
+} */
+
 .btn.btn-raise {
   margin-top: -7px;
 }
@@ -32,4 +51,10 @@
 .ppx[value] {
   text-align: right;
   width: 3rem !important;
+}
+
+li.nav-item>a.nav-link,
+.navbar-brand,
+.btn {
+  font-family: cubano-sharp, 'Cubano Sharp', sans-serif;
 }

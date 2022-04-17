@@ -15,7 +15,8 @@ if(is_post_request()) {
     $session->message('The user was created successfully.', 'success');
     redirect_to(url_for('/app/shared/users/view.php?id=' . $new_id));
   } else {
-
+    $session->message('User creation failed. Please evaluate your input and try again.', 'warning');
+    redirect_to(url_for('/app/shared/users/view.php?id=' . $new_id));
   }
 } else {
   $user = new User;
@@ -23,7 +24,7 @@ if(is_post_request()) {
 ?>
 
 <header>
-  <div class="p-5 bg-dark text-light">
+  <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
       <h1>New User Information</h1>
     </div>

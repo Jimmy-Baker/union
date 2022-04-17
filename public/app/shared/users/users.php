@@ -15,7 +15,7 @@ $members = User::find_by_access("MM");
 ?>
 
 <header>
-  <div class="p-5 bg-dark text-light">
+  <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
       <h1>Manage Users</h1>
     </div>

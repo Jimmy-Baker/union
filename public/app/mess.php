@@ -16,11 +16,10 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
   </head>
 
   <body>
-    <?= strtotime('now'); ?>
-    <p>Peter <?= has_valid_name('Peter'); ?></p>
-    <p>Pe-ter <?= has_valid_name('Pe-ter'); ?></p>
-    <p>Pe ter <?= has_valid_name('Pe ter'); ?></p>
-    <p>Pe9er <?= has_valid_name('Pe0er'); ?></p>
+    <?php 
+      $user = User::find_expanded_pass_by_param('id', '10');
+      var_dump($user);
+    ?>
   </body>
 
 </html>

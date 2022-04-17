@@ -4,7 +4,7 @@ if(!isset($event)) {
   redirect_to(url_for('/staff/events/events.php'));
 }
 
-$locations = Location::array_all_both_names();
+$locations = Location::find_all_locations_expanded();
 $today = date('Y-m-d');
 
 ?>
@@ -40,7 +40,7 @@ $today = date('Y-m-d');
       <div class="col-md-7">
         <select name="event[location_id]" value="<?= h($event->location_id); ?>" class="form-select" id="inputLocationID" aria-describedby="helpLocationID" required>
           <?php foreach($locations as $location) { ?>
-          <option value="<?= $location['id'] ?>" <?= ($event->location_id == $location['id']) ? 'selected' : '' ?>><?= $location['gym_name'] . ' ' . $location['location_name'] ?></option>
+          <option value="<?= $location->id ?>" <?= ($event->location_id == $location->id) ? 'selected' : '' ?>><?= $location->gym_name . ' ' . $location->location_name ?></option>
           <?php } ?>
         </select>
       </div>

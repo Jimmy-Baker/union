@@ -19,7 +19,7 @@ class Attendance extends DatabaseObject {
     $this->time_out = $args['time_out'] ?? '';
   }
   
-  static public function clock_in($user_id, $location_id) {
+  static public function check_in($user_id, $location_id) {
     $sql = "INSERT INTO " . static::$table_name;
     $sql .= " (user_id, location_id, time_in)";
     $sql .= " VALUES (" . quote_null($user_id) . ", ";
@@ -31,6 +31,7 @@ class Attendance extends DatabaseObject {
     $sql = "SELECT * FROM " . static::$table_name;
     $sql .= " WHERE user_id=" . quote_null($user_id);
     $sql .= " AND location_id=" . quote_null($location_id);
+    $sql .= " AND time_in >= CURDATE() AND time_in < (CURDATE() + INTERVAL 1 DAY)";
     $sql .= " AND time_out IS NULL";
     $sql .= " ORDER BY time_in ASC LIMIT 1";
     $result = static::find_by_sql($sql);
@@ -46,7 +47,7 @@ class Attendance extends DatabaseObject {
     }
   }
   
-  public function clock_out() {
+  public function check_out() {
     $sql = "UPDATE " . static::$table_name;
     $sql .=  " SET time_out = NOW()";
     $sql .= " WHERE id=" . self::$database->escape_string($this->id);
@@ -54,11 +55,24 @@ class Attendance extends DatabaseObject {
     return self::$database->query($sql);
   }
   
-  static public function currently_in($location_id) {
+  static public function current_count($location_id) {
     $sql = "SELECT id FROM " . static::$table_name;
     $sql .= " WHERE location_id=" . quote_null($location_id);
     $sql .= " AND time_out IS NULL";
     $result = static::find_by_sql($sql);
     return count($result);
   }
+  
+  static public function today_list_expanded($location_id) {
+    $sql = "SELECT attendance.*, users.first_name, users.preferred_name, users.last_name FROM attendance INNER JOIN users ON attendance.user_id=users.id WHERE location_id='" . parent::$database->escape_string($location_id);
+    $sql .= "' AND time_in >= CURDATE() AND time_in < (CURDATE() + INTERVAL 1 DAY) ORDER BY time_in ASC;";
+    $results = self::$database->query($sql);
+    $array = [];
+    while($record = $results->fetch_assoc()){
+      $object = (object) $record;
+      $array[] = $object;
+    }
+    return $array;
+  }
+  
 }

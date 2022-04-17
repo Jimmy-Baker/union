@@ -6,7 +6,7 @@ include(SHARED_PATH . '/user-header.php');
 ?>
 
 <header>
-  <div class="p-5 bg-dark text-light">
+  <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
       <h1 class="display-2">Administrator Dashboard</h1>
     </div>
@@ -47,7 +47,7 @@ include(SHARED_PATH . '/user-header.php');
           </div>
         </div>
       </div>
-      <!-- </div>
+    </div>
     <div class="col card shadow me-2 ms-md-3 px-0">
       <h5 class="card-header">Link group</h5>
       <div class="card-body row row-cols-1 g-2">
@@ -63,7 +63,7 @@ include(SHARED_PATH . '/user-header.php');
         <a class="col btn btn-primary ">Button</a>
         <a class="col btn btn-primary ">Button</a>
       </div>
-    </div> -->
+    </div>
   </section>
 
   <section class="accordion shadow" id="accordionTools">
@@ -181,7 +181,7 @@ include(SHARED_PATH . '/user-header.php');
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <div class="card-body text-end pt-0">
-                  <a href="<?= url_for("/app/shared/users/checkin.php"); ?>" class="btn btn-primary">Check In Users</a>
+                  <a href="<?= url_for("/app/shared/locations/checkin.php"); ?>" class="btn btn-primary">Check In Users</a>
                 </div>
               </div>
             </div>
