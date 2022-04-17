@@ -23,16 +23,10 @@ $groups = Group::find_all();
           <li class="breadcrumb-item active" aria-current="page">Groups</a></li>
         </ol>
       </nav>
-      <div class="col-auto d-none d-sm-block">
-        <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="groupMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          Group Menu
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="groupMenuLink">
-          <li><a class="dropdown-item active" href="<?= url_for('app/shared/groups/groups.php'); ?>">All Groups</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/groups/new.php'); ?>">New Group</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/groups/search.php'); ?>">Find Groups</a></li>
-        </ul>
-      </div>
+      <?php
+        define('drop_menu', TRUE);
+        include_once('drop_menu.php');
+      ?>
     </div>
   </div>
 </header>
@@ -58,6 +52,7 @@ $groups = Group::find_all();
                   <th>ID</th>
                   <th>Leader ID</th>
                   <th>Type Abv</th>
+                  <th>Name</th>
                   <th>&nbsp;</th>
                 </tr>
               </thead>
@@ -67,6 +62,7 @@ $groups = Group::find_all();
                   <td><?= h($group->id) ?></td>
                   <td><?= h($group->leader_id) ?></td>
                   <td><?= h($group->type_abv) ?></td>
+                  <td><?= h($group->name) ?>
                   <td>
                     <div class="btn-group" role="group" aria-label="group actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/groups/view.php?id=' . h(u($group->id))); ?>">View</a>

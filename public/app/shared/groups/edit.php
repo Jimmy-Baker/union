@@ -11,7 +11,7 @@ if($group == false) {
   redirect_to(url_for('/app/shared/groups/groups.php'));
 }
 
-$page_title = 'Edit Group: ' . h($group->full_name());
+$page_title = 'Edit Group: ' . h($group->name);
 include(SHARED_PATH . '/user-header.php'); 
 
 if(is_post_request()) {
@@ -47,25 +47,10 @@ if(is_post_request()) {
           <li class="breadcrumb-item active" aria-current="page">Edit Group</li>
         </ol>
       </nav>
-      <div class="col-auto d-none d-sm-block">
-        <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="groupMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          Group Menu
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="groupMenuLink">
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/groups/groups.php'); ?>">All Groups</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/groups/new.php'); ?>">New Group</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/groups/search.php'); ?>">Find Groups</a></li>
-          <li>
-            <hr class="drowndown-divider my-2">
-          </li>
-          <li>
-            <h4 class="dropdown-header fs-6 text-dark">Group ID: <?= $group->id ?></h4>
-          </li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/groups/view.php?id=' . $group->id); ?>">View Group</a></li>
-          <li><a class="dropdown-item active" href="<?= url_for('app/shared/groups/edit.php?id=' . $group->id); ?>">Edit Group</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/groups/edit.php?id=' . $group->id); ?>">Delete Group</a></li>
-        </ul>
-      </div>
+      <?php
+        define('drop_menu', TRUE);
+        include_once('drop_menu.php');
+      ?>
     </div>
   </div>
 </header>

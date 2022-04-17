@@ -11,7 +11,7 @@ if($group == false) {
   redirect_to(url_for('/app/shared/groups/groups.php'));
 }
 
-$page_title = 'Group: ' . h($group->group_id);
+$page_title = 'Group: ' . h($group->name);
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 
@@ -30,25 +30,10 @@ include(SHARED_PATH . '/user-header.php');
           <li class="breadcrumb-item active" aria-current="page"><?= $group->id ?></li>
         </ol>
       </nav>
-      <div class="col-auto d-none d-sm-block">
-        <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="groupMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          Group Menu
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="groupMenuLink">
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/groups/groups.php'); ?>">All Groups</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/groups/new.php'); ?>">New Group</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/groups/search.php'); ?>">Find Groups</a></li>
-          <li>
-            <hr class="drowndown-divider my-2">
-          </li>
-          <li>
-            <h4 class="dropdown-header fs-6 text-dark">Group ID: <?= $group->id ?></h4>
-          </li>
-          <li><a class="dropdown-item active" href="<?= url_for('app/shared/groups/view.php?id=' . $group->id); ?>">View Group</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/groups/edit.php?id=' . $group->id); ?>">Edit Group</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/groups/edit.php?id=' . $group->id); ?>">Delete Group</a></li>
-        </ul>
-      </div>
+      <?php
+        define('drop_menu', TRUE);
+        include_once('drop_menu.php');
+      ?>
     </div>
   </div>
 </header>
@@ -58,12 +43,9 @@ include(SHARED_PATH . '/user-header.php');
     <div class="card-header fs-4">Group</div>
     <div class="card-body">
       <div class="row">
-        <h1 class="card-title"><?= h($group->id); ?><span class="card-subtitle text-muted"> (#<?= h($group->id); ?>)</span></h1>
+        <h1 class="card-title"><?= h($group->name); ?><span class="card-subtitle text-muted"> (#<?= h($group->id); ?>)</span></h1>
       </div>
       <div class="row mt-4">
-        <div class="col-lg-4 order-lg-last d-grid d-lg-block">
-          <img src="#" class="rounded img-thumbnail mx-auto mb-2" alt="<?= $group->preferred_name ?>'s profile picture." height="200" width="200">
-        </div>
         <div class="col-lg-8 order-lg-first">
           <div class="card-text">
             <dl class="row">
