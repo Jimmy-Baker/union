@@ -6,7 +6,7 @@ if(!defined('drop_menu')) {
 ?>
 
 <div class="col-auto d-none d-sm-block">
-  <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="eventMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+  <a class="btn btn-primary btn-raise dropdown-toggle" href="#" role="button" id="eventMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
     Event Menu
   </a>
   <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="eventMenuLink">
