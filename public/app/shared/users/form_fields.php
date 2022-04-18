@@ -15,7 +15,7 @@ $accesses = User::USER_TYPES;
 
 <datalist id="countryPrefixes">
   <?php foreach($countries as $country) { ?>
-  <option value="<?= $country->country_prefix ?>" <?= ($user->phone_p_country == $country->country_prefix) ? 'selected' : '';?>><?= $country->country_name; ?></option>
+  <option value="<?= h($country->country_prefix) ?>" <?= ($user->phone_p_country == $country->country_prefix) ? 'selected' : '';?>><?= h($country->country_name); ?></option>
   <?php } ?>
 </datalist>
 
@@ -29,10 +29,10 @@ $accesses = User::USER_TYPES;
       </div>
       <div class="col-md-7">
         <?php if($user->avatar_url != ''){ ?>
-        <img src="<?= h($user->avatar_url); ?>" class="rounded img-thumbnail mx-auto mb-2" alt="<?= $user->preferred_name ?>'s profile picture." height="200" width="200">
+        <img src="<?= h($user->avatar_url); ?>" class="rounded img-thumbnail mx-auto mb-2" alt="<?= h($user->preferred_name) ?>'s profile picture." height="200" width="200">
         <?php } ?>
         <div class="input-group">
-          <input type="text" value="<?= $user->avatar_url; ?>" name="image1" class="form-control" id="inputSavedImage1" aria-describedby="helpSavedImage1" readonly>
+          <input type="text" value="<?= h($user->avatar_url); ?>" name="image1" class="form-control" id="inputSavedImage1" aria-describedby="helpSavedImage1" readonly>
           <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#uploadModal">Upload Image</button>
         </div>
       </div>
@@ -122,7 +122,7 @@ $accesses = User::USER_TYPES;
       <div class="col-md-7">
         <select name="user[state_abv]" class="form-select" id="inputStateAbv" required>
           <?php foreach($states as $state) { ?>
-          <option value="<?= $state->abv ?>" <?= ($user->state_abv == $state->abv) ? 'selected' : '';?>><?= $state->state_name; ?></option>
+          <option value="<?= h($state->abv) ?>" <?= ($user->state_abv == $state->abv) ? 'selected' : '';?>><?= h($state->state_name); ?></option>
           <?php } ?>
         </select>
       </div>
@@ -145,7 +145,7 @@ $accesses = User::USER_TYPES;
       <div class="col-md-7">
         <select name="user[country_abv]" class="form-select country" id="inputCountryAbv" aria-describedby="helpCountryAbv" required>
           <?php foreach($countries as $country) { ?>
-          <option value="<?= $country->abv ?>" <?= (($user->country_abv == $country->abv) || (($user->country_abv == '') && ($country->abv == 'US'))) ? 'selected' : '';?>><?= $country->country_name; ?></option>
+          <option value="<?= h($country->abv) ?>" <?= (($user->country_abv == $country->abv) || (($user->country_abv == '') && ($country->abv == 'US'))) ? 'selected' : '';?>><?= h($country->country_name); ?></option>
           <?php } ?>
         </select>
         <div id="helpCountryAbv" class="form-text offset-md-3"></div>
@@ -254,7 +254,7 @@ $accesses = User::USER_TYPES;
       <div class="col-md-7">
         <select name="user[access_abv]" class="form-select" id="inputAccessAbv" required>
           <?php foreach($accesses as $abv=>$access) { ?>
-          <option value="<?= $abv ?>" <?= ($user->access_abv == $abv) ? 'selected' : '';?>><?= $access; ?></option>
+          <option value="<?= h($abv) ?>" <?= ($user->access_abv == $abv) ? 'selected' : '';?>><?= h($access); ?></option>
           <?php } ?>
         </select>
       </div>

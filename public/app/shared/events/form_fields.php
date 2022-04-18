@@ -18,7 +18,7 @@ $today = date('Y-m-d');
         <label for="inputStartDate" class="col-form-label">Start Date</label>
       </div>
       <div class="col-md-7">
-        <input type="date" name="event[start_date]" value="<?= h(html_date($event->start_date)); ?>" class="form-control" id="inputStartDate" min="<?= $today; ?>" aria-describedby="helpStartDate" required>
+        <input type="date" name="event[start_date]" value="<?= h(html_date($event->start_date)); ?>" class="form-control" id="inputStartDate" min="<?= h($today); ?>" aria-describedby="helpStartDate" required>
       </div>
       <div id="helpStartDate" class="form-text offset-md-3"></div>
     </div>
@@ -28,7 +28,7 @@ $today = date('Y-m-d');
         <label for="inputEndDate" class="col-form-label">End Date</label>
       </div>
       <div class="col-md-7">
-        <input type="date" name="event[end_date]" value="<?= h(html_date($event->end_date)); ?>" class="form-control" id="inputEndDate" aria-describedby="helpEndDate" min="<?= $today; ?>" required>
+        <input type="date" name="event[end_date]" value="<?= h(html_date($event->end_date)); ?>" class="form-control" id="inputEndDate" aria-describedby="helpEndDate" min="<?= h($today); ?>" required>
       </div>
       <div id="helpEndDate" class="form-text offset-md-3"></div>
     </div>
@@ -40,7 +40,7 @@ $today = date('Y-m-d');
       <div class="col-md-7">
         <select name="event[location_id]" value="<?= h($event->location_id); ?>" class="form-select" id="inputLocationID" aria-describedby="helpLocationID" required>
           <?php foreach($locations as $location) { ?>
-          <option value="<?= $location->id ?>" <?= ($event->location_id == $location->id) ? 'selected' : '' ?>><?= $location->gym_name . ' ' . $location->location_name ?></option>
+          <option value="<?= h($location->id) ?>" <?= ($event->location_id == $location->id) ? 'selected' : '' ?>><?= h($location->gym_name) . ' ' . h($location->location_name) ?></option>
           <?php } ?>
         </select>
       </div>

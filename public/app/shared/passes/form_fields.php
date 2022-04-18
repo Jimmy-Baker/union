@@ -70,7 +70,7 @@ $today = date('Y-m-d');
       <div class="col-md-7">
         <input type="date" name="pass[expires_on]" value="<?= h(html_date($pass->expires_on)); ?>" class="form-control" id="inputExpiresOn" aria-describedby="expiresOnHelp" readonly>
       </div>
-      <div id="expiresOnHelp" class="form-text offset-md-3">Must be between 01/01/1902 and <?= format_date($today, "/"); ?></div>
+      <div id="expiresOnHelp" class="form-text offset-md-3">Must be between 01/01/1902 and <?= h(format_date($today, "/")); ?></div>
     </div>
   </div>
 </fieldset>

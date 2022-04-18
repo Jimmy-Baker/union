@@ -37,7 +37,7 @@ $gyms = Gym::find_all();
       <div class="col-md-7">
         <select name="location[gym_id]" value="<?= h($location->gym_id); ?>" class="form-select" id="inputGymId" aria-describedby="helpGymId" required>
           <?php foreach($gyms as $gym) { ?>
-          <option value="<?= $gym->id ?>" <?= ($gym->id == $location->gym_id) ? 'selected' : '';?>><?= h($gym->gym_name); ?></option>
+          <option value="<?= h($gym->id) ?>" <?= ($gym->id == $location->gym_id) ? 'selected' : '';?>><?= h($gym->gym_name); ?></option>
           <?php } ?>
         </select>
       </div>

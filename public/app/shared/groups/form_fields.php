@@ -47,7 +47,7 @@ $today = date('Y-m-d');
       <div class="col-md-7">
         <select name="group[type_abv]" class="form-select" id="inputGroupType" aria-describedby="helpGroupType" required>
           <?php foreach($types as $type) { ?>
-          <option value="<?= $type->abv ?>" <?= ($group->type_abv == $type->abv) ? 'selected' : ''; ?>><?= $type->description ?></option>
+          <option value="<?= h($type->abv) ?>" <?= ($group->type_abv == $type->abv) ? 'selected' : ''; ?>><?= h($type->description) ?></option>
           <?php } ?>
         </select>
       </div>
