@@ -40,8 +40,8 @@ $groups = Group::find_all();
         </li>
       </ul>
     </div>
-    <div class="card-body">
 
+    <div class="card-body">
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
           <div class="table-responsive">

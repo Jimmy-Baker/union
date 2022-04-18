@@ -43,4 +43,18 @@ class Group extends DatabaseObject {
 
   }
   
+  public function group_members() {
+    $sql = "SELECT group_users.user_id, users.first_name, users.last_name, group_users.role_abv FROM group_users INNER JOIN users ON group_users.user_id=users.id WHERE group_users.group_id='" . $this->id . "';";
+    $results = self::$database->query($sql);
+    $array = [];
+    while($record = $results->fetch_assoc()){
+      $object = (object) $record;
+      // foreach($object as $prop=>$value){
+      //   $value = $value;
+      // }
+      $array[] = $object;
+    }
+    return $array; 
+  }
+  
 }

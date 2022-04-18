@@ -10,6 +10,7 @@ $group = Group::find_by_id($id);
 if($group == false) {
   redirect_to(url_for('/app/shared/groups/groups.php'));
 }
+$members = $group->group_members();
 
 $page_title = 'Group: ' . h($group->name);
 include(SHARED_PATH . '/user-header.php'); 
@@ -40,7 +41,7 @@ include(SHARED_PATH . '/user-header.php');
 
 <main class=" container-md p-4" id="main">
   <div class="card shadow col-md-10 mx-auto mb-4">
-    <div class="card-header fs-4">Group</div>
+    <div class="card-header fs-4">Group Details</div>
     <div class="card-body">
       <div class="row">
         <h1 class="card-title"><?= h($group->name); ?><span class="card-subtitle text-muted"> (#<?= h($group->id); ?>)</span></h1>
@@ -59,6 +60,46 @@ include(SHARED_PATH . '/user-header.php');
       </div>
     </div>
   </div>
+
+  <div class="card shadow col-md-10 mx-auto mb-4">
+    <div class="card-header fs-4">Group Members</div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <caption>List of all groups</caption>
+          <thead class="table-primary">
+            <tr>
+              <th>User ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Role</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach($members as $member) { ?>
+            <tr class="align-middle text-nowrap">
+              <td><?= h($member->user_id) ?></td>
+              <td><?= h($member->first_name) ?></td>
+              <td><?= h($member->last_name) ?></td>
+              <td><?= h($member->role_abv) ?>
+              <td>
+                <div class="btn-group" role="group" aria-label="group actions">
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/member/view.php?id=' . h(u($member->user_id))); ?>">View</a>
+                  <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                  <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
+                    <li><a class="dropdown-item" href="<?= url_for('/app/shared/groups/delete.php?id=' . h(u($group->id))); ?>">Remove</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <div class="row justify-content-evenly" role="toolbar" aria-label="Group toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/groups/edit.php?id='. h(u($group->id))); ?>">Edit This Group</a>
