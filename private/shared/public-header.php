@@ -24,12 +24,12 @@
   </head>
 
   <body class="container-fluid px-0 pt-5 vh-100">
-    <nav class="navbar navbar-dark shadow navbar-expand-sm bg-primary fixed-top">
+    <nav class="navbar navbar-dark bg-dark shadow navbar-expand-sm bg-primary fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand col-auto py-0" href="#">
+        <a class="navbar-brand col-auto py-0" href="<?= url_for("/index.php") ?>">
           <div class="row align-items-center">
             <div class="col pe-0">
-              <img src="<?=url_for("/img/union-logo.svg");?>" alt="United mountains logo." width="45">
+              <img src="<?=url_for("/img/union-logo-dark.svg");?>" alt="Union mountains logo." width="45">
             </div>
             <div class="col ps-1">
               <h1 class="d-inline-block h2 mb-0 col">Union</h1>
@@ -45,7 +45,7 @@
             <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+            <ul class="navbar-nav bg-dark justify-content-start flex-grow-1 pe-3">
               <li class="nav-item">
                 <a class="nav-link <?= ($page_title == 'Home') ? "active" : ''; ?>" aria-current="page" href="<?= url_for("index.php"); ?>">Home</a>
               </li>
@@ -72,7 +72,7 @@
                 </ul>
               </li> -->
             </ul>
-            <form class="d-flex row pe-sm-4 pt-4 pt-sm-0" action="<?=url_for("/app/login.php");?>">
+            <form class="d-flex row pe-sm-4 pt-4 pt-sm-0 bg-dark" action="<?=url_for("/app/login.php");?>">
               <button class="col-auto btn btn-outline-light ms-2 ms-sm-0 order-sm-1" type="submit">Log In</button>
               <a class="col-sm-auto nav-link text-light order-sm-0" href="<?= url_for("/app/signup.php"); ?>">Sign Up</a>
             </form>

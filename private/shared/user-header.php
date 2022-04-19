@@ -29,7 +29,7 @@
         <a class="navbar-brand col-auto py-0" href="#">
           <div class="row align-items-center">
             <div class="col pe-0">
-              <img src="<?=url_for("/img/union-logo.svg");?>" alt="United mountains logo." width="45">
+              <img src="<?=url_for("/img/union-logo-dark.svg");?>" alt="Union mountains logo." width="45">
             </div>
             <div class="col ps-1">
               <h1 class="d-inline-block h2 mb-0 col">Union</h1>

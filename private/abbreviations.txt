@@ -1,0 +1,10 @@
+Abbreviations
+
+AA
+
+GA - Group Administrator
+GM - Gym Manager
+GS - Gym Staff
+GU - Group User
+
+MM - Union Member

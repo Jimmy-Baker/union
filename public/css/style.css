@@ -45,7 +45,10 @@ body {
 }
 
 #index-hd {
-  background: url(/public/img/background.png) center/cover no-repeat;
+  background: url(/public/img/fists.png);
+  background-position: calc(70vw - 80px) calc(100% + 2vw);
+  background-repeat: no-repeat;
+  background-size: calc(15% + 180px);
 }
 
 .ppx[value] {
@@ -57,4 +60,73 @@ li.nav-item>a.nav-link,
 .navbar-brand,
 .btn {
   font-family: cubano-sharp, 'Cubano Sharp', sans-serif;
+}
+
+.connect {
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -45%);
+  z-index: 100;
+}
+
+.position-relative:nth-of-type(2)>.connect {
+  top: 108%;
+}
+
+.connect span {
+  color: var(--bs-primary);
+  font-size: 6rem;
+  text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+  align-content: flex-end;
+  display: flex;
+  height: 80px;
+  justify-content: center;
+}
+
+.card-icon img {
+  align-self: center;
+  height: auto;
+  max-height: 100%;
+  width: auto;
+  max-width: 100%;
+}
+
+.hr-primary {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+  color: var(--bs-primary);
+  opacity: 1;
+}
+
+.hr-dark {
+  background-color: var(--bs-dark);
+  border-color: var(--bs-dark);
+  color: var(--bs-dark);
+  opacity: 1;
+}
+
+.btn.btn-secondary {
+  color: var(--bs-dark);
+}
+
+@media (min-width: 576px) {
+  .position-relative:first-of-type>.connect {
+    left: 100%;
+    top: 45%;
+  }
+
+  .position-relative:nth-of-type(2)>.connect {
+    left: 0;
+    top: 107%;
+  }
+}
+
+@media (min-width: 992px) {
+  .position-relative:nth-of-type(2)>.connect {
+    left: 100%;
+    top: 45%;
+  }
 }

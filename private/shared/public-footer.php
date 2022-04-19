@@ -5,6 +5,12 @@
 
 <button type="button" class="btn shadow btn-secondary rounded-circle btn-lg" id="back-to-top"><i class="fas fa-arrow-up"></i></button>
 
+<?php if(isset($scripts)) {
+  foreach($scripts as $script) {
+    echo('<script src="' . url_for($script) .'" defer></script>');
+  }
+} ?>
+
 </body>
 
 <?php 
