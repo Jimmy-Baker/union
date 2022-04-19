@@ -2,6 +2,7 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 
 if(!isset($_GET['key']) && !isset($_POST['key'])) {
+  $session->message("Unauthorized access was detected. Please generate a new request try again.", "warning");
   redirect_to(url_for('/app/login.php'));
 }
 

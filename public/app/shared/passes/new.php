@@ -8,17 +8,17 @@ if(is_post_request()) {
   // Create record using post parameters
   $args = $_POST['user'];
   $pass = new Pass($args);
-  $result = $user->save();
+  $result = $pass->save();
 
   if($result === true) {
-    $new_id = $user->id;
-    $session->message('The user was created successfully.', 'success');
+    $new_id = $pass->id;
+    $session->message('The pass was created successfully.', 'success');
     redirect_to(url_for('/app/shared/users/view.php?id=' . $new_id));
   } else {
-
+    $session->message('Pass creation failed. Please evaluate your input and try again.', 'warning');
   }
 } else {
-  $user = new User;
+  $pass = new Pass;
 }
 ?>
 

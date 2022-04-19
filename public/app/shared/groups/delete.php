@@ -3,11 +3,13 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
 if(!isset($_GET['id'])) {
+  $session->message('No group was identified.', 'warning');
   redirect_to(url_for('/app/shared/groups/groups.php'));
 }
 $id = $_GET['id'];
 $group = Group::find_by_id($id);
 if($group == false) {
+  $session->message('No group was identified.', 'warning');
   redirect_to(url_for('/app/shared/groups/groups.php'));
 }
 

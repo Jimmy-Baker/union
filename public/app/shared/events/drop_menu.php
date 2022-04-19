@@ -1,8 +1,10 @@
 <?php
 // prevent this code from being loaded directly
-if(!defined('drop_menu')) {
-  redirect_to(url_for('/staff/events/events.php'));
-}
+// if(!defined('drop_menu')) {
+//   redirect_to(url_for('/staff/events/events.php'));
+// }
+if(count(get_included_files()) == 1) redirect_to(url_for('/app/shared/events/events.php'));
+
 ?>
 
 <div class="col-auto d-none d-sm-block">

@@ -3,12 +3,14 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
 if(!isset($_GET['id'])) {
+  $session->message('No location was identified.', 'warning');
   redirect_to(url_for('/app/shared/locations/locations.php'));
 }
 $id = $_GET['id'];
 $location = Location::find_by_id($id);
 $gym = Gym::find_by_id($location->gym_id);
 if($location == false) {
+  $session->message('No location was identified.', 'warning');
   redirect_to(url_for('/app/shared/locations/locations.php'));
 }
 

@@ -3,11 +3,13 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
 if(!isset($_GET['id'])) {
+  $session->message('No pass was identified.', 'warning');
   redirect_to(url_for('/app/shared/users/users.php'));
 }
 $id = $_GET['id'];
 $user = User::find_by_id($id);
 if($user == false) {
+  $session->message('No pass was identified.', 'warning');
   redirect_to(url_for('/app/shared/users/users.php'));
 }
 
@@ -18,7 +20,7 @@ if(is_post_request()) {
 
   // Delete user
   $result = $user->delete();
-  $session->message('The user was deleted successfully.', 'success');
+  $session->message('The pass was deleted successfully.', 'success');
   redirect_to(url_for('/app/shared/users/users.php'));
 
 } else {
@@ -32,7 +34,7 @@ if(is_post_request()) {
   $result = $user->save();
 
   if($result === true) {
-    $session->message('The user was updated successfully.', 'success');
+    $session->message('The pass was updated successfully.', 'success');
     redirect_to(url_for('/app/shared/users/view.php?id=' . $id));
   } else {
     echo $result;

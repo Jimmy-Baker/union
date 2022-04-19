@@ -15,7 +15,7 @@ if(is_post_request()) {
     $session->message('The group was created successfully.', 'success');
     redirect_to(url_for('/app/shared/groups/view.php?id=' . $new_id));
   } else {
-
+    $session->message('Group creation failed. Please evaluate your input and try again.', 'warning');
   }
 } else {
   $group = new Group;

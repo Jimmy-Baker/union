@@ -16,7 +16,6 @@ if(is_post_request()) {
     redirect_to(url_for('/app/shared/users/view.php?id=' . $new_id));
   } else {
     $session->message('User creation failed. Please evaluate your input and try again.', 'warning');
-    redirect_to(url_for('/app/shared/users/view.php?id=' . $new_id));
   }
 } else {
   $user = new User;

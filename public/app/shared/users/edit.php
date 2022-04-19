@@ -3,11 +3,13 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
 if(!isset($_GET['id'])) {
+  $session->message('No user was identified.', 'warning');
   redirect_to(url_for('/app/shared/users/users.php'));
 }
 $id = $_GET['id'];
 $user = User::find_by_id($id);
 if($user == false) {
+  $session->message('No user was identified.', 'warning');
   redirect_to(url_for('/app/shared/users/users.php'));
 }
 

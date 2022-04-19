@@ -3,6 +3,7 @@
 function require_login() {
   global $session;
   if(!$session->is_logged_in()) {
+    $session->message('You must be logged in to view this page.', 'warning');
     redirect_to(url_for('/app/login.php'));
   } else {
     // do nothing
@@ -13,8 +14,10 @@ function require_access($abv) {
   global $session;
   $types = ['XX'=>0,'AA'=>1,'GM'=>2,'GS'=>3,'MM'=>4];
   if(!array_key_exists($abv, $types)){
+    $session->message('You are not authorized to view this page.', 'warning');
     redirect_to($session->dashboard());
   } elseif($types[$session->access_abv] > $types[$abv]) {
+    $session->message('You are not authorized to view this page.', 'warning');
     redirect_to($session->dashboard());
   }  
 }

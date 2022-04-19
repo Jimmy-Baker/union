@@ -15,7 +15,7 @@ if(is_post_request()) {
     $session->message('The gym was created successfully.', 'success');
     redirect_to(url_for('/app/shared/gyms/view.php?id=' . $new_id));
   } else {
-
+    $session->message('Gym creation failed. Please evaluate your input and try again.', 'warning');
   }
 } else {
   $gym = new Gym;

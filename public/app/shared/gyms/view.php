@@ -3,11 +3,13 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
 if(!isset($_GET['id'])) {
+  $session->message('No gym was identified.', 'warning');
   redirect_to(url_for('/app/shared/gyms/gyms.php'));
 }
 $id = $_GET['id'];
 $gym = Gym::find_by_id($id);
 if($gym == false) {
+  $session->message('No gym was identified.', 'warning');
   redirect_to(url_for('/app/shared/gyms/gyms.php'));
 }
 

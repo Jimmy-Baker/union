@@ -15,7 +15,7 @@ if(is_post_request()) {
     $session->message('The event was created successfully.', 'success');
     redirect_to(url_for('/app/shared/events/view.php?id=' . $new_id));
   } else {
-    $session->message('The event could not be created.', 'warning');
+    $session->message('Event creation failed. Please evaluate your input and try again.', 'warning');
   }
 } else {
   $event = new Event;

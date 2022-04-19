@@ -1,6 +1,7 @@
 <?php
 // prevent this code from being loaded directly
 if(!isset($gym)) {
+  $session->message('No gym was identified.', 'warning');
   redirect_to(url_for('/staff/gyms/gyms.php'));
 }
 

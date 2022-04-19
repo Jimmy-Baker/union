@@ -1,8 +1,9 @@
 <?php
 // prevent this code from being loaded directly
-if(!isset($group)) {
-  redirect_to(url_for('/staff/groups/groups.php'));
-}
+// if(!isset($group)) {
+//   redirect_to(url_for('/staff/groups/groups.php'));
+// }
+if(count(get_included_files()) == 1) redirect_to(url_for('/app/shared/groups/groups.php'));
 
 $users = User::find_all();
 $types = GroupType::find_all();

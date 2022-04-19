@@ -3,11 +3,13 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
 if(!isset($_GET['id'])) {
+  $session->message('No pass was identified.', 'warning');
   redirect_to(url_for('/app/shared/passes/passes.php'));
 }
 $id = $_GET['id'];
 $pass = Pass::find_by_id($id);
 if($pass == false) {
+  $session->message('No pass was identified.', 'warning');
   redirect_to(url_for('/app/shared/passes/passes.php'));
 }
 

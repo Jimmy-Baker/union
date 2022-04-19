@@ -3,11 +3,13 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
 if(!isset($_GET['id'])) {
+  $session->message('No event was identified.', 'warning');
   redirect_to(url_for('/app/shared/events/events.php'));
 }
 $id = $_GET['id'];
 $event = Event::find_by_id($id);
 if($event == false) {
+  $session->message('No event was identified.', 'warning');
   redirect_to(url_for('/app/shared/events/events.php'));
 }
 

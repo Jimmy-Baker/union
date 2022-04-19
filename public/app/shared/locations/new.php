@@ -15,7 +15,7 @@ if(is_post_request()) {
     $session->message('The location was created successfully.', 'success');
     redirect_to(url_for('/app/shared/locations/view.php?id=' . $new_id));
   } else {
-
+    $session->message('Location creation failed. Please evaluate your input and try again.', 'warning');
   }
 } else {
   $location = new Location;
