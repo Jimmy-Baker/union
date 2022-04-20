@@ -54,11 +54,10 @@ if(is_post_request()) {
     }
     
   };
-  var_dump($args);
-  var_dump($user);
+  
   $user->merge_attributes($args);
   $result = $user->save();
-  var_dump($result);
+
   if($result === true) {
     $session->message('The user was updated successfully.', 'success');
     redirect_to(url_for('/app/shared/users/view.php?id=' . $id));

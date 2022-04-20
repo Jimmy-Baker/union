@@ -49,6 +49,9 @@ include(SHARED_PATH . '/user-header.php');
         <h1 class="card-title"><?= h($gym->gym_name); ?><span class="card-subtitle text-muted"> (#<?= h($gym->id); ?>)</span></h1>
       </div>
       <div class="row mt-4">
+        <div class="col-lg-4 order-lg-last d-grid d-lg-block">
+          <img src="<?= h($gym->avatar_url); ?>" class="rounded img-thumbnail mx-auto mb-2 avatar" alt="<?= $gym->gym_name ?>'s profile picture." height="200" width="200">
+        </div>
         <div class="col-lg-8 order-lg-first">
           <div class="card-text">
             <dl class="row">

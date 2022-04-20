@@ -30,14 +30,11 @@ class Gym extends DatabaseObject {
     }
     
     if(!is_blank($this->website)) {
-      if(has_valid_url($this->website)) {
+      if(!has_valid_url($this->website)) {
         $this->error_array += ["Website" => "Website must be a valid URL."];
       }
     }
     
-    // if(!is_blank($this->avatar_url)) {
-      
-    // }
   }
   
 }
