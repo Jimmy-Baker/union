@@ -106,64 +106,64 @@ $accesses = User::USER_TYPES;
     <fieldset class="card shadow col-md-10 mx-auto mb-4">
       <legend class="card-header">Location Information</legend>
       <div class="card-body">
-        <div class="card-body">
-          <div class=" row row-cols-md-auto align-items-center mb-3 mb-md-4">
-            <div class="col-md-3 text-md-end">
-              <label for="inputStreetAddress" class="col-form-label">Street Address</label>
-            </div>
-            <div class="col-md-7">
-              <input type="text" name="user[street_address]" value="<?= h($user->street_address); ?>" class="form-control" id="inputStreetAddress" minlength="6" maxlength="64" aria-describedby="helpStreetAddress" required>
-            </div>
-            <div id="helpStreetAddress" class="form-text offset-md-3">Maximum of 64 characters</div>
+        <div class=" row row-cols-md-auto align-items-center mb-3 mb-md-4">
+          <div class="col-md-3 text-md-end">
+            <label for="inputStreetAddress" class="col-form-label">Street Address</label>
           </div>
-
-          <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
-            <div class="col-md-3 text-md-end">
-              <label for="inputCity" class="col-form-label">City</label>
-            </div>
-            <div class="col-md-7">
-              <input type="text" name="user[city]" value="<?= h($user->city); ?>" class="form-control" id="inputCity" minlength="2" maxlength="64" aria-describedby="helpCity" required>
-            </div>
-            <div id="helpCity" class="form-text offset-md-3">Maximum of 64 characters</div>
+          <div class="col-md-7">
+            <input type="text" name="user[street_address]" value="<?= h($user->street_address); ?>" class="form-control" id="inputStreetAddress" minlength="6" maxlength="64" aria-describedby="helpStreetAddress" required>
           </div>
+          <div id="helpStreetAddress" class="form-text offset-md-3">Maximum of 64 characters</div>
+        </div>
 
-          <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
-            <div class="col-md-3 text-md-end">
-              <label for="inputStateAbv" class="col-form-label">State</label>
-            </div>
-            <div class="col-md-7">
-              <select name="user[state_abv]" class="form-select" id="inputStateAbv" required>
-                <?php foreach($states as $state) { ?>
-                <option value="<?= $state->abv ?>" <?= ($user->state_abv == $state->abv) ? 'selected' : '';?>><?= $state->state_name; ?></option>
-                <?php } ?>
-              </select>
-            </div>
+        <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
+          <div class="col-md-3 text-md-end">
+            <label for="inputCity" class="col-form-label">City</label>
           </div>
-
-          <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
-            <div class="col-md-3 text-md-end">
-              <label for="inputZip" class="col-form-label">Zip Code</label>
-            </div>
-            <div class="col-md-7">
-              <input type="text" name="user[zip]" value="<?= h($user->zip); ?>" class="form-control" id="inputZip" minlength="5" maxlength="5" aria-describedby="helpZip" required>
-            </div>
-            <div id="helpZip" class="form-text offset-md-3">Must be 5 characters</div>
+          <div class="col-md-7">
+            <input type="text" name="user[city]" value="<?= h($user->city); ?>" class="form-control" id="inputCity" minlength="2" maxlength="64" aria-describedby="helpCity" required>
           </div>
+          <div id="helpCity" class="form-text offset-md-3">Maximum of 64 characters</div>
+        </div>
 
-          <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
-            <div class="col-md-3 text-md-end">
-              <label for="inputCountryAbv" class="col-form-label">Country</label>
-            </div>
-            <div class="col-md-7">
-              <select name="user[country_abv]" class="form-select country" id="inputCountryAbv" aria-describedby="helpCountryAbv" required>
-                <?php foreach($countries as $country) { ?>
-                <option value="<?= $country->abv ?>" <?= (($user->country_abv == $country->abv) || (($user->country_abv == '') && ($country->abv == 'US'))) ? 'selected' : '';?>><?= $country->country_name; ?></option>
-                <?php } ?>
-              </select>
-              <div id="helpCountryAbv" class="form-text offset-md-3"></div>
-            </div>
+        <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
+          <div class="col-md-3 text-md-end">
+            <label for="inputStateAbv" class="col-form-label">State</label>
+          </div>
+          <div class="col-md-7">
+            <select name="user[state_abv]" class="form-select" id="inputStateAbv" required>
+              <option value=""></option>
+              <?php foreach($states as $state) { ?>
+              <option value="<?= $state->abv ?>" <?= ($user->state_abv == $state->abv) ? 'selected' : '';?>><?= $state->state_name; ?></option>
+              <?php } ?>
+            </select>
           </div>
         </div>
+
+        <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
+          <div class="col-md-3 text-md-end">
+            <label for="inputZip" class="col-form-label">Zip Code</label>
+          </div>
+          <div class="col-md-7">
+            <input type="text" name="user[zip]" value="<?= h($user->zip); ?>" class="form-control" id="inputZip" minlength="5" maxlength="5" aria-describedby="helpZip" required>
+          </div>
+          <div id="helpZip" class="form-text offset-md-3">Must be 5 characters</div>
+        </div>
+
+        <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
+          <div class="col-md-3 text-md-end">
+            <label for="inputCountryAbv" class="col-form-label">Country</label>
+          </div>
+          <div class="col-md-7">
+            <select name="user[country_abv]" class="form-select country" id="inputCountryAbv" aria-describedby="helpCountryAbv" required>
+              <?php foreach($countries as $country) { ?>
+              <option value="<?= $country->abv ?>" <?= (($user->country_abv == $country->abv) || (($user->country_abv == '') && ($country->abv == 'US'))) ? 'selected' : '';?>><?= $country->country_name; ?></option>
+              <?php } ?>
+            </select>
+            <div id="helpCountryAbv" class="form-text offset-md-3"></div>
+          </div>
+        </div>
+      </div>
     </fieldset>
 
     <fieldset class="card shadow col-md-10 mx-auto mb-4">
@@ -274,7 +274,9 @@ $accesses = User::USER_TYPES;
 
 </main>
 
-<?php include(SHARED_PATH . '/public-footer.php'); ?>
+<?php
+$scripts[] = "js/country_ppx.js";
+$scripts[] = "node_modules/inputmask/dist/jquery.inputmask.js";
+?>
 
-<script src="<?= url_for("js/country_ppx.js") ?>" defer></script>
-<script src="<?= url_for('node_modules/inputmask/dist/jquery.inputmask.js') ?>" defer></script>
+<?php include(SHARED_PATH . '/public-footer.php'); ?>

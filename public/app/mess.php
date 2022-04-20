@@ -16,9 +16,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
   </head>
 
   <body>
-    <?php 
-      $user = User::find_expanded_pass_by_param('id', '10');
-      var_dump($user);
+    <?= active_class(null)
     ?>
   </body>
 

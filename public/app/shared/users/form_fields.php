@@ -29,10 +29,10 @@ $accesses = User::USER_TYPES;
       </div>
       <div class="col-md-7">
         <?php if($user->avatar_url != ''){ ?>
-        <img src="<?= h($user->avatar_url); ?>" class="rounded img-thumbnail mx-auto mb-2" alt="<?= h($user->preferred_name) ?>'s profile picture." height="200" width="200">
+        <img src="<?= h($user->avatar_url); ?>" class="rounded img-thumbnail mx-auto mb-2 avatar" alt="<?= h($user->preferred_name) ?>'s profile picture." height="200" width="200">
         <?php } ?>
         <div class="input-group">
-          <input type="text" value="<?= h($user->avatar_url); ?>" name="image1" class="form-control" id="inputSavedImage1" aria-describedby="helpSavedImage1" readonly>
+          <input type="text" value="<?= image_name($user->avatar_url); ?>" name="image1" class="form-control" id="inputSavedImage1" aria-describedby="helpSavedImage1" readonly>
           <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#uploadModal">Upload Image</button>
         </div>
       </div>

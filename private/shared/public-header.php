@@ -1,6 +1,7 @@
 <?php 
   if(!isset($page_title)) { $page_title = 'Visitor Area'; }
   $page = substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], "/") + 1);
+  $scripts = [];
 ?>
 
 <!DOCTYPE html>

@@ -2,30 +2,43 @@ body {
   background-color: #F7EDDE !important;
 }
 
-
-.btn-outline-primary {
-  background-color: #fff;
-}
-
-.card,
-.accordion-item {
-  border-color: var(--bs-primary);
-}
-
-/* .card-header {
-  background-color: var(--bs-dark);
-  color: var(--bs-white);
-} */
-
-.btn.btn-raise {
-  margin-top: -7px;
-}
-
 #back-to-top {
   display: none;
   position: fixed;
   bottom: 20px;
   right: 20px;
+  z-index: 900;
+}
+
+.avatar {
+  height: 200px;
+  object-fit: cover;
+  width: 200px;
+}
+
+.avatar-sm {
+  height: 100px;
+  object-fit: cover;
+  width: 100px;
+}
+
+.avatar-xs {
+  height: 50px;
+  object-fit: cover;
+  width: 50px;
+}
+
+.btn-outline-primary {
+  background-color: #fff;
+}
+
+.btn.btn-raise {
+  margin-top: -7px;
+}
+
+.card,
+.accordion-item {
+  border-color: var(--bs-primary);
 }
 
 .fixed-message {

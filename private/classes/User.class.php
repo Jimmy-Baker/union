@@ -3,7 +3,7 @@
 class User extends DatabaseObject {
 
   static protected $table_name = "users";
-  static protected $db_columns = ['id', 'first_name', 'last_name', 'middle_name', 'preferred_name', 'birth_date', 'group_id', 'avatar_url', 'street_address', 'city', 'zip', 'state_abv', 'country_abv', 'email', 'phone_primary', 'phone_p_country', 'phone_secondary', 'phone_s_country', 'first_name_emergency', 'last_name_emergency', 'phone_emergency', 'phone_e_country', 'password_hash', 'access_abv', 'created_at', 'primary_location'];
+  static protected $db_columns = ['id', 'first_name', 'last_name', 'middle_name', 'preferred_name', 'birth_date', 'avatar_url', 'street_address', 'city', 'zip', 'state_abv', 'country_abv', 'email', 'phone_primary', 'phone_p_country', 'phone_secondary', 'phone_s_country', 'first_name_emergency', 'last_name_emergency', 'phone_emergency', 'phone_e_country', 'password_hash', 'access_abv', 'created_at', 'primary_location'];
   
   public $id;
   public $first_name;
@@ -11,7 +11,6 @@ class User extends DatabaseObject {
   public $middle_name;
   public $preferred_name;
   public $birth_date;
-  public $group_id;
   public $avatar_url;
   public $street_address;
   public $city;
@@ -166,7 +165,7 @@ class User extends DatabaseObject {
       $this->error_array += ["City" => "City cannot be blank."];
     } elseif (!has_valid_name($this->city)) {
       $this->error_array += ["City" => "City can only contain letters, dashes, and spaces."];
-    } elseif (!has_length($this->password, array('min'=>2, 'max'=>64))) {
+    } elseif (!has_length($this->city, array('min'=>2, 'max'=>64))) {
       $this->error_array += ["City" => "City must contain 2 or more characters."];
     } 
     

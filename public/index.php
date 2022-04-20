@@ -19,6 +19,7 @@ if($session->is_logged_in()){
         </div>
       </div>
     </div>
+  </div>
 </header>
 
 <main class="container-md p-4" id="main">

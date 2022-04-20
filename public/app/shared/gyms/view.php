@@ -35,7 +35,6 @@ include(SHARED_PATH . '/user-header.php');
         </ol>
       </nav>
       <?php 
-        define('drop_menu', TRUE);
         include_once('drop_menu.php'); 
       ?>
     </div>

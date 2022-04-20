@@ -26,16 +26,9 @@ $actives = Pass::find_active();
           <li class="breadcrumb-item active" aria-current="page">Passes</a></li>
         </ol>
       </nav>
-      <div class="col-auto d-none d-sm-block">
-        <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="passMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          Pass Menu
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="passMenuLink">
-          <li><a class="dropdown-item active" href="<?= url_for('app/shared/passes/passes.php'); ?>">All Passes</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/passes/new.php'); ?>">New Pass</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/passes/search.php'); ?>">Find Passes</a></li>
-        </ul>
-      </div>
+      <?php 
+        include_once('drop_menu.php'); 
+      ?>
     </div>
   </div>
 </header>

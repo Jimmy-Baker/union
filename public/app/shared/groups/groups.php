@@ -24,7 +24,6 @@ $groups = Group::find_all();
         </ol>
       </nav>
       <?php
-        define('drop_menu', TRUE);
         include_once('drop_menu.php');
       ?>
     </div>

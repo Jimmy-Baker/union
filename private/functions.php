@@ -138,4 +138,26 @@ function random_six() {
   return $generator->generateString(6, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 }
 
+function image_name($string="") {
+  if($string=="") {
+    $message = "No Image";
+  } else {
+    $name = substr($string, -10, 7);
+    switch ($name){
+      case "default": $message="Default Image";
+        break;
+      default: $message="User Provided Image";
+        break;
+    }
+  }
+  return $message;
+}
+
+function active_class($string) {
+  $name = basename($_SERVER['SCRIPT_NAME'], ".php");
+  if($string == $name){
+    return ' active';
+  }
+}
+
 ?>

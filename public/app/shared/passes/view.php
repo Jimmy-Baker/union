@@ -33,25 +33,9 @@ include(SHARED_PATH . '/user-header.php');
           <li class="breadcrumb-item active" aria-current="page"><?= $pass->id ?></li>
         </ol>
       </nav>
-      <div class="col-auto d-none d-sm-block">
-        <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="passMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          Pass Menu
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="passMenuLink">
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/passes/passes.php'); ?>">All Passes</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/passes/new.php'); ?>">New Pass</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/passes/search.php'); ?>">Find Passes</a></li>
-          <li>
-            <hr class="drowndown-divider my-2">
-          </li>
-          <li>
-            <h4 class="dropdown-header fs-6 text-dark">Pass ID: <?= $pass->id ?></h4>
-          </li>
-          <li><a class="dropdown-item active" href="<?= url_for('app/shared/passes/view.php?id=' . $pass->id); ?>">View Pass</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/passes/edit.php?id=' . $pass->id); ?>">Edit Pass</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/passes/edit.php?id=' . $pass->id); ?>">Delete Pass</a></li>
-        </ul>
-      </div>
+      <?php 
+        include_once('drop_menu.php'); 
+      ?>
     </div>
   </div>
 </header>

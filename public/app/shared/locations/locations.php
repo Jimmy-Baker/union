@@ -24,8 +24,7 @@ $locations = Location::find_all();
         </ol>
       </nav>
       <?php 
-        define('drop_menu', TRUE);
-        include('drop_menu.php'); 
+        include_once('drop_menu.php'); 
       ?>
     </div>
   </div>
