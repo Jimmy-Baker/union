@@ -26,7 +26,7 @@ if($session->is_logged_in()){
   <section class="pt-4">
     <div class="row">
       <div class="col-xl-3">
-        <h2 class="text-dark text-xl-end">How it Works</h2>
+        <h2 class="text-dark text-xl-end s-heading">How it Works</h2>
         <hr class="d-none d-xl-block hr-dark mt-0 pb-1">
       </div>
       <div class="col-xl-9 px-5 px-sm-2">

@@ -69,7 +69,7 @@ body {
   width: 3rem !important;
 }
 
-li.nav-item>a.nav-link,
+.navbar li.nav-item>a.nav-link,
 .navbar-brand,
 .btn {
   font-family: cubano-sharp, 'Cubano Sharp', sans-serif;
@@ -141,5 +141,11 @@ li.nav-item>a.nav-link,
   .position-relative:nth-of-type(2)>.connect {
     left: 100%;
     top: 45%;
+  }
+}
+
+@media (max-width: 1399.98px) {
+  .s-heading {
+    font-size: 3rem;
   }
 }

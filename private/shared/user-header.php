@@ -27,7 +27,7 @@
   <body class="container-fluid px-0 pt-5 vh-100">
     <nav class="navbar navbar-dark shadow navbar-expand-md bg-dark fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand col-auto py-0" href="#">
+        <a class="navbar-brand col-auto py-0" href="<?= url_for("/index.php") ?>">
           <div class="row align-items-center">
             <div class="col pe-0">
               <img src="<?=url_for("/img/union-logo-dark.svg");?>" alt="Union mountains logo." width="45">
@@ -47,9 +47,7 @@
           </div>
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-start flex-grow-1 pe-3 bg-dark">
-              <li class="nav-item">
-                <a class="nav-link <?= ($page_title == 'Home') ? "active" : ''; ?>" aria-current="page" href="<?= url_for("index.php"); ?>">Home</a>
-              </li>
+
               <li class="nav-item">
                 <a class="nav-link <?= ($page_title == 'Passes') ? "active" : ''; ?>" href="<?= url_for("passes.php"); ?>">Passes</a>
               </li>
