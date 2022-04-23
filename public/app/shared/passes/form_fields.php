@@ -5,6 +5,7 @@ if(!isset($pass)) {
 }
 
 $today = date('Y-m-d');
+$types = Pass::PASS_TYPES;
 ?>
 
 <fieldset class="card shadow col-md-10 mx-auto mb-4">
@@ -26,8 +27,8 @@ $today = date('Y-m-d');
       </div>
       <div class="col-md-7">
         <select name="pass[is_active]" class="form-select" id="inputIsActive" required>
-          <option value="0" <?= ($pass->is_active == 0) ? 'selected' : ''; ?>>No</option>
-          <option value="1" <?= ($pass->is_active == 1) ? 'selected' : ''; ?>>Yes</option>
+          <option value='0' <?= ($pass->is_active == 0) ? 'selected' : ''; ?>>No</option>
+          <option value='1' <?= ($pass->is_active == 1) ? 'selected' : ''; ?>>Yes</option>
         </select>
       </div>
       <div id="isActiveHelp" class="form-text offset-md-3">Maximum of 32 characters</div>
@@ -38,20 +39,26 @@ $today = date('Y-m-d');
         <label for="inputPassType" class="col-form-label">Pass Type</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="pass[pass_type]" value="<?= h($pass->pass_type); ?>" class="form-control" id="inputPassType" aria-describedby="passTypeHelp" maxlength="32">
+        <select name="pass[pass_type]" class="form-select" id="inputPassType" aria-describedby="passTypeHelp" required>
+          <?php foreach($types as $abv=>$type) { ?>
+          <option value="<?= h($abv) ?>" <?= ($pass->pass_type == $abv) ? 'selected' : '';?>><?= h($type); ?></option>
+          <?php } ?>
+        </select>
       </div>
       <div id="passTypeHelp" class="form-text offset-md-3">Maximum of 32 characters</div>
     </div>
 
+    <?php if(defined('exists')) { ?>
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
       <div class="col-md-3 text-md-end">
         <label for="inputCreatedAt" class="col-form-label">Created</label>
       </div>
       <div class="col-md-7">
-        <input type="date" name="user[created_at]" value="<?= h(html_date($pass->created_at)); ?>" class="form-control" id="inputCreatedAt" aria-describedby="lastNameHelp" readonly>
+        <input type="date" name="user[created_at]" value="<?= h(html_date($pass->created_at)); ?>" class="form-control" id="inputCreatedAt" aria-describedby="lastNameHelp">
       </div>
       <div id="createdAtHelp" class="form-text offset-md-3">Maximum of 32 characters</div>
     </div>
+    <?php } ?>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
       <div class="col-md-3 text-md-end">
@@ -63,14 +70,16 @@ $today = date('Y-m-d');
       <div id="activeOnHelp" class="form-text offset-md-3">Maximum of 32 characters</div>
     </div>
 
+    <?php if(defined('exists')) { ?>
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
       <div class="col-md-3 text-md-end">
         <label for="inputExpiresOn" class="col-form-label">Expires On</label>
       </div>
       <div class="col-md-7">
-        <input type="date" name="pass[expires_on]" value="<?= h(html_date($pass->expires_on)); ?>" class="form-control" id="inputExpiresOn" aria-describedby="expiresOnHelp" readonly>
+        <input type="date" name="pass[expires_on]" value="<?= h(html_date($pass->expires_on)); ?>" class="form-control" id="inputExpiresOn" aria-describedby="expiresOnHelp">
       </div>
       <div id="expiresOnHelp" class="form-text offset-md-3">Must be between 01/01/1902 and <?= h(format_date($today, "/")); ?></div>
     </div>
+    <?php } ?>
   </div>
 </fieldset>

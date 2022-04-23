@@ -1,7 +1,7 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Administrator Dashboard';
 require_login();
+$page_title = 'Administrator Dashboard';
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

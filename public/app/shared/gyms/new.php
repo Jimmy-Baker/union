@@ -1,6 +1,5 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'New Gym';
 require_login();
 
 if(is_post_request()) {
@@ -20,6 +19,7 @@ if(is_post_request()) {
   $gym = new Gym;
 }
 
+$page_title = 'New Gym';
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

@@ -1,6 +1,5 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Password Reset';
 
 $error_array = [];
 $email = '';
@@ -42,6 +41,7 @@ if(is_post_request()) {
 
 }
 
+$page_title = 'Password Reset';
 include(SHARED_PATH . '/public-header.php'); 
 ?>
 

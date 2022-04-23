@@ -1,6 +1,5 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Edit Pass: ' . h($pass->id);
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -30,6 +29,7 @@ if(is_post_request()) {
   //display the form
 }
 
+$page_title = 'Edit Pass: ' . h($pass->id);
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 
@@ -50,6 +50,7 @@ include(SHARED_PATH . '/user-header.php');
         </ol>
       </nav>
       <?php 
+        define('exists', true);
         include_once('drop_menu.php'); 
       ?>
     </div>

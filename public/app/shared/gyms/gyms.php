@@ -1,10 +1,10 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Manage Gyms';
 require_login();
 
 $gyms = Gym::find_all();
 
+$page_title = 'Manage Gyms';
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

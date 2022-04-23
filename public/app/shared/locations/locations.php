@@ -1,10 +1,10 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Manage Locations';
 require_login();
 
 $locations = Location::find_all();
 
+$page_title = 'Manage Locations';
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

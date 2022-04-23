@@ -1,6 +1,5 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Find Users';
 require_login();
 
 if(is_post_request()) {
@@ -30,6 +29,7 @@ if(is_post_request()) {
   
 }
 
+$page_title = 'Find Users';
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

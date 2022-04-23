@@ -1,6 +1,5 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'New User';
 
 if(is_post_request()) {
   // Create record using post parameters
@@ -25,6 +24,7 @@ $countries = Country::all_countries();
 $today = date('Y-m-d');
 $accesses = User::USER_TYPES;
 
+$page_title = 'New User';
 include(SHARED_PATH . '/public-header.php'); 
 ?>
 

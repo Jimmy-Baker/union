@@ -1,6 +1,5 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Delete Event: ' . h($event->event_name());
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -27,6 +26,7 @@ if(is_post_request()) {
   // Display form
 }
 
+$page_title = 'Delete Event: ' . h($event->event_name());
 include(SHARED_PATH . '/user-header.php');
 ?>
 

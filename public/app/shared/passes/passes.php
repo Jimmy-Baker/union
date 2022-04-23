@@ -1,12 +1,12 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Manage Passes';
 require_login();
 
 $passes = Pass::find_all();
 $expireds = Pass::find_expired();
 $actives = Pass::find_active();
 
+$page_title = 'Manage Passes';
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

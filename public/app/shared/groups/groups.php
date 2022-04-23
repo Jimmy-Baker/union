@@ -1,10 +1,10 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Manage Groups';
 require_login();
 
 $groups = Group::find_all();
 
+$page_title = 'Manage Groups';
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

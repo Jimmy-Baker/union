@@ -14,7 +14,7 @@ class Pass extends DatabaseObject {
   public $expires_on;
   public $pause_on;
   
-  public const PASS_TYPES = ['A'=>'Administrator','B'=>'Unlimited', 'C'=>'Conditional','D'=>'Base Pass', 'E'=>'Union Pass', 'F'=>'Premier Pass'];
+  public const PASS_TYPES = ['A'=>'Administrator','B'=>'Unlimited', 'C'=>'Conditional','D'=>'Base Pass', 'E'=>'Union Pass', 'F'=>'Season Pass'];
   
   public function __construct($args=[]) {
     $this->user_id = $args['user_id'] ?? '';
@@ -29,6 +29,10 @@ class Pass extends DatabaseObject {
   public function pass_type() {
     $key = $this->pass_type;
     return self::PASS_TYPES[$key];
+  }
+  
+  public function is_active() {
+    return ($this->is_active == "1") ? 'Yes' : 'No';
   }
   
   static public function find_expired(){
@@ -48,7 +52,15 @@ class Pass extends DatabaseObject {
   public function activate() {
     $today = date('Y-m-d');
     $this->active_on = $today; 
-    $this->expires_on = date('Y-m-d', strtotime($today . ' + 365 days'));
+    switch ($this->pass_type) {
+      case "A": $this->expires_on = date('Y-m-d', strtotime($today . ' + 365 days'));; break;
+      case "B": $this->expires_on = date('Y-m-d', strtotime($today . ' + 365 days'));; break;
+      case "C": $this->expires_on = date('Y-m-d', strtotime($today . ' + 1 month'));; break;
+      case "D": $this->expires_on = date('Y-m-d', strtotime($today . ' + 1 month'));; break;
+      case "E": $this->expires_on = date('Y-m-d', strtotime($today . ' + 1 month'));; break;
+      case "F": $this->expires_on = date('Y-m-d', strtotime($today . ' + 3 months'));; break;
+    }
+    
   }
   
   public function pause() {
@@ -62,32 +74,44 @@ class Pass extends DatabaseObject {
   }
   
   protected function create() {
-    if($this->is_active = 1) {
+    if($this->is_active = '1') {
       $this->activate();
-    } elseif($this->is_active = 0) {
+    } elseif($this->is_active = '0') {
       $this->active_on = '';
     }
+    //$this->proliferate();
     return parent::create();
   }
-
-  protected function update() {
-    if($this->is_active = 1 && !isset($this->active_on)) {
-      $this->activate();
-    } elseif($this->is_active = 1 && isset($this->active_on)) {
-      $this->unpause();
-    } elseif($this->is_active = 0 && isset($this->active_on)) {
-      $this->pause();
-    } 
-    return parent::update();
+  
+  protected function proliferate() {
+    switch ($this->pass_type) {
+      case "A": ; break;
+      case "B": ; break;
+      case "C": ; break;
+      case "D": ; break;
+      case "E": ; break;
+      case "F": ; break;
+    }
   }
+
+  // protected function update() {
+  //   if($this->is_active = '1' && !isset($this->active_on)) {
+  //     $this->activate();
+  //   } elseif($this->is_active = '1' && isset($this->active_on)) {
+  //     $this->unpause();
+  //   } elseif($this->is_active = '0' && isset($this->active_on)) {
+  //     $this->pause();
+  //   } 
+  //   return parent::update();
+  // }
   
   protected function validate() {
     $this->error_array = [];
 
     if(is_blank($this->user_id)) {
-      $this->error_array[] = ["#first_name", "User ID cannot be blank."];
+      $this->error_array[] = ["#first_name" => "User ID cannot be blank."];
     } elseif(!User::find_by_id($this->user_id)) {
-      $this->error_array[] = ["#first_name", "User ID must be for an existing user."];
+      $this->error_array[] = ["#first_name" => "User ID must be for an existing user."];
     }
 
     return $this->error_array;

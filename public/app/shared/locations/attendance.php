@@ -1,6 +1,5 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Attendance List';
 require_login();
 
 if(is_post_request()) {
@@ -53,6 +52,7 @@ if(is_post_request()) {
 $location = Location::find_expanded_by_id($session->location);
 $participants = Attendance::today_list_expanded($location->id);
 
+$page_title = 'Attendance List';
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

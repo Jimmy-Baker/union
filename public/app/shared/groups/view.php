@@ -1,6 +1,5 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Group: ' . h($group->name);
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -15,6 +14,7 @@ if($group == false) {
 }
 $members = $group->group_members();
 
+$page_title = 'Group: ' . h($group->name);
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

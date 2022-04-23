@@ -1,6 +1,5 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'New Group';
 require_login();
 
 if(is_post_request()) {
@@ -20,6 +19,7 @@ if(is_post_request()) {
   $group = new Group;
 }
 
+$page_title = 'New Group';
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

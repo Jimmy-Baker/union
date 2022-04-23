@@ -1,6 +1,5 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Manage Users';
 require_login();
 
 $users = User::find_all();
@@ -9,6 +8,7 @@ $managers = User::find_by_access("GM");
 $staffs = User::find_by_access("GS");
 $members = User::find_by_access("MM");
 
+$page_title = 'Manage Users';
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

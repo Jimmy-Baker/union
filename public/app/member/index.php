@@ -1,7 +1,8 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Member Dashboard';
 require_login();
+
+$page_title = 'Member Dashboard';
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

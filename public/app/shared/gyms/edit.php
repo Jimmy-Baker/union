@@ -1,6 +1,5 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Edit Gym: ' . h($gym->gym_name);
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -40,6 +39,7 @@ if(is_post_request()) {
   //display the form
 }
 
+$page_title = 'Edit Gym: ' . h($gym->gym_name);
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

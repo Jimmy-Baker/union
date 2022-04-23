@@ -96,4 +96,10 @@ class PassItem extends DatabaseObject {
     return $result;
   }
   
+  public static function delete_all($id) {
+    $sql = "DELETE FROM " . static::$table_name . " ";
+    $sql .= "WHERE pass_id='" . self::$database->escape_string($id) . "' ";
+    $result = self::$database->query($sql);
+    return $result;
+  }
 }

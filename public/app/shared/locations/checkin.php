@@ -1,6 +1,5 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Check In';
 require_login();
 
 $location = Location::find_by_id($_SESSION['location']);
@@ -64,6 +63,7 @@ if(is_post_request()) {
 
 }
 
+$page_title = 'Check In';
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

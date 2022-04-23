@@ -125,15 +125,11 @@ class DatabaseObject {
   }
 
   protected function update() {
-    $this->validate();
-    
     if(!empty($this->error_array)) { 
-      echo('<br>pooped out<br>');
       return false;
     }
     
     $attributes = $this->sanitized_attributes();
-    var_dump($attributes);
     $attribute_pairs = [];
     foreach($attributes as $key => $value) {
       $attribute_pairs[] = "{$key}=".quote_null($value);
@@ -143,7 +139,6 @@ class DatabaseObject {
     $sql .= join(', ', $attribute_pairs);
     $sql .= " WHERE id='" . self::$database->escape_string($this->id) . "' ";
     $sql .= "LIMIT 1";
-    var_dump($sql);
     $result = self::$database->query($sql);
     return $result;
   }

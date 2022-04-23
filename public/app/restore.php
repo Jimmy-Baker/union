@@ -1,6 +1,5 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Password Reset';
 
 if(!isset($_GET['key']) && !isset($_POST['key'])) {
   $session->message("Unauthorized access was detected. Please generate a new request try again.", "warning");
@@ -50,6 +49,7 @@ if(is_post_request()) {
   
 }
 
+$page_title = 'Password Reset';
 include(SHARED_PATH . '/public-header.php'); 
 ?>
 

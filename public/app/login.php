@@ -1,6 +1,5 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Log in';
 
 $error_array = [];
 $email = '';
@@ -47,6 +46,7 @@ if(is_post_request()) {
   }
 }
 
+$page_title = 'Log in';
 include(SHARED_PATH . '/public-header.php'); 
 ?>
 

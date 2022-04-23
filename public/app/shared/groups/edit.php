@@ -1,6 +1,5 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Edit Group: ' . h($group->name);
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -30,6 +29,7 @@ if(is_post_request()) {
   //display the form
 }
 
+$page_title = 'Edit Group: ' . h($group->name);
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

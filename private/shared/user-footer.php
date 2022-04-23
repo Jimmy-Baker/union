@@ -3,7 +3,7 @@
     <div class="col-auto ">
       <div class="row justify-content-center">
         <div class="col-auto">
-          <img class="img-fluid" src="/public/img/union-logo-yellow.svg" alt="Union mountains logo." width="75">
+          <img class="img-fluid" src="/public/img/union-logo-dark.svg" alt="Union mountains logo." width="75">
         </div>
       </div>
       <div class="row row-cols-auto">

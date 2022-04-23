@@ -1,10 +1,10 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Manage Events';
 require_login();
 
 $events = Event::find_all();
 
+$page_title = 'Manage Events';
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

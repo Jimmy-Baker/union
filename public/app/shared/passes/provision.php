@@ -1,6 +1,5 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Provision A Pass';
 require_login();
 
 $pass_types = PASS::PASS_TYPES;
@@ -58,6 +57,8 @@ if(is_post_request()) {
 } else {
 
 }
+
+$page_title = 'Provision A Pass';
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

@@ -1,6 +1,5 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'New Location';
 require_login();
 
 if(is_post_request()) {
@@ -20,6 +19,7 @@ if(is_post_request()) {
   $location = new Location;
 }
 
+$page_title = 'New Location';
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

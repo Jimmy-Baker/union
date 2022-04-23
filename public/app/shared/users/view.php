@@ -1,6 +1,5 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'User: ' . h($user->full_name());
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -14,6 +13,7 @@ if($user == false) {
   redirect_to(url_for('/app/shared/users/users.php'));
 }
 
+$page_title = 'User: ' . h($user->full_name());
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

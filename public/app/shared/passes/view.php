@@ -1,6 +1,5 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Pass: ' . h($pass->id);
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -15,6 +14,7 @@ if($pass == false) {
   redirect_to(url_for('/app/shared/passes/passes.php'));
 }
 
+$page_title = 'Pass: ' . h($pass->id);
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 
@@ -56,9 +56,9 @@ include(SHARED_PATH . '/user-header.php');
               <dt class="col-sm-4 text-sm-end">User ID</dt>
               <dd class="col-sm-8"><?= d($pass->user_id); ?></dd>
               <dt class="col-sm-4 text-sm-end">Active</dt>
-              <dd class="col-sm-8"><?= d($pass->is_active); ?></dd>
+              <dd class="col-sm-8"><?= d($pass->is_active()); ?></dd>
               <dt class="col-sm-4 text-sm-end">Pass Type</dt>
-              <dd class="col-sm-8"><?= d($pass->pass_type); ?></dd>
+              <dd class="col-sm-8"><?= d($pass->pass_type()); ?></dd>
               <dt class="col-sm-4 text-sm-end">Created</dt>
               <dd class="col-sm-8"><?= d($pass->created_at); ?></dd>
               <dt class="col-sm-4 text-sm-end">Active On</dt>
