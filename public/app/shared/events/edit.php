@@ -13,7 +13,7 @@ if($event == false) {
   redirect_to(url_for('/app/shared/events/events.php'));
 }
 
-$page_title = 'Edit Event: ' . h($event->full_name());
+$page_title = 'Edit Event: ' . h($event->event_name);
 include(SHARED_PATH . '/user-header.php'); 
 
 if(is_post_request()) {
@@ -43,10 +43,10 @@ if(is_post_request()) {
     <div class="row justify-content-between">
       <nav aria-label="breadcrumb" class="col-auto">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
-          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/events/events.php'); ?>">Events</a></li>
-          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/events/view.php?id=' . $event->id); ?>"><?= $event->name; ?></a></li>
-          <li class="breadcrumb-item active" aria-current="page">Edit Event</li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/events/events.php'); ?>">Events</a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/events/view.php?id=' . $event->id); ?>"><?= $event->event_name; ?></a></li>
+          <li class="breadcrumb-item active text-primary" aria-current="page">Edit Event</li>
         </ol>
       </nav>
       <div class="col-auto d-none d-sm-block">
@@ -76,6 +76,7 @@ if(is_post_request()) {
   <?= display_errors($event->error_array); ?>
   <form action="<?= url_for('/app/shared/events/edit.php?id=' . h(u($id))); ?>" method="post">
 
+    <?php define('exists', TRUE); ?>
     <?php include('form_fields.php'); ?>
 
     <div class="row justify-content-evenly">

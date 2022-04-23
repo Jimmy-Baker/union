@@ -2,31 +2,35 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 $page_title = 'Find Locations';
-include(SHARED_PATH . '/user-header.php'); 
 
 if(is_post_request()) {
   // Create record using post parameters
-  $sql = "SELECT * FROM locations WHERE ";
-  if (isset($_POST['inputValue1'])) {
-    $sql .= $_POST['inputParameter1'] . " LIKE '%" . $_POST['inputValue1'] . "%'";
-  };
-  if (isset($_POST['inputValue2'])) {
-    $sql .= "AND " . $_POST['inputParameter2'] . " LIKE '%" . $_POST['inputValue2'] . "%'";
-  };
-  if (isset($_POST['inputValue3'])) {
-    $sql .= "AND " . $_POST['inputParameter3'] . " LIKE '%" . $_POST['inputValue3'] . "%'";
-  };
-  if (isset($_POST['inputValue4'])) {
-    $sql .= "AND " . $_POST['inputParameter4'] . " LIKE '%" . $_POST['inputValue4'] . "%'";
-  };
-  if (isset($_POST['inputValue5'])) {
-    $sql .= "AND " . $_POST['inputParameter5'] . " LIKE '%" . $_POST['inputValue5'] . "%'";
-  };
+  $args = $_POST;
+  $search = new Search($args);
+  $search->table = "locations";
   
-  $locations = Location::find_by_sql($sql);
+  $sql = $search->getSQL();
+  if($sql){
+    $locations = User::find_by_sql($sql);
+    if($locations) {
+      if(count($locations) < 1){
+       $session->message('No locations were found. Please try again.', 'warning');
+      } elseif(count($locations) == 1) {
+        $session->message(count($locations) . ' location was found.', 'success');
+      } else {
+        $session->message(count($locations) . ' locations were found.', 'success');
+      }
+    } else {
+      $session->message('The search query failed. Please try again.', 'warning');
+    }
+  } else {
+    $session->message('Please check your search terms and try again.', 'warning');
+  }
 } else {
-
+  
 }
+
+include(SHARED_PATH . '/user-header.php'); 
 ?>
 
 <header>
@@ -39,9 +43,9 @@ if(is_post_request()) {
     <div class="row justify-content-between">
       <nav aria-label="breadcrumb" class="col-auto">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
-          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/locations/locations.php'); ?>">Locations</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Find Locations</a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/locations/locations.php'); ?>">Locations</a></li>
+          <li class="breadcrumb-item active text-primary" aria-current="page">Find Locations</a></li>
         </ol>
       </nav>
       <?php 
@@ -57,13 +61,79 @@ if(is_post_request()) {
       <legend class="card-header">Search Criteria</legend>
       <div class="card-body">
 
+        <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4" id="query1">
+          <div class="col-md-3 text-md-end">
+            <label for="inputValue1" class="col-form-label">Parameter</label>
+          </div>
+          <div class="col-md-7">
+            <div class="row ms-0 input-group">
+              <select class="form-select" aria-label="Parameter type for following text input" name="inputParameter1" id="inputParameter1" required>
+                <option hidden value="">Select One</option>
+                <option value="location_name" <?= ($_POST['inputParameter1'] ?? '') == "location_name" ? "selected" : "" ?>>First Name</option>
+                <option value="gym_id" <?= ($_POST['inputParameter1'] ?? '') == "gym_id" ? "selected" : "" ?>>Gym ID</option>
+                <option value="city" <?= ($_POST['inputParameter1'] ?? '') == "city" ? "selected" : "" ?>>City</option>
+                <option value="state" <?= ($_POST['inputParameter1'] ?? '') == "state" ? "selected" : "" ?>>State</option>
+                <option value="location_name" <?= ($_POST['inputParameter1'] ?? '') == "location_name" ? "selected" : "" ?>>Location Name</option>
+                <option value="phone_primary" <?= ($_POST['inputParameter1'] ?? '') == "phone_primary" ? "selected" : "" ?>>Phone Number</option>
+              </select>
+              <input type="text" class="form-control w-50" name="inputValue1" value="<?= $_POST['inputValue1'] ?? '';?>" aria-describedby="helpValue1" id="inputValue1" required>
+              <button type="button" class="btn-close align-self-center m-2" aria-label="Close" id="close1" disabled></button>
+            </div>
+          </div>
+          <div id="helpValue1" class="form-text offset-md-3">Maximum of 32 Characters</div>
+        </div>
+
+        <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4" id="query2">
+          <div class="col-md-3 text-md-end">
+            <label for="inputValue2" class="col-form-label">Parameter</label>
+          </div>
+          <div class="col-md-7">
+            <div class="row ms-0 input-group">
+              <select class="form-select" aria-label="Parameter type for following text input" name="inputParameter2" id="inputParameter2">
+                <option hidden value="">Select One</option>
+                <option value="location_name" <?= ($_POST['inputParameter2'] ?? '') == "location_name" ? "selected" : "" ?>>First Name</option>
+                <option value="gym_id" <?= ($_POST['inputParameter2'] ?? '') == "gym_id" ? "selected" : "" ?>>Gym ID</option>
+                <option value="city" <?= ($_POST['inputParameter2'] ?? '') == "city" ? "selected" : "" ?>>City</option>
+                <option value="state" <?= ($_POST['inputParameter2'] ?? '') == "state" ? "selected" : "" ?>>State</option>
+                <option value="location_name" <?= ($_POST['inputParameter2'] ?? '') == "location_name" ? "selected" : "" ?>>Location Name</option>
+                <option value="phone_primary" <?= ($_POST['inputParameter2'] ?? '') == "phone_primary" ? "selected" : "" ?>>Phone Number</option>
+              </select>
+              <input type="text" class="form-control w-50" name="inputValue2" value="<?= $_POST['inputValue2'] ?? '';?>" aria-describedby="helpValue2" id="inputValue2">
+              <button type="button" class="btn-close align-self-center m-2" aria-label="Close" id="close2"></button>
+            </div>
+          </div>
+          <div id="helpValue2" class="form-text offset-md-3">Maximum of 32 Characters</div>
+        </div>
+
+        <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4" id="query3">
+          <div class="col-md-3 text-md-end">
+            <label for="inputValue3" class="col-form-label">Parameter</label>
+          </div>
+          <div class="col-md-7">
+            <div class="row ms-0 input-group">
+              <select class="form-select" aria-label="Parameter type for following text input" name="inputParameter3" id="inputParameter3">
+                <option hidden value="">Select One</option>
+                <option value="location_name" <?= ($_POST['inputParameter3'] ?? '') == "location_name" ? "selected" : "" ?>>First Name</option>
+                <option value="gym_id" <?= ($_POST['inputParameter3'] ?? '') == "gym_id" ? "selected" : "" ?>>Gym ID</option>
+                <option value="city" <?= ($_POST['inputParameter3'] ?? '') == "city" ? "selected" : "" ?>>City</option>
+                <option value="state" <?= ($_POST['inputParameter3'] ?? '') == "state" ? "selected" : "" ?>>State</option>
+                <option value="location_name" <?= ($_POST['inputParameter3'] ?? '') == "location_name" ? "selected" : "" ?>>Location Name</option>
+                <option value="phone_primary" <?= ($_POST['inputParameter3'] ?? '') == "phone_primary" ? "selected" : "" ?>>Phone Number</option>
+              </select>
+              <input type="text" class="form-control w-50" name="inputValue3" value="<?= $_POST['inputValue3'] ?? '';?>" aria-describedby="helpValue3" id="inputValue3">
+              <button type="button" class="btn-close align-self-center m-2" aria-label="Close" id="close3"></button>
+            </div>
+          </div>
+          <div id="helpValue3" class="form-text offset-md-3">Maximum of 32 Characters</div>
+        </div>
+
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
           <div class="col-md-3 text-md-end">
             <label for="inputParameter1" class="col-form-label">Parameter</label>
           </div>
           <div class="col-md-7">
             <div class="row ms-0 input-group">
-              <select class="form-select" aria-label="Parameter selection for following text input" name="inputParameter1" value="<?= $_POST['inputParamater1'] ?? '';?>" required>
+              <select class="form-select" aria-label="Parameter selection for following text input" name="inputParameter1" value="<?= $_POST['inputParameter1'] ?? '';?>" required>
                 <option value="location_name">Location Name</option>
                 <option value="gym_id">Gym ID</option>
                 <option value="city">City</option>
@@ -77,14 +147,13 @@ if(is_post_request()) {
           <div id="phoneSecondaryHelp" class="form-text offset-md-3">Maximum of 32 Characters</div>
         </div>
 
-        <div class="row mb-3 mb-md-4">
+        <div id="addParamRow" class="row mb-3 mb-md-4">
           <div class="row col-md-10 justify-content-end">
             <div class="col-auto">
-              <button type="button" class="btn btn-outline-primary">Add A Parameter</button>
+              <button id="addParam" type="button" class="btn btn-outline-primary">Add A Parameter</button>
             </div>
           </div>
         </div>
-      </div>
 
       </div>
     </fieldset>

@@ -33,12 +33,12 @@
               <img src="<?=url_for("/img/union-logo-dark.svg");?>" alt="Union mountains logo." width="45">
             </div>
             <div class="col ps-1">
-              <h1 class="d-inline-block h2 mb-0 col">Union</h1>
+              <p class="h1 d-inline-block h2 mb-0 col">Union</p>
             </div>
           </div>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"><span class="visually-hidden">Toggle Menu</span></span>
         </button>
         <div class="offcanvas bg-dark offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
           <div class="offcanvas-header text-white">
@@ -59,7 +59,7 @@
               </li>
             </ul>
             <div class="d-flex row pe-md-4 pt-4 pt-md-0">
-              <span class="col-md-auto nav-link text-white-50" href="<?= url_for("app/signup.php"); ?>">Hello, <a href="<?= $session->dashboard(); ?>" class="active text-light"><?= $session->name; ?></a></span>
+              <span class="col-md-auto nav-link text-white-50">Hello, <a href="<?= $session->dashboard(); ?>" class="active text-light"><?= $session->name; ?></a></span>
               <div class="col-auto btn-group ps-3 ps-md-0">
                 <a href="#" class="btn btn-outline-light"><?= $session->location_name ?></a>
                 <button type="button" class="btn btn-outline-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">

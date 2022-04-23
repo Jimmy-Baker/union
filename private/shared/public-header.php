@@ -43,7 +43,7 @@
         <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasNavbar" data-bs-scroll="true" aria-labelledby="offcanvasNavbarLabel">
           <div class="offcanvas-header text-white">
             <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
-            <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"><span class="visually-hidden">Toggle Menu</span></button>
           </div>
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-start bg-dark flex-grow-1 pe-3">

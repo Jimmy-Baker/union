@@ -54,10 +54,10 @@ if(is_post_request()) {
     <div class="row justify-content-between">
       <nav aria-label="breadcrumb" class="col-auto">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
-          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/groups/groups.php'); ?>">Groups</a></li>
-          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/groups/view.php?id=' . $group->id); ?>"><?= $group->id; ?></a></li>
-          <li class="breadcrumb-item active" aria-current="page">Delete Group</li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/groups/groups.php'); ?>">Groups</a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/groups/view.php?id=' . $group->id); ?>"><?= $group->id; ?></a></li>
+          <li class="breadcrumb-item active text-primary" aria-current="page">Delete Group</li>
         </ol>
       </nav>
       <?php

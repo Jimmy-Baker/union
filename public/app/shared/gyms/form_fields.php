@@ -5,6 +5,8 @@ if(!isset($gym)) {
   redirect_to(url_for('/staff/gyms/gyms.php'));
 }
 
+$num=1;
+
 ?>
 
 <fieldset class="card shadow col-md-10 mx-auto mb-4">
@@ -21,7 +23,7 @@ if(!isset($gym)) {
         <?php } ?>
         <div class="input-group">
           <input type="text" value="<?= image_name($gym->avatar_url); ?>" name="image1" class="form-control" id="inputSavedImage1" aria-describedby="helpSavedImage1" readonly>
-          <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#uploadModal">Upload Image</button>
+          <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#uploadModal">Add Image</button>
         </div>
       </div>
       <div id="helpSavedImage1" class="form-text" offset-md-3></div>
@@ -54,3 +56,5 @@ if(!isset($gym)) {
 </fieldset>
 
 <?php include(PUBLIC_PATH . '/app/shared/upload.php'); ?>
+
+<?php $scripts[] = "js/photo_modal.js" ?>

@@ -79,10 +79,10 @@ include(SHARED_PATH . '/user-header.php');
     <div class="row justify-content-between">
       <nav aria-label="breadcrumb" class="col-auto">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
-          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/locations/locations.php'); ?>">Locations</a></li>
-          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/locations/view.php?id=' . h($location->id)); ?>"><?= h($gym->gym_name) . ' ' . h($location->location_name); ?></a></li>
-          <li class="breadcrumb-item active" aria-current="page">Check In</a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/locations/locations.php'); ?>">Locations</a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/locations/view.php?id=' . h($location->id)); ?>"><?= h($gym->gym_name) . ' ' . h($location->location_name); ?></a></li>
+          <li class="breadcrumb-item active text-primary" aria-current="page">Check In</a></li>
         </ol>
       </nav>
 
@@ -102,7 +102,7 @@ include(SHARED_PATH . '/user-header.php');
           </div>
           <div class="col-md-7">
             <div class="row ms-0 input-group">
-              <select class="form-select" aria-label="Parameter selection for following text input" name="inputParameter1" value="<?= $_POST['inputParamater1'] ?? '';?>" required>
+              <select class="form-select" aria-label="Parameter selection for following text input" name="inputParameter1" value="<?= $_POST['inputParameter1'] ?? '';?>" required>
                 <option value="id">User ID</option>
                 <option value="email">Email</option>
                 <option value="phone_primary">Phone Number</option>

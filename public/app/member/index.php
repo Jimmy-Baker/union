@@ -13,7 +13,7 @@ include(SHARED_PATH . '/user-header.php');
     <div class="row justify-content-between">
       <nav aria-label="breadcrumb" class="col-auto">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+          <li class="breadcrumb-item active text-primary" aria-current="page">Dashboard</li>
         </ol>
       </nav>
       <div class="col-auto d-none d-sm-block">

@@ -13,7 +13,7 @@ class Event extends DatabaseObject {
   public $participants;
   public $cost;
   public $url;
-  public $photo_data;
+  public $photo_data = [];
   
   public function __construct($args=[]) {
     $this->start_date = $args['start_date'] ?? '';
@@ -23,7 +23,7 @@ class Event extends DatabaseObject {
     $this->participants = $args['participants'] ?? '';
     $this->cost = $args['cost'] ?? '';
     $this->url = $args['url'] ?? '';
-    $this->photo_data = $args['photo_data'] ?? '';
+    $this->photo_data = $args['photo_data'] ?? [];
   }
   
   protected function validate() {

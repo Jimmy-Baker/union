@@ -44,10 +44,10 @@ if(is_post_request()) {
     <div class="row justify-content-between">
       <nav aria-label="breadcrumb" class="col-auto">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
-          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/locations/locations.php'); ?>">Locations</a></li>
-          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/locations/view.php?id=' . $location->id); ?>"><?= h($gym->gym_name) . ' ' . h($location->location_name); ?></a></li>
-          <li class="breadcrumb-item active" aria-current="page">Edit Location</li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/locations/locations.php'); ?>">Locations</a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/locations/view.php?id=' . $location->id); ?>"><?= h($gym->gym_name) . ' ' . h($location->location_name); ?></a></li>
+          <li class="breadcrumb-item active text-primary" aria-current="page">Edit Location</li>
         </ol>
       </nav>
       <?php 

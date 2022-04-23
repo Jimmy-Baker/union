@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="row row-cols-auto">
-        <p class="d-inline-block h1 display-3 mb-0 col">Union</p>
+        <h2 class="d-inline-block h1 display-3 mb-0 col">Union</h2>
       </div>
     </div>
   </div>
@@ -24,11 +24,11 @@
     </div>
   </div>
   <div class="row pt-4">
-    <p class="text-center">&copy; <?= date('Y'); ?> Union Climbing | <a href="#">Privacy Policy</a></p>
+    <p class="text-center">&copy; <?= date('Y'); ?> Union Climbing | <a href="#" class="link-light">Privacy Policy</a></p>
   </div>
 </footer>
 
-<button type="button" class="btn shadow btn-secondary rounded-circle btn-lg" id="back-to-top"><i class="fas fa-arrow-up"></i></button>
+<button type="button" class="btn shadow btn-secondary rounded-circle btn-lg" id="back-to-top"><span class="visually-hidden">Back to Top</span><i class="fas fa-arrow-up"></i></button>
 
 <?php if(isset($scripts)) {
   foreach($scripts as $script) {

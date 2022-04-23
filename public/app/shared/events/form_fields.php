@@ -87,14 +87,35 @@ $today = date('Y-m-d');
       <div id="helpURL" class="form-text offset-md-3">Maximum of 64 characters</div>
     </div>
 
-    <div class=" row row-cols-md-auto align-items-center mb-3 mb-md-4">
+    <?php if(defined('exists')) { ?>
+    <?php foreach($event->photo_data as $key=>$photo) { ?>
+    <?php $num = $key + 1 ?>
+    <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
       <div class="col-md-3 text-md-end">
-        <label for="inputPhotoData" class="col-form-label">Photos</label>
+        <label for="inputSavedImage<?= $num ?>" class="col-form-label">Images</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="event[photo_data]" value="<?= h($event->photo_data); ?>" class="form-control" id="inputPhotoData" maxlength="64" aria-describedby="helpPhotoData">
+        <div class="input-group">
+          <input type="text" value="" name="image<?= $num ?>" class="form-control" id="inputSavedImage<?= $num ?>" aria-describedby="helpSavedImage<?= $num ?>" readonly>
+          <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#uploadModal<?= $num ?>" data-bs-image="<?= $num ?>">Add Image</button>
+          <button type="button" class="btn-close align-self-center m-2" aria-label="Close" disabled></button>
+        </div>
       </div>
-      <div id="helpPhotoData" class="form-text offset-md-3">Maximum of 64 characters</div>
+      <div id="helpSavedImage<?= $num ?>" class="form-text offset-md-3"></div>
     </div>
+    <?php include(PUBLIC_PATH . '/app/shared/upload.php'); ?>
+    <?php } ?>
+
+    <div class="row mb-3 mb-md-4" id="addImageRow">
+      <div class="row col-md-10 justify-content-end">
+        <div class="col-auto me-3">
+          <button type="button" class="btn btn-outline-primary" id="addImage">Additional Image</button>
+        </div>
+      </div>
+    </div>
+    <?php } ?>
   </div>
 </fieldset>
+
+<?php $scripts[] = "js/extra_image.js" ?>
+<?php $scripts[] = "js/photo_modal.js" ?>

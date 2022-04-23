@@ -7,8 +7,8 @@ if(!isset($user)) {
 $states = State::all_states();
 $countries = Country::all_countries();
 $today = date('Y-m-d');
-$accesses = User::USER_TYPES; 
-
+$accesses = User::USER_TYPES;
+$num=1;
 // Set some defaults
 
 ?>
@@ -33,7 +33,7 @@ $accesses = User::USER_TYPES;
         <?php } ?>
         <div class="input-group">
           <input type="text" value="<?= image_name($user->avatar_url); ?>" name="image1" class="form-control" id="inputSavedImage1" aria-describedby="helpSavedImage1" readonly>
-          <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#uploadModal">Upload Image</button>
+          <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#uploadModal1">Add Image</button>
         </div>
       </div>
       <div id="helpSavedImage1" class="form-text" offset-md-3></div>
@@ -282,5 +282,6 @@ $accesses = User::USER_TYPES;
 
 <?php include(PUBLIC_PATH . '/app/shared/upload.php'); ?>
 
-<script src="<?= url_for("js/country_ppx.js") ?>" defer></script>
-<script src="<?= url_for('node_modules/inputmask/dist/jquery.inputmask.js') ?>" defer></script>
+<?php $scripts[] = "js/country_ppx.js" ?>
+<?php $scripts[] = "node_modules/inputmask/dist/jquery.inputmask.js" ?>
+<?php $scripts[] = "js/photo_modal.js" ?>

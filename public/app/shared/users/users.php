@@ -24,8 +24,8 @@ $members = User::find_by_access("MM");
     <div class="row justify-content-between">
       <nav aria-label="breadcrumb" class="col-auto">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Users</a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
+          <li class="breadcrumb-item active text-primary" aria-current="page">Users</a></li>
         </ol>
       </nav>
       <?php

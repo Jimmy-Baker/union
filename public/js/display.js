@@ -1,6 +1,6 @@
 window.addEventListener('scroll', topButton);
 hideMessage();
-modal();
+// modal();
 resetForm();
 
 function modal() {

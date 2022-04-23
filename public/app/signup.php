@@ -36,7 +36,7 @@ $accesses = User::USER_TYPES;
     <div class="row justify-content-between">
       <nav aria-label="breadcrumb" class="col-auto">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="login.php">Back to Login</a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="login.php">Back to Login</a></li>
         </ol>
       </nav>
     </div>

@@ -27,9 +27,9 @@ include(SHARED_PATH . '/user-header.php');
     <div class="row justify-content-between">
       <nav aria-label="breadcrumb" class="col-auto">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="<?= $session->dashboard(); ?>">Dashboard</a></li>
-          <li class="breadcrumb-item"><a href="<?= url_for('app/shared/users/users.php'); ?>">Users</a></li>
-          <li class="breadcrumb-item active" aria-current="page"><?= $user->full_name() ?></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/users/users.php'); ?>">Users</a></li>
+          <li class="breadcrumb-item active text-primary" aria-current="page"><?= $user->full_name() ?></li>
         </ol>
       </nav>
       <?php

@@ -42,14 +42,13 @@
     </div>
   </div>
   <div class="row pt-4">
-    <p class="text-center">&copy; <?= date('Y'); ?> Union Climbing | <a href="<?= url_for("/privacy.php") ?>" class="link-secondary">Privacy Policy</a></p>
+    <p class="text-center">&copy; <?= date('Y'); ?> Union Climbing | <a href="<?= url_for("/privacy.php") ?>" class="link-light">Privacy Policy</a></p>
   </div>
 </footer>
 
-<button type="button" class="btn shadow btn-secondary rounded-circle btn-lg" id="back-to-top"><i class="fas fa-arrow-up"></i></button>
+<button type="button" class="btn shadow btn-secondary rounded-circle btn-lg" id="back-to-top"><span class="visually-hidden">Back to Top</span><i class="fas fa-arrow-up"></i></button>
 
-<?php 
-  if(isset($scripts)) {
+<?php if(isset($scripts)) {
   foreach($scripts as $script) {
     echo('<script src="' . url_for($script) .'" defer></script>');
   }

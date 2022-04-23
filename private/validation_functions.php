@@ -163,6 +163,7 @@
     return preg_match('/([0-9]+\.[0-9]+)/', $string);
   }
   
+  
   // ctype_alnum($string)
   // ctype_alpha($string)
   // ctype_digit($string)
