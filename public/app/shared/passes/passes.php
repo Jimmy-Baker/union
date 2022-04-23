@@ -1,6 +1,6 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Passes';
+$page_title = 'Manage Passes';
 require_login();
 
 $passes = Pass::find_all();
@@ -13,7 +13,7 @@ include(SHARED_PATH . '/user-header.php');
 <header>
   <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
-      <h1>Manage Passes</h1>
+      <h1><?= $page_title ?></h1>
     </div>
   </div>
   <div class="container-md p-4">

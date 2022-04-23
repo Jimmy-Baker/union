@@ -8,7 +8,7 @@ include(SHARED_PATH . '/user-header.php');
 <header>
   <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
-      <h1 class="display-2">Administrator Dashboard</h1>
+      <h1 class="display-2"><?= $page_title ?></h1>
     </div>
   </div>
   <div class="container-md p-4">

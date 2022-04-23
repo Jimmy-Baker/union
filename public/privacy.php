@@ -13,7 +13,7 @@ if($session->is_logged_in()){
     <div class="container-fluid py-3">
       <div class="row">
         <div class="col-8">
-          <h1 class="display-2">Privacy Policy</h1>
+          <h1 class="display-2"><?= $page_title ?></h1>
         </div>
       </div>
     </div>

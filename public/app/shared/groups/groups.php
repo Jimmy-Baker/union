@@ -1,6 +1,6 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Groups';
+$page_title = 'Manage Groups';
 require_login();
 
 $groups = Group::find_all();
@@ -11,7 +11,7 @@ include(SHARED_PATH . '/user-header.php');
 <header>
   <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
-      <h1>Manage Groups</h1>
+      <h1><?= $page_title ?></h1>
     </div>
   </div>
   <div class="container-md p-4">

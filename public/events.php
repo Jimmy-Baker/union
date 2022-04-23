@@ -11,7 +11,7 @@ if($session->is_logged_in()){
 <header>
   <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
-      <h1 class="display-2">Events</h1>
+      <h1 class="display-2"><?= $page_title ?></h1>
       <p>Unlock climbing access nation-wide with the largest network of independently-owned gyms. Introducing the Union Pass, available now!</p>
       <a class="btn btn-primary" href="#" role="button">Explore Passes</a>
     </div>

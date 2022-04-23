@@ -55,6 +55,7 @@ include(SHARED_PATH . '/public-header.php');
 
 <main class="container-md p-4 mt-5" id="main">
   <form action="restore.php" method="post">
+    <h1><?= $page_title ?></h1>
     <fieldset class="card shadow col-md-10 mx-auto mb-4">
       <legend class="card-header">Reset Your Password</legend>
       <div class="card-body">

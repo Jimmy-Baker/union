@@ -47,7 +47,7 @@ include(SHARED_PATH . '/public-header.php');
 
 <main class="container-md p-4 mt-5" id="main">
   <form action="reset.php" method="post">
-    <h1>Password Reset</h1>
+    <h1><?= $page_title ?></h1>
     <div class="mb-3">
       <label for="inputEmail" class="form-label">Email Address</label>
       <input type="email" name="email" value="<?= h($email); ?>" class="form-control" id="inputEmail" required>
