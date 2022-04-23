@@ -1,12 +1,11 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-require_login();
 $page_title = 'Locations';
-include(SHARED_PATH . '/user-header.php'); 
-?>
+require_login();
 
-<?php
 $locations = Location::find_all();
+
+include(SHARED_PATH . '/user-header.php'); 
 ?>
 
 <header>

@@ -1,8 +1,7 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+$page_title = 'Find Passes';
 require_login();
-$page_title = 'Find Users';
-include(SHARED_PATH . '/user-header.php'); 
 
 if(is_post_request()) {
   // Create record using post parameters

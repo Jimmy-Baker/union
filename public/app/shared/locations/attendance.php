@@ -1,8 +1,7 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-require_login();
 $page_title = 'Attendance List';
-
+require_login();
 
 if(is_post_request()) {
   //validate a method is provided

@@ -1,12 +1,11 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-require_login();
 $page_title = 'Events';
-include(SHARED_PATH . '/user-header.php'); 
-?>
+require_login();
 
-<?php
 $events = Event::find_all();
+
+include(SHARED_PATH . '/user-header.php'); 
 ?>
 
 <header>

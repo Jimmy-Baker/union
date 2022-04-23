@@ -1,7 +1,7 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-require_login();
 $page_title = 'Check In';
+require_login();
 
 $location = Location::find_by_id($_SESSION['location']);
 $gym = Gym::find_by_id($location->gym_id);
@@ -60,13 +60,11 @@ if(is_post_request()) {
   } else {
     $session->message("Your location is not set.", "warning");
   }
-    
 } else {
 
 }
 
 include(SHARED_PATH . '/user-header.php'); 
-
 ?>
 
 <header>

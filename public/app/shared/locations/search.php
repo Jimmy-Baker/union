@@ -1,7 +1,7 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-require_login();
 $page_title = 'Find Locations';
+require_login();
 
 if(is_post_request()) {
   // Create record using post parameters

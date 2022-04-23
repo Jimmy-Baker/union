@@ -1,6 +1,6 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-$page_title = 'Home';
+$page_title = 'Privacy Policy';
 if($session->is_logged_in()){
   include(SHARED_PATH . '/user-header.php');
 } else {

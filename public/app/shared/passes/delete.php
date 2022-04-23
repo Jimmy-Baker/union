@@ -1,53 +1,41 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+$page_title = 'Delete Pass: ' . h($pass->id());
 require_login();
 
 if(!isset($_GET['id'])) {
   $session->message('No pass was identified.', 'warning');
-  redirect_to(url_for('/app/shared/users/users.php'));
+  redirect_to(url_for('/app/shared/passes/passes.php'));
 }
 $id = $_GET['id'];
-$user = User::find_by_id($id);
-if($user == false) {
+$pass = Pass::find_by_id($id);
+if($pass == false) {
   $session->message('No pass was identified.', 'warning');
-  redirect_to(url_for('/app/shared/users/users.php'));
+  redirect_to(url_for('/app/shared/passes/passes.php'));
 }
 
-$page_title = 'Delete User: ' . h($user->full_name());
 include(SHARED_PATH . '/user-header.php'); 
 
 if(is_post_request()) {
-
-  // Delete user
-  $result = $user->delete();
-  $session->message('The pass was deleted successfully.', 'success');
-  redirect_to(url_for('/app/shared/users/users.php'));
-
+  // Delete pass
+  $result = $pass->delete();
+  if($result === true) {
+    $session->message('The user was deleted successfully.', 'success');
+    redirect_to(url_for('/app/shared/passes/passes.php'));
+  } else {
+    $session->message('The pass deletion failed. Please try again.', 'warning');
+  }
 } else {
   // Display form
 }
 
-if(is_post_request()) {
-  // Save record using post parameters
-  $args = $_POST['user'];
-  $user->merge_attributes($args);
-  $result = $user->save();
-
-  if($result === true) {
-    $session->message('The pass was updated successfully.', 'success');
-    redirect_to(url_for('/app/shared/users/view.php?id=' . $id));
-  } else {
-    echo $result;
-  }
-} else {
-  //display the form
-}
+include(SHARED_PATH . '/user-header.php'); 
 ?>
 
 <header>
   <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
-      <h1>Delete User</h1>
+      <h1>Delete Pass</h1>
     </div>
   </div>
   <div class="container-md p-4">
@@ -55,9 +43,9 @@ if(is_post_request()) {
       <nav aria-label="breadcrumb" class="col-auto">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
-          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/users/users.php'); ?>">Users</a></li>
-          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/users/view.php?id=' . $user->id); ?>"><?= $user->full_name(); ?></a></li>
-          <li class="breadcrumb-item active text-primary" aria-current="page">Delete User</li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/passes/passes.php'); ?>">Passes</a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/passes/view.php?id=' . $pass->id); ?>"><?= $pass->full_name(); ?></a></li>
+          <li class="breadcrumb-item active text-primary" aria-current="page">Delete Pass</li>
         </ol>
       </nav>
       <?php 
@@ -68,20 +56,20 @@ if(is_post_request()) {
 </header>
 
 <main class="container-md p-4" id="main">
-  <form action="<?= url_for('/app/shared/users/delete.php?id=' . h(u($id))); ?>" method="post">
+  <form action="<?= url_for('/app/shared/passes/delete.php?id=' . h(u($id))); ?>" method="post">
     <fieldset class="card shadow col-md-10 mx-auto mb-4">
       <legend class="card-header">Profile Information</legend>
       <div class="card-body">
         <div class="card-text">
           <dl class="row">
             <dt class="col-sm-3">First Name</dt>
-            <dd class="col-sm-9"><?= h($user->first_name); ?></dd>
+            <dd class="col-sm-9"><?= h($pass->first_name); ?></dd>
             <dt class="col-sm-3">Middle Name</dt>
-            <dd class="col-sm-9"><?= h($user->middle_name); ?></dd>
+            <dd class="col-sm-9"><?= h($pass->middle_name); ?></dd>
             <dt class="col-sm-3">Last Name</dt>
-            <dd class="col-sm-9"><?= h($user->last_name); ?></dd>
+            <dd class="col-sm-9"><?= h($pass->last_name); ?></dd>
             <dt class="col-sm-3">Preferred Name</dt>
-            <dd class="col-sm-9"><?= h($user->preferred_name); ?></dd>
+            <dd class="col-sm-9"><?= h($pass->preferred_name); ?></dd>
             <dt class="col-sm-3">Birth Date</dt>
             <dd class="col-sm-9"><?= h(format_date($user->birth_date, "-")); ?></dd>
             <dt class="col-sm-3">Group ID</dt>
@@ -98,7 +86,7 @@ if(is_post_request()) {
     </fieldset>
     <div class="row justify-content-evenly">
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
-        <a class="btn shadow btn-outline-primary" href="<?= url_for('app/shared/users/view.php?id=' . $user->id); ?>">Cancel Deletion</a>
+        <a class="btn shadow btn-outline-primary" href="<?= url_for('app/shared/passes/view.php?id=' . $user->id); ?>">Cancel Deletion</a>
       </div>
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
         <button type="submit" name="submit" class="btn shadow btn-danger">Confirm Deletion</button>

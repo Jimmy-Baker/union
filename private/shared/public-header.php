@@ -48,13 +48,13 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-start bg-dark flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link <?= ($page_title == 'Passes') ? "active" : ''; ?>" href="<?= url_for("passes.php"); ?>">Passes</a>
+                <a class="nav-link<?= active_class('passes') ?>" href="<?= url_for("passes.php"); ?>">Passes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?= ($page_title == 'Partner Gyms') ? "active" : ''; ?>" href="<?= url_for("gyms.php"); ?>">Gyms</a>
+                <a class="nav-link<?= active_class('gyms') ?>" href="<?= url_for("gyms.php"); ?>">Gyms</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?= ($page_title == 'Events') ? "active" : ''; ?>" href="<?= url_for("events.php"); ?>">Events</a>
+                <a class="nav-link<?= active_class('events') ?>" href="<?= url_for("events.php"); ?>">Events</a>
               </li>
             </ul>
             <form class="d-flex row pe-sm-4 pt-4 pt-sm-0 bg-dark" action="<?=url_for("/app/login.php");?>">

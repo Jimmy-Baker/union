@@ -1,15 +1,13 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-require_login();
 $page_title = 'Passes';
-include(SHARED_PATH . '/user-header.php'); 
-?>
+require_login();
 
-<?php
 $passes = Pass::find_all();
 $expireds = Pass::find_expired();
 $actives = Pass::find_active();
 
+include(SHARED_PATH . '/user-header.php'); 
 ?>
 
 <header>

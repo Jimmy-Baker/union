@@ -1,5 +1,6 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+$page_title = 'Delete Gym: ' . h($gym->gym_name);
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -13,21 +14,20 @@ if($gym == false) {
   redirect_to(url_for('/app/shared/gyms/gyms.php'));
 }
 
-$page_title = 'Delete Gym: ' . h($gym->gym_name);
-
 if(is_post_request()) {
-
   // Delete gym
   $result = $gym->delete();
-  $session->message('The gym was deleted successfully.', 'success');
-  redirect_to(url_for('/app/shared/gyms/gyms.php'));
-
+  if($result === true) {
+    $session->message('The gym was deleted successfully.', 'success');
+    redirect_to(url_for('/app/shared/gyms/gyms.php'));
+  } else {
+    $session->message('The gym deletion failed. Please try again.', 'warning');
+  }
 } else {
   // Display form
 }
 
 include(SHARED_PATH . '/user-header.php'); 
-
 ?>
 
 <header>

@@ -1,8 +1,7 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-require_login();
 $page_title = 'Provision A Pass';
-include(SHARED_PATH . '/user-header.php'); 
+require_login();
 
 $pass_types = PASS::PASS_TYPES;
 $gyms = Gym::find_all();
@@ -59,6 +58,7 @@ if(is_post_request()) {
 } else {
 
 }
+include(SHARED_PATH . '/user-header.php'); 
 ?>
 
 <header>

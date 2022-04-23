@@ -1,8 +1,7 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-require_login();
 $page_title = 'New User';
-include(SHARED_PATH . '/user-header.php'); 
+require_login();
 
 if(is_post_request()) {
   // Create record using post parameters
@@ -20,6 +19,8 @@ if(is_post_request()) {
 } else {
   $user = new User;
 }
+
+include(SHARED_PATH . '/user-header.php'); 
 ?>
 
 <header>

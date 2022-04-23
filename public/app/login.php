@@ -1,5 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+$page_title = 'Log in';
 
 $error_array = [];
 $email = '';
@@ -17,7 +18,6 @@ if(is_post_request()) {
   if(is_blank($password)) {
     $error_array[] = ["#password","Password cannot be blank."];
   }
-
   // if there were no errors, try to login
   if(empty($error_array)) {
     $user = User::find_by_email($email);
@@ -44,15 +44,11 @@ if(is_post_request()) {
       // email not found or password does not match
       $session->message('That email and password combination was incorrect.', 'warning');
     }
-
   }
-
 }
 
+include(SHARED_PATH . '/public-header.php'); 
 ?>
-
-<?php $page_title = 'Log in'; ?>
-<?php include(SHARED_PATH . '/public-header.php'); ?>
 
 <main class="container-md p-4 mt-5" id="main">
   <form action="login.php" method="post">

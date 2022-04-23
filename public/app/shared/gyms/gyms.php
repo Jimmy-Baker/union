@@ -1,12 +1,11 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-require_login();
 $page_title = 'Gyms';
-include(SHARED_PATH . '/user-header.php'); 
-?>
+require_login();
 
-<?php
 $gyms = Gym::find_all();
+
+include(SHARED_PATH . '/user-header.php'); 
 ?>
 
 <header>

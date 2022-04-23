@@ -1,5 +1,6 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+$page_title = 'Location: ' . h($location->gym_name) . ' ' . h($location->location_name);
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -13,7 +14,6 @@ if($location == false) {
   redirect_to(url_for('/app/shared/locations/locations.php'));
 }
 
-$page_title = 'Location: ' . h($location->gym_name) . ' ' . h($location->location_name);
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

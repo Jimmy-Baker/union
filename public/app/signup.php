@@ -1,7 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 $page_title = 'New User';
-include(SHARED_PATH . '/public-header.php'); 
 
 if(is_post_request()) {
   // Create record using post parameters
@@ -14,7 +13,8 @@ if(is_post_request()) {
     $session->message('Congratulations! Your account was created.', 'success');
     redirect_to(url_for('/app/login.php?email=' . $user->email));
   } else {
-
+    $session->message('Your account creation failed. Please check your input and try again', 'warning');
+    redirect_to(url_for('/app/login.php?email=' . $user->email));
   }
 } else {
   $user = new User;
@@ -24,6 +24,8 @@ $states = State::all_states();
 $countries = Country::all_countries();
 $today = date('Y-m-d');
 $accesses = User::USER_TYPES;
+
+include(SHARED_PATH . '/public-header.php'); 
 ?>
 
 <header>

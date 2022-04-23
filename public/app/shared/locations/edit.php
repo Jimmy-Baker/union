@@ -1,5 +1,6 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+$page_title = 'Edit Location: ' . h($gym->gym_name) . ' ' . h($location->location_name);
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -14,9 +15,6 @@ if($location == false) {
   redirect_to(url_for('/app/shared/locations/locations.php'));
 }
 
-$page_title = 'Edit Location: ' . h($gym->gym_name) . ' ' . h($location->location_name);
-include(SHARED_PATH . '/user-header.php'); 
-
 if(is_post_request()) {
   // Save record using post parameters
   $args = $_POST['location'];
@@ -27,11 +25,13 @@ if(is_post_request()) {
     $session->message('The location was updated successfully.', 'success');
     redirect_to(url_for('/app/shared/locations/view.php?id=' . $id));
   } else {
-    echo $result;
+    $session->message('The location update failed. Please evaluate your input and try again.', 'warning');
   }
 } else {
   //display the form
 }
+
+include(SHARED_PATH . '/user-header.php'); 
 ?>
 
 <header>

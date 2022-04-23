@@ -1,5 +1,6 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+$page_title = 'Gym: ' . h($gym->gym_name);
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -15,7 +16,6 @@ if($gym == false) {
 
 $locations = Location::find_all_by_param('gym_id', $gym->id);
 
-$page_title = 'Gym: ' . h($gym->gym_name);
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

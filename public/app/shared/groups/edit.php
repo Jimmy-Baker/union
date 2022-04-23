@@ -1,5 +1,6 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+$page_title = 'Edit Group: ' . h($group->name);
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -13,9 +14,6 @@ if($group == false) {
   redirect_to(url_for('/app/shared/groups/groups.php'));
 }
 
-$page_title = 'Edit Group: ' . h($group->name);
-include(SHARED_PATH . '/user-header.php'); 
-
 if(is_post_request()) {
   // Save record using post parameters
   $args = $_POST['group'];
@@ -26,11 +24,13 @@ if(is_post_request()) {
     $session->message('The group was updated successfully.', 'success');
     redirect_to(url_for('/app/shared/groups/view.php?id=' . $id));
   } else {
-    echo $result;
+    $session->message('The group update failed. Please evaluate your input and try again.', 'warning');
   }
 } else {
   //display the form
 }
+
+include(SHARED_PATH . '/user-header.php'); 
 ?>
 
 <header>

@@ -1,5 +1,6 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+$page_title = 'Delete Location: ' . h($location->gym_name) . ' ' . h($location->location_name);
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -13,35 +14,20 @@ if($location == false) {
   redirect_to(url_for('/app/shared/locations/locations.php'));
 }
 
-$page_title = 'Delete Location: ' . h($location->gym_name) . ' ' . h($location->location_name);
-include(SHARED_PATH . '/user-header.php'); 
-
 if(is_post_request()) {
-
   // Delete location
   $result = $location->delete();
-  $session->message('The location was deleted successfully.', 'success');
-  redirect_to(url_for('/app/shared/locations/locations.php'));
-
+  if($result === true) {
+    $session->message('The location was deleted successfully.', 'success');
+    redirect_to(url_for('/app/shared/locations/locations.php'));
+  } else {
+    $session->message('The location deletion failed. Please try again.', 'warning');
+  }
 } else {
   // Display form
 }
 
-if(is_post_request()) {
-  // Save record using post parameters
-  $args = $_POST['location'];
-  $location->merge_attributes($args);
-  $result = $location->save();
-
-  if($result === true) {
-    $session->message('The location was updated successfully.', 'success');
-    redirect_to(url_for('/app/shared/locations/view.php?id=' . $id));
-  } else {
-    echo $result;
-  }
-} else {
-  //display the form
-}
+include(SHARED_PATH . '/user-header.php');
 ?>
 
 <header>

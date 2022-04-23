@@ -1,5 +1,6 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+$page_title = 'Delete Group: ' . h($group->name);
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -13,35 +14,20 @@ if($group == false) {
   redirect_to(url_for('/app/shared/groups/groups.php'));
 }
 
-$page_title = 'Delete Group: ' . h($group->name);
-include(SHARED_PATH . '/user-header.php'); 
-
 if(is_post_request()) {
-
-  // Delete group
+  // Delete location
   $result = $group->delete();
-  $session->message('The group was deleted successfully.', 'success');
-  redirect_to(url_for('/app/shared/groups/groups.php'));
-
+  if($result === true) {
+    $session->message('The group was deleted successfully.', 'success');
+    redirect_to(url_for('/app/shared/groups/groups.php'));
+  } else {
+    $session->message('The group deletion failed. Please try again.', 'warning');
+  }
 } else {
   // Display form
 }
 
-if(is_post_request()) {
-  // Save record using post parameters
-  $args = $_POST['group'];
-  $group->merge_attributes($args);
-  $result = $group->save();
-
-  if($result === true) {
-    $session->message('The group was updated successfully.', 'success');
-    redirect_to(url_for('/app/shared/groups/view.php?id=' . $id));
-  } else {
-    echo $result;
-  }
-} else {
-  //display the form
-}
+include(SHARED_PATH . '/user-header.php');
 ?>
 
 <header>

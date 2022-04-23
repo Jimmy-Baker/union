@@ -1,5 +1,6 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+$page_title = 'Edit Gym: ' . h($gym->gym_name);
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -29,21 +30,17 @@ if(is_post_request()) {
   $gym->merge_attributes($args);
   $result = $gym->save();
   
-  var_dump($result);
-
   if($result === true) {
     $session->message('The gym was updated successfully.', 'success');
     redirect_to(url_for('/app/shared/gyms/view.php?id=' . $id));
   } else {
-    echo $result;
+    $session->message('The gym update failed. Please evaluate your input and try again.', 'warning');
   }
 } else {
   //display the form
 }
 
-$page_title = 'Edit Gym: ' . h($gym->gym_name);
 include(SHARED_PATH . '/user-header.php'); 
-
 ?>
 
 <header>

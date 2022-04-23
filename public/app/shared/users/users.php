@@ -1,17 +1,15 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-require_login();
 $page_title = 'Users';
-include(SHARED_PATH . '/user-header.php'); 
-?>
+require_login();
 
-<?php
 $users = User::find_all();
 $admins = User::find_by_access("AA");
 $managers = User::find_by_access("GM");
 $staffs = User::find_by_access("GS");
 $members = User::find_by_access("MM");
 
+include(SHARED_PATH . '/user-header.php'); 
 ?>
 
 <header>

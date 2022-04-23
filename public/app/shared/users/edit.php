@@ -1,5 +1,6 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+$page_title = 'Edit User: ' . h($user->full_name());
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -52,7 +53,6 @@ if(is_post_request()) {
         $session->message('Image could not be uploaded', 'warning');
       }
     }
-    
   };
   
   $user->merge_attributes($args);
@@ -68,9 +68,7 @@ if(is_post_request()) {
   //display the form
 }
 
-$page_title = 'Edit User: ' . h($user->full_name());
 include(SHARED_PATH . '/user-header.php'); 
-
 ?>
 
 <header>

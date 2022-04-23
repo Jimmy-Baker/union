@@ -1,5 +1,6 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+$page_title = 'Edit Event: ' . h($event->event_name);
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -13,9 +14,6 @@ if($event == false) {
   redirect_to(url_for('/app/shared/events/events.php'));
 }
 
-$page_title = 'Edit Event: ' . h($event->event_name);
-include(SHARED_PATH . '/user-header.php'); 
-
 if(is_post_request()) {
   // Save record using post parameters
   $args = $_POST['event'];
@@ -26,11 +24,13 @@ if(is_post_request()) {
     $session->message('The event was updated successfully.', 'success');
     redirect_to(url_for('/app/shared/events/view.php?id=' . $id));
   } else {
-    echo $result;
+    $session->message('The event update failed. Please evaluate your input and try again.', 'warning');
   }
 } else {
   //display the form
 }
+
+include(SHARED_PATH . '/user-header.php'); 
 ?>
 
 <header>

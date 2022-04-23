@@ -1,5 +1,6 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+$page_title = 'Pass: ' . h($pass->id);
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -14,7 +15,6 @@ if($pass == false) {
   redirect_to(url_for('/app/shared/passes/passes.php'));
 }
 
-$page_title = 'Pass: ' . h($pass->id);
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

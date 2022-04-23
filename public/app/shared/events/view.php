@@ -1,5 +1,6 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+$page_title = 'Event: ' . h($event->event_name);
 require_login();
 
 if(!isset($_GET['id'])) {
@@ -13,7 +14,6 @@ if($event == false) {
   redirect_to(url_for('/app/shared/events/events.php'));
 }
 
-$page_title = 'Event: ' . h($event->event_name);
 include(SHARED_PATH . '/user-header.php'); 
 ?>
 

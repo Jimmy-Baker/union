@@ -49,13 +49,13 @@
             <ul class="navbar-nav justify-content-start flex-grow-1 pe-3 bg-dark">
 
               <li class="nav-item">
-                <a class="nav-link <?= ($page_title == 'Passes') ? "active" : ''; ?>" href="<?= url_for("passes.php"); ?>">Passes</a>
+                <a class="nav-link<?= active_class('passes'); ?>" href="<?= url_for("passes.php"); ?>">Passes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?= ($page_title == 'Partner Gyms') ? "active" : ''; ?>" href="<?= url_for("gyms.php"); ?>">Gyms</a>
+                <a class="nav-link<?= active_class('gyms') ?>" href="<?= url_for("gyms.php"); ?>">Gyms</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <?= ($page_title == 'Events') ? "active" : ''; ?>" href="<?= url_for("events.php"); ?>">Events</a>
+                <a class="nav-link<?= active_class('events') ?>" href="<?= url_for("events.php"); ?>">Events</a>
               </li>
             </ul>
             <div class="d-flex row pe-md-4 pt-4 pt-md-0">
@@ -66,17 +66,16 @@
                   <span class="visually-hidden">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu bg-light dropdown-menu-end text-end">
-                  <li><a class="dropdown-item" href="<?= $session->dashboard(); ?>">My Dashboard</a></li>
-                  <li><a class="dropdown-item" href="<?= url_for("/app/shared/locations/attendance.php") ?>">Attendance</a></li>
-                  <li><a class="dropdown-item" href="<?= url_for("/app/shared/locations/checkin.php") ?>">Member Check In</a></li>
+                  <li><a class="dropdown-item<?= active_class('dashboard') ?>" href="<?= $session->dashboard(); ?>">My Dashboard</a></li>
+                  <li><a class="dropdown-item<?= active_class('attendance') ?>" href="<?= url_for("/app/shared/locations/attendance.php") ?>">Attendance</a></li>
+                  <li><a class="dropdown-item<?= active_class('checkin') ?>" href="<?= url_for("/app/shared/locations/checkin.php") ?>">Member Check In</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>
-                  <li><a class="dropdown-item" href="#">Change Location</a></li>
+                  <li><a class="dropdown-item<?= active_class('change') ?>" href="#">Change Location</a></li>
                   <li><a class="dropdown-item" href="<?=url_for("/app/logout.php");?>">Logout</a></li>
                 </ul>
               </div>
-              <!-- <button class="col-auto btn btn-outline-light ms-0 ms-md-0" type="submit">Log Out</button> -->
             </div>
           </div>
         </div>
