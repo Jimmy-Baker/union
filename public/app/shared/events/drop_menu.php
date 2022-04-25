@@ -20,11 +20,11 @@ if(count(get_included_files()) == 1) redirect_to(url_for('/app/shared/events/eve
       <hr class="drowndown-divider my-2">
     </li>
     <li>
-      <h4 class="dropdown-header fs-6 text-dark">Event ID: <?= $event->id ?></h4>
+      <h4 class="dropdown-header fs-6 text-dark">Event ID: <?= h($event->id) ?></h4>
     </li>
-    <li><a class="dropdown-item<?= active_class('view') ?>" href="<?= url_for('app/shared/events/view.php?id=' . $event->id); ?>">View Event</a></li>
-    <li><a class="dropdown-item<?= active_class('edit') ?>" href="<?= url_for('app/shared/events/edit.php?id=' . $event->id); ?>">Edit Event</a></li>
-    <li><a class="dropdown-item<?= active_class('delete') ?>" href="<?= url_for('app/shared/events/delete.php?id=' . $event->id); ?>">Delete Event</a></li>
+    <li><a class="dropdown-item<?= active_class('view') ?>" href="<?= url_for('app/shared/events/view.php?id=' . u($event->id)); ?>">View Event</a></li>
+    <li><a class="dropdown-item<?= active_class('edit') ?>" href="<?= url_for('app/shared/events/edit.php?id=' . u($event->id)); ?>">Edit Event</a></li>
+    <li><a class="dropdown-item<?= active_class('delete') ?>" href="<?= url_for('app/shared/events/delete.php?id=' . u($event->id)); ?>">Delete Event</a></li>
     <?php } ?>
   </ul>
 </div>

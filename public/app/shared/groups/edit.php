@@ -21,7 +21,7 @@ if(is_post_request()) {
 
   if($result === true) {
     $session->message('The group was updated successfully.', 'success');
-    redirect_to(url_for('/app/shared/groups/view.php?id=' . $id));
+    redirect_to(url_for('/app/shared/groups/view.php?id=' . u($id)));
   } else {
     $session->message('The group update failed. Please evaluate your input and try again.', 'warning');
   }
@@ -45,7 +45,7 @@ include(SHARED_PATH . '/user-header.php');
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
           <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/groups/groups.php'); ?>">Groups</a></li>
-          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/groups/view.php?id=' . $group->id); ?>"><?= $group->id; ?></a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/groups/view.php?id=' . u($group->id)); ?>"><?= $group->id; ?></a></li>
           <li class="breadcrumb-item active text-primary" aria-current="page">Edit Group</li>
         </ol>
       </nav>
@@ -58,13 +58,13 @@ include(SHARED_PATH . '/user-header.php');
 
 <main class="container-md p-4" id="main">
   <?= display_errors($group->error_array); ?>
-  <form action="<?= url_for('/app/shared/groups/edit.php?id=' . h(u($id))); ?>" method="post">
+  <form action="<?= url_for('/app/shared/groups/edit.php?id=' . u($id)); ?>" method="post">
 
     <?php include('form_fields.php'); ?>
 
     <div class="row justify-content-evenly">
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
-        <a class="btn shadow btn-outline-primary" href="<?= url_for('app/shared/groups/view.php?id=' . $group->id); ?>">Cancel Edits</a>
+        <a class="btn shadow btn-outline-primary" href="<?= url_for('app/shared/groups/view.php?id=' . u($group->id)); ?>">Cancel Edits</a>
       </div>
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
         <button type="submit" name="submit" class="btn shadow btn-primary">Submit Edits</button>

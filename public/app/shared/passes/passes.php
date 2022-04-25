@@ -69,7 +69,7 @@ include(SHARED_PATH . '/user-header.php');
                 <?php foreach($passes as $pass) { ?>
                 <tr class="align-middle text-nowrap">
                   <td><?= h($pass->id) ?></td>
-                  <td><a href="<?= url_for('/app/shared/users/view.php?id=' . h(u($pass->user_id))); ?>"><?= h($pass->user_id) ?></a></td>
+                  <td><a href="<?= url_for('/app/shared/users/view.php?id=' . u($pass->user_id)); ?>"><?= h($pass->user_id) ?></a></td>
                   <td><?= h($pass->is_active) ?></td>
                   <td><?= h($pass->pass_type) ?></td>
                   <td><?= h($pass->created_at) ?></td>
@@ -77,11 +77,11 @@ include(SHARED_PATH . '/user-header.php');
                   <td><?= h($pass->expires_on) ?></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="pass actions">
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/passes/view.php?id=' . h(u($pass->id))); ?>">View</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/passes/view.php?id=' . u($pass->id)); ?>">View</a>
                       <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                       <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/edit.php?id=' . h(u($pass->id))); ?>">Edit</a></li>
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/delete.php?id=' . h(u($pass->id))); ?>">Delete</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/edit.php?id=' . u($pass->id)); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/delete.php?id=' . u($pass->id)); ?>">Delete</a></li>
                       </ul>
                     </div>
                   </td>
@@ -111,7 +111,7 @@ include(SHARED_PATH . '/user-header.php');
                 <?php foreach($actives as $active) { ?>
                 <tr class="align-middle text-nowrap">
                   <td><?= h($active->id) ?></td>
-                  <td><a href="<?= url_for('/app/shared/users/view.php?id=' . h(u($active->user_id))); ?>"><?= h($active->user_id) ?></a></td>
+                  <td><a href="<?= url_for('/app/shared/users/view.php?id=' . u($active->user_id)); ?>"><?= h($active->user_id) ?></a></td>
                   <td><?= h($active->is_active) ?></td>
                   <td><?= h($active->pass_type) ?></td>
                   <td><?= h($active->created_at) ?></td>
@@ -119,11 +119,11 @@ include(SHARED_PATH . '/user-header.php');
                   <td><?= h($active->expires_on) ?></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="pass actions">
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/passes/view.php?id=' . h(u($active->id))); ?>">View</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/passes/view.php?id=' . u($active->id)); ?>">View</a>
                       <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                       <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/edit.php?id=' . h(u($active->id))); ?>">Edit</a></li>
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/delete.php?id=' . h(u($active->id))); ?>">Delete</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/edit.php?id=' . u($active->id)); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/delete.php?id=' . u($active->id)); ?>">Delete</a></li>
                       </ul>
                     </div>
                   </td>
@@ -153,7 +153,7 @@ include(SHARED_PATH . '/user-header.php');
                 <?php foreach($expireds as $expired) { ?>
                 <tr class="align-middle text-nowrap">
                   <td><?= h($expired->id) ?></td>
-                  <td><a href="<?= url_for('/app/shared/users/view.php?id=' . h(u($expired->user_id))); ?>"><?= h($expired->user_id) ?></a></td>
+                  <td><a href="<?= url_for('/app/shared/users/view.php?id=' . u($expired->user_id)); ?>"><?= h($expired->user_id) ?></a></td>
                   <td><?= h($expired->is_active) ?></td>
                   <td><?= h($expired->pass_type) ?></td>
                   <td><?= h($expired->created_at) ?></td>
@@ -161,11 +161,11 @@ include(SHARED_PATH . '/user-header.php');
                   <td><?= h($expired->expires_on) ?></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="pass actions">
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/passes/view.php?id=' . h(u($expired->id))); ?>">View</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/passes/view.php?id=' . u($expired->id)); ?>">View</a>
                       <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                       <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/edit.php?id=' . h(u($expired->id))); ?>">Edit</a></li>
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/delete.php?id=' . h(u($expired->id))); ?>">Delete</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/edit.php?id=' . u($expired->id)); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/passes/delete.php?id=' . u($expired->id)); ?>">Delete</a></li>
                       </ul>
                     </div>
                   </td>

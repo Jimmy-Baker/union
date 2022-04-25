@@ -15,7 +15,10 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
   </head>
 
   <body>
-    <?= active_class(null)
+    <?php 
+      $pass = new Pass();
+      $pass->pass_type = "E";
+      $pass->provision();
     ?>
   </body>
 

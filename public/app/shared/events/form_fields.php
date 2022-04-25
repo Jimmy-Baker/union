@@ -18,7 +18,7 @@ $today = date('Y-m-d');
         <label for="inputStartDate" class="col-form-label">Start Date</label>
       </div>
       <div class="col-md-7">
-        <input type="date" name="event[start_date]" value="<?= h(html_date($event->start_date)); ?>" class="form-control" id="inputStartDate" min="<?= h($today); ?>" aria-describedby="helpStartDate" required>
+        <input type="date" name="event[start_date]" value="<?= html_date($event->start_date); ?>" class="form-control" id="inputStartDate" min="<?= h($today); ?>" aria-describedby="helpStartDate" required>
       </div>
       <div id="helpStartDate" class="form-text offset-md-3"></div>
     </div>
@@ -28,7 +28,7 @@ $today = date('Y-m-d');
         <label for="inputEndDate" class="col-form-label">End Date</label>
       </div>
       <div class="col-md-7">
-        <input type="date" name="event[end_date]" value="<?= h(html_date($event->end_date)); ?>" class="form-control" id="inputEndDate" aria-describedby="helpEndDate" min="<?= h($today); ?>" required>
+        <input type="date" name="event[end_date]" value="<?= html_date($event->end_date); ?>" class="form-control" id="inputEndDate" aria-describedby="helpEndDate" min="<?= h($today); ?>" required>
       </div>
       <div id="helpEndDate" class="form-text offset-md-3"></div>
     </div>
@@ -62,7 +62,7 @@ $today = date('Y-m-d');
         <label for="inputParticipants" class="col-form-label">Participants</label>
       </div>
       <div class="col-md-7">
-        <input type="number" name="event[participants]" value="<?= h($event->participants); ?>" class="form-control" id="inputParticipants" min="0" max="999" aria-describedby="helpParticipants" required>
+        <input type="number" name="event[participants]" value="<?= h($event->participants); ?>" class="form-control" id="inputParticipants" min="0" max="999" step="1" aria-describedby="helpParticipants" required>
       </div>
       <div id="helpParticipants" class="form-text offset-md-3">Must be between 0 and 999</div>
     </div>
@@ -72,7 +72,10 @@ $today = date('Y-m-d');
         <label for="inputCost" class="col-form-label">Cost</label>
       </div>
       <div class="col-md-7">
-        <input type="number" name="event[cost]" value="<?= h($event->cost); ?>" class="form-control" id="inputCost" min="0" max="999.99" step=".01" aria-describedby="helpCost" required>
+        <div class="input-group">
+          <span class="input-group-text">$</span>
+          <input type="text" name="event[cost]" value="<?= h($event->cost); ?>" class="form-control" id="inputCost" minlength="1" maxlength="6" default="0" inputmode="decimal" pattern="([0-9]{1,3})*[.]?[0-9]{2}" title="must follow X.XX format" aria-describedby="helpCost" required>
+        </div>
       </div>
       <div id="helpCost" class="form-text offset-md-3">Must be between 0 and 999.99</div>
     </div>
@@ -82,17 +85,19 @@ $today = date('Y-m-d');
         <label for="inputURL" class="col-form-label">URL</label>
       </div>
       <div class="col-md-7">
-        <input type="url" name="event[url]" value="<?= h($event->url); ?>" class="form-control" id="inputURL" maxlength="64" aria-describedby="helpURL">
+        <input type="url" name="event[url]" value="<?= h($event->url); ?>" class="form-control" id="inputURL" maxlength="64" placeholder="https://www.example.com/event?id=1" aria-describedby="helpURL">
       </div>
-      <div id="helpURL" class="form-text offset-md-3">Maximum of 64 characters</div>
+      <div id="helpURL" class="form-text offset-md-3">Must begin with
+        <code>http://</code> or
+        <code>https://</code>
+      </div>
     </div>
 
     <?php if(defined('exists')) { ?>
-    <?php foreach($event->photo_data as $key=>$photo) { ?>
-    <?php $num = $key + 1 ?>
+    <?php for($num = 1; $num<2; $num++) { ?>
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
       <div class="col-md-3 text-md-end">
-        <label for="inputSavedImage<?= $num ?>" class="col-form-label">Images</label>
+        <label for="inputSavedImage<?= $num ?>" class="col-form-label">Image</label>
       </div>
       <div class="col-md-7">
         <div class="input-group">
@@ -105,17 +110,8 @@ $today = date('Y-m-d');
     </div>
     <?php include(PUBLIC_PATH . '/app/shared/upload.php'); ?>
     <?php } ?>
-
-    <div class="row mb-3 mb-md-4" id="addImageRow">
-      <div class="row col-md-10 justify-content-end">
-        <div class="col-auto me-3">
-          <button type="button" class="btn btn-outline-primary" id="addImage">Additional Image</button>
-        </div>
-      </div>
-    </div>
     <?php } ?>
   </div>
 </fieldset>
 
-<?php $scripts[] = "js/extra_image.js" ?>
 <?php $scripts[] = "js/photo_modal.js" ?>

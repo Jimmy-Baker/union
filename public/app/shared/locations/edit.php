@@ -22,7 +22,7 @@ if(is_post_request()) {
 
   if($result === true) {
     $session->message('The location was updated successfully.', 'success');
-    redirect_to(url_for('/app/shared/locations/view.php?id=' . $id));
+    redirect_to(url_for('/app/shared/locations/view.php?id=' . u($id)));
   } else {
     $session->message('The location update failed. Please evaluate your input and try again.', 'warning');
   }
@@ -46,7 +46,7 @@ include(SHARED_PATH . '/user-header.php');
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
           <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/locations/locations.php'); ?>">Locations</a></li>
-          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/locations/view.php?id=' . $location->id); ?>"><?= h($gym->gym_name) . ' ' . h($location->location_name); ?></a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/locations/view.php?id=' . u($location->id)); ?>"><?= h($gym->gym_name) . ' ' . h($location->location_name); ?></a></li>
           <li class="breadcrumb-item active text-primary" aria-current="page">Edit Location</li>
         </ol>
       </nav>
@@ -59,13 +59,13 @@ include(SHARED_PATH . '/user-header.php');
 
 <main class="container-md p-4" id="main">
   <?= display_errors($location->error_array); ?>
-  <form action="<?= url_for('/app/shared/locations/edit.php?id=' . h(u($id))); ?>" method="post">
+  <form action="<?= url_for('/app/shared/locations/edit.php?id=' . u($id)); ?>" method="post">
 
     <?php include('form_fields.php'); ?>
 
     <div class="row justify-content-evenly">
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
-        <a class="btn shadow btn-outline-primary" href="<?= url_for('app/shared/locations/view.php?id=' . $location->id); ?>">Cancel Edits</a>
+        <a class="btn shadow btn-outline-primary" href="<?= url_for('app/shared/locations/view.php?id=' . u($location->id)); ?>">Cancel Edits</a>
       </div>
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
         <button type="submit" name="submit" class="btn shadow btn-primary">Submit Edits</button>

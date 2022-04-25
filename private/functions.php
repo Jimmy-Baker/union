@@ -9,11 +9,11 @@ function url_for($script_path) {
 }
 
 function u($string="") {
-  return urlencode($string);
+  return h(urlencode($string));
 }
 
 function raw_u($string="") {
-  return rawurlencode($string);
+  return h(rawurlencode($string));
 }
 
 function h($string="") {
@@ -54,12 +54,12 @@ if(!function_exists('money_format')) {
 //format datetime to a recognizable date
 function format_date($datetime, $unit) {
   $date = date_create($datetime);
-  return date_format($date, "n".$unit."d".$unit."Y");
+  return h(date_format($date, "n".$unit."d".$unit."Y"));
 }
 
 function html_date($datetime) {
   $date = date_create($datetime);
-  return date_format($date, "Y-m-d");
+  return h(date_format($date, "Y-m-d"));
 }
 
 function timestamp() {
@@ -110,6 +110,7 @@ function d($string="") {
     return htmlspecialchars($string);
   }
 }
+
 
 function isJSON($string){
   json_decode($string);

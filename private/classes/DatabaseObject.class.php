@@ -155,7 +155,18 @@ class DatabaseObject {
   public function merge_attributes($args=[]) {
     foreach($args as $key => $value) {
       if(property_exists($this, $key) && !is_null($value)) {
+        // if(is_array($value)){
+        //   for ($i=1; $i<5; $i++){
+        //     if(isset($value[$i])){
+        //       echo "<br>$key";
+        //       echo "<br>$value[$i]";
+        //       echo "$this";
+        //     }
+        //   }
+          
+        // } else {
         $this->$key = $value;
+        // }
       }
     }
   }

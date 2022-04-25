@@ -23,7 +23,7 @@ class Event extends DatabaseObject {
     $this->participants = $args['participants'] ?? '';
     $this->cost = $args['cost'] ?? '';
     $this->url = $args['url'] ?? '';
-    $this->photo_data = $args['photo_data'] ?? [];
+    $this->photo_data = $args['photo_data'] ?? '/public/upload/event/default.png';
   }
   
   protected function validate() {

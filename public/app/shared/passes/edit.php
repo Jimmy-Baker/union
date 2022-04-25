@@ -45,7 +45,7 @@ include(SHARED_PATH . '/user-header.php');
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
           <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/passes/passes.php'); ?>">Passes</a></li>
-          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/passes/view.php?id=' . $pass->id); ?>"><?= $pass->id; ?></a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/passes/view.php?id=' . u($pass->id)); ?>"><?= $pass->id; ?></a></li>
           <li class="breadcrumb-item active text-primary" aria-current="page">Edit Pass</li>
         </ol>
       </nav>
@@ -59,13 +59,13 @@ include(SHARED_PATH . '/user-header.php');
 
 <main class="container-md p-4" id="main">
   <?= display_errors($pass->error_array); ?>
-  <form action="<?= url_for('/app/shared/passes/edit.php?id=' . h(u($id))); ?>" method="post">
+  <form action="<?= url_for('/app/shared/passes/edit.php?id=' . u($id)); ?>" method="post">
 
     <?php include('form_fields.php'); ?>
 
     <div class="row justify-content-evenly">
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
-        <a class="btn shadow btn-outline-primary" href="<?= url_for('app/shared/passes/view.php?id=' . $pass->id); ?>">Cancel Edits</a>
+        <a class="btn shadow btn-outline-primary" href="<?= url_for('app/shared/passes/view.php?id=' . u($pass->id)); ?>">Cancel Edits</a>
       </div>
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
         <button type="submit" name="submit" class="btn shadow btn-primary">Submit Edits</button>

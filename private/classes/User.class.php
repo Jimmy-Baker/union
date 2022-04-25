@@ -46,7 +46,7 @@ class User extends DatabaseObject {
     $this->preferred_name = $args['preferred_name'] ?? '';
     $this->birth_date = $args['birth_date'] ?? '';
     $this->group_id = $args['group_id'] ?? '';
-    $this->avatar_url = $args['avatar_url'] ?? '';
+    $this->avatar_url = $args['avatar_url'] ?? '/public/upload/profile/default.png';
     $this->street_address = $args['street_address'] ?? '';
     $this->city = $args['city'] ?? '';
     $this->zip = $args['zip'] ?? '';
@@ -306,6 +306,7 @@ class User extends DatabaseObject {
     while($record = $results->fetch_assoc()){
       $object = (object) $record;
     }
+    $results->free();
     return $object;
   }
   
@@ -316,6 +317,18 @@ class User extends DatabaseObject {
   public function punch_count($location) {
     $sql = "SELECT * FROM locations WHERE pass_id='" . $this->active_pass . "'";
     return $location;
+  }
+  
+  public function session_query() {
+    $sql = "SELECT locations.location_name AS location_name, locations.gym_id AS gym_id, gyms.gym_name AS gym_name, IFNULL((SELECT id FROM passes WHERE user_id='" . self::$database->escape_string($this->primary_location) . "' AND is_active=1 ORDER BY created_at DESC LIMIT 1), 'null') AS pass_id FROM (locations JOIN gyms ON locations.gym_id=gyms.id) WHERE locations.id='" . self::$database->escape_string($this->primary_location) . "' LIMIT 1;";
+      $results = self::$database->query($sql);
+      $array = [];
+      while($record = $results->fetch_assoc()){
+        $object = (object) $record;
+        $array[] = $object;
+      }
+    $results->free();
+    return array_shift($array);
   }
   
 }

@@ -72,6 +72,7 @@ class Attendance extends DatabaseObject {
       $object = (object) $record;
       $array[] = $object;
     }
+    $results->free();
     return $array;
   }
   

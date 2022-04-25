@@ -83,7 +83,7 @@ include(SHARED_PATH . '/user-header.php');
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
           <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/users/users.php'); ?>">Users</a></li>
-          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/users/view.php?id=' . $user->id); ?>"><?= $user->full_name(); ?></a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/users/view.php?id=' . u($user->id)); ?>"><?= h($user->full_name()); ?></a></li>
           <li class="breadcrumb-item active text-primary" aria-current="page">Edit User</li>
         </ol>
       </nav>
@@ -96,14 +96,14 @@ include(SHARED_PATH . '/user-header.php');
 
 <main class="container-md p-4" id="main">
   <?= display_errors($user->error_array); ?>
-  <form action="<?= url_for('/app/shared/users/edit.php?id=' . h(u($id))); ?>" method="post" enctype="multipart/form-data">
+  <form action="<?= url_for('/app/shared/users/edit.php?id=' . u($id)); ?>" method="post" enctype="multipart/form-data">
 
     <?php define('exists', true); ?>
     <?php include('form_fields.php'); ?>
 
     <div class="row justify-content-evenly">
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
-        <a class="btn shadow btn-outline-primary" href="<?= url_for('app/shared/users/view.php?id=' . $user->id); ?>">Cancel Edits</a>
+        <a class="btn shadow btn-outline-primary" href="<?= url_for('app/shared/users/view.php?id=' . u($user->id)); ?>">Cancel Edits</a>
       </div>
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
         <button type="submit" name="submit" class="btn shadow btn-primary">Submit Edits</button>

@@ -30,7 +30,7 @@ include(SHARED_PATH . '/user-header.php');
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
           <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/groups/groups.php'); ?>">Groups</a></li>
-          <li class="breadcrumb-item active text-primary" aria-current="page"><?= $group->id ?></li>
+          <li class="breadcrumb-item active text-primary" aria-current="page"><?= h($group->id) ?></li>
         </ol>
       </nav>
       <?php
@@ -86,10 +86,10 @@ include(SHARED_PATH . '/user-header.php');
               <td><?= h($member->role_abv) ?>
               <td>
                 <div class="btn-group" role="group" aria-label="group actions">
-                  <a class="btn btn-primary" href="<?= url_for('/app/shared/member/view.php?id=' . h(u($member->user_id))); ?>">View</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/member/view.php?id=' . u($member->user_id)); ?>">View</a>
                   <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                   <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                    <li><a class="dropdown-item" href="<?= url_for('/app/shared/groups/delete.php?id=' . h(u($group->id))); ?>">Remove</a></li>
+                    <li><a class="dropdown-item" href="<?= url_for('/app/shared/groups/delete.php?id=' . u($group->id)); ?>">Remove</a></li>
                   </ul>
                 </div>
               </td>
@@ -103,10 +103,10 @@ include(SHARED_PATH . '/user-header.php');
 
   <div class="row justify-content-evenly" role="toolbar" aria-label="Group toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/groups/edit.php?id='. h(u($group->id))); ?>">Edit This Group</a>
+      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/groups/edit.php?id='. u($group->id)); ?>">Edit This Group</a>
     </div>
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn shadow btn-danger" href="<?= url_for('app/shared/groups/delete.php?id='. h(u($group->id))); ?>">Delete This Group</a>
+      <a class="btn shadow btn-danger" href="<?= url_for('app/shared/groups/delete.php?id='. u($group->id)); ?>">Delete This Group</a>
     </div>
   </div>
 </main>

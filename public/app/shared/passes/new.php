@@ -10,8 +10,9 @@ if(is_post_request()) {
 
   if($result === true) {
     $new_id = $pass->id;
+    $pro = $pass->provision();
     $session->message('The pass was created successfully.', 'success');
-    redirect_to(url_for('/app/shared/passes/view.php?id=' . $new_id));
+    // redirect_to(url_for('/app/shared/passes/view.php?id=' . $new_id));
   } else {
     $session->message('Pass creation failed. Please evaluate your input and try again.', 'warning');
   }

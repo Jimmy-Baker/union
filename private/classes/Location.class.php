@@ -62,11 +62,12 @@ class Location extends DatabaseObject {
       // }
       $array[] = $object;
     }
+    $results->free();
     return $array; 
   }
   
   static public function find_random_expanded() {
-    $sql = "SELECT * FROM (SELECT locations.*, states.state_name, states.region, gyms.gym_name, gyms.website FROM locations INNER JOIN states ON locations.state_abv=states.abv INNER JOIN gyms ON locations.gym_id=gyms.id) AS r1 JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM locations)) AS id) AS r2 WHERE r1.id >= r2.id ORDER BY r1.id ASC LIMIT 1;";
+    $sql = "SELECT * FROM (SELECT locations.*, states.state_name, states.region, gyms.gym_name, gyms.website, gyms.avatar_url FROM locations INNER JOIN states ON locations.state_abv=states.abv INNER JOIN gyms ON locations.gym_id=gyms.id) AS r1 JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM locations)) AS id) AS r2 WHERE r1.id >= r2.id ORDER BY r1.id ASC LIMIT 1;";
     $results = self::$database->query($sql);
     $array = [];
     while($record = $results->fetch_assoc()){
@@ -76,6 +77,7 @@ class Location extends DatabaseObject {
       // }
       $array[] = $object;
     }
+    $results->free();
     return array_shift($array);
   }
   
@@ -90,6 +92,7 @@ class Location extends DatabaseObject {
       // }
       $array[] = $object;
     }
+    $results->free();
     return array_shift($array); 
   }
   

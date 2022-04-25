@@ -42,7 +42,7 @@ include(SHARED_PATH . '/user-header.php');
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
           <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/gyms/gyms.php'); ?>">Gyms</a></li>
-          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/gyms/view.php?id=' . $gym->id); ?>"><?= $gym->gym_name; ?></a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/gyms/view.php?id=' . u($gym->id)); ?>"><?= h($gym->gym_name); ?></a></li>
           <li class="breadcrumb-item active text-primary" aria-current="page">Delete Gym</li>
         </ol>
       </nav>
@@ -54,7 +54,7 @@ include(SHARED_PATH . '/user-header.php');
 </header>
 
 <main class="container-md p-4" id="main">
-  <form action="<?= url_for('/app/shared/gyms/delete.php?id=' . h(u($id))); ?>" method="post">
+  <form action="<?= url_for('/app/shared/gyms/delete.php?id=' . u($id)); ?>" method="post">
     <fieldset class="card shadow col-md-10 mx-auto mb-4">
       <legend class="card-header">Gym Information</legend>
       <div class="card-body">
@@ -70,7 +70,7 @@ include(SHARED_PATH . '/user-header.php');
     </fieldset>
     <div class="row justify-content-evenly">
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
-        <a class="btn shadow btn-outline-primary" href="<?= url_for('app/shared/gyms/view.php?id=' . $gym->id); ?>">Cancel Deletion</a>
+        <a class="btn shadow btn-outline-primary" href="<?= url_for('app/shared/gyms/view.php?id=' . u($gym->id)); ?>">Cancel Deletion</a>
       </div>
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
         <button type="submit" name="submit" class="btn shadow btn-danger">Confirm Deletion</button>

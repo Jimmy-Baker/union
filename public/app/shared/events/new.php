@@ -11,7 +11,7 @@ if(is_post_request()) {
   if($result === true) {
     $new_id = $event->id;
     $session->message('The event was created successfully.', 'success');
-    redirect_to(url_for('/app/shared/events/view.php?id=' . $new_id));
+    redirect_to(url_for('/app/shared/events/view.php?id=' . u($new_id)));
   } else {
     $session->message('Event creation failed. Please evaluate your input and try again.', 'warning');
   }

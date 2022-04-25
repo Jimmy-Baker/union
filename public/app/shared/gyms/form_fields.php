@@ -23,7 +23,7 @@ $num=1;
         <?php } ?>
         <div class="input-group">
           <input type="text" value="<?= image_name($gym->avatar_url); ?>" name="image1" class="form-control" id="inputSavedImage1" aria-describedby="helpSavedImage1" readonly>
-          <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#uploadModal">Add Image</button>
+          <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#uploadModal1">Add Image</button>
         </div>
       </div>
       <div id="helpSavedImage1" class="form-text" offset-md-3></div>

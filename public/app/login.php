@@ -51,6 +51,8 @@ include(SHARED_PATH . '/public-header.php');
 ?>
 
 <main class="container-md p-4 mt-5" id="main">
+  <?= display_errors($error_array); ?>
+
   <form action="login.php" method="post">
     <h1><?= $page_title ?></h1>
     <div class="mb-3">
@@ -69,7 +71,6 @@ include(SHARED_PATH . '/public-header.php');
     <button type="submit" name="submit" class="btn btn-primary">Log In</button>
   </form>
 
-  <?= display_errors($error_array); ?>
 </main>
 
 

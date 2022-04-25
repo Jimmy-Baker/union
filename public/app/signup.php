@@ -47,7 +47,6 @@ include(SHARED_PATH . '/public-header.php');
 
 <main class="container-md p-4 mt-5" id="main">
 
-  <?= display_errors($user->error_array); ?>
   <form action="signup.php" method="post">
     <fieldset class="card shadow col-md-10 mx-auto mb-4">
       <legend class="card-header">Profile Information</legend>
@@ -98,7 +97,7 @@ include(SHARED_PATH . '/public-header.php');
             <label for="inputBirthDate" class="col-form-label">Birth Date</label>
           </div>
           <div class="col-md-7">
-            <input type="date" name="user[birth_date]" value="<?= h(html_date($user->birth_date)); ?>" class="form-control" id="inputBirthDate" min="1902-01-01" max="<?= $today; ?>" aria-describedby="helpBirthDate" required>
+            <input type="date" name="user[birth_date]" value="<?= html_date($user->birth_date); ?>" class="form-control" id="inputBirthDate" min="1902-01-01" max="<?= $today; ?>" aria-describedby="helpBirthDate" required>
           </div>
           <div id="helpBirthDate" class="form-text offset-md-3">Must be between 01/01/1902 and <?= format_date($today, "/"); ?></div>
         </div>
@@ -136,7 +135,7 @@ include(SHARED_PATH . '/public-header.php');
             <select name="user[state_abv]" class="form-select" id="inputStateAbv" required>
               <option value=""></option>
               <?php foreach($states as $state) { ?>
-              <option value="<?= $state->abv ?>" <?= ($user->state_abv == $state->abv) ? 'selected' : '';?>><?= $state->state_name; ?></option>
+              <option value="<?= h($state->abv) ?>" <?= ($user->state_abv == $state->abv) ? 'selected' : '';?>><?= h($state->state_name); ?></option>
               <?php } ?>
             </select>
           </div>
@@ -159,7 +158,7 @@ include(SHARED_PATH . '/public-header.php');
           <div class="col-md-7">
             <select name="user[country_abv]" class="form-select country" id="inputCountryAbv" aria-describedby="helpCountryAbv" required>
               <?php foreach($countries as $country) { ?>
-              <option value="<?= $country->abv ?>" <?= (($user->country_abv == $country->abv) || (($user->country_abv == '') && ($country->abv == 'US'))) ? 'selected' : '';?>><?= $country->country_name; ?></option>
+              <option value="<?= h($country->abv) ?>" <?= (($user->country_abv == $country->abv) || (($user->country_abv == '') && ($country->abv == 'US'))) ? 'selected' : '';?>><?= h($country->country_name); ?></option>
               <?php } ?>
             </select>
             <div id="helpCountryAbv" class="form-text offset-md-3"></div>
@@ -276,9 +275,9 @@ include(SHARED_PATH . '/public-header.php');
 
 </main>
 
-<?php
+<?= 
+display_errors($user->error_array);
 $scripts[] = "js/country_ppx.js";
 $scripts[] = "node_modules/inputmask/dist/jquery.inputmask.js";
-?>
 
-<?php include(SHARED_PATH . '/public-footer.php'); ?>
+include(SHARED_PATH . '/public-footer.php'); ?>

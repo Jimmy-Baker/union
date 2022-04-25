@@ -54,6 +54,7 @@ class Group extends DatabaseObject {
       // }
       $array[] = $object;
     }
+    $results->free();
     return $array; 
   }
   

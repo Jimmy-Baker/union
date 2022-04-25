@@ -30,7 +30,7 @@ include(SHARED_PATH . '/user-header.php');
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
           <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/passes/passes.php'); ?>">Passes</a></li>
-          <li class="breadcrumb-item active text-primary" aria-current="page"><?= $pass->id ?></li>
+          <li class="breadcrumb-item active text-primary" aria-current="page"><?= h($pass->id) ?></li>
         </ol>
       </nav>
       <?php 
@@ -99,10 +99,10 @@ include(SHARED_PATH . '/user-header.php');
   </div>
   <div class="row justify-content-evenly" role="toolbar" aria-label="Pass toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/passes/edit.php?id='. h(u($pass->id))); ?>">Edit This Pass</a>
+      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/passes/edit.php?id='. u($pass->id)); ?>">Edit This Pass</a>
     </div>
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn shadow btn-danger" href="<?= url_for('app/shared/passes/delete.php?id='. h(u($pass->id))); ?>">Delete This Pass</a>
+      <a class="btn shadow btn-danger" href="<?= url_for('app/shared/passes/delete.php?id='. u($pass->id)); ?>">Delete This Pass</a>
     </div>
   </div>
 </main>

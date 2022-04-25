@@ -9,8 +9,9 @@ class Session {
   public $avatar_url;
   public $location;
   public $location_name;
-  public $gym;
+  public $gym_id;
   public $gym_name;
+  public $pass_id;
   private $last_login;
 
   public const MAX_LOGIN_AGE = 60*60*24; // 1 day
@@ -30,9 +31,12 @@ class Session {
       $this->name = $_SESSION['name'] = $user->name();
       $this->avatar_url = $_SESSION['avatar_url'] = $user->avatar_url;
       $this->location = $_SESSION['location'] = $user->primary_location;
-      $this->location_name = $_SESSION['location_name'] = Location::return_param_by_id("location_name", $this->location);
-      $this->gym = $_SESSION['gym'] = Location::return_param_by_id("gym_id", $this->location);
-      $this->gym_name = $_SESSION['gym_name'] = Gym::return_param_by_id("gym_name", $this->gym);
+      
+      $data = $user->session_query();
+      $this->location_name = $_SESSION['location_name'] = $data->location_name;
+      $this->gym_id= $_SESSION['gym_id'] = $data->gym_id;
+      $this->gym_name = $_SESSION['gym_name'] = $data->gym_name;
+      $this->pass_id = $_SESSION['pass_id'] = $data->pass_id;
       $this->last_login = $_SESSION['last_login'] = time();
     }
     return true;
@@ -51,8 +55,9 @@ class Session {
     unset($_SESSION['avatar_url']);
     unset($_SESSION['location']);
     unset($_SESSION['location_name']);
-    unset($_SESSION['gym']);
+    unset($_SESSION['gym_id']);
     unset($_SESSION['gym_name']);
+    unset($_SESSION['pass_id']);
     unset($_SESSION['last_login']);
     unset($this->user_id);
     unset($this->email);
@@ -61,8 +66,9 @@ class Session {
     unset($this->avatar_url);
     unset($this->location);
     unset($this->location_name);
-    unset($this->gym);
+    unset($this->gym_id);
     unset($this->gym_name);
+    unset($this->pass_id);
     unset($this->last_login);
     
     return true;
@@ -76,10 +82,11 @@ class Session {
       $this->name = $_SESSION['name'];
       $this->avatar_url = $_SESSION['avatar_url'];
       $this->location = $_SESSION['location'];
-      $this->location_name = $_SESSION['location_name'];
-      $this->gym = $_SESSION['gym'];
-      $this->location_name = $_SESSION['gym_name'];
-      $this->last_login = $_SESSION['last_login'];
+      $this->location_name = $_SESSION['location_name'] ?? '';
+      $this->gym_id= $_SESSION['gym_id'] ?? '';
+      $this->gym_name = $_SESSION['gym_name'] ?? '';
+      $this->pass_id = $_SESSION['pass_id'] ?? '';
+      $this->last_login = $_SESSION['last_login'] ?? '';
     }
   }
 
@@ -127,7 +134,7 @@ class Session {
   }
   
   public function gym_location() {
-    return $this->gym_name . "" . $this->location_name;
+    return $this->gym_name . " " . $this->location_name;
   }
 }
 

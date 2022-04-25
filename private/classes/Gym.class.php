@@ -13,7 +13,7 @@ class Gym extends DatabaseObject {
   public function __construct($args=[]) {
     $this->gym_name = $args['gym_name'] ?? '';
     $this->website = $args['website'] ?? '';
-    $this->avatar_url = $args['avatar_url'] ?? '';
+    $this->avatar_url = $args['avatar_url'] ?? '/public/upload/gym/default.png';
   }
   
   protected function validate() {

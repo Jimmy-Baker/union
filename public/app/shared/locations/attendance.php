@@ -68,7 +68,7 @@ include(SHARED_PATH . '/user-header.php');
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
           <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/locations/locations.php'); ?>">Locations</a></li>
-          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/locations/view.php?id=' . $location->id); ?>"><?= h($location->gym_name) . ' ' . h($location->location_name); ?></a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/locations/view.php?id=' . u($location->id)); ?>"><?= h($location->gym_name) . ' ' . h($location->location_name); ?></a></li>
           <li class="breadcrumb-item active text-primary" aria-current="page">Attendance</a></li>
         </ol>
       </nav>

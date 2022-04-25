@@ -68,14 +68,14 @@ include(SHARED_PATH . '/user-header.php');
 
 <main class="container-md p-4" id="main">
   <?= display_errors($gym->error_array); ?>
-  <form action="<?= url_for('/app/shared/gyms/edit.php?id=' . h(u($id))); ?>" method="post" enctype="multipart/form-data">
+  <form action="<?= url_for('/app/shared/gyms/edit.php?id=' . u($id)); ?>" method="post" enctype="multipart/form-data">
 
     <?php define('exists', true); ?>
     <?php include('form_fields.php'); ?>
 
     <div class="row justify-content-evenly">
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
-        <a class="btn shadow btn-outline-primary" href="<?= url_for('app/shared/gyms/view.php?id=' . $gym->id); ?>">Cancel Edits</a>
+        <a class="btn shadow btn-outline-primary" href="<?= url_for('app/shared/gyms/view.php?id=' . u($gym->id)); ?>">Cancel Edits</a>
       </div>
       <div class="col-sm-4 col-md-3 mb-3 d-grid">
         <button type="submit" name="submit" class="btn shadow btn-primary">Submit Edits</button>

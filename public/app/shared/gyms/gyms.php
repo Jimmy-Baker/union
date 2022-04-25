@@ -61,11 +61,11 @@ include(SHARED_PATH . '/user-header.php');
                   <td><?= h($gym->website) ?></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="gym actions">
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/gyms/view.php?id=' . h(u($gym->id))); ?>">View</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/gyms/view.php?id=' . u($gym->id)); ?>">View</a>
                       <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                       <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/gyms/edit.php?id=' . h(u($gym->id))); ?>">Edit</a></li>
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/gyms/delete.php?id=' . h(u($gym->id))); ?>">Delete</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/gyms/edit.php?id=' . u($gym->id)); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/gyms/delete.php?id=' . u($gym->id)); ?>">Delete</a></li>
                       </ul>
                     </div>
                   </td>

@@ -31,7 +31,7 @@ include(SHARED_PATH . '/user-header.php');
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
           <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/gyms/gyms.php'); ?>">Gyms</a></li>
-          <li class="breadcrumb-item active text-primary" aria-current="page"><?= $gym->gym_name ?></li>
+          <li class="breadcrumb-item active text-primary" aria-current="page"><?= h($gym->gym_name) ?></li>
         </ol>
       </nav>
       <?php 
@@ -50,7 +50,7 @@ include(SHARED_PATH . '/user-header.php');
       </div>
       <div class="row mt-4">
         <div class="col-lg-4 order-lg-last d-grid d-lg-block">
-          <img src="<?= h($gym->avatar_url); ?>" class="rounded img-thumbnail mx-auto mb-2 avatar" alt="<?= $gym->gym_name ?>'s profile picture." height="200" width="200">
+          <img src="<?= h($gym->avatar_url); ?>" class="rounded img-thumbnail mx-auto mb-2 avatar" alt="<?= h($gym->gym_name) ?>'s profile picture." height="200" width="200">
         </div>
         <div class="col-lg-8 order-lg-first">
           <div class="card-text">
@@ -80,10 +80,10 @@ include(SHARED_PATH . '/user-header.php');
 
   <div class="row justify-content-evenly" role="toolbar" aria-label="Gym toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/gyms/edit.php?id='. h(u($gym->id))); ?>">Edit This Gym</a>
+      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/gyms/edit.php?id='. u($gym->id)); ?>">Edit This Gym</a>
     </div>
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn shadow btn-danger" href="<?= url_for('app/shared/gyms/delete.php?id='. h(u($gym->id))); ?>">Delete This Gym</a>
+      <a class="btn shadow btn-danger" href="<?= url_for('app/shared/gyms/delete.php?id='. u($gym->id)); ?>">Delete This Gym</a>
     </div>
   </div>
 </main>

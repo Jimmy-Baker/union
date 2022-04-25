@@ -61,18 +61,21 @@
             <div class="d-flex row pe-md-4 pt-4 pt-md-0">
               <span class="col-md-auto nav-link text-white-50">Hello, <a href="<?= $session->dashboard(); ?>" class="active text-light"><?= $session->name; ?></a></span>
               <div class="col-auto btn-group ps-3 ps-md-0">
-                <a href="#" class="btn btn-outline-light"><?= $session->location_name ?></a>
+                <a href="#" class="btn btn-outline-light"><?= $session->gym_name ?></a>
                 <button type="button" class="btn btn-outline-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                   <span class="visually-hidden">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu bg-light dropdown-menu-end text-end">
-                  <li><a class="dropdown-item<?= active_class('dashboard') ?>" href="<?= $session->dashboard(); ?>">My Dashboard</a></li>
+                  <li>
+                    <h4 class="dropdown-header fs-6 text-dark"><?= $session->location_name ?></h4>
+                  </li>
                   <li><a class="dropdown-item<?= active_class('attendance') ?>" href="<?= url_for("/app/shared/locations/attendance.php") ?>">Attendance</a></li>
                   <li><a class="dropdown-item<?= active_class('checkin') ?>" href="<?= url_for("/app/shared/locations/checkin.php") ?>">Member Check In</a></li>
+                  <li><a class="dropdown-item<?= active_class('change') ?>" href="#">Change Location</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>
-                  <li><a class="dropdown-item<?= active_class('change') ?>" href="#">Change Location</a></li>
+                  <li><a class="dropdown-item<?= active_class('dashboard') ?>" href="<?= $session->dashboard(); ?>">My Dashboard</a></li>
                   <li><a class="dropdown-item" href="<?=url_for("/app/logout.php");?>">Logout</a></li>
                 </ul>
               </div>

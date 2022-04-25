@@ -210,11 +210,11 @@ include(SHARED_PATH . '/user-header.php');
               <td><?= format_phone(h($user->phone_p_country), h($user->phone_primary)) ?></td>
               <td>
                 <div class="btn-group" role="group" aria-label="user actions">
-                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . u($user->id)); ?>">View</a>
                   <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                   <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                    <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a></li>
-                    <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a></li>
+                    <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . u($user->id)); ?>">Edit</a></li>
+                    <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . u($user->id)); ?>">Delete</a></li>
                   </ul>
                 </div>
               </td>

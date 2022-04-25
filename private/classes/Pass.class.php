@@ -70,28 +70,43 @@ class Pass extends DatabaseObject {
   
   public function unpause() {
     $today = date('Y-m-d');
-    
   }
   
   protected function create() {
-    if($this->is_active = '1') {
-      $this->activate();
-    } elseif($this->is_active = '0') {
-      $this->active_on = '';
-    }
-    //$this->proliferate();
+    // if($this->is_active = '1') {
+    //   $this->activate();
+    // } elseif($this->is_active = '0') {
+    //   $this->active_on = '';
+    // }
     return parent::create();
   }
   
-  protected function proliferate() {
-    switch ($this->pass_type) {
-      case "A": ; break;
-      case "B": ; break;
-      case "C": ; break;
-      case "D": ; break;
-      case "E": ; break;
-      case "F": ; break;
+  public function provision() {
+    $query = "SELECT id FROM gyms";
+    $results = self::$database->query($query);
+    $gyms = [];
+    while($record = $results->fetch_row()){
+      $gyms[] = $record[0];
     }
+    $results->free();
+
+    switch($this->pass_type) {
+      case "A": $assigned=30; break;
+      case "B": $assigned=99; break;
+      case "C": $assigned=10; break;
+      case "D": $assigned=1; break;
+      case "E": $assigned=3; break;
+      case "F": $assigned=5; break;
+    }
+    
+    $sql = "INSERT INTO pass_line_items (pass_id, gym_id, assigned) VALUES";
+    foreach($gyms as $gym){
+      $sql .= " ('" . $this->id . "', '" . $gym . "', '" . $assigned . "'),";
+    }
+    $sql = substr($sql, 0, -1) . ";";
+    $result = self::$database->query($sql);
+
+    return $result;
   }
 
   // protected function update() {

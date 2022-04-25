@@ -23,32 +23,17 @@ if(is_post_request()) {
     $args['is_active'] = '0';
     $pass = new Pass($args);
     $result = $pass->save();
-    if($result){
-      foreach($gyms as $gym){
-        $li_args['pass_id'] = $pass->id;
-        $li_args['gym_id'] = $gym->id;
-        switch($pass->pass_type){
-          case 'D':
-            $li_args['assigned'] = 1;
-            break;
-          case 'E':
-            $li_args['assigned'] = 2;
-            break;
-          case 'F':
-            $li_args['assigned'] = 5;
-            break;
-        }
-        $li_args['used'] = 0;
-        
-        $punch = new PassItem($li_args);
-        $li_result = $punch->save();
-        if(!$li_result){
-          $session->message("failed to update", "warning");
-          exit("failure");
-        }
-      };
-      $session->message("Pass provisioned successfully.", "primary");
-    };
+    if($result) {
+      $pro = $pass->provision();
+      if($pro) {
+        $session->message("Pass provisioned successfully.", "primary");
+      } else {
+        $session->message("The pass could not be provisioned.", "warning");
+        $pass->delete();
+      }  
+    } else {
+      $session->message("The pass could not be created.", "warning");
+    }
   } else {
     // user sql query failed
     $session->message("That user could not be found", "warning");
@@ -166,9 +151,9 @@ include(SHARED_PATH . '/user-header.php');
               <td><?= h($user->name()) . ' ' . h($user->last_name) ?></td>
               <td>
                 <div class="btn-group" role="group" aria-label="user actions">
-                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
-                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
-                  <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . u($user->id)); ?>">View</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . u($user->id)); ?>">Edit</a>
+                  <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . u($user->id)); ?>">Delete</a>
                 </div>
               </td>
             </tr>

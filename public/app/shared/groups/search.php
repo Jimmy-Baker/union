@@ -159,11 +159,11 @@ include(SHARED_PATH . '/user-header.php');
               <td><?= h($group->type_abv) ?></td>
               <td>
                 <div class="btn-group" role="group" aria-label="group actions">
-                  <a class="btn btn-primary" href="<?= url_for('/app/shared/groups/view.php?id=' . h(u($group->id))); ?>">View</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/groups/view.php?id=' . u($group->id)); ?>">View</a>
                   <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                   <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                    <li><a class="dropdown-item" href="<?= url_for('/app/shared/groups/edit.php?id=' . h(u($group->id))); ?>">Edit</a></li>
-                    <li><a class="dropdown-item" href="<?= url_for('/app/shared/groups/delete.php?id=' . h(u($group->id))); ?>">Delete</a></li>
+                    <li><a class="dropdown-item" href="<?= url_for('/app/shared/groups/edit.php?id=' . u($group->id)); ?>">Edit</a></li>
+                    <li><a class="dropdown-item" href="<?= url_for('/app/shared/groups/delete.php?id=' . u($group->id)); ?>">Delete</a></li>
                   </ul>
                 </div>
               </td>

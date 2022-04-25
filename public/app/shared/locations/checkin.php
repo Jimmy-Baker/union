@@ -79,7 +79,7 @@ include(SHARED_PATH . '/user-header.php');
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
           <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/locations/locations.php'); ?>">Locations</a></li>
-          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/locations/view.php?id=' . h($location->id)); ?>"><?= h($gym->gym_name) . ' ' . h($location->location_name); ?></a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/locations/view.php?id=' . u($location->id)); ?>"><?= h($gym->gym_name) . ' ' . h($location->location_name); ?></a></li>
           <li class="breadcrumb-item active text-primary" aria-current="page">Check In</a></li>
         </ol>
       </nav>
@@ -147,9 +147,9 @@ include(SHARED_PATH . '/user-header.php');
               <td><?= h($user->name()) . ' ' . h($user->last_name) ?></td>
               <td>
                 <div class="btn-group" role="group" aria-label="user actions">
-                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
-                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a>
-                  <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . u($user->id)); ?>">View</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . u($user->id)); ?>">Edit</a>
+                  <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . u($user->id)); ?>">Delete</a>
                 </div>
               </td>
             </tr>

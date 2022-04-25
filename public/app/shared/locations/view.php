@@ -65,10 +65,10 @@ include(SHARED_PATH . '/user-header.php');
   </div>
   <div class="row justify-content-evenly" role="toolbar" aria-label="Location toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/locations/edit.php?id='. h(u($location->id))); ?>">Edit This Location</a>
+      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/locations/edit.php?id='. u($location->id)); ?>">Edit This Location</a>
     </div>
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn shadow btn-danger" href="<?= url_for('app/shared/locations/delete.php?id='. h(u($location->id))); ?>">Delete This Location</a>
+      <a class="btn shadow btn-danger" href="<?= url_for('app/shared/locations/delete.php?id='. u($location->id)); ?>">Delete This Location</a>
     </div>
   </div>
 </main>

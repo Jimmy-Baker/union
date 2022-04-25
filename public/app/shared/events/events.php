@@ -71,11 +71,11 @@ include(SHARED_PATH . '/user-header.php');
                   <td><?= h($event->url) ?></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="event actions">
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/events/view.php?id=' . h(u($event->id))); ?>">View</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/events/view.php?id=' . u($event->id)); ?>">View</a>
                       <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                       <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/events/edit.php?id=' . h(u($event->id))); ?>">Edit</a></li>
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/events/delete.php?id=' . h(u($event->id))); ?>">Delete</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/events/edit.php?id=' . u($event->id)); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/events/delete.php?id=' . u($event->id)); ?>">Delete</a></li>
                       </ul>
                     </div>
                   </td>

@@ -29,28 +29,12 @@ include(SHARED_PATH . '/user-header.php');
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
           <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/events/events.php'); ?>">Events</a></li>
-          <li class="breadcrumb-item active text-primary" aria-current="page"><?= $event->event_name ?></li>
+          <li class="breadcrumb-item active text-primary" aria-current="page"><?= h($event->event_name) ?></li>
         </ol>
       </nav>
-      <div class="col-auto d-none d-sm-block">
-        <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="eventMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          Event Menu
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="eventMenuLink">
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/events/events.php'); ?>">All Events</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/events/new.php'); ?>">New Event</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/events/search.php'); ?>">Find Events</a></li>
-          <li>
-            <hr class="drowndown-divider my-2">
-          </li>
-          <li>
-            <h4 class="dropdown-header fs-6 text-dark">Event ID: <?= $event->id ?></h4>
-          </li>
-          <li><a class="dropdown-item active" href="<?= url_for('app/shared/events/view.php?id=' . $event->id); ?>">View Event</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/events/edit.php?id=' . $event->id); ?>">Edit Event</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/events/edit.php?id=' . $event->id); ?>">Delete Event</a></li>
-        </ul>
-      </div>
+      <?php 
+        include_once('drop_menu.php'); 
+      ?>
     </div>
   </div>
 </header>
@@ -64,7 +48,7 @@ include(SHARED_PATH . '/user-header.php');
       </div>
       <div class="row mt-4">
         <div class="col-lg-4 order-lg-last d-grid d-lg-block">
-          <img src="#" class="rounded img-thumbnail mx-auto mb-2" alt="<?= $event->event_name ?>'s profile picture." height="200" width="200">
+          <img src="#" class="rounded img-thumbnail mx-auto mb-2" alt="<?= h($event->event_name) ?>'s profile picture." height="200" width="200">
         </div>
         <div class="col-lg-8 order-lg-first">
           <div class="card-text">
@@ -81,6 +65,7 @@ include(SHARED_PATH . '/user-header.php');
               <dd class="col-sm-8"><?= d($event->cost); ?></dd>
               <dt class="col-sm-4 text-sm-end">URL</dt>
               <dd class="col-sm-8"><?= d($event->url); ?></dd>
+              <dt class="col-sm-4 text-sm-end">Photo Data</dt>
             </dl>
           </div>
         </div>
@@ -89,10 +74,10 @@ include(SHARED_PATH . '/user-header.php');
   </div>
   <div class="row justify-content-evenly" role="toolbar" aria-label="Event toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/events/edit.php?id='. h(u($event->id))); ?>">Edit This Event</a>
+      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/events/edit.php?id='. u($event->id)); ?>">Edit This Event</a>
     </div>
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn shadow btn-danger" href="<?= url_for('app/shared/events/delete.php?id='. h(u($event->id))); ?>">Delete This Event</a>
+      <a class="btn shadow btn-danger" href="<?= url_for('app/shared/events/delete.php?id='. u($event->id)); ?>">Delete This Event</a>
     </div>
   </div>
 </main>

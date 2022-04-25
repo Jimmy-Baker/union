@@ -54,7 +54,7 @@ $types = Pass::PASS_TYPES;
         <label for="inputCreatedAt" class="col-form-label">Created</label>
       </div>
       <div class="col-md-7">
-        <input type="date" name="user[created_at]" value="<?= h(html_date($pass->created_at)); ?>" class="form-control" id="inputCreatedAt" aria-describedby="lastNameHelp">
+        <input type="date" name="user[created_at]" value="<?= html_date($pass->created_at); ?>" class="form-control" id="inputCreatedAt" aria-describedby="lastNameHelp">
       </div>
       <div id="createdAtHelp" class="form-text offset-md-3">Maximum of 32 characters</div>
     </div>
@@ -76,9 +76,9 @@ $types = Pass::PASS_TYPES;
         <label for="inputExpiresOn" class="col-form-label">Expires On</label>
       </div>
       <div class="col-md-7">
-        <input type="date" name="pass[expires_on]" value="<?= h(html_date($pass->expires_on)); ?>" class="form-control" id="inputExpiresOn" aria-describedby="expiresOnHelp">
+        <input type="date" name="pass[expires_on]" value="<?= html_date($pass->expires_on); ?>" class="form-control" id="inputExpiresOn" aria-describedby="expiresOnHelp">
       </div>
-      <div id="expiresOnHelp" class="form-text offset-md-3">Must be between 01/01/1902 and <?= h(format_date($today, "/")); ?></div>
+      <div id="expiresOnHelp" class="form-text offset-md-3">Must be between 01/01/1902 and <?= format_date($today, "/"); ?></div>
     </div>
     <?php } ?>
   </div>

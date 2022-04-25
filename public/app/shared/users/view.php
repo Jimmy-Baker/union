@@ -48,7 +48,7 @@ include(SHARED_PATH . '/user-header.php');
       </div>
       <div class="row mt-4">
         <div class="col-lg-4 order-lg-last d-grid d-lg-block">
-          <img src="<?= h($user->avatar_url); ?>" class="rounded img-thumbnail mx-auto mb-2 avatar" alt="<?= $user->preferred_name ?>'s profile picture." height="200" width="200">
+          <img src="<?= h($user->avatar_url); ?>" class="rounded img-thumbnail mx-auto mb-2 avatar" alt="<?= h($user->preferred_name) ?>'s profile picture." height="200" width="200">
         </div>
         <div class="col-lg-8 order-lg-first">
           <div class="card-text">
@@ -87,10 +87,10 @@ include(SHARED_PATH . '/user-header.php');
   </div>
   <div class="row justify-content-evenly" role="toolbar" aria-label="User toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/users/edit.php?id='. h(u($user->id))); ?>">Edit This User</a>
+      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/users/edit.php?id='. u($user->id)); ?>">Edit This User</a>
     </div>
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn shadow btn-danger" href="<?= url_for('app/shared/users/delete.php?id='. h(u($user->id))); ?>">Delete This User</a>
+      <a class="btn shadow btn-danger" href="<?= url_for('app/shared/users/delete.php?id='. u($user->id)); ?>">Delete This User</a>
     </div>
   </div>
 </main>

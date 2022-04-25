@@ -87,11 +87,11 @@ include(SHARED_PATH . '/user-header.php');
                   <td><?= format_phone(h($user->phone_p_country), h($user->phone_primary)) ?></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($user->id))); ?>">View</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . u($user->id)); ?>">View</a>
                       <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                       <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($user->id))); ?>">Edit</a></li>
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($user->id))); ?>">Delete</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . u($user->id)); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . u($user->id)); ?>">Delete</a></li>
                       </ul>
                     </div>
                   </td>
@@ -123,7 +123,7 @@ include(SHARED_PATH . '/user-header.php');
                 <tr class="align-middle text-nowrap">
                   <td><?= h($admin->id) ?></td>
                   <td><?= h($admin->email) ?></td>
-                  <td><a href="<?= url_for('/app/shared/groups/view.php?id=' . h(u($admin->group_id))); ?>"><?= h($admin->group_id) ?></a></td>
+                  <td><a href="<?= url_for('/app/shared/groups/view.php?id=' . u($admin->group_id)); ?>"><?= h($admin->group_id) ?></a></td>
                   <td><?= h($admin->first_name) ?></td>
                   <td><?= h($admin->last_name) ?></td>
                   <td><?= h($admin->city) ?></td>
@@ -131,11 +131,11 @@ include(SHARED_PATH . '/user-header.php');
                   <td><?= format_phone(h($admin->phone_p_country), h($admin->phone_primary)) ?></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($admin->id))); ?>">View</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . u($admin->id)); ?>">View</a>
                       <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                       <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($admin->id))); ?>">Edit</a></li>
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($admin->id))); ?>">Delete</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . u($admin->id)); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . u($admin->id)); ?>">Delete</a></li>
                       </ul>
                     </div>
                   </td>
@@ -167,7 +167,7 @@ include(SHARED_PATH . '/user-header.php');
                 <tr class="align-middle text-nowrap">
                   <td><?= h($manager->id) ?></td>
                   <td><?= h($manager->email) ?></td>
-                  <td><a href="<?= url_for('/app/shared/groups/view.php?id=' . h(u($manager->group_id))); ?>"><?= h($manager->group_id) ?></a></td>
+                  <td><a href="<?= url_for('/app/shared/groups/view.php?id=' . u($manager->group_id)); ?>"><?= h($manager->group_id) ?></a></td>
                   <td><?= h($manager->first_name) ?></td>
                   <td><?= h($manager->last_name) ?></td>
                   <td><?= h($manager->city) ?></td>
@@ -175,11 +175,11 @@ include(SHARED_PATH . '/user-header.php');
                   <td><?= format_phone(h($manager->phone_p_country), h($manager->phone_primary)) ?></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($manager->id))); ?>">View</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . u($manager->id)); ?>">View</a>
                       <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                       <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($manager->id))); ?>">Edit</a></li>
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($manager->id))); ?>">Delete</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . u($manager->id)); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . u($manager->id)); ?>">Delete</a></li>
                       </ul>
                     </div>
                   </td>
@@ -211,7 +211,7 @@ include(SHARED_PATH . '/user-header.php');
                 <tr class="align-middle text-nowrap">
                   <td><?= h($staff->id) ?></td>
                   <td><?= h($staff->email) ?></td>
-                  <td><a href="<?= url_for('/app/shared/groups/view.php?id=' . h(u($staff->group_id))); ?>"><?= h($staff->group_id) ?></a></td>
+                  <td><a href="<?= url_for('/app/shared/groups/view.php?id=' . u($staff->group_id)); ?>"><?= h($staff->group_id) ?></a></td>
                   <td><?= h($staff->first_name) ?></td>
                   <td><?= h($staff->last_name) ?></td>
                   <td><?= h($staff->city) ?></td>
@@ -219,11 +219,11 @@ include(SHARED_PATH . '/user-header.php');
                   <td><?= format_phone(h($staff->phone_p_country), h($staff->phone_primary)) ?></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($staff->id))); ?>">View</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . u($staff->id)); ?>">View</a>
                       <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                       <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($staff->id))); ?>">Edit</a></li>
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($staff->id))); ?>">Delete</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . u($staff->id)); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . u($staff->id)); ?>">Delete</a></li>
                       </ul>
                     </div>
                   </td>
@@ -255,7 +255,7 @@ include(SHARED_PATH . '/user-header.php');
                 <tr class="align-middle text-nowrap">
                   <td><?= h($member->id) ?></td>
                   <td><?= h($member->email) ?></td>
-                  <td><a href="<?= url_for('/app/shared/groups/view.php?id=' . h(u($member->group_id))); ?>"><?= h($member->group_id) ?></a></td>
+                  <td><a href="<?= url_for('/app/shared/groups/view.php?id=' . u($member->group_id)); ?>"><?= h($member->group_id) ?></a></td>
                   <td><?= h($member->first_name) ?></td>
                   <td><?= h($member->last_name) ?></td>
                   <td><?= h($member->city) ?></td>
@@ -263,11 +263,11 @@ include(SHARED_PATH . '/user-header.php');
                   <td><?= format_phone(h($member->phone_p_country), h($member->phone_primary)) ?></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="user actions">
-                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . h(u($member->id))); ?>">View</a>
+                      <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . u($member->id)); ?>">View</a>
                       <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                       <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . h(u($member->id))); ?>">Edit</a></li>
-                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . h(u($member->id))); ?>">Delete</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/edit.php?id=' . u($member->id)); ?>">Edit</a></li>
+                        <li><a class="dropdown-item" href="<?= url_for('/app/shared/users/delete.php?id=' . u($member->id)); ?>">Delete</a></li>
                       </ul>
                     </div>
                   </td>
