@@ -8,7 +8,7 @@ include(SHARED_PATH . '/user-header.php');
 <header>
   <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
-      <h1 class="display-2"><?= $page_title ?></h1>
+      <h1><?= $page_title ?></h1>
     </div>
   </div>
   <div class="container-md p-4">
@@ -37,7 +37,7 @@ include(SHARED_PATH . '/user-header.php');
     <div class="card shadow col-12 col-md-6 px-0">
       <div class="row align-items-center">
         <div class="col-4">
-          <img src="<?= h($session->avatar_url); ?>" class="img-fluid img-thumbnail avatar m-3" alt="<?= h($session->name); ?> profile photo." height="200" width="200">
+          <img src="<?= h($session->avatar_url); ?>" class="img-thumbnail avatar m-3" alt="<?= h($session->name); ?> profile photo." height="200" width="200">
         </div>
         <div class="col-8">
           <div class="card-body">
@@ -49,11 +49,11 @@ include(SHARED_PATH . '/user-header.php');
       </div>
     </div>
     <div class="col card shadow me-2 ms-md-3 px-0">
-      <h5 class="card-header">Link group</h5>
+      <h5 class="card-header">My Info</h5>
       <div class="card-body row row-cols-1 g-2">
-        <a class="col btn btn-primary ">My Passes</a>
         <a class="col btn btn-primary ">My Profile</a>
-        <a class="col btn btn-primary ">Button</a>
+        <a class="col btn btn-primary ">My Pass</a>
+        <a class="col btn btn-primary ">My Gym</a>
       </div>
     </div>
     <div class="col card shadow ms-2 px-0">
@@ -160,7 +160,44 @@ include(SHARED_PATH . '/user-header.php');
       </h2>
       <div id="collapseManager" class="accordion-collapse collapse" aria-labelledby="headingManager" data-bs-parent="#accordionTools">
         <div class="accordion-body">
-          <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element.
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            <div class="col">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title">Manage Our Location</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Gym Managers</h6>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <div class="card-body text-end pt-0">
+                  <a href="<?= url_for("/app/shared/locations/checkin.php"); ?>" class="btn btn-primary">Check In Users</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title">Manage Our Employees</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Gym Managers</h6>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <div class="card-body text-end pt-0">
+                  <a href="<?= url_for("/app/shared/locations/checkin.php"); ?>" class="btn btn-primary">Check In Users</a>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title">Manage Our Events</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Gym Managers</h6>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <div class="card-body text-end pt-0">
+                  <a href="<?= url_for("/app/shared/locations/checkin.php"); ?>" class="btn btn-primary">Check In Users</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

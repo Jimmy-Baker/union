@@ -100,8 +100,11 @@ $today = date('Y-m-d');
         <label for="inputSavedImage<?= $num ?>" class="col-form-label">Image</label>
       </div>
       <div class="col-md-7">
+        <?php if($event->photo_data != ''){ ?>
+        <img src="<?= h($event->photo_data); ?>" class="rounded img-thumbnail mx-auto mb-2 avatar" alt="<?= h($event->event_name) ?> display picture." height="200" width="200">
+        <?php } ?>
         <div class="input-group">
-          <input type="text" value="" name="image<?= $num ?>" class="form-control" id="inputSavedImage<?= $num ?>" aria-describedby="helpSavedImage<?= $num ?>" readonly>
+          <input type="text" value="<?= image_name($event->photo_data); ?>" name="image<?= $num ?>" class="form-control" id="inputSavedImage<?= $num ?>" aria-describedby="helpSavedImage<?= $num ?>" readonly>
           <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#uploadModal<?= $num ?>" data-bs-image="<?= $num ?>">Add Image</button>
           <button type="button" class="btn-close align-self-center m-2" aria-label="Close" disabled></button>
         </div>
@@ -109,8 +112,7 @@ $today = date('Y-m-d');
       <div id="helpSavedImage<?= $num ?>" class="form-text offset-md-3"></div>
     </div>
     <?php include(PUBLIC_PATH . '/app/shared/upload.php'); ?>
-    <?php } ?>
-    <?php } ?>
+    <?php }} ?>
   </div>
 </fieldset>
 

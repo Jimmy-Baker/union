@@ -11,15 +11,19 @@ body {
 }
 
 .avatar {
-  height: 200px;
+  aspect-ratio: 1/1;
+  max-height: 200px;
+  max-width: 200px;
   object-fit: cover;
-  width: 200px;
+  width: 100%;
 }
 
 .avatar-sm {
-  height: 100px;
+  aspect-ratio: 1/1;
+  max-height: 100px;
+  max-width: 100px;
   object-fit: cover;
-  width: 100px;
+  width: 100%;
 }
 
 .avatar-xs {

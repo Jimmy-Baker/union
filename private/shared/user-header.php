@@ -71,7 +71,7 @@
                   </li>
                   <li><a class="dropdown-item<?= active_class('attendance') ?>" href="<?= url_for("/app/shared/locations/attendance.php") ?>">Attendance</a></li>
                   <li><a class="dropdown-item<?= active_class('checkin') ?>" href="<?= url_for("/app/shared/locations/checkin.php") ?>">Member Check In</a></li>
-                  <li><a class="dropdown-item<?= active_class('change') ?>" href="#">Change Location</a></li>
+                  <li><a class="dropdown-item<?= active_class('change') ?>" href="<?= url_for("/app/admin/change.php") ?>">Change Location</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>

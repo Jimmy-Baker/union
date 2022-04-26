@@ -16,9 +16,10 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 
   <body>
     <?php 
-      $pass = new Pass();
-      $pass->pass_type = "E";
-      $pass->provision();
+      $location = Permission::find_locations_by_user_permission(31, 'XC');
+      var_dump($location);
+      
+      
     ?>
   </body>
 

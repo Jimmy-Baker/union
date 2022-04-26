@@ -1,45 +1,15 @@
 window.addEventListener('scroll', topButton);
 hideMessage();
-// modal();
+locationModal();
 resetForm();
 
-function modal() {
-	var uploadModal = document.getElementById('uploadModal');
+function locationModal() {
+	var locationModal = document.getElementById('locationModal');
+	var locationButton = document.getElementById('locationButton');
 
-	if (uploadModal) {
-		var inputImage = document.getElementById('inputImage1');
-		var closePrompts = document.querySelectorAll('[data-modal-cancel]');
-		var savePrompts = document.querySelectorAll('[data-modal-save]');
-
-		uploadModal.addEventListener('shown.bs.modal', function () {
-			inputImage.focus();
-		});
-
-		closePrompts.forEach(prompt => {
-			var num = prompt.dataset.modalCancel;
-			prompt.addEventListener('click', () => {
-				var input = document.getElementById(`inputImage${num}`);
-				input.value = '';
-			});
-			prompt.addEventListener('keydown', e => {
-				if (e.code === 'Space' || e.code === 'Enter') {
-					button.click();
-				}
-			});
-		});
-
-		savePrompts.forEach(prompt => {
-			var num = prompt.dataset.modalSave;
-			prompt.addEventListener('click', () => {
-				var input = document.getElementById(`inputImage${num}`);
-				var saved = document.getElementById(`inputSavedImage${num}`);
-				saved.value = input.value;
-			});
-			prompt.addEventListener('keydown', e => {
-				if (e.code === 'Space' || e.code === 'Enter') {
-					button.click();
-				}
-			});
+	if (locationModal && locationButton) {
+		locationModal.addEventListener('shown.bs.modal', function () {
+			locationButton.focus();
 		});
 	}
 }
