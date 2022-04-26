@@ -57,7 +57,7 @@ class PassItem extends DatabaseObject {
     $sql .= ") VALUES (";
     $prepared_attributes = array_map('quote_null', array_values($attributes));
     $sql .= join(", ", $prepared_attributes);
-    $sql .= ")";
+    $sql .= ") LIMIT 1;";
     $result = self::$database->query($sql);
     return $result;
   }

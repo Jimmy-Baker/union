@@ -58,4 +58,46 @@ class Group extends DatabaseObject {
     return $array; 
   }
   
+  public function add_member($user_id) {
+    $sql = "INSERT INTO group_users (group_id, user_id, role_abv) VALUES ('" . parent::$database->escape_string($this->id) . "', '" . parent::$database->escape_string($user_id) . "', 'GC') LIMIT 1;";
+    $results = self::$database->query($sql);
+    return $results;
+  }
+  
+  static public function find_as_type($user_id, $type){
+    $sql = "SELECT b.group_id AS group_id, groups.leader_id AS leader_id, groups.type_abv AS type_abv, groups.name AS name FROM (SELECT group_id FROM group_users WHERE user_id='" . parent::$database->escape_string($user_id) . "' AND role_abv='" . parent::$database->escape_string($type) . "') AS b LEFT JOIN groups ON b.group_id=groups.id";
+    $results = self::$database->query($sql);
+    $array = [];
+    while($record = $results->fetch_assoc()){
+      $object = (object) $record;
+      $array[] = $object;
+    }
+    $results->free();
+    return array_shift($array);
+  }
+  
+  static public function find_as_member($user_id){
+    $sql = "SELECT b.group_id AS group_id, groups.leader_id AS leader_id, groups.type_abv AS type_abv, groups.name AS name FROM (SELECT group_id FROM group_users WHERE user_id='" . $user_id . "') AS b LEFT JOIN groups ON b.group_id=groups.id";
+    $results = self::$database->query($sql);
+    $array = [];
+    while($record = $results->fetch_assoc()){
+      $object = (object) $record;
+      $array[] = $object;
+    }
+    $results->free();
+    return array_shift($array);  
+  }
+  
+  public function add_user($user_id, $role){
+    $sql = "INSERT INTO group_users (group_id, user_id, role_abv) VALUES ('" . parent::$database->escape_string($this->id) . "', '" . parent::$database->escape_string($user_id) . "', '" . parent::$database->escape_string($role) ."');";
+    $result = parent::$database->query($sql);
+    return $result;
+  }
+  
+  public function remove_user($user_id) {
+    $sql = "DELETE FROM group_users WHERE user_id='" . parent::$database->escape_string($user_id) . "' AND group_id='" . parent::$database->escape_string($this->id) . "' LIMIT 1;";
+    $result = parent::$database->query($sql);
+    return $result;
+  }
+  
 }

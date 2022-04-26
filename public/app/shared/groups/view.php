@@ -67,7 +67,7 @@ include(SHARED_PATH . '/user-header.php');
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-striped table-hover">
-          <caption>List of all groups</caption>
+          <caption>List of all members</caption>
           <thead class="table-primary">
             <tr>
               <th>User ID</th>
@@ -86,10 +86,10 @@ include(SHARED_PATH . '/user-header.php');
               <td><?= h($member->role_abv) ?>
               <td>
                 <div class="btn-group" role="group" aria-label="group actions">
-                  <a class="btn btn-primary" href="<?= url_for('/app/shared/member/view.php?id=' . u($member->user_id)); ?>">View</a>
+                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . u($member->user_id)); ?>">View</a>
                   <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                   <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                    <li><a class="dropdown-item" href="<?= url_for('/app/shared/groups/delete.php?id=' . u($group->id)); ?>">Remove</a></li>
+                    <li><button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmModal">Remove User</button></li>
                   </ul>
                 </div>
               </td>
@@ -97,6 +97,29 @@ include(SHARED_PATH . '/user-header.php');
             <?php } ?>
           </tbody>
         </table>
+      </div>
+      <div class="card-body text-end pt-0">
+        <a href="<?= url_for('/app/shared/groups/add_user.php?id=' . u($group->id)); ?>" class="btn btn-primary">Add A User</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmModalLabel">Confirm User Removal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to remove this user from the group?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <form action="<?= url_for('/app/shared/groups/remove_user.php?id=' . u($group->id). '&user=' . u($member->user_id)); ?>" method="POST">
+            <button type="submit" class="btn btn-primary">Confirm Removal</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

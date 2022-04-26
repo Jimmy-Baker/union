@@ -193,7 +193,7 @@ include(SHARED_PATH . '/user-header.php');
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <div class="card-body text-end pt-0">
-                  <a href="<?= url_for("/app/shared/groups/groups.php"); ?>" class="btn btn-primary">Provide A Pass</a>
+                  <a href="<?= url_for("/app/shared/passes/provision.php"); ?>" class="btn btn-primary">Provide A Pass</a>
                 </div>
               </div>
             </div>

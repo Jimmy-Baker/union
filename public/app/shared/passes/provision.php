@@ -13,9 +13,6 @@ if(is_post_request()) {
     case "email":
       $user = User::find_by_email($_POST['inputValue1']);
       break;
-    case "phone_primary":
-      $user = User::find_by_phone($_POST['inputValue1']);
-      break;
   }
   if($user){
     $args = $_POST['pass'];
@@ -26,7 +23,14 @@ if(is_post_request()) {
     if($result) {
       $pro = $pass->provision();
       if($pro) {
-        $session->message("Pass provisioned successfully.", "primary");
+        $deactivate = $pass->deactive_others();
+        $activate = $pass->activate();
+        if($activate && $deactivate){
+          $session->message("Pass provisioned successfully.", "primary");
+        } else {
+          $session->message("The pass could not be activated.", "warning");
+          $pass->delete();
+        }
       } else {
         $session->message("The pass could not be provisioned.", "warning");
         $pass->delete();
@@ -84,12 +88,11 @@ include(SHARED_PATH . '/user-header.php');
               <select class="form-select" aria-label="Parameter selection for following text input" name="inputParameter1" value="<?= $_POST['inputParameter1'] ?? '';?>" required>
                 <option value="id">User ID</option>
                 <option value="email">Email</option>
-                <option value="phone_primary">Phone Number</option>
               </select>
               <input type="text" class="form-control w-50" name="inputValue1" value="<?= $_POST['inputValue1'] ?? '';?>" required>
             </div>
           </div>
-          <div id="phoneSecondaryHelp" class="form-text offset-md-3">Maximum of 32 Characters</div>
+          <div id="helpValue1" class="form-text offset-md-3">Maximum of 32 Characters</div>
         </div>
       </div>
 
@@ -101,7 +104,7 @@ include(SHARED_PATH . '/user-header.php');
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
           <div class="col-md-3 text-md-end">
-            <label for="pass_type" class="col-form-label">Pass Type</label>
+            <label for="inputPassType" class="col-form-label">Pass Type</label>
           </div>
           <div class="col-md-7">
             <div class="row ms-0">
@@ -113,7 +116,7 @@ include(SHARED_PATH . '/user-header.php');
               </select>
             </div>
           </div>
-          <div id="passTypeHelp" class="form-text offset-md-3">Maximum of 32 Characters</div>
+          <div id="helpPassType" class="form-text offset-md-3">Maximum of 32 Characters</div>
         </div>
       </div>
 

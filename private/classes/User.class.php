@@ -320,7 +320,7 @@ class User extends DatabaseObject {
   }
   
   public function session_query() {
-    $sql = "SELECT locations.location_name AS location_name, locations.gym_id AS gym_id, gyms.gym_name AS gym_name, IFNULL((SELECT id FROM passes WHERE user_id='" . self::$database->escape_string($this->primary_location) . "' AND is_active=1 ORDER BY created_at DESC LIMIT 1), 'null') AS pass_id FROM (locations JOIN gyms ON locations.gym_id=gyms.id) WHERE locations.id='" . self::$database->escape_string($this->primary_location) . "' LIMIT 1;";
+    $sql = "SELECT locations.location_name AS location_name, locations.gym_id AS gym_id, gyms.gym_name AS gym_name, IFNULL((SELECT id FROM passes WHERE user_id='" . self::$database->escape_string($this->id) . "' AND is_active=1 ORDER BY created_at DESC LIMIT 1), 'null') AS pass_id FROM (locations JOIN gyms ON locations.gym_id=gyms.id) WHERE locations.id='" . self::$database->escape_string($this->primary_location) . "' LIMIT 1;";
       $results = self::$database->query($sql);
       $array = [];
       while($record = $results->fetch_assoc()){

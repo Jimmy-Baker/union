@@ -12,6 +12,7 @@ class Session {
   public $gym_id;
   public $gym_name;
   public $pass_id;
+  public $group_id;
   private $last_login;
 
   public const MAX_LOGIN_AGE = 60*60*24; // 1 day
@@ -37,6 +38,9 @@ class Session {
       $this->gym_id= $_SESSION['gym_id'] = $data->gym_id;
       $this->gym_name = $_SESSION['gym_name'] = $data->gym_name;
       $this->pass_id = $_SESSION['pass_id'] = $data->pass_id;
+      $this->group_id = $_SESSION['group_id'] =
+      $data->group_id;
+      
       $this->last_login = $_SESSION['last_login'] = time();
     }
     return true;

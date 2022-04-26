@@ -108,7 +108,7 @@ include(SHARED_PATH . '/user-header.php');
               <input type="text" class="form-control w-50" name="inputValue1" value="<?= $_POST['inputValue1'] ?? '';?>" required>
             </div>
           </div>
-          <div id="phoneSecondaryHelp" class="form-text offset-md-3">Maximum of 32 Characters</div>
+          <div id="helpParameter1" class="form-text offset-md-3">Maximum of 32 Characters</div>
         </div>
       </div>
 

@@ -144,7 +144,7 @@ include(SHARED_PATH . '/user-header.php');
               <button type="button" class="btn-close align-self-center m-2" aria-label="Close" disabled></button>
             </div>
           </div>
-          <div id="phoneSecondaryHelp" class="form-text offset-md-3">Maximum of 32 Characters</div>
+          <div id="helpParameter1" class="form-text offset-md-3">Maximum of 32 Characters</div>
         </div>
 
         <div id="addParamRow" class="row mb-3 mb-md-4">

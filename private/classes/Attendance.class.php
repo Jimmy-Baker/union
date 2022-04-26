@@ -23,7 +23,7 @@ class Attendance extends DatabaseObject {
     $sql = "INSERT INTO " . static::$table_name;
     $sql .= " (user_id, location_id, time_in)";
     $sql .= " VALUES (" . quote_null($user_id) . ", ";
-    $sql .= quote_null($location_id) . ", NOW() )";
+    $sql .= quote_null($location_id) . ", NOW() ) LIMIT 1;";
     return self::$database->query($sql);
   }
   

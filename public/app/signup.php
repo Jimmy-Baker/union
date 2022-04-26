@@ -133,7 +133,7 @@ include(SHARED_PATH . '/public-header.php');
           </div>
           <div class="col-md-7">
             <select name="user[state_abv]" class="form-select" id="inputStateAbv" required>
-              <option value=""></option>
+              <option hidden value="">Select One</option>
               <?php foreach($states as $state) { ?>
               <option value="<?= h($state->abv) ?>" <?= ($user->state_abv == $state->abv) ? 'selected' : '';?>><?= h($state->state_name); ?></option>
               <?php } ?>

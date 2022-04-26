@@ -61,8 +61,8 @@ include(SHARED_PATH . '/public-header.php');
     </div>
     <div class="mb-3">
       <label for="inputPassword" class="form-label">Password</label>
-      <input type="password" name="password" value="" class="form-control" id="inputPassword" aria-describedby="passwordHelp" required>
-      <div id="passwordHelp" class="form-text">Can't remember your password? Contact us for assistance.</div>
+      <input type="password" name="password" value="" class="form-control" id="inputPassword" aria-describedby="helpPassword" required>
+      <div id="helpPassword" class="form-text">Can't remember your password? Contact us for assistance.</div>
     </div>
     <div class="mb-3 form-check">
       <input type="checkbox" class="form-check-input" id="inputRemember">

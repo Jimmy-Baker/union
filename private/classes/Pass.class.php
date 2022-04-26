@@ -52,6 +52,7 @@ class Pass extends DatabaseObject {
   public function activate() {
     $today = date('Y-m-d');
     $this->active_on = $today; 
+    $this->is_active = 1;
     switch ($this->pass_type) {
       case "A": $this->expires_on = date('Y-m-d', strtotime($today . ' + 365 days'));; break;
       case "B": $this->expires_on = date('Y-m-d', strtotime($today . ' + 365 days'));; break;
@@ -60,17 +61,23 @@ class Pass extends DatabaseObject {
       case "E": $this->expires_on = date('Y-m-d', strtotime($today . ' + 1 month'));; break;
       case "F": $this->expires_on = date('Y-m-d', strtotime($today . ' + 3 months'));; break;
     }
-    
+    return $this->save();
   }
   
-  public function pause() {
-    $this->pause_on = date('Y-m-d');
-    $this->expires_on = '';
+  public function deactive_others() {
+    $sql = "UPDATE passes SET is_active=0 WHERE user_id='" . $this->user_id . "' AND id<>'" . $this->id . "';";
+    $result = self::$database->query($sql);
+    return $result;
   }
   
-  public function unpause() {
-    $today = date('Y-m-d');
-  }
+  // public function pause() {
+  //   $this->pause_on = date('Y-m-d');
+  //   $this->expires_on = '';
+  // }
+  
+  // public function unpause() {
+  //   $today = date('Y-m-d');
+  // }
   
   protected function create() {
     // if($this->is_active = '1') {
