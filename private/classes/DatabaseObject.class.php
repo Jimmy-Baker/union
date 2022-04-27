@@ -125,6 +125,7 @@ class DatabaseObject {
   }
 
   protected function update() {
+    $this->validate();
     if(!empty($this->error_array)) { 
       return false;
     }
