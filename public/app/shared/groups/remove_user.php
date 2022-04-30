@@ -5,14 +5,14 @@ require_login();
 if(!isset($_GET['id'])) {
   $session->message('No group was identified.', 'warning');
   redirect_to(url_for('/app/shared/groups/groups.php'));
-} elseif(!isset($_GET['user'])) {
+} elseif(!isset($_POST['user'])) {
   $session->message('No user was identified.', 'warning');
   redirect_to(url_for('/app/shared/groups/view.php?id=' . u($_GET['id'])));
 }
 
 $id = $_GET['id'];
 $group = Group::find_by_id($id);
-$user_id = $_GET['user'];
+$user_id = $_POST['user'];
 $redirection = url_for('/app/shared/groups/view.php?id=' . u($id));
 if(is_post_request()) {
   if($group){

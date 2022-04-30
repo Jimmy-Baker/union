@@ -47,7 +47,6 @@ include(SHARED_PATH . '/user-header.php');
 
 <main class="container-md p-4" id="main">
 
-  <?= display_errors($gym->error_array); ?>
   <form action="<?= url_for('/app/shared/gyms/new.php'); ?>" method="post">
 
     <?php include('form_fields.php'); ?>
@@ -57,4 +56,9 @@ include(SHARED_PATH . '/user-header.php');
 
 </main>
 
-<?php include(SHARED_PATH . '/user-footer.php'); ?>
+<?php
+if($gym->error_array != []){ 
+  $error_render=$gym->error_array;
+}
+include(SHARED_PATH . '/user-footer.php'); 
+?>

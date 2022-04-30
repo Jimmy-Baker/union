@@ -7,9 +7,9 @@ if(count(get_included_files()) == 1) redirect_to(url_for('/app/shared/locations/
 
 ?>
 
-<div class="col-auto d-none d-sm-block">
-  <a class="btn btn-primary btn-raise dropdown-toggle" href="#" role="button" id="locationMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-    Location Menu
+<div class="col-12 col-md-auto d-flex d-md-block">
+  <a class="btn btn-primary btn-raise dropdown-toggle drop-menu" href="#" role="button" id="locationMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    <span>Location Menu</span>
   </a>
   <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="locationMenuLink">
     <li><a class="dropdown-item<?= active_class('locations') ?>" href="<?= url_for('app/shared/locations/locations.php'); ?>">All Locations</a></li>
@@ -22,6 +22,8 @@ if(count(get_included_files()) == 1) redirect_to(url_for('/app/shared/locations/
     <li>
       <h4 class="dropdown-header fs-6 text-dark">Location ID: <?= $location->id ?></h4>
     </li>
+    <li><a class="dropdown-item<?= active_class('attendance') ?>" href="<?= url_for('app/shared/locations/attendance.php') ?>">Attendance</a></li>
+    <li><a class="dropdown-item<?= active_class('checkin') ?>" href="<?= url_for('app/shared/locations/checkin.php') ?>">Check In</a></li>
     <li><a class="dropdown-item<?= active_class('view') ?>" href="<?= url_for('app/shared/locations/view.php?id=' . u($location->id)); ?>">View Location</a></li>
     <li><a class="dropdown-item<?= active_class('edit') ?>" href="<?= url_for('app/shared/locations/edit.php?id=' . u($location->id)); ?>">Edit Location</a></li>
     <li><a class="dropdown-item<?= active_class('delete') ?>" href="<?= url_for('app/shared/locations/delete.php?id=' . u($location->id)); ?>">Delete Location</a></li>

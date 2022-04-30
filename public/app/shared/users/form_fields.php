@@ -9,7 +9,6 @@ $countries = Country::all_countries();
 $today = date('Y-m-d');
 $accesses = User::USER_TYPES;
 $num=1;
-// Set some defaults
 
 ?>
 
@@ -242,8 +241,9 @@ $num=1;
         <label for="inputGroupID" class="col-form-label">Group ID</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="user[group_id]" value="<?= h($user->group_id); ?>" class="form-control" id="inputGroupID" maxlength="6">
+        <input type="text" name="user[group_id]" value="<?= h($user->group_id); ?>" class="form-control" id="inputGroupID" aria-describedby="helpGroupID" maxlength="6">
       </div>
+      <div id="helpGroupID" class="form-text offset-md-3">Maximum of 6 Digits</div>
     </div>
     <?php } ?>
 
@@ -252,12 +252,13 @@ $num=1;
         <label for="inputAccessAbv" class="col-form-label">User Type</label>
       </div>
       <div class="col-md-7">
-        <select name="user[access_abv]" class="form-select" id="inputAccessAbv" required>
+        <select name="user[access_abv]" class="form-select" id="inputAccessAbv" aria-describedby="helpUserType" required>
           <?php foreach($accesses as $abv=>$access) { ?>
           <option value="<?= h($abv) ?>" <?= ($user->access_abv == $abv) ? 'selected' : '';?>><?= h($access); ?></option>
           <?php } ?>
         </select>
       </div>
+      <div id="helpUserType" class="form-text offset-md-3">Select One</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -265,8 +266,9 @@ $num=1;
         <label for="inputPassword" class="col-form-label">Password</label>
       </div>
       <div class="col-md-7">
-        <input type="password" name="user[password]" value="<?= h($user->password); ?>" class="form-control" id="inputPassword" <?php if(!defined('exists')) {'required';} ?>>
+        <input type="password" name="user[password]" value="<?= h($user->password); ?>" class="form-control" id="inputPassword" aria-describedby="helpPassword" <?php if(!defined('exists')) {'required';} ?>>
       </div>
+      <div id="helpPassword" class="form-text offset-md-3">Must be at least 8 characters and contain a combination of uppercase and lowercase letters and symbols.</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -274,8 +276,9 @@ $num=1;
         <label for="inputConfirmPassword" class="col-form-label">Confirm Password</label>
       </div>
       <div class="col-md-7">
-        <input type="password" name="user[confirm_password]" value="<?= h($user->confirm_password); ?>" class="form-control" id="inputConfirmPassword" <?php if(!defined('exists')) {'required';} ?>>
+        <input type="password" name="user[confirm_password]" value="<?= h($user->confirm_password); ?>" class="form-control" aria-describedby="helpConfirmPassword" id="inputConfirmPassword" <?php if(!defined('exists')) {'required';} ?>>
       </div>
+      <div id="helpConfirmPassword" class="form-text offset-md-3">Must match the previous value.</div>
     </div>
   </div>
 </fieldset>

@@ -48,7 +48,6 @@ include(SHARED_PATH . '/user-header.php');
 
 <main class="container-md p-4" id="main">
 
-  <?= display_errors($pass->error_array); ?>
   <form action="<?= url_for('/app/shared/passes/new.php'); ?>" method="post">
 
     <?php include('form_fields.php'); ?>
@@ -58,4 +57,9 @@ include(SHARED_PATH . '/user-header.php');
 
 </main>
 
-<?php include(SHARED_PATH . '/user-footer.php'); ?>
+<?php
+if($pass->error_array != []){ 
+  $error_render=$pass->error_array;
+}
+include(SHARED_PATH . '/user-footer.php'); 
+?>

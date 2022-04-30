@@ -116,8 +116,9 @@ include(SHARED_PATH . '/user-header.php');
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <form action="<?= url_for('/app/shared/groups/remove_user.php?id=' . u($group->id). '&user=')?>" method="POST" id="confirmForm">
-            <button type="submit" class="btn btn-primary" id="confirmButton">Confirm Removal</button>
+          <form action="<?= url_for('/app/shared/groups/remove_user.php?id=' . u($group->id))?>" method="POST">
+            <input type="hidden" name="user" id="confirmInput">
+            <button type=" submit" class="btn btn-primary" id="confirmButton">Confirm Removal</button>
           </form>
         </div>
       </div>

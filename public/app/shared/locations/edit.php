@@ -58,7 +58,6 @@ include(SHARED_PATH . '/user-header.php');
 </header>
 
 <main class="container-md p-4" id="main">
-  <?= display_errors($location->error_array); ?>
   <form action="<?= url_for('/app/shared/locations/edit.php?id=' . u($id)); ?>" method="post">
 
     <?php include('form_fields.php'); ?>
@@ -74,4 +73,9 @@ include(SHARED_PATH . '/user-header.php');
   </form>
 </main>
 
-<?php include(SHARED_PATH . '/user-footer.php'); ?>
+<?php
+if($location->error_array != []){ 
+  $error_render=$location->error_array;
+}
+include(SHARED_PATH . '/user-footer.php'); 
+?>

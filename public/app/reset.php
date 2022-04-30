@@ -29,15 +29,19 @@ if(is_post_request()) {
       
       $request = new Request($args);
       $result = $request->save();
-      // send user a password reset email
       
-      include('mail/password_reset.php');
+      // send user a password reset email
+      if($result){
+        include('mail/password_reset.php');
+        $session->message('An email will be sent to your address if it exists in our system.', 'success');
+      } else {
+        $session->message("The request could not be completed. Please try again.", "warning");
+      }
     } else {
-      // email not found or password does not match
-      echo 'No User';
+      $session->message("The request could not be generated. Please try again.", "warning");
     }
   }
-  $session->message('An email will be sent to your address if it exists in our system.', 'success');
+  
 
 }
 
@@ -52,7 +56,7 @@ include(SHARED_PATH . '/public-header.php');
       <label for="inputEmail" class="form-label">Email Address</label>
       <input type="email" name="email" value="<?= h($email); ?>" class="form-control" id="inputEmail" required>
     </div>
-    <button type="submit" name="submit" class="btn btn-primary">Reset Password</button>
+    <button type="submit" name="submit" class="btn btn-primary" id="spinButton">Reset Password</button>
   </form>
 
   <?= display_errors($error_array); ?>

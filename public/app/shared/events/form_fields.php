@@ -74,7 +74,7 @@ $today = date('Y-m-d');
       <div class="col-md-7">
         <div class="input-group">
           <span class="input-group-text">$</span>
-          <input type="text" name="event[cost]" value="<?= h($event->cost); ?>" class="form-control" id="inputCost" minlength="1" maxlength="6" default="0" inputmode="decimal" pattern="([0-9]{1,3})*[.]?[0-9]{2}" title="must follow X.XX format" aria-describedby="helpCost" required>
+          <input type="text" name="event[cost]" value="<?= h($event->cost); ?>" class="form-control" id="inputCost" maxlength="6" default="0" inputmode="decimal" pattern="([0-9]{1,3})*[.]?[0-9]{2}" title="must follow X.XX format" aria-describedby="helpCost">
         </div>
       </div>
       <div id="helpCost" class="form-text offset-md-3">Must be between 0 and 999.99</div>

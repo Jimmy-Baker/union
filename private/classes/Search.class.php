@@ -12,6 +12,7 @@ class Search {
   public $value2;
   public $value3;
   public $value4;
+  public $error_array = [];
   
   public function __construct($args=[]) {
     $this->parameter1 = $args['inputParameter1'] ?? '';
@@ -29,7 +30,8 @@ class Search {
   }
   
   public function getSQL() {
-    if($this->validate()){
+    $this->validate();
+    if(empty($this->error_array)){
       if ($this->value1 != '' && $this->parameter1 != ''){
         $sql = "SELECT * FROM " . $this->table . " WHERE ";
         $sql .= self::$database->escape_string($this->parameter1) . " LIKE '%" . self::$database->escape_string($this->value1) . "%'";
@@ -56,16 +58,49 @@ class Search {
   private function validate(){
     if(!isset($this->parameter1)){
       $this->error_array += ["Parameter1" => "The first parameter cannot be blank."];
+    } else {
+      if(!has_length($this->value1, array('min' => 1, 'max' => 32))){
+        $this->error_array += ["Value1" => "This input must be between 1 and 32 characters."];
+      } elseif(has_padding($this->value1)) {
+        $this->error_array += ["Value1" => "This input cannot start or end with a space."];         
+      } elseif(!has_valid_char($this->value1)) {
+        $this->error_array += ["Value1" => "This input must consist of letters, numbers, dashes, and spaces."];
+      }
     }
     
     if(isset($this->value2)){
       if($this->parameter2 = ''){
-        $this->error_array += ["Parameter2" => "This search value cannot be blank."];
+        $this->error_array += ["Parameter2" => "This parameter cannot be blank if selected."];
+      } elseif(!has_length($this->value2, array('min' => 1, 'max' => 32))){
+        $this->error_array += ["Value2" => "This input must be between 1 and 32 characters."];
+      } elseif(has_padding($this->value2)) {
+        $this->error_array += ["Value2" => "This input cannot start or end with a space."];         
+      } elseif(!has_valid_char($this->value2)) {
+        $this->error_array += ["Value2" => "This input must consist of letters, numbers, dashes, and spaces."];
       }
-      
-      
-      if(!isset($this->parameter2)){
-        $this->error_array += ["Parameter1" => "This search value cannot have a blank parameter."];
+    }
+    
+    if(isset($this->value3)){
+      if($this->parameter3 = ''){
+        $this->error_array += ["Parameter3" => "This parameter cannot be blank if selected."];
+      } elseif(!has_length($this->value3, array('min' => 1, 'max' => 32))){
+        $this->error_array += ["Value3" => "This input must be between 1 and 32 characters."];
+      } elseif(has_padding($this->value3)) {
+        $this->error_array += ["Value3" => "This input cannot start or end with a space."];         
+      } elseif(!has_valid_char($this->value3)) {
+        $this->error_array += ["Value3" => "This input must consist of letters, numbers, dashes, and spaces."];
+      }
+    }
+    
+    if(isset($this->value4)){
+      if($this->parameter4 = ''){
+        $this->error_array += ["Parameter4" => "This parameter cannot be blank if selected."];
+      } elseif(!has_length($this->value4, array('min' => 1, 'max' => 32))){
+        $this->error_array += ["Value4" => "This input must be between 1 and 32 characters."];
+      } elseif(has_padding($this->value4)) {
+        $this->error_array += ["Value4" => "This input cannot start or end with a space."];         
+      } elseif(!has_valid_char($this->value4)) {
+        $this->error_array += ["Value4" => "This input must consist of letters, numbers, dashes, and spaces."];
       }
     }
     

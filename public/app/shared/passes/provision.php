@@ -27,6 +27,7 @@ if(is_post_request()) {
         $activate = $pass->activate();
         if($activate && $deactivate){
           $session->message("Pass provisioned successfully.", "primary");
+          redirect_to(url_for('/app/shared/passes/view.php?id=' . u($pass->id)));
         } else {
           $session->message("The pass could not be activated.", "warning");
           $pass->delete();

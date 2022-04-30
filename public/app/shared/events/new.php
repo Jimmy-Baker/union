@@ -38,30 +38,27 @@ include(SHARED_PATH . '/user-header.php');
           <li class="breadcrumb-item active text-primary" aria-current="page">New Event</li>
         </ol>
       </nav>
-      <div class="col-auto d-none d-sm-block">
-        <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="eventMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          Event Menu
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="eventMenuLink">
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/events/events.php'); ?>">All Events</a></li>
-          <li><a class="dropdown-item active" href="<?= url_for('app/shared/events/new.php'); ?>">New Event</a></li>
-          <li><a class="dropdown-item" href="<?= url_for('app/shared/events/search.php'); ?>">Find Events</a></li>
-        </ul>
-      </div>
+      <?php
+        include_once('drop_menu.php');
+      ?>
     </div>
   </div>
 </header>
 
 <main class="container-md p-4" id="main">
 
-  <?= display_errors($event->error_array); ?>
-  <form action="<?= url_for('/app/shared/events/new.php'); ?>" method="post">
+
+  <form action="<?= url_for('/app/shared/events/new.php'); ?>" method="post" class="needs-validation" novalidate>
 
     <?php include('form_fields.php'); ?>
-
     <button type="submit" name="submit" class="btn shadow btn-primary">Create Event</button>
   </form>
 
 </main>
 
-<?php include(SHARED_PATH . '/user-footer.php'); ?>
+<?php
+if($event->error_array != []){ 
+  $error_render=$event->error_array;
+}
+include(SHARED_PATH . '/user-footer.php'); 
+?>

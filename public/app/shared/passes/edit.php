@@ -74,4 +74,9 @@ include(SHARED_PATH . '/user-header.php');
   </form>
 </main>
 
-<?php include(SHARED_PATH . '/user-footer.php'); ?>
+<?php
+if($pass->error_array != []){ 
+  $error_render=$pass->error_array;
+}
+include(SHARED_PATH . '/user-footer.php'); 
+?>

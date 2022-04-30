@@ -95,7 +95,6 @@ include(SHARED_PATH . '/user-header.php');
 </header>
 
 <main class="container-md p-4" id="main">
-  <?= display_errors($user->error_array); ?>
   <form action="<?= url_for('/app/shared/users/edit.php?id=' . u($id)); ?>" method="post" enctype="multipart/form-data">
 
     <?php define('exists', true); ?>
@@ -112,4 +111,9 @@ include(SHARED_PATH . '/user-header.php');
   </form>
 </main>
 
-<?php include(SHARED_PATH . '/user-footer.php'); ?>
+<?php
+if($user->error_array != []){ 
+  $error_render=$user->error_array;
+}
+include(SHARED_PATH . '/user-footer.php'); 
+?>

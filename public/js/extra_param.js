@@ -40,7 +40,7 @@
 		}
 	}
 
-	(function hideQueries() {
+	function hideQueries() {
 		let j = 1;
 		while (j < queryArray.length) {
 			if (inputArray[j].value == '') {
@@ -50,9 +50,9 @@
 			}
 			j++;
 		}
-	})();
+	}
 
-	(function showOptions() {
+	function showAllOptions() {
 		let j = 0;
 		while (j < paramArray.length) {
 			let opts = paramArray[j].querySelectorAll('option');
@@ -65,7 +65,10 @@
 		paramArray.forEach(param => {
 			hideOptions(param.value, param);
 		});
-	})();
+	}
+
+	hideQueries();
+	showAllOptions();
 
 	closeArray.forEach(close => {
 		close.addEventListener('click', e => {
@@ -77,7 +80,7 @@
 
 	paramArray.forEach((param, key) => {
 		param.addEventListener('change', e => {
-			showOptions();
+			showAllOptions();
 		});
 	});
 

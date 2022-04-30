@@ -8,7 +8,6 @@ function extraImage() {
 
 	BUTTON.addEventListener('click', e => {
 		if (i <= 5) {
-			console.log('click');
 			let newRow = buildInput(i);
 			CARD.insertBefore(newRow, BTNROW);
 			i++;

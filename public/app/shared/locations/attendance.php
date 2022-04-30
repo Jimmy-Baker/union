@@ -12,7 +12,7 @@ if(is_post_request()) {
           if($record){
             $result = $record->delete();
             if($result) {
-              $session->message("The attendance record was deleted.", "success");
+              $session->message("The attendance record was deleted.", "warning");
             } else {
               $session->message("The attendance record could not be found.", "warning");
             }
@@ -119,6 +119,7 @@ include(SHARED_PATH . '/user-header.php');
                         <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                         <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
                           <li><button type="submit" class="dropdown-item" name="method" value="delete">Delete Check In</button></li>
+                          <li><button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmModal" data-bs-id="<?=($participant->id) ?>">Remove User</button></li>
                         </ul>
                       </div>
                     </form>
@@ -132,12 +133,32 @@ include(SHARED_PATH . '/user-header.php');
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmModalLabel">Confirm Deletion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to remove this check in? The user will not be refunded a punch.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <form action="<?= url_for('/app/shared/locations/attendance.php'); ?>" method="POST">
+            <input type="hidden" name="id" value="" id="confirmInput">
+            <input type="hidden" name="method" value="delete">
+            <button type="submit" class="btn btn-primary" id="confirmButton">Confirm Removal</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row justify-content-evenly" role="toolbar" aria-label="Location toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/locations/search.php'); ?>">Find Locations</a>
-    </div>
-    <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/locations/new.php'); ?>">Create A Location</a>
+      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/locations/checkin.php'); ?>">Check In User</a>
     </div>
   </div>
 

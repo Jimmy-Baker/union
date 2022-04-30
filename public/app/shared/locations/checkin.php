@@ -83,7 +83,9 @@ include(SHARED_PATH . '/user-header.php');
           <li class="breadcrumb-item active text-primary" aria-current="page">Check In</a></li>
         </ol>
       </nav>
-
+      <?php 
+        include_once('drop_menu.php'); 
+      ?>
     </div>
   </div>
 </header>
@@ -116,34 +118,32 @@ include(SHARED_PATH . '/user-header.php');
     </fieldset>
 
     <div class="row justify-content-evenly" role="toolbar" aria-label="User toolbar">
-      <div class="col-sm-4 col-md-3 d-grid">
+      <div class="col-sm-4 col-md-3 mb-3 d-grid">
         <button class="btn shadow btn-primary" type="submit">Check In User</button>
       </div>
     </div>
   </form>
 
-  <?php if (isset($users)) { ?>
+  <?php if(isset($credit) && $credit) { ?>
   <hr class="w-50 mx-auto">
 
   <div class="card shadow mx-auto mt-5" id="results">
-    <div class="card-header fs-4">Search Results</div>
+    <div class="card-header fs-4">Recent Check In</div>
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-striped table-hover">
-          <caption>User Search Results</caption>
+          <caption>Most Recent Check In</caption>
           <thead class="table-primary">
             <tr>
-              <th>ID</th>
-              <th>Access</th>
+              <th>User ID</th>
               <th>Name</th>
               <th>&nbsp;</th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach($users as $user) { ?>
             <tr class="align-middle text-nowrap">
               <td><?= h($user->id) ?></td>
-              <td><?= h($user->access_abv) ?></td>
+              <td><?= h($user->name()) . ' ' . h($user->last_name) ?></td>
               <td><?= h($user->name()) . ' ' . h($user->last_name) ?></td>
               <td>
                 <div class="btn-group" role="group" aria-label="user actions">
@@ -153,13 +153,13 @@ include(SHARED_PATH . '/user-header.php');
                 </div>
               </td>
             </tr>
-            <?php } ?>
           </tbody>
         </table>
       </div>
     </div>
   </div>
   <?php } ?>
+
 </main>
 
 <?php include(SHARED_PATH . '/user-footer.php'); ?>

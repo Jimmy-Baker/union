@@ -3,6 +3,12 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 $page_title = 'Administrator Dashboard';
 include(SHARED_PATH . '/user-header.php'); 
+
+if(test_access('GM')){
+  $location = Location::find_by_id($session->location);
+}
+
+
 ?>
 
 <header>
@@ -164,36 +170,36 @@ include(SHARED_PATH . '/user-header.php');
             <div class="col">
               <div class="card h-100">
                 <div class="card-body">
-                  <h5 class="card-title">Manage Our Location</h5>
+                  <h5 class="card-title">Manage Gym Location</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Gym Managers</h6>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <div class="card-body text-end pt-0">
-                  <a href="<?= url_for("/app/shared/locations/checkin.php"); ?>" class="btn btn-primary">Check In Users</a>
+                  <a href="<?= url_for("/app/shared/locations/view.php?id=" . u($location->id)); ?>" class="btn btn-primary">Gym Location</a>
                 </div>
               </div>
             </div>
             <div class="col">
               <div class="card h-100">
                 <div class="card-body">
-                  <h5 class="card-title">Manage Our Employees</h5>
+                  <h5 class="card-title">Manage Gym Employees</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Gym Managers</h6>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <div class="card-body text-end pt-0">
-                  <a href="<?= url_for("/app/shared/locations/checkin.php"); ?>" class="btn btn-primary">Check In Users</a>
+                  <a href="<?= url_for("/app/shared/groups/view.php?id=" . u($location->employee_group)); ?>" class="btn btn-primary">Gym Employees</a>
                 </div>
               </div>
             </div>
             <div class="col">
               <div class="card h-100">
                 <div class="card-body">
-                  <h5 class="card-title">Manage Our Events</h5>
+                  <h5 class="card-title">Manage Gym Events</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Gym Managers</h6>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <div class="card-body text-end pt-0">
-                  <a href="<?= url_for("/app/shared/locations/checkin.php"); ?>" class="btn btn-primary">Check In Users</a>
+                  <a href="<?= url_for("/app/shared/events/events.php?local=true"); ?>" class="btn btn-primary">Gym Events</a>
                 </div>
               </div>
             </div>

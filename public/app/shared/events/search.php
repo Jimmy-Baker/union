@@ -20,7 +20,7 @@ if(is_post_request()) {
         $session->message(count($events) . ' events were found.', 'success');
       }
     } else {
-      $session->message('The search query failed. Please try again.', 'warning');
+      $session->message('The search query failed to return a result. Please try again.', 'warning');
     }
   } else {
     $session->message('Please check your search terms and try again.', 'warning');
@@ -61,7 +61,7 @@ include(SHARED_PATH . '/user-header.php');
 </header>
 
 <main class="container-md p-4" id="main">
-  <form action="<?= url_for('/app/shared/events/search.php#results'); ?>" method="POST" class="mb-5">
+  <form action="<?= url_for('/app/shared/events/search.php#results'); ?>" method="POST" class="mb-5 needs-validation" novalidate>
     <fieldset class="card shadow col-md-10 mx-auto mb-4">
       <legend class="card-header">Search Criteria</legend>
       <div class="card-body">
@@ -73,8 +73,6 @@ include(SHARED_PATH . '/user-header.php');
             <div class="row ms-0 input-group">
               <select class="form-select" aria-label="Parameter type for following text input" name="inputParameter1" id="inputParameter1" required>
                 <option hidden value="">Select One</option>
-                <option value="start_date" <?= ($_POST['inputParameter1'] ?? '') == "start_date" ? "selected" : "" ?>>Start Date</option>
-                <option value="end_date" <?= ($_POST['inputParameter1'] ?? '') == "end_date" ? "selected" : "" ?>>End Date</option>
                 <option value="location_id" <?= ($_POST['inputParameter1'] ?? '') == "location_id" ? "selected" : "" ?>>Location ID</option>
                 <option value="event_name" <?= ($_POST['inputParameter1'] ?? '') == "event_name" ? "selected" : "" ?>>Event Name</option>
               </select>
@@ -93,8 +91,6 @@ include(SHARED_PATH . '/user-header.php');
             <div class="row ms-0 input-group">
               <select class="form-select" aria-label="Parameter type for following text input" name="inputParameter2" id="inputParameter2">
                 <option hidden value="">Select One</option>
-                <option value="start_date" <?= ($_POST['inputParameter2'] ?? '') == "start_date" ? "selected" : "" ?>>Start Date</option>
-                <option value="end_date" <?= ($_POST['inputParameter2'] ?? '') == "end_date" ? "selected" : "" ?>>End Date</option>
                 <option value="location_id" <?= ($_POST['inputParameter2'] ?? '') == "location_id" ? "selected" : "" ?>>Location ID</option>
                 <option value="event_name" <?= ($_POST['inputParameter2'] ?? '') == "event_name" ? "selected" : "" ?>>Event Name</option>
               </select>
@@ -103,26 +99,6 @@ include(SHARED_PATH . '/user-header.php');
             </div>
           </div>
           <div id="helpValue2" class="form-text offset-md-3">Maximum of 32 Characters</div>
-        </div>
-
-        <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4" id="query3">
-          <div class="col-md-3 text-md-end">
-            <label for="inputValue3" class="col-form-label">Parameter</label>
-          </div>
-          <div class="col-md-7">
-            <div class="row ms-0 input-group">
-              <select class="form-select" aria-label="Parameter type for following text input" name="inputParameter3" id="inputParameter3">
-                <option hidden value="">Select One</option>
-                <option value="start_date" <?= ($_POST['inputParameter3'] ?? '') == "start_date" ? "selected" : "" ?>>Start Date</option>
-                <option value="end_date" <?= ($_POST['inputParameter3'] ?? '') == "end_date" ? "selected" : "" ?>>End Date</option>
-                <option value="location_id" <?= ($_POST['inputParameter3'] ?? '') == "location_id" ? "selected" : "" ?>>Location ID</option>
-                <option value="event_name" <?= ($_POST['inputParameter3'] ?? '') == "event_name" ? "selected" : "" ?>>Event Name</option>
-              </select>
-              <input type="text" class="form-control w-50" name="inputValue3" value="<?= $_POST['inputValue3'] ?? '';?>" aria-describedby="helpValue3" id="inputValue3">
-              <button type="button" class="btn-close align-self-center m-2" aria-label="Close" id="close3"></button>
-            </div>
-          </div>
-          <div id="helpValue3" class="form-text offset-md-3">Maximum of 32 Characters</div>
         </div>
 
         <div id="addParamRow" class="row mb-3 mb-md-4">

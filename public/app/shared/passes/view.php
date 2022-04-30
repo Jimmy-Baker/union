@@ -14,6 +14,12 @@ if($pass == false) {
   redirect_to(url_for('/app/shared/passes/passes.php'));
 }
 
+if(is_post_request()){
+  if($punches){
+    
+  }
+}
+
 $page_title = 'Pass: ' . h($pass->id);
 include(SHARED_PATH . '/user-header.php'); 
 ?>
@@ -71,6 +77,7 @@ include(SHARED_PATH . '/user-header.php');
       </div>
     </div>
   </div>
+  <?php if($punches) { ?>
   <div class="card shadow col-md-10 mx-auto mb-4">
     <div class="card-header fs-4"><?= h($pass->pass_type()); ?></div>
     <div class="card-body">
@@ -82,6 +89,7 @@ include(SHARED_PATH . '/user-header.php');
               <th>Gym ID</th>
               <th>Assigned</th>
               <th>Used</th>
+              <th>&nbsp;</th>
             </tr>
           </thead>
           <tbody>
@@ -90,6 +98,19 @@ include(SHARED_PATH . '/user-header.php');
               <td><?= h($punch->gym_id) ?></td>
               <td><?= h($punch->assigned) ?></td>
               <td><?= h($punch->used) ?></td>
+              <td>
+                <form method="POST" action="<?= url_for('/app/shared/locations/view.php?=' . $pass->id); ?>">
+                  <input type="hidden" name="id" value="<?= h($punch->gym_id) ?>">
+                  <div class="btn-group" role="group" aria-label="location actions">
+                    <button class="btn btn-primary" type="submit" name="method" value="redeem">Redeem</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
+                    <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
+                      <li><button type="submit" class="dropdown-item no-js" name="method" value="remove">Remove Redemption</button></li>
+                      <li><button class="dropdown-item yes-js" data-bs-toggle="modal" data-bs-target="#confirmModal" data-bs-id="<?=($participant->id) ?>">Remove Redemption</button></li>
+                    </ul>
+                  </div>
+                </form>
+              </td>
             </tr>
             <?php } ?>
           </tbody>
@@ -97,6 +118,30 @@ include(SHARED_PATH . '/user-header.php');
       </div>
     </div>
   </div>
+  <?php } ?>
+
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmModalLabel">Confirm Deletion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to remove this redemption? The user will be refunded a punch.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <form action="<?= url_for('/app/shared/locations/attendance.php'); ?>" method="POST">
+            <input type="hidden" name="id" value="" id="confirmInput">
+            <input type="hidden" name="method" value="remove">
+            <button type="submit" class="btn btn-primary" id="confirmButton">Confirm Removal</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row justify-content-evenly" role="toolbar" aria-label="Pass toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/passes/edit.php?id='. u($pass->id)); ?>">Edit This Pass</a>

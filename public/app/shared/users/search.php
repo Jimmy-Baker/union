@@ -20,7 +20,7 @@ if(is_post_request()) {
         $session->message(count($users) . ' users were found.', 'success');
       }
     } else {
-      $session->message('The search query failed. Please try again.', 'warning');
+      $session->message('The search query failed to return a result. Please try again.', 'warning');
     }
   } else {
     $session->message('Please check your search terms and try again.', 'warning');
@@ -56,7 +56,7 @@ include(SHARED_PATH . '/user-header.php');
 </header>
 
 <main class="container-md p-4" id="main">
-  <form action="<?= url_for('/app/shared/users/search.php#results'); ?>" method="POST" class="mb-5">
+  <form action="<?= url_for('/app/shared/users/search.php#results'); ?>" method="POST" class="mb-5 needs-validation" novalidate>
     <fieldset class="card shadow col-md-10 mx-auto mb-4">
       <legend class="card-header">Search Criteria</legend>
       <div class="card-body">
@@ -228,6 +228,10 @@ include(SHARED_PATH . '/user-header.php');
   <?php } ?>
 </main>
 
-<?php $scripts[] = "js/extra_param.js"; ?>
-
-<?php include(SHARED_PATH . '/user-footer.php'); ?>
+<?php 
+if($search->error_array != []){ 
+  $error_render=$search->error_array;
+}
+$scripts[] = "js/extra_param.js";
+include(SHARED_PATH . '/user-footer.php'); 
+?>

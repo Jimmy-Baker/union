@@ -11,7 +11,7 @@ $key = $_GET['key'] ?? $_POST['key'];
 
 if(is_post_request()) {
   // Validations
-
+  
   // if there were no errors, try to find user
   if(empty($error_array)) {
     //lookup user by email and confirm key
@@ -28,22 +28,22 @@ if(is_post_request()) {
           $saved = $user->save();
           if($saved) {
             $request->delete();
-            $session->message('Your password has been updated', 'success');
+            $session->message('Your password has been updated.', 'success');
             redirect_to(url_for('/app/login.php'));
           } else {
-            $session->message('Your request could not be completed', 'warning');
+            $session->message('Your request could not be completed. Please check your input and try again.', 'warning');
           }
         } else {
-          $session->message('The request could not be validated', 'warning');
+          $session->message('The request could not be validated.', 'warning');
         }
       } else {
-        $session->message('No password reset request could be found', 'warning');
+        $session->message('No password reset request could be found.', 'warning');
       }
     } else {
-      $session->message('The email could not be found', 'warning');
+      $session->message('The email could not be found.', 'warning');
     }
   } else {
-    //error_array
+    $session->message('Please check your input and try again.', 'warning');
   }
 } else {
   
@@ -54,7 +54,9 @@ include(SHARED_PATH . '/public-header.php');
 ?>
 
 <main class="container-md p-4 mt-5" id="main">
-  <form action="restore.php" method="post">
+
+  <? display_errors($error_array); ?>
+  <form action="restore.php?email=<?= u($email) ?>&key=<?= u($key) ?>" method="post">
     <h1><?= $page_title ?></h1>
     <fieldset class="card shadow col-md-10 mx-auto mb-4">
       <legend class="card-header">Reset Your Password</legend>
@@ -74,8 +76,9 @@ include(SHARED_PATH . '/public-header.php');
             <label for="inputPassword" class="col-form-label">New Password</label>
           </div>
           <div class="col-md-7">
-            <input type="password" name="user[password]" value="" class="form-control" id="inputPassword">
+            <input type="password" name="user[password]" value="" class="form-control" aria-describedby="helpPassword" id="inputPassword">
           </div>
+          <div id="helpPassword" class="form-text offset-md-3">Must be at least 8 characters and contain a combination of uppercase and lowercase letters and symbols.</div>
         </div>
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -85,6 +88,7 @@ include(SHARED_PATH . '/public-header.php');
           <div class="col-md-7">
             <input type="password" name="user[confirm_password]" value="" class="form-control" id="inputConfirmPassword">
           </div>
+          <div id="helpConfirmPassword" class="form-text offset-md-3">Must match the previous value.</div>
         </div>
       </div>
     </fieldset>

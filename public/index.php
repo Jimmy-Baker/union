@@ -12,8 +12,10 @@ if($session->is_logged_in()){
   <div class="p-5 bg-primary text-light" id="index-hd">
     <div class="container-fluid py-3">
       <div class="row">
-        <div class="col-8">
+        <div class="col-12 col-sm-8">
           <h1 class="display-2">Freedom to Climb</h1>
+        </div>
+        <div class="col-8">
           <p>Unlock climbing access accross the country with the largest network of independently-owned gyms. Introducing the Union Pass, available now!</p>
           <a class="btn btn-secondary" href="<?= url_for('passes.php');?>" role="button">Explore Passes</a>
         </div>

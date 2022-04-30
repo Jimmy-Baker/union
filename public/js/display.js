@@ -2,6 +2,28 @@ window.addEventListener('scroll', topButton);
 hideMessage();
 locationModal();
 resetForm();
+spinButton();
+
+function spinButton() {
+	var spinButton = document.getElementById('spinButton');
+	if (spinButton) {
+		spinButton.addEventListener('click', () => {
+			var wheel = document.createElement('span');
+			wheel.classList.add('spinner-border', 'spinner-border-sm');
+			wheel.setAttribute('role', 'status');
+			var text = document.createElement('span');
+			text.innerText = 'Loading...';
+			spinButton.innerText = '';
+			spinButton.appendChild(wheel);
+			spinButton.appendChild(text);
+		});
+		spinButton.addEventListener('keydown', e => {
+			if (e.code === 'Space' || e.code === 'Enter') {
+				button.click();
+			}
+		});
+	}
+}
 
 function locationModal() {
 	var locationModal = document.getElementById('locationModal');
@@ -77,3 +99,13 @@ function resetForm() {
 		});
 	}
 }
+
+let map;
+function initMap() {
+	map = new google.maps.Map(document.getElementById('map'), {
+		center: { lat: -34.397, lng: 150.644 },
+		zoom: 8
+	});
+}
+
+window.initMap = initMap;

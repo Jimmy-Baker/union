@@ -56,7 +56,7 @@ include(SHARED_PATH . '/user-header.php');
               <dt class="col-sm-4 text-sm-end">Primary Phone</dt>
               <dd class="col-sm-8"><?= d(format_phone($location->phone_p_country, $location->phone_primary)); ?></dd>
               <dt class="col-sm-4 text-sm-end">Gym Website</dt>
-              <dd class="col-sm-8"><a href="https://<?= raw_u($location->website) ?>"><?= u($location->website); ?></a></dd>
+              <dd class="col-sm-8"><a href="<?= h($location->website) ?>"><?= h($location->website); ?></a></dd>
             </dl>
           </div>
         </div>

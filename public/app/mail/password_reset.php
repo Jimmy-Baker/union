@@ -3,14 +3,11 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-//require($_SERVER['DOCUMENT_ROOT'] . '/private/vendor/autoload.php');
-
 $message = "<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><title>Password Reset Requested</title><meta name='description' content='Click on the included link to reset your password.'><meta name='author' content='Union Climbing'><meta name='viewport' content='width=device-width, initial-scale=1'><style type='text/css'></style></head><body><header><h1>Union Climbing</h1></header><main><p>Hi {$user->preferred_name},</p><p>A password reset was requested for your Union account. If this was not done by you, you can safely disregard this email. To proceed, click the link below and enter your security code. This code will expire in 5 mintues.</p><p>Security code: {$key}</p><a href='https://www.unionclimbing.com/app/restore.php?email={$user->email}&key={$key}'>Reset Your Password</a></main></body></html>";
-
 
 $mail = new PHPMailer(true);
 try {
-  $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+  // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
   $mail->isSMTP();
   $mail->Host = 'smtp.hostinger.com';
   $mail->Port = 465;
@@ -28,7 +25,6 @@ try {
   $mail->Body = $message;
   
   $mail->send();
-  echo 'The email message was sent.';
 
 } catch (Exception $e) {
   echo "The email message was not sent. Mailer Error: {$mail->ErrorInfo}";

@@ -57,7 +57,6 @@ include(SHARED_PATH . '/user-header.php');
 </header>
 
 <main class="container-md p-4" id="main">
-  <?= display_errors($group->error_array); ?>
   <form action="<?= url_for('/app/shared/groups/edit.php?id=' . u($id)); ?>" method="post">
 
     <?php include('form_fields.php'); ?>
@@ -73,4 +72,9 @@ include(SHARED_PATH . '/user-header.php');
   </form>
 </main>
 
-<?php include(SHARED_PATH . '/user-footer.php'); ?>
+<?php
+if($group->error_array != []){ 
+  $error_render=$group->error_array;
+}
+include(SHARED_PATH . '/user-footer.php'); 
+?>

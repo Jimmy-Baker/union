@@ -48,7 +48,7 @@ include(SHARED_PATH . '/user-header.php');
       </div>
       <div class="row mt-4">
         <div class="col-lg-4 order-lg-last d-grid d-lg-block">
-          <img src="#" class="rounded img-thumbnail mx-auto mb-2" alt="<?= h($event->event_name) ?>'s profile picture." height="200" width="200">
+          <img src="<?= h($event->photo_data) ?>" class="rounded img-thumbnail mx-auto mb-2" alt="<?= h($event->event_name) ?>'s profile picture." height="200" width="200">
         </div>
         <div class="col-lg-8 order-lg-first">
           <div class="card-text">
@@ -65,7 +65,6 @@ include(SHARED_PATH . '/user-header.php');
               <dd class="col-sm-8"><?= d($event->cost); ?></dd>
               <dt class="col-sm-4 text-sm-end">URL</dt>
               <dd class="col-sm-8"><?= d($event->url); ?></dd>
-              <dt class="col-sm-4 text-sm-end">Photo Data</dt>
             </dl>
           </div>
         </div>
