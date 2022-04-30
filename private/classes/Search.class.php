@@ -54,7 +54,21 @@ class Search {
   
   
   private function validate(){
-    return true;
+    if(!isset($this->parameter1)){
+      $this->error_array += ["Parameter1" => "The first parameter cannot be blank."];
+    }
+    
+    if(isset($this->value2)){
+      if($this->parameter2 = ''){
+        $this->error_array += ["Parameter2" => "This search value cannot be blank."];
+      }
+      
+      
+      if(!isset($this->parameter2)){
+        $this->error_array += ["Parameter1" => "This search value cannot have a blank parameter."];
+      }
+    }
+    
   }
 }
 

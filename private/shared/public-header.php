@@ -22,6 +22,7 @@
     <script src="<?= url_for("/node_modules/@popperjs/core/dist/umd/popper.min.js");?>" defer></script>
     <script src="<?= url_for("/node_modules/bootstrap/dist/js/bootstrap.min.js");?>" defer></script>
     <script src="<?= url_for("js/display.js");?>" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAd8V8hWBmqllcYKHS5uQraXVE1mZ-a-X4&callback=initMap" async></script>
   </head>
 
   <body class="container-fluid px-0 pt-5 vh-100">

@@ -23,10 +23,11 @@ class Event extends DatabaseObject {
     $this->participants = $args['participants'] ?? '';
     $this->cost = $args['cost'] ?? '';
     $this->url = $args['url'] ?? '';
-    $this->photo_data = $args['photo_data'] ?? '/public/upload/event/default.png';
+    $this->photo_data = $args['photo_data'] ?? '"/public/upload/event/default.png"';
   }
   
   protected function validate() {
+
     $this->error_array = [];
 
     if(is_blank($this->start_date)) {
@@ -45,9 +46,9 @@ class Event extends DatabaseObject {
     
     if(is_blank($this->location_id)) {
       $this->error_array += ["LocationID" => "Location cannot be blank."];
-    } elseif (!ctype_digit($this->zip)) {
+    } elseif (!ctype_digit($this->location_id)) {
       $this->error_array += ["LocationID" => "Location can only contain numerals."];
-    } elseif (!has_length($this->zip, array('min' => 1, 'max' => 5))) {
+    } elseif (!has_length($this->location_id, array('min' => 1, 'max' => 5))) {
       $this->error_array += ["LocationID" => "Location must be 5 digits or less."];
     }
 
@@ -63,26 +64,24 @@ class Event extends DatabaseObject {
     
     if(is_blank($this->participants)) {
       $this->error_array += ["Participants" => "Participants cannot be blank."];
-    } elseif (!ctype_digit($this->zip)) {
+    } elseif (!ctype_digit($this->participants)) {
       $this->error_array += ["Participants" => "Participants can only contain numerals."];
-    } elseif (!has_length($this->zip, array('min' => 1, 'max' => 5))) {
+    } elseif (!has_length($this->participants, array('min' => 1, 'max' => 5))) {
       $this->error_array += ["Participants" => "Participants must be 3 digits or less."];
     }
     
     if(!isset($this->cost)) {
       $this->error_array += ["Cost" => "Cost cannot be blank."];
-    } elseif (!has_decimal_format($this->cost)) {
+    } elseif (!ctype_digit($this->cost) &&!has_decimal_format($this->cost)) {
       $this->error_array += ["Cost" => "Cost must be a decimal number."];
     }
 
-    if(isset($this->url)){
+    if(isset($this->url) && $this->url!=''){
       if(!has_valid_url($this->url)) {
         $this->error_array += ["URL" => "URL must be a valid URL format."];
       }
+
     }
-    
-    
-    
     return $this->error_array;
   }
   

@@ -91,7 +91,13 @@ class PassItem extends DatabaseObject {
   }
   
   public function redeem_punch() {
-    $this->used = 1;
+    $this->used += 1;
+    $result = $this->save();
+    return $result;
+  }
+  
+  public function refund_punch() {
+    $this->used -= 1;
     $result = $this->save();
     return $result;
   }

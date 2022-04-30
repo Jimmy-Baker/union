@@ -58,6 +58,11 @@ class Group extends DatabaseObject {
     return $array; 
   }
   
+  static public function find_all_by_member($user_id) {
+    $sql = "SELECT groups.* FROM groups LEFT JOIN group_users ON groups.id = group_users.group_id WHERE group_users.user_id='" . parent::$database->escape_string($user_id) . "';";
+    return parent::find_by_sql($sql);
+  }
+  
   public function add_member($user_id) {
     $sql = "INSERT INTO group_users (group_id, user_id, role_abv) VALUES ('" . parent::$database->escape_string($this->id) . "', '" . parent::$database->escape_string($user_id) . "', 'GC') LIMIT 1;";
     $results = self::$database->query($sql);
@@ -99,5 +104,4 @@ class Group extends DatabaseObject {
     $result = parent::$database->query($sql);
     return $result;
   }
-  
 }

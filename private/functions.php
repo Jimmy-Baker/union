@@ -13,7 +13,7 @@ function u($string="") {
 }
 
 function raw_u($string="") {
-  return h(rawurlencode($string));
+  return rawurlencode($string);
 }
 
 function h($string="") {

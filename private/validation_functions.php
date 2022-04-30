@@ -118,7 +118,7 @@
   }
   
   function has_date($value, $options) {
-    if(isset($options['min']) && !has_date_greater_than(strtotime($value), strtotime($options['min'] . ' + 1 day'))) {
+    if(isset($options['min']) && !has_date_greater_than(strtotime($value), strtotime($options['min'] . ' - 1 day'))) {
       return false;
     } elseif(isset($options['max']) && !has_date_less_than(strtotime($value), strtotime($options['max'] . ' + 1 day'))) {
       return false;

@@ -3,7 +3,7 @@
 class Location extends DatabaseObject {
 
   static protected $table_name = "locations";
-  static protected $db_columns = ['id', 'gym_id', 'location_name', 'street_address', 'city', 'zip', 'state_abv', 'country_abv', 'phone_p_country', 'phone_primary', 'photo_data', 'attendance_data', 'capacity'];
+  static protected $db_columns = ['id', 'gym_id', 'location_name', 'street_address', 'city', 'zip', 'state_abv', 'country_abv', 'phone_p_country', 'phone_primary', 'photo_data', 'capacity', 'employee_group'];
   
   public $id;
   public $gym_id;
@@ -16,8 +16,8 @@ class Location extends DatabaseObject {
   public $phone_p_country;
   public $phone_primary;
   public $photo_data = [];
-  public $attendance_data = [];
   public $capacity;
+  public $employee_group;
   
   public function __construct($args=[]) {
     $this->gym_id = $args['gym_id'] ?? '';
@@ -30,8 +30,8 @@ class Location extends DatabaseObject {
     $this->phone_p_country = $args['phone_p_country'] ?? '';
     $this->phone_primary = $args['phone_primary'] ?? '';
     $this->photo_data = $args['photo_data'] ?? [];
-    $this->attendance_data = $args['attendance_data'] ?? [];
     $this->capacity = $args['capacity'] ?? '';
+    $this->employee_group = $args['employee_group'] ?? '';
   }
   
   public function occupants() {

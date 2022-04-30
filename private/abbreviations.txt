@@ -1,10 +1,31 @@
 Abbreviations
 
-AA
+AA - Administrator User
+AG - Administrator Group
+
+CC - Corporate Group
+
+FF - Family Group
 
 GA - Group Administrator
-GM - Gym Manager
-GS - Gym Staff
-GU - Group User
+GB - Group Moderator
+GC - Group Contributor
 
-MM - Union Member
+
+GG - Gym Employees Group
+
+GM - Gym Manager User
+GS - Gym Staff User
+
+MG - Gym Manager Group
+
+MM - Union Member User
+
+II - Institution Group
+
+PP - Private Group
+
+XC - Change Into Location
+XE - Edit Events
+XI - Edit Gym Info
+XA - Add Employees directly to employee group
