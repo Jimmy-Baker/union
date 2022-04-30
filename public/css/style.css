@@ -34,6 +34,13 @@ header>div:first-child {
   background-size: calc(15% + 280px);
 }
 
+#events-hd {
+  background: url(/public/img/events.png);
+  background-position: calc(80vw - 120px) calc(90% + 5vw);
+  background-repeat: no-repeat;
+  background-size: calc(5% + 280px);
+}
+
 /*------------------*\
 ||  Footer Styling  ||
 \*------------------*/
@@ -41,9 +48,9 @@ header>div:first-child {
   display: none;
   position: fixed;
   bottom: 20px;
-  padding-bottom: 13.5px;
-  padding-top: 13.5px;
+  height: 52px;
   right: 20px;
+  width: 52px;
   z-index: 900;
 }
 

@@ -14,6 +14,7 @@ class Event extends DatabaseObject {
   public $cost;
   public $url;
   public $photo_data = [];
+  public $description;
   
   public function __construct($args=[]) {
     $this->start_date = $args['start_date'] ?? '';
@@ -24,6 +25,27 @@ class Event extends DatabaseObject {
     $this->cost = $args['cost'] ?? '';
     $this->url = $args['url'] ?? '';
     $this->photo_data = $args['photo_data'] ?? '"/public/upload/event/default.png"';
+    $this->description = $args['description'] ?? '';
+  }
+  
+  public static function find_ex_this_month() {
+    $sql = "SELECT events.*, b.location_name, b.gym_name from events LEFT JOIN (SELECT locations.id AS id, locations.location_name AS location_name, gyms.gym_name AS gym_name FROM locations LEFT JOIN gyms ON locations.gym_id = gyms.id) AS b ON events.location_id=b.id WHERE events.start_date >= (LAST_DAY(NOW()) + INTERVAL 1 DAY - INTERVAL 1 MONTH) AND events.start_date < (LAST_DAY(NOW()) + INTERVAL 1 DAY) ORDER BY start_date ASC;";
+    $results = self::$database->query($sql);
+    $array = [];
+    while($record = $results->fetch_assoc()){
+      $object = (object) $record;
+      // foreach($object as $prop=>$value){
+      //   $value = $value;
+      // }
+      $array[] = $object;
+    }
+    $results->free(); 
+    return $array; 
+  }
+  
+  public static function find_ex_next_month() {
+    $sql = "SELECT events.*, b.location_name, b.gym_name from events LEFT JOIN (SELECT locations.id AS id, locations.location_name AS location_name, gyms.gym_name AS gym_name FROM locations LEFT JOIN gyms ON locations.gym_id = gyms.id) AS b ON events.location_id=b.id WHERE events.start_date >= (LAST_DAY(NOW()+INTERVAL 1 MONTH) + INTERVAL 1 DAY - INTERVAL 1 MONTH) AND events.start_date < (LAST_DAY(NOW() + INTERVAL 1 MONTH) + INTERVAL 1 DAY) ORDER BY start_date ASC;";
+    return parent::find_by_sql($sql);
   }
   
   protected function validate() {
@@ -82,6 +104,17 @@ class Event extends DatabaseObject {
       }
 
     }
+    
+    if(isset($this->description) && $this->description!=''){
+      if(!ctype_print($this->description)) {
+        $this->error_array += ["description" => "Description must consist of printable characters."];
+      } elseif(has_padding($this->description)){
+        $this->error_array += ["description" => "Description cannot begin or end with spaces."];
+      } elseif(!has_valid_text($this->description)) {
+        $this->error_array += ["description" => "Description cannot contain any special characters."];
+      }
+    }
+    
     return $this->error_array;
   }
   

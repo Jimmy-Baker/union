@@ -155,6 +155,10 @@
     return !preg_match('/[^a-z0-9\s-]/i',$string);
   }
   
+  function has_valid_text($string) {
+    return !preg_match('/[A-Za-z0-9 _.,-!"\'$/]*', $string);
+  }
+  
   function has_valid_url($website) {
     return preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website);
   }
