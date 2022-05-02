@@ -2,6 +2,11 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+if(!test_access('GS')){
+  $session->message('You do not have permission to view all events.', 'warning');
+  redirect_to(url_for($session->dashboard()));
+} 
+
 $events = Event::find_all();
 $loc_events = Event::find_all_by_param("location_id", h($session->location));
 $local = $_GET['local'] ?? false;
@@ -141,9 +146,11 @@ include(SHARED_PATH . '/user-header.php');
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/events/search.php'); ?>">Find Events</a>
     </div>
+    <?php if(Permission::test_location_user_permission($event->location_id, $session->user_id, 'XE') || $session->access_abv == 'AA'){ ?>
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/events/new.php'); ?>">Create A Event</a>
     </div>
+    <?php } ?>
   </div>
 
 </main>

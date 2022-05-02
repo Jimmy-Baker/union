@@ -13,6 +13,11 @@ if($pass == false) {
   redirect_to(url_for('/app/shared/passes/passes.php'));
 }
  
+if(!test_access('GM')){
+  $session->message('You do not have permission to delete a pass.', 'warning');
+  redirect_to(url_for('/app/shared/passes/view.php?id=' . u($id)));
+} 
+
 /** 
  * Delete a database record upon request
  */

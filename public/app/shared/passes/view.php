@@ -89,7 +89,9 @@ include(SHARED_PATH . '/user-header.php');
               <th>Gym ID</th>
               <th>Assigned</th>
               <th>Used</th>
+              <?php if(test_access('GS')){ ?>
               <th>&nbsp;</th>
+              <?php } ?>
             </tr>
           </thead>
           <tbody>
@@ -98,6 +100,7 @@ include(SHARED_PATH . '/user-header.php');
               <td><?= h($punch->gym_id) ?></td>
               <td><?= h($punch->assigned) ?></td>
               <td><?= h($punch->used) ?></td>
+              <?php if(test_access('GS')){ ?>
               <td>
                 <form method="POST" action="<?= url_for('/app/shared/locations/view.php?=' . $pass->id); ?>">
                   <input type="hidden" name="id" value="<?= h($punch->gym_id) ?>">
@@ -111,6 +114,7 @@ include(SHARED_PATH . '/user-header.php');
                   </div>
                 </form>
               </td>
+              <?php } ?>
             </tr>
             <?php } ?>
           </tbody>
@@ -120,6 +124,7 @@ include(SHARED_PATH . '/user-header.php');
   </div>
   <?php } ?>
 
+  <?php if(test_access('GS')){ ?>
   <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -141,7 +146,9 @@ include(SHARED_PATH . '/user-header.php');
       </div>
     </div>
   </div>
+  <?php } ?>
 
+  <?php if(test_access('GM')){ ?>
   <div class="row justify-content-evenly" role="toolbar" aria-label="Pass toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/passes/edit.php?id='. u($pass->id)); ?>">Edit This Pass</a>
@@ -150,6 +157,7 @@ include(SHARED_PATH . '/user-header.php');
       <a class="btn shadow btn-danger" href="<?= url_for('app/shared/passes/delete.php?id='. u($pass->id)); ?>">Delete This Pass</a>
     </div>
   </div>
+  <?php } ?>
 </main>
 
 <?php include(SHARED_PATH . '/user-footer.php'); ?>

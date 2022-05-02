@@ -13,6 +13,11 @@ if($gym == false) {
   redirect_to(url_for('/app/shared/gyms/gyms.php'));
 }
 
+if(!test_access('AA') && !(test_access('GM') && $session->gym_id==$id)){
+  $session->message('You do not have permission to modify this gym.', 'warning');
+  redirect_to(url_for('/app/shared/gyms/gyms.php'));
+} 
+
 /** 
  * Save a database record upon request
  */

@@ -12,6 +12,12 @@ if($group == false) {
   $session->message('No group was identified.', 'warning');
   redirect_to(url_for('/app/shared/groups/groups.php'));
 }
+
+if(!test_access('GS') && !Group::test_group_user($id, $session->user_id)){
+  $session->message('You do not have permission to view this group.', 'warning');
+  redirect_to(url_for('/app/shared/groups/groups.php'));
+}
+
 $members = $group->group_members();
 
 $page_title = 'Group: ' . h($group->name);
@@ -125,16 +131,19 @@ include(SHARED_PATH . '/user-header.php');
     </div>
   </div>
 
+  <?php if(($session->access_abv == 'AA') || Group::test_group_user_role($id, $session->user_id, 'GA')){ ?>
   <div class="row justify-content-evenly" role="toolbar" aria-label="Group toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/groups/edit.php?id='. u($group->id)); ?>">Edit This Group</a>
     </div>
+    <?php if(($session->access_abv == 'AA') || ($group->owner_id == $session->user_id)){ ?>
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-danger" href="<?= url_for('app/shared/groups/delete.php?id='. u($group->id)); ?>">Delete This Group</a>
     </div>
+    <?php } ?>
   </div>
+  <?php } ?>
 </main>
-
 
 <?php
 $scripts[] = "js/confirm.js";  

@@ -13,6 +13,11 @@ if($location == false) {
   redirect_to(url_for('/app/shared/locations/locations.php'));
 }
 
+if(!test_access('AA')){
+  $session->message('You do not have permission to delete a location.', 'warning');
+  redirect_to(url_for('/app/shared/locations/locations.php'));
+}
+
 /** 
  * Delete a database record upon request
  */

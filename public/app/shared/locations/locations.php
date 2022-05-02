@@ -2,6 +2,11 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+if(!test_access('GS')) {
+  $session->message('You do not have permission to view all locations.', 'warning');
+  redirect_to(url_for($session->dashboard()));
+}
+
 $locations = Location::find_all();
 
 $page_title = 'Manage Locations';
@@ -55,9 +60,11 @@ include(SHARED_PATH . '/user-header.php');
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/locations/search.php'); ?>">Find Locations</a>
     </div>
+    <?php if(test_access('AA')) { ?>
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/locations/new.php'); ?>">Create A Location</a>
     </div>
+    <?php } ?>
   </div>
 
 </main>

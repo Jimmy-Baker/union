@@ -2,6 +2,11 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+if(!test_access('GS')){
+  $session->message('You do not have permission to view all gyms.', 'warning');
+  redirect_to(url_for($session->dashboard()));
+} 
+
 $gyms = Gym::find_all();
 
 $page_title = 'Manage Gyms';
@@ -78,6 +83,7 @@ include(SHARED_PATH . '/user-header.php');
       </div>
     </div>
   </div>
+  <?php if(test_access('AA')){ ?>
   <div class="row justify-content-evenly" role="toolbar" aria-label="Gym toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
     </div>
@@ -85,6 +91,7 @@ include(SHARED_PATH . '/user-header.php');
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/gyms/new.php'); ?>">Create A Gym</a>
     </div>
   </div>
+  <?php } ?>
 
 </main>
 

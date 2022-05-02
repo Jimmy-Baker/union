@@ -13,8 +13,15 @@ if($pass == false) {
   redirect_to(url_for('/app/shared/passes/passes.php'));
 }
 
+if(!test_access('GS')){
+  $session->message('You do not have permission to modify a pass.', 'warning');
+  redirect_to(url_for('/app/shared/passes/view.php?id=' . u($id)));
+} 
+
+/** 
+ * Modify a database record upon request
+ */
 if(is_post_request()) {
-  // Save record using post parameters
   $args = $_POST['pass'];
   $pass->merge_attributes($args);
   $result = $pass->save();

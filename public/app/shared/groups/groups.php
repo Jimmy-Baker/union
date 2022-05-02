@@ -121,6 +121,7 @@ include(SHARED_PATH . '/user-header.php');
       </div>
     </div>
   </div>
+  <?php if(test_access('GM')){ ?>
   <div class="row justify-content-evenly" role="toolbar" aria-label="Group toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/groups/search.php'); ?>">Find Groups</a>
@@ -129,7 +130,7 @@ include(SHARED_PATH . '/user-header.php');
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/groups/new.php'); ?>">Create A Group</a>
     </div>
   </div>
-
+  <?php } ?>
 </main>
 
 <?php include(SHARED_PATH . '/user-footer.php'); ?>

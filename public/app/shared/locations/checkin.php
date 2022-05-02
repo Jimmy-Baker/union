@@ -2,6 +2,11 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+if(!test_access('GS')) {
+  $session->message('You do not have permission to check users in.', 'warning');
+  redirect_to(url_for($session->dashboard()));
+}
+
 $location = Location::find_by_id($_SESSION['location']);
 $gym = Gym::find_by_id($location->gym_id);
 

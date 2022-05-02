@@ -2,6 +2,11 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+if(!test_access('GS')){
+  $session->message('You do not have permission to view all passes.', 'warning');
+  redirect_to(url_for($session->dashboard()));
+} 
+
 $passes = Pass::find_all();
 $expireds = Pass::find_expired();
 $actives = Pass::find_active();
@@ -183,7 +188,7 @@ include(SHARED_PATH . '/user-header.php');
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/passes/search.php'); ?>">Find Passes</a>
     </div>
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
-      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/passes/new.php'); ?>">Create A Pass</a>
+      <a class="btn shadow btn-primary" href="<?= url_for('app/shared/passes/provision.php'); ?>">Provision A Pass</a>
     </div>
   </div>
 

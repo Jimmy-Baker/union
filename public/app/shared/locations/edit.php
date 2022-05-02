@@ -14,6 +14,11 @@ if($location == false) {
   redirect_to(url_for('/app/shared/locations/locations.php'));
 }
 
+if(!test_access('AA') && !(Permission::test_location_user_permission($id, $session->user_id, 'XI'))){
+  $session->message('You do not have permission to modify this location.', 'warning');
+  redirect_to(url_for('/app/shared/locations/view.php?id=' . u($id)));
+} 
+
 /** 
  * Save a database record upon request
  */

@@ -24,19 +24,8 @@ if(is_post_request()) {
       $session->login($user);
       $session->message('Your login was successful!', 'success');
       
-      switch ($session->access_abv) {
-        case "AA":
-          redirect_to(url_for('/app/admin/index.php'));
-          break;
-        case "GS":
-          redirect_to(url_for('/app/staff/index.php'));
-          break; 
-        case "GM":
-          redirect_to(url_for('app/staff/index.php'));
-          break;
-        default:
-          redirect_to(url_for('app/member/index.php'));
-      }
+      redirect_to(url_for('/app/dashboard/index.php'));
+          
     } else {
       $session->message('That email and password combination was incorrect.', 'warning');
     }

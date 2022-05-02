@@ -15,6 +15,11 @@ $group = Group::find_by_id($id);
 $user_id = $_POST['user'];
 $redirection = url_for('/app/shared/groups/view.php?id=' . u($id));
 
+if(($session->access_abv != 'AA') && !Group::test_group_user_role($id, $session->user_id, 'GA')){
+  $session->message('You do not have permission to edit this group.', 'warning');
+  redirect_to(url_for('/app/shared/groups/view.php?id='. u($id)));
+}
+
 /** 
  * Remove a user from the group upon request
  */

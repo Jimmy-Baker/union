@@ -2,6 +2,11 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+if(!test_access('GS')) {
+  $session->message('You do not have permission to search all locations.', 'warning');
+  redirect_to(url_for($session->dashboard()));
+}
+
 /** 
  * Perform a sql search query upon request
  */

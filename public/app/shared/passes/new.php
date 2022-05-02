@@ -2,6 +2,11 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+if(!test_access('GM')){
+  $session->message('You do not have permission to create a custom pass.', 'warning');
+  redirect_to(url_for('/app/shared/passes/view.php?id=' . u($id)));
+} 
+
 /** 
  * Create a database record upon request
  */

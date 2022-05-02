@@ -13,6 +13,11 @@ if($group == false) {
   redirect_to(url_for('/app/shared/groups/groups.php'));
 }
 
+if(($session->access_abv != 'AA') && ($group->owner_id != $session->user_id)){
+  $session->message('You do not have permission to delete this group.', 'warning');
+  redirect_to(url_for('/app/shared/groups/view.php?id='. u($id)));
+}
+
 /** 
  * Delete a database record upon request
  */

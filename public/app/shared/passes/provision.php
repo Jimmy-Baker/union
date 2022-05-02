@@ -2,6 +2,11 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+if(!test_access('GS')){
+  $session->message('You do not have permission to provision passes.', 'warning');
+  redirect_to(url_for($session->dashboard()));
+} 
+
 $pass_types = PASS::PASS_TYPES;
 $gyms = Gym::find_all();
 

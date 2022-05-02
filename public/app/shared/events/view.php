@@ -2,6 +2,11 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+if(!test_access('GS')){
+  $session->message('You do not have permission to view event details.', 'warning');
+  redirect_to(url_for($session->dashboard()));
+} 
+
 if(!isset($_GET['id'])) {
   $session->message('No event was identified.', 'warning');
   redirect_to(url_for('/app/shared/events/events.php'));
@@ -71,6 +76,7 @@ include(SHARED_PATH . '/user-header.php');
       </div>
     </div>
   </div>
+  <?php if(Permission::test_location_user_permission($event->location_id, $session->user_id, 'XE') || $session->access_abv == 'AA'){ ?>
   <div class="row justify-content-evenly" role="toolbar" aria-label="Event toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/events/edit.php?id='. u($event->id)); ?>">Edit This Event</a>
@@ -79,6 +85,7 @@ include(SHARED_PATH . '/user-header.php');
       <a class="btn shadow btn-danger" href="<?= url_for('app/shared/events/delete.php?id='. u($event->id)); ?>">Delete This Event</a>
     </div>
   </div>
+  <?php } ?>
 </main>
 
 <?php include(SHARED_PATH . '/user-footer.php'); ?>

@@ -13,6 +13,11 @@ if($group == false) {
   redirect_to(url_for('/app/shared/groups/groups.php'));
 }
 
+if(($session->access_abv != 'AA') && !Group::test_group_user_role($id, $session->user_id, 'GA')){
+  $session->message('You do not have permission to edit this group.', 'warning');
+  redirect_to(url_for('/app/shared/groups/view.php?id='. u($id)));
+}
+
 /** 
  * Save a database record upon request
  */

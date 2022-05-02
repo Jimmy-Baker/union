@@ -110,4 +110,39 @@ class Group extends DatabaseObject {
     $result = parent::$database->query($sql);
     return $result;
   }
+  
+  /** 
+   * Tests if a user has a specific role within a group
+   *  
+   * @param string $group_id The group to look within
+   * @param string $user_id The user to evaluate
+   * @param string $role The role to specify 
+   * @return boolean ex. True if the user has the role within the group
+   */
+  public static function test_group_user_role($group_id, $user_id, $role) {
+    $sql = "SELECT user_id FROM group_users WHERE group_id='" . parent::$database->escape_string($group_id) . "' AND user_id='" . parent::$database->escape_string($user_id) . "' AND role='" . parent::$database->escape_string($role) . "';";
+    $result = self::$database->query($sql);
+    if($result->num_rows >0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  /** 
+   * Tests if a user exists within a group 
+   * 
+   * @param string $group_id The group to look within
+   * @param string $user_id The user to evaluate
+   * @return boolean ex. True if the user has the role within the group
+   */
+  public static function test_group_user($group_id, $user_id) {
+    $sql = "SELECT user_id FROM group_users WHERE group_id='" . parent::$database->escape_string($group_id) . "' AND user_id='" . parent::$database->escape_string($user_id) . "';";
+    $result = self::$database->query($sql);
+    if($result->num_rows >0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

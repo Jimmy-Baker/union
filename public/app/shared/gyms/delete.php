@@ -13,6 +13,11 @@ if($gym == false) {
   redirect_to(url_for('/app/shared/gyms/gyms.php'));
 }
 
+if(!test_access('AA')){
+  $session->message('You do not have permission to delete a gym.', 'warning');
+  redirect_to(url_for('/app/shared/gyms/gyms.php'));
+}
+
 /** 
  * Delete a database record upon request
  */

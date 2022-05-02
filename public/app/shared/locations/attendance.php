@@ -2,6 +2,11 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+if(!test_access('GS')) {
+  $session->message('You do not have permission to view this location\'s attendance.', 'warning');
+  redirect_to(url_for($session->dashboard()));
+}
+
 /** 
  * Save a database record upon request
  */

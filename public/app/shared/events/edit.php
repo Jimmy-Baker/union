@@ -13,6 +13,11 @@ if($event == false) {
   redirect_to(url_for('/app/shared/events/events.php'));
 }
 
+if(!Permission::test_location_user_permission($event->location_id, $session->user_id, 'XE') && $session->access_abv != 'AA'){
+  $session->message("You do not have permission to edit this event.", "warning");
+  redirect_to(url_for('/app/shared/events/events.php'));
+}
+
 /** 
  * Save a database record upon request
  */

@@ -28,14 +28,13 @@ class Permission extends DatabaseObject {
    * @return boolean ex. False if user lacks permission 
    */
   public static function test_location_user_permission($location_id, $user_id, $permission_abv){
-  $sql = "SELECT group_permissions.location_id FROM group_permissions JOIN group_users ON group_permissions.group_id = group_users.group_id WHERE group_permissions.location_id='" . parent::$database->escape_string($location_id) . "' AND group_users.user_id='" . parent::$database->escape_string($user_id) . "' AND group_permissions.permission_abv='" . parent::$database->escape_string($permission_abv) . "'";
-  $result = self::$database->query($sql);
-  if($result->num_rows >0) {
-    return true;
-  } else {
+    $sql = "SELECT group_permissions.location_id FROM group_permissions JOIN group_users ON group_permissions.group_id = group_users.group_id WHERE group_permissions.location_id='" . parent::$database->escape_string($location_id) . "' AND group_users.user_id='" . parent::$database->escape_string($user_id) . "' AND group_permissions.permission_abv='" . parent::$database->escape_string($permission_abv) . "'";
+    $result = self::$database->query($sql);
+    if($result->num_rows >0) {
+      return true;
+    } else {
     return false;
-  }
-  return $result;
+    }
   }
   
   /** 
