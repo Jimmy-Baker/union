@@ -14,6 +14,9 @@ if($location == false) {
   redirect_to(url_for('/app/shared/locations/locations.php'));
 }
 
+/** 
+ * Save a database record upon request
+ */
 if(is_post_request()) {
   // Save record using post parameters
   $args = $_POST['location'];
@@ -26,9 +29,7 @@ if(is_post_request()) {
   } else {
     $session->message('The location update failed. Please evaluate your input and try again.', 'warning');
   }
-} else {
-  //display the form
-}
+} 
 
 $page_title = 'Edit Location: ' . h($gym->gym_name) . ' ' . h($location->location_name);
 include(SHARED_PATH . '/user-header.php'); 

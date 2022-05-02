@@ -3,7 +3,7 @@
 class Pass extends DatabaseObject {
 
   static protected $table_name = "passes";
-  static protected $db_columns = ['id', 'user_id', 'is_active', 'pass_type', 'created_at', 'active_on', 'expires_on', 'pause_on'];
+  static protected $db_columns = ['id', 'user_id', 'is_active', 'pass_type', 'created_at', 'active_on', 'expires_on'];
   
   public $id;
   public $user_id;
@@ -12,10 +12,15 @@ class Pass extends DatabaseObject {
   public $created_at;
   public $active_on;
   public $expires_on;
-  public $pause_on;
   
   public const PASS_TYPES = ['A'=>'Administrator','B'=>'Unlimited', 'C'=>'Conditional','D'=>'Base Pass', 'E'=>'Union Pass', 'F'=>'Season Pass'];
   
+  /** 
+   * Constructs a Pass object with properties set with an associative array   
+   *
+   * @param array $args Values to set the properties with   
+   * @return object An instantiated pass
+   */
   public function __construct($args=[]) {
     $this->user_id = $args['user_id'] ?? '';
     $this->is_active = $args['is_active'] ?? '';
@@ -23,18 +28,32 @@ class Pass extends DatabaseObject {
     $this->created_at = $args['created_at'] ?? '';
     $this->active_on = $args['active_on'] ?? '';
     $this->expires_on = $args['expires_on'] ?? '';
-    $this->pause_on = $args['pause_on'] ?? '';
   }
   
+  /** 
+   * Provides a long-form pass type based on a Pass's pass_type
+   * 
+   * @return string ex. Union Pass or Season Pass 
+   */
   public function pass_type() {
     $key = $this->pass_type;
     return self::PASS_TYPES[$key];
   }
   
+  /** 
+   * Tests whether or not a pass is currently active
+   * 
+   * @return string ex. Yes if pass is active 
+   */
   public function is_active() {
     return ($this->is_active == "1") ? 'Yes' : 'No';
   }
   
+  /** 
+   * Retrieves an array of all expired passes
+   *
+   * @return array An array of Pass objects
+   */
   static public function find_expired(){
     $today = date('Y-m-d');
     $sql = "SELECT * FROM " . static::$table_name . " ";
@@ -42,6 +61,11 @@ class Pass extends DatabaseObject {
     return static::find_by_sql($sql);
   }  
   
+  /** 
+   * Retrieves an array of all active passes  
+   *
+   * @return array An array of Pass objects 
+   */
   static public function find_active(){
     $today = date('Y-m-d');
     $sql = "SELECT * FROM " . static::$table_name . " ";
@@ -49,6 +73,11 @@ class Pass extends DatabaseObject {
     return static::find_by_sql($sql);
   }  
   
+  /** 
+   * Activates a Pass, sets an expiration date, and updates the database record 
+   *
+   * @return boolean ex. True if record update was successful
+   */
   public function activate() {
     $today = date('Y-m-d');
     $this->active_on = $today; 
@@ -64,30 +93,22 @@ class Pass extends DatabaseObject {
     return $this->save();
   }
   
+  /** 
+   * Deactivates all other passes with a matching user_id and updates their records
+   *
+   * @return boolean ex. True if the update was successful
+   */
   public function deactive_others() {
     $sql = "UPDATE passes SET is_active=0 WHERE user_id='" . $this->user_id . "' AND id<>'" . $this->id . "';";
     $result = self::$database->query($sql);
     return $result;
   }
   
-  // public function pause() {
-  //   $this->pause_on = date('Y-m-d');
-  //   $this->expires_on = '';
-  // }
-  
-  // public function unpause() {
-  //   $today = date('Y-m-d');
-  // }
-  
-  protected function create() {
-    // if($this->is_active = '1') {
-    //   $this->activate();
-    // } elseif($this->is_active = '0') {
-    //   $this->active_on = '';
-    // }
-    return parent::create();
-  }
-  
+  /** 
+   * Populates the database with PassItems for the Pass 
+   *
+   * @return boolean ex. True if the record insertion was successful 
+   */
   public function provision() {
     $query = "SELECT id FROM gyms";
     $results = self::$database->query($query);
@@ -115,30 +136,60 @@ class Pass extends DatabaseObject {
 
     return $result;
   }
-
-  // protected function update() {
-  //   if($this->is_active = '1' && !isset($this->active_on)) {
-  //     $this->activate();
-  //   } elseif($this->is_active = '1' && isset($this->active_on)) {
-  //     $this->unpause();
-  //   } elseif($this->is_active = '0' && isset($this->active_on)) {
-  //     $this->pause();
-  //   } 
-  //   return parent::update();
-  // }
   
+  /** 
+   * Tests Pass properties for valid HTML input values
+   *
+   * @return array HTML elements as keys and messages as values
+   */
   protected function validate() {
     $this->error_array = [];
 
     if(is_blank($this->user_id)) {
-      $this->error_array[] = ["#first_name" => "User ID cannot be blank."];
-    } elseif(!User::find_by_id($this->user_id)) {
-      $this->error_array[] = ["#first_name" => "User ID must be for an existing user."];
+      $this->error_array[] = ["UserID" => "User ID cannot be blank."];
+    } elseif(!ctype_digit($this->user_id)){
+      $this->error_array[] = ["UserID" => "User ID must be a number."];
+    }
+    
+    if(is_blank($this->is_active)) {
+      $this->error_array[] = ["IsActive" => "An option must be selected."];
+    } elseif($this->is_active != 0 && $this->is_active != 1) {
+      $this->error_array[] = ["IsActive" => "Possible values are limited to Yes or No."];
+    }
+    
+    if(is_blank($this->pass_type)) {
+      $this->error_array[] = ["PassType" => "Pass type cannot be blank."];
+    } elseif(!isset(PASS::PASS_TYPES[$this->pass_type])){
+      $this->error_array[] = ["PassType" => "Pass type values are limited to pre-defined values."];
+    }
+    
+    if(!is_blank($this->created_at)) {
+      if(!has_date($this->created_at, array('max' => 'now'))){
+      $this->error_array[] = ["CreatedAt" => "Cannot be a future date."];
+      }
+    }
+    
+    if(!is_blank($this->active_on)) {
+      if(!has_date($this->active_on, array('min' => 'now'))){
+      $this->error_array[] = ["ActiveOn" => "Cannot be a past date."];
+      }
+    }    
+    
+    if(!is_blank($this->expires_on)) {
+      if(!has_date($this->expires_on, array('min' => 'now'))){
+      $this->error_array[] = ["ExpiresOn" => "Cannot be a past date."];
+      }
     }
 
     return $this->error_array;
   } 
   
+  /** 
+   * Retrieves a single active Pass for a given user
+   *  
+   * @param string $user_id The user to find a pass for
+   * @return object/boolen An instantiated Pass or False 
+   */
   static public function find_users_active_pass($user_id) {
     $sql = "SELECT * FROM " . static::$table_name . " ";
     $sql .= "WHERE user_id='" . $user_id . "' AND is_active=1 ORDER BY created_at LIMIT 1";

@@ -1,8 +1,4 @@
 <?php
-// prevent this code from being loaded directly
-// if(!isset($group)) {
-//   redirect_to(url_for('/staff/groups/groups.php'));
-// }
 if(count(get_included_files()) == 1) redirect_to(url_for('/app/shared/groups/groups.php'));
 
 $users = User::find_all();
@@ -12,7 +8,7 @@ $today = date('Y-m-d');
 
 <datalist id="userIDs">
   <?php foreach($users as $user) { ?>
-  <option value="<?= h($user->id) ?>" <?= ($user->id == $group->leader_id) ? 'selected' : '';?>><?= h($user->full_name()); ?></option>
+  <option value="<?= h($user->id) ?>" <?= ($user->id == $group->owner_id) ? 'selected' : '';?>><?= h($user->full_name()); ?></option>
   <?php } ?>
 </datalist>
 
@@ -33,12 +29,12 @@ $today = date('Y-m-d');
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
       <div class="col-md-3 text-md-end">
-        <label for="inputLeaderID" class="col-form-label">Leader ID</label>
+        <label for="inputOwnerID" class="col-form-label">Leader ID</label>
       </div>
       <div class="col-md-7">
-        <input type="text" name="group[leader_id]" value="<?= h($group->id) ?>" class="form-control" id="inputLeaderID" list="userIDs" aria-describedby="helpLeaderID" maxlength="8" required>
+        <input type="text" name="group[owner_id]" value="<?= h($group->id) ?>" class="form-control" id="inputOwnerID" list="userIDs" aria-describedby="helpOwnerID" maxlength="8" required>
       </div>
-      <div id="helpLeaderID" class="form-text offset-md-3">Maximum of 32 characters</div>
+      <div id="helpOwnerID" class="form-text offset-md-3">Maximum of 32 characters</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">

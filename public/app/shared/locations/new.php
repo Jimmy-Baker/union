@@ -2,8 +2,10 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+/** 
+ * Create a database record upon request
+ */
 if(is_post_request()) {
-  // Create record using post parameters
   $args = $_POST['location'];
   $location = new Location($args);
   $result = $location->save();

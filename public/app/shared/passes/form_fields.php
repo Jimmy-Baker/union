@@ -1,5 +1,4 @@
 <?php
-// prevent this code from being loaded directly
 if(!isset($pass)) {
   redirect_to(url_for('app/shared/passes/passes.php'));
 }

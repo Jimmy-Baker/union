@@ -13,8 +13,10 @@ if($event == false) {
   redirect_to(url_for('/app/shared/events/events.php'));
 }
 
+/** 
+ * Save a database record upon request
+ */
 if(is_post_request()) {
-  // Save record using post parameters
   $args = $_POST['event'];
   
   for($num = 1; $num<2; $num++) {

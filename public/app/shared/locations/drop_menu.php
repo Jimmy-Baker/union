@@ -1,10 +1,5 @@
 <?php
-// prevent this code from being loaded directly
-// if(!defined('drop_menu')) {
-//   header("Location: " . __DIR__ . '/public/app/shared/locations/locations.php');
-// }
 if(count(get_included_files()) == 1) redirect_to(url_for('/app/shared/locations/locations.php'));
-
 ?>
 
 <div class="col-12 col-md-auto d-flex d-md-block">

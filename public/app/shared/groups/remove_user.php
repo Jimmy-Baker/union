@@ -14,6 +14,10 @@ $id = $_GET['id'];
 $group = Group::find_by_id($id);
 $user_id = $_POST['user'];
 $redirection = url_for('/app/shared/groups/view.php?id=' . u($id));
+
+/** 
+ * Remove a user from the group upon request
+ */
 if(is_post_request()) {
   if($group){
     $result = $group->remove_user($user_id);

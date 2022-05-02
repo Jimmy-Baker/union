@@ -19,6 +19,12 @@ class Location extends DatabaseObject {
   public $capacity;
   public $employee_group;
   
+  /** 
+   * Constructs a Location object with properties set with an associative array   
+   *
+   * @param array $args Values to set the properties with   
+   * @return object An instantiated location
+   */
   public function __construct($args=[]) {
     $this->gym_id = $args['gym_id'] ?? '';
     $this->location_name = $args['location_name'] ?? '';
@@ -34,14 +40,30 @@ class Location extends DatabaseObject {
     $this->employee_group = $args['employee_group'] ?? '';
   }
   
+  /** 
+   * Returns the number of occupants at the location
+   * 
+   * @return int The number of occupants 
+   */
   public function occupants() {
     return Attendance::current_count($this->id);
   }
   
+  /** 
+   * Returns the number of available spaces for checkin at the location
+   * 
+   * @return number The number of available spaces 
+   */
   public function available() {
     return ($this->capacity - $this->occupants());
   }
   
+  /** 
+   * Concatenates the location and gym names
+   *  
+   * @param string $sep The string to join with, ex. ' - ' 
+   * @return string The concatenated names and seperator string 
+   */
   public function full_name($sep = null) {
     $gym_name = Gym::return_param_by_id("gym_name", $this->gym_id);
     if(isset($sep)){
@@ -51,6 +73,11 @@ class Location extends DatabaseObject {
     }
   }
   
+  /** 
+   * Retrieves all locations as objects with additional properties
+   * 
+   * @return array An array of expanded location objects 
+   */
   static public function find_all_locations_expanded() {
     $sql = "SELECT locations.*, states.state_name, states.region, gyms.gym_name, gyms.website FROM locations INNER JOIN states ON locations.state_abv=states.abv INNER JOIN gyms ON locations.gym_id=gyms.id;";
     $results = self::$database->query($sql);
@@ -66,6 +93,11 @@ class Location extends DatabaseObject {
     return $array; 
   }
   
+  /** 
+   * Retrieves a single location at random as an object with additional properties
+   *   
+   * @return object A Location with additional properties
+   */
   static public function find_random_expanded() {
     $sql = "SELECT * FROM (SELECT locations.*, states.state_name, states.region, gyms.gym_name, gyms.website, gyms.avatar_url FROM locations INNER JOIN states ON locations.state_abv=states.abv INNER JOIN gyms ON locations.gym_id=gyms.id) AS r1 JOIN (SELECT CEIL(RAND() * (SELECT MAX(id) FROM locations)) AS id) AS r2 WHERE r1.id >= r2.id ORDER BY r1.id ASC LIMIT 1;";
     $results = self::$database->query($sql);
@@ -81,6 +113,12 @@ class Location extends DatabaseObject {
     return array_shift($array);
   }
   
+  /** 
+   * Retrieves a single location as an object with additional properties 
+   * 
+   * @param string $id The id of the location to retrieve 
+   * @return object A Location with additional properties 
+   */
   static public function find_expanded_by_id($id) {
     $sql = "SELECT locations.*, states.state_name, states.region, gyms.gym_name, gyms.website FROM locations INNER JOIN states ON locations.state_abv=states.abv INNER JOIN gyms ON locations.gym_id=gyms.id WHERE locations.id='" . parent::$database->escape_string($id) . "';";
     $results = self::$database->query($sql);
@@ -96,6 +134,11 @@ class Location extends DatabaseObject {
     return array_shift($array); 
   }
   
+  /** 
+   * Tests Location properties for valid HTML input values
+   *
+   * @return array HTML elements as keys and messages as values 
+   */
   protected function validate() {
     $this-> error_array = [];
     
@@ -151,7 +194,9 @@ class Location extends DatabaseObject {
       $this->error_array += ["PhonePrimary" => "Primary phone can only contain numerals."];
     } elseif (!has_length($this->phone_primary, array('min' => 10, 'max'=>12))) {
       $this->error_array += ["PhonePrimary" => "Primary phone must be 10 to 12 digits."];
-    }      
+    }
+
+    return $this->error_array;      
   }
   
 }

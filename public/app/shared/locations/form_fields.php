@@ -1,5 +1,4 @@
 <?php
-// prevent this code from being loaded directly
 if(!isset($location)) {
   redirect_to(url_for('/staff/locations/locations.php'));
 }
@@ -7,7 +6,6 @@ if(!isset($location)) {
 $states = State::all_states();
 $countries = Country::all_countries();
 $gyms = Gym::find_all();
-
 ?>
 
 <datalist id="countryPrefixes">

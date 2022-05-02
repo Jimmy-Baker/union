@@ -4,7 +4,6 @@ require_login();
 
 $events = Event::find_all();
 $loc_events = Event::find_all_by_param("location_id", h($session->location));
-
 $local = $_GET['local'] ?? false;
 
 $page_title = 'Manage Events';

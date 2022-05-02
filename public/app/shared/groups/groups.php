@@ -62,7 +62,7 @@ include(SHARED_PATH . '/user-header.php');
                 <?php foreach($groups as $group) { ?>
                 <tr class="align-middle text-nowrap">
                   <td><?= h($group->id) ?></td>
-                  <td><?= h($group->leader_id) ?></td>
+                  <td><?= h($group->owner_id) ?></td>
                   <td><?= h($group->type_abv) ?></td>
                   <td><?= h($group->name) ?>
                   <td>
@@ -99,7 +99,7 @@ include(SHARED_PATH . '/user-header.php');
                 <?php foreach($my_groups as $my_group) { ?>
                 <tr class="align-middle text-nowrap">
                   <td><?= h($my_group->id) ?></td>
-                  <td><?= h($my_group->leader_id) ?></td>
+                  <td><?= h($my_group->owner_id) ?></td>
                   <td><?= h($my_group->type_abv) ?></td>
                   <td><?= h($my_group->name) ?>
                   <td>

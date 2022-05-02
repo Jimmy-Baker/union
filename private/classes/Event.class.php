@@ -16,6 +16,12 @@ class Event extends DatabaseObject {
   public $photo_data = [];
   public $description;
   
+  /** 
+   * Constructs a Event object with properties set with an associative array   
+   *
+   * @param array $args Values to set the properties with   
+   * @return object An instantiated event
+   */
   public function __construct($args=[]) {
     $this->start_date = $args['start_date'] ?? '';
     $this->end_date = $args['end_date'] ?? '';
@@ -28,6 +34,11 @@ class Event extends DatabaseObject {
     $this->description = $args['description'] ?? '';
   }
   
+  /** 
+   * Retrieves an array of events occuring this month with expanded properties
+   *  
+   * @return array An array of Event objects 
+   */
   public static function find_ex_this_month() {
     $sql = "SELECT events.*, b.location_name, b.gym_name from events LEFT JOIN (SELECT locations.id AS id, locations.location_name AS location_name, gyms.gym_name AS gym_name FROM locations LEFT JOIN gyms ON locations.gym_id = gyms.id) AS b ON events.location_id=b.id WHERE events.start_date >= (LAST_DAY(NOW()) + INTERVAL 1 DAY - INTERVAL 1 MONTH) AND events.start_date < (LAST_DAY(NOW()) + INTERVAL 1 DAY) ORDER BY start_date ASC;";
     $results = self::$database->query($sql);
@@ -43,13 +54,22 @@ class Event extends DatabaseObject {
     return $array; 
   }
   
+  /** 
+   * Retrieves an array of events occuring next month with expanded properties
+   *  
+   * @return array An array of Event objects 
+   */
   public static function find_ex_next_month() {
     $sql = "SELECT events.*, b.location_name, b.gym_name from events LEFT JOIN (SELECT locations.id AS id, locations.location_name AS location_name, gyms.gym_name AS gym_name FROM locations LEFT JOIN gyms ON locations.gym_id = gyms.id) AS b ON events.location_id=b.id WHERE events.start_date >= (LAST_DAY(NOW()+INTERVAL 1 MONTH) + INTERVAL 1 DAY - INTERVAL 1 MONTH) AND events.start_date < (LAST_DAY(NOW() + INTERVAL 1 MONTH) + INTERVAL 1 DAY) ORDER BY start_date ASC;";
     return parent::find_by_sql($sql);
   }
   
+  /** 
+   * Tests User properties for valid HTML input values
+   *
+   * @return array HTML elements as keys and messages as values 
+   */
   protected function validate() {
-
     $this->error_array = [];
 
     if(is_blank($this->start_date)) {
@@ -102,7 +122,6 @@ class Event extends DatabaseObject {
       if(!has_valid_url($this->url)) {
         $this->error_array += ["URL" => "URL must be a valid URL format."];
       }
-
     }
     
     if(isset($this->description) && $this->description!=''){

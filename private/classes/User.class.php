@@ -39,6 +39,12 @@ class User extends DatabaseObject {
   
   public const USER_TYPES = ['AA'=>'Administrator','GM'=>'Gym Manager', 'GS'=>'Gym Staff','MM'=>'Member', ''=>'None'];
 
+  /** 
+   * Constructs a User object with properties set with an associative array   
+   *
+   * @param array $args Values to set the properties with   
+   * @return object An instantiated user
+   */
   public function __construct($args=[]) {
     $this->first_name = $args['first_name'] ?? '';
     $this->last_name = $args['last_name'] ?? '';
@@ -63,16 +69,25 @@ class User extends DatabaseObject {
     $this->phone_e_country = $args['phone_e_country'] ?? '';
     $this->access_abv = $args['access_abv'] ?? 'MM';
     $this->primary_location = $args['primary_location'] ?? '';
-    
     $this->password = $args['password'] ?? '';
     $this->confirm_password = $args['confirm_password'] ?? '';
   }
 
+  /** 
+   * Concatenates first, middle, and last name values
+   *
+   * @return string ex. John Jacob Smith or John Smith
+   */
   public function full_name() {
     $middle = ($this->middle_name = '') ? $this->middle_name . " " : "";
     return $this->first_name . " " . $middle . $this->last_name;
   }
 
+  /** 
+   * Provides a first or preferred name, if one exists 
+   * 
+   * @return string ex. John or Johnny
+   */
   public function name() {
     switch ($this->preferred_name) {
       case '':
@@ -83,19 +98,39 @@ class User extends DatabaseObject {
     }
   }
   
+  /** 
+   * Updates a User's password_hash with the BCRYPT of its password
+   *  
+   */
   protected function set_password_hash() {
     $this->password_hash = password_hash($this->password, PASSWORD_BCRYPT);
   }
 
+  /** 
+   * Tests a string against the User's password_hash  
+   * 
+   * @param string $password A string to test 
+   * @return boolean ex. True or False  
+   */
   public function verify_password($password) {
     return password_verify($password, $this->password_hash);
   }
 
+  /** 
+   * Sets the User's password_hash before creating a database record  
+   * 
+   * @return boolean ex. True if record was created sucessfully
+   */
   protected function create() {
     $this->set_password_hash();
     return parent::create();
   }
 
+  /** 
+   * Sets the User's password_hash before updating a database record 
+   *  
+   * @return boolean ex. True if record was updated successfully  
+   */
   protected function update() {
     if($this->password != '') {
       $this->set_password_hash();
@@ -107,10 +142,13 @@ class User extends DatabaseObject {
     return parent::update();
   }
 
-  protected function validate() {
-    
+  /** 
+   * Tests User properties for valid HTML input values
+   *
+   * @return array HTML elements as keys and messages as values 
+   */
+  protected function validate() {    
     $this->error_array = [];
-
     if(is_blank($this->first_name)) {
       $this->error_array += ["FirstName" => "First name cannot be blank."];
     } elseif (!has_length($this->first_name, array('min' => 1, 'max' => 32))) {
@@ -259,7 +297,7 @@ class User extends DatabaseObject {
       } elseif (has_spaces($this->password)) {
         $this->error_array += ["Password" => "Password cannot contain spaces."];
       }
-
+      
       if(is_blank($this->confirm_password)) {
         $this->error_array += ["ConfirmPassword" => "Confirm password cannot be blank."];
       } elseif ($this->password !== $this->confirm_password) {
@@ -270,6 +308,12 @@ class User extends DatabaseObject {
     return $this->error_array;
   }
 
+  /** 
+   * Finds a single User in the database with a given email
+   * 
+   * @param string $email The email to search database records for 
+   * @return object An instantiated User 
+   */
   public static function find_by_email($email) {
     $sql = "SELECT * FROM " . static::$table_name . " ";
     $sql .= "WHERE email='" . self::$database->escape_string($email) . "'";
@@ -281,6 +325,12 @@ class User extends DatabaseObject {
     }
   }
   
+  /** 
+   * Finds a single User in the database with a given phone number 
+   * 
+   * @param string $phone The email to search database records for  
+   * @return object An instantiated User
+   */
   static public function find_by_phone($phone) {
     $sql = "SELECT * FROM " . static::$table_name . " ";
     $sql .= "WHERE phone_primary='" . self::$database->escape_string($phone) . "'";
@@ -292,12 +342,25 @@ class User extends DatabaseObject {
     }
   }
   
+  /** 
+   * Finds multiple Users in the database based on access type 
+   * 
+   * @param string $access_abv The access type to search database records for  
+   * @return object An array of instantiated Users
+   */
   static public function find_by_access($access_abv) {
     $sql = "SELECT * FROM " . static::$table_name . " ";
     $sql .= "WHERE access_abv='" . self::$database->escape_string($access_abv) . "'";
     return static::find_by_sql($sql);
   }
   
+  /** 
+   * Finds a user_id and pass_id in the database with a user field 
+   * 
+   * @param string $param The user field to search database records for  
+   * @param string $value The value for the given user field
+   * @return object An instantiated User
+   */
   static public function find_expanded_pass_by_param($param, $value){
     $sql = "SELECT users.id, passes.id AS pass_id FROM users INNER JOIN passes ON users.id=passes.user_id";
     $sql .= " WHERE users." . self::$database->escape_string($param) . "='" . self::$database->escape_string($value) . "'";
@@ -310,15 +373,20 @@ class User extends DatabaseObject {
     return $object;
   }
   
+  /** 
+   * Provides a long-form user type based on a User's access_abv
+   *
+   * @return string ex. Administrator or Gym Staff 
+   */
   public function user_type() {
       return self::USER_TYPES[$this->access_abv]; 
   }
   
-  public function punch_count($location) {
-    $sql = "SELECT * FROM locations WHERE pass_id='" . $this->active_pass . "'";
-    return $location;
-  }
-  
+  /** 
+   * Provide additional data related to the User for session initialization
+   *
+   * @return object preferred location details for a given user 
+   */
   public function session_query() {
     $sql = "SELECT locations.location_name AS location_name, locations.gym_id AS gym_id, gyms.gym_name AS gym_name, IFNULL((SELECT id FROM passes WHERE user_id='" . self::$database->escape_string($this->id) . "' AND is_active=1 ORDER BY created_at DESC LIMIT 1), 'null') AS pass_id FROM (locations JOIN gyms ON locations.gym_id=gyms.id) WHERE locations.id='" . self::$database->escape_string($this->primary_location) . "' LIMIT 1;";
       $results = self::$database->query($sql);
@@ -330,7 +398,6 @@ class User extends DatabaseObject {
     $results->free();
     return array_shift($array);
   }
-  
 }
 
 ?>

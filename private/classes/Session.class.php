@@ -16,11 +16,22 @@ class Session {
 
   public const MAX_LOGIN_AGE = 60*60*24; // 1 day
 
+  /** 
+   * Constructs a Session object and checks for stored session information   
+   *   
+   * @return object An instantiated session
+   */
   public function __construct() {
     session_start();
     $this->check_stored_login();
   }
 
+  /** 
+   * Converts User information to Session values and start a new session
+   * 
+   * @param object $user A specific user to login
+   * @return boolean ex. True if login was successful 
+   */
   public function login($user) {
     if($user) {
       // prevent session fixation attacks
@@ -43,11 +54,20 @@ class Session {
     return true;
   }
 
+  /** 
+   * Checks if someone is already logged into the given session
+   *
+   * @return boolean ex. True if a login is already present  
+   */
   public function is_logged_in() {
-    // return isset($this->user_id);
     return isset($this->user_id) && $this->last_login_is_recent();
   }
 
+  /** 
+   * Clears stored Session properties and variables
+   *
+   * @return boolean ex. True after unsetting  
+   */
   public function logout() {
     unset($_SESSION['user_id']);
     unset($_SESSION['email']);
@@ -75,6 +95,10 @@ class Session {
     return true;
   }
 
+  /** 
+   * Checks for set user_id session variable and sets Session properties if present 
+   *
+   */
   private function check_stored_login() {
     if(isset($_SESSION['user_id'])) {
       $this->user_id = $_SESSION['user_id'];
@@ -91,6 +115,11 @@ class Session {
     }
   }
 
+  /** 
+   * Tests for a recent session login against MAX_LOGIN_AGE
+   *
+   * @return boolean ex True if login was within 1 day
+   */
   private function last_login_is_recent() {
     if(!isset($this->last_login)) {
       return false;
@@ -101,18 +130,27 @@ class Session {
     }
   }
 
+  /** 
+   * Sets or gets a message for display based on a page
+   *  
+   * @param string $msg The message to display
+   * @param string $class The CSS class to apply to the message
+   * @return boolean/string ex. True if set or $msg if get
+   */
   public function message($msg="", $class="") {
     if(!empty($msg)) {
-      // Then this is a "set" message
       $_SESSION['message'] = $msg;
       $_SESSION['message_class'] = $class;
       return true;
     } else {
-      // Then this is a "get" message
       return $_SESSION['message'] ?? '';
     }
   }
 
+  /** 
+   * Clears the session message variable after displaying 
+   *  
+   */
   public function clear_message() {
     unset($_SESSION['message']);
     unset($_SESSION['message_class']);
@@ -134,6 +172,11 @@ class Session {
     }
   }
   
+  /** 
+   * Concatenates gym and location names stored in the current session
+   * 
+   * @return string ex. RockCity Asheville 
+   */
   public function gym_location() {
     return $this->gym_name . " " . $this->location_name;
   }

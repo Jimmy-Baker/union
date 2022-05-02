@@ -5,6 +5,9 @@ require_login();
 $location = Location::find_by_id($_SESSION['location']);
 $gym = Gym::find_by_id($location->gym_id);
 
+/** 
+ * Save a database record upon request
+ */
 if(is_post_request()) {
   //validate location is set
   if($location) {
@@ -59,8 +62,6 @@ if(is_post_request()) {
   } else {
     $session->message("Your location is not set.", "warning");
   }
-} else {
-
 }
 
 $page_title = 'Check In';

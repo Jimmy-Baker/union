@@ -13,10 +13,11 @@ if($gym == false) {
   redirect_to(url_for('/app/shared/gyms/gyms.php'));
 }
 
+/** 
+ * Save a database record upon request
+ */
 if(is_post_request()) {
-  // Save record using post parameters
   $args = $_POST['gym'];
-  
   if($_POST['image1']) {
     $url = imageUpload("image1", $gym, "gym");
     if($url) {
@@ -28,15 +29,12 @@ if(is_post_request()) {
   
   $gym->merge_attributes($args);
   $result = $gym->save();
-  
   if($result === true) {
     $session->message('The gym was updated successfully.', 'success');
     redirect_to(url_for('/app/shared/gyms/view.php?id=' . $id));
   } else {
     $session->message('The gym update failed. Please evaluate your input and try again.', 'warning');
   }
-} else {
-  //display the form
 }
 
 $page_title = 'Edit Gym: ' . h($gym->gym_name);

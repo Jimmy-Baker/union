@@ -13,8 +13,10 @@ if($location == false) {
   redirect_to(url_for('/app/shared/locations/locations.php'));
 }
 
+/** 
+ * Delete a database record upon request
+ */
 if(is_post_request()) {
-  // Delete location
   $result = $location->delete();
   if($result === true) {
     $session->message('The location was deleted successfully.', 'success');
@@ -22,9 +24,7 @@ if(is_post_request()) {
   } else {
     $session->message('The location deletion failed. Please try again.', 'warning');
   }
-} else {
-  // Display form
-}
+} 
 
 $page_title = 'Delete Location: ' . h($location->gym_name) . ' ' . h($location->location_name);
 include(SHARED_PATH . '/user-header.php');

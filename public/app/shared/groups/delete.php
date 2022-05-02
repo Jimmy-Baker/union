@@ -13,8 +13,10 @@ if($group == false) {
   redirect_to(url_for('/app/shared/groups/groups.php'));
 }
 
+/** 
+ * Delete a database record upon request
+ */
 if(is_post_request()) {
-  // Delete location
   $result = $group->delete();
   if($result === true) {
     $session->message('The group was deleted successfully.', 'success');
@@ -22,8 +24,6 @@ if(is_post_request()) {
   } else {
     $session->message('The group deletion failed. Please try again.', 'warning');
   }
-} else {
-  // Display form
 }
 
 $page_title = 'Delete Group: ' . h($group->name);
@@ -64,7 +64,7 @@ include(SHARED_PATH . '/user-header.php');
           </div>
           <dl class="row mt-4">
             <dt class="col-sm-3">Leader ID</dt>
-            <dd class="col-sm-9"><?= h($group->leader_id); ?></dd>
+            <dd class="col-sm-9"><?= h($group->owner_id); ?></dd>
             <dt class="col-sm-3">Group Type</dt>
             <dd class="col-sm-9"><?= h($group->type_abv); ?></dd>
           </dl>

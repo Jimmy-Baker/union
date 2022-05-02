@@ -10,12 +10,23 @@ class Gym extends DatabaseObject {
   public $website;
   public $avatar_url;
   
+  /** 
+   * Constructs a Gym object with properties set with an associative array   
+   *
+   * @param array $args Values to set the properties with   
+   * @return object An instantiated gym
+   */
   public function __construct($args=[]) {
     $this->gym_name = $args['gym_name'] ?? '';
     $this->website = $args['website'] ?? '';
     $this->avatar_url = $args['avatar_url'] ?? '/public/upload/gym/default.png';
   }
   
+  /** 
+   * Tests Gym properties for valid HTML input values
+   *
+   * @return array HTML elements as keys and messages as values 
+   */
   protected function validate() {
     $this->error_array = [];
     
@@ -34,7 +45,8 @@ class Gym extends DatabaseObject {
         $this->error_array += ["Website" => "Website must be a valid URL."];
       }
     }
-    
+
+    return $this->error_array;
   }
   
 }

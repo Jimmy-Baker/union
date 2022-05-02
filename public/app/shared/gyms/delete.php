@@ -13,8 +13,10 @@ if($gym == false) {
   redirect_to(url_for('/app/shared/gyms/gyms.php'));
 }
 
+/** 
+ * Delete a database record upon request
+ */
 if(is_post_request()) {
-  // Delete gym
   $result = $gym->delete();
   if($result === true) {
     $session->message('The gym was deleted successfully.', 'success');
@@ -22,9 +24,7 @@ if(is_post_request()) {
   } else {
     $session->message('The gym deletion failed. Please try again.', 'warning');
   }
-} else {
-  // Display form
-}
+} 
 
 $page_title = 'Delete Gym: ' . h($gym->gym_name);
 include(SHARED_PATH . '/user-header.php'); 

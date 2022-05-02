@@ -6,23 +6,14 @@ $email = '';
 $password = '';
 
 if(is_post_request()) {
-
   $email = $_POST['email'] ?? '';
-
-  // Validations
   if(is_blank($email)) {
     $error_array[] = ["#email","Email cannot be blank."];
   }
-
-  // if there were no errors, try to login
   if(empty($error_array)) {
     $user = User::find_by_email($email);
-    // test if user found and password is correct
     if($user != false) {
-      // generate a security key
       $key = random_six();
-      
-      // generate a new request
       $args = [];
       $args['user_id'] = $user->id;
       $args['key'] = $key;
@@ -30,7 +21,6 @@ if(is_post_request()) {
       $request = new Request($args);
       $result = $request->save();
       
-      // send user a password reset email
       if($result){
         include('mail/password_reset.php');
         $session->message('An email will be sent to your address if it exists in our system.', 'success');
@@ -41,8 +31,6 @@ if(is_post_request()) {
       $session->message("The request could not be generated. Please try again.", "warning");
     }
   }
-  
-
 }
 
 $page_title = 'Password Reset';

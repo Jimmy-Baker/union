@@ -14,6 +14,9 @@ if($group == false) {
   redirect_to(url_for('/app/shared/groups/groups.php'));
 } 
 
+/** 
+ * Adds a user to the group upon request
+ */
 if(is_post_request()) {
   if (isset($_POST['inputValue1'])) {
     $user = User::find_by_param($_POST['inputParameter1'], $_POST['inputValue1']);
@@ -72,7 +75,7 @@ include(SHARED_PATH . '/user-header.php');
           <div class="card-text">
             <dl class="row">
               <dt class="col-sm-4 text-sm-end">Leader ID</dt>
-              <dd class="col-sm-8"><?= d($group->leader_id); ?></dd>
+              <dd class="col-sm-8"><?= d($group->owner_id); ?></dd>
               <dt class="col-sm-4 text-sm-end">Group Type</dt>
               <dd class="col-sm-8"><?= d($group->type_abv); ?></dd>
             </dl>

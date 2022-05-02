@@ -5,24 +5,22 @@ $error_array = [];
 $email = '';
 $password = '';
 
+/** 
+ * Generate a new session upon request
+ */
 if(is_post_request()) {
-
   $email = $_POST['email'] ?? '';
   $password = $_POST['password'] ?? '';
 
-  // Validations
   if(is_blank($email)) {
     $error_array[] = ["#email","Email cannot be blank."];
   }
   if(is_blank($password)) {
     $error_array[] = ["#password","Password cannot be blank."];
   }
-  // if there were no errors, try to login
   if(empty($error_array)) {
     $user = User::find_by_email($email);
-    // test if user found and password is correct
     if($user != false && $user->verify_password($password)) {
-      // Mark user as logged in
       $session->login($user);
       $session->message('Your login was successful!', 'success');
       
@@ -40,7 +38,6 @@ if(is_post_request()) {
           redirect_to(url_for('app/member/index.php'));
       }
     } else {
-      // email not found or password does not match
       $session->message('That email and password combination was incorrect.', 'warning');
     }
   }

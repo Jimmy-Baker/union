@@ -14,6 +14,12 @@ class Search {
   public $value4;
   public $error_array = [];
   
+  /** 
+   * Constructs a Search object with properties set with an associative array   
+   *
+   * @param array $args Values to set the properties with   
+   * @return object An instantiated search
+   */
   public function __construct($args=[]) {
     $this->parameter1 = $args['inputParameter1'] ?? '';
     $this->parameter2 = $args['inputParameter2'] ?? '';
@@ -25,10 +31,20 @@ class Search {
     $this->value4 = $args['inputValue4'] ?? '';
   }
   
+  /** 
+   * Sets the database property for a Search object
+   *  
+   * @param mysqli $database A mysqli object
+   */
   static public function set_database($database) {
     self::$database = $database;
   }
   
+  /** 
+   * Initiates a select query based on validated search parameters
+   *  
+   * @return string/boolean A SQL statement or false 
+   */
   public function getSQL() {
     $this->validate();
     if(empty($this->error_array)){
@@ -54,7 +70,11 @@ class Search {
     }
   }
   
-  
+  /** 
+   * Tests Search properties for valid HTML input values
+   *
+   * @return array HTML elements as keys and messages as values 
+   */
   private function validate(){
     if(!isset($this->parameter1)){
       $this->error_array += ["Parameter1" => "The first parameter cannot be blank."];
@@ -103,7 +123,8 @@ class Search {
         $this->error_array += ["Value4" => "This input must consist of letters, numbers, dashes, and spaces."];
       }
     }
-    
+  
+    return $this->error_array;
   }
 }
 

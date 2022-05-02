@@ -6,6 +6,9 @@ $page_title = 'Change Location';
 $user_id = $_SESSION['user_id'];
 $redirect = url_for('/app/admin/change.php');
 
+/** 
+ * Change the user's session location upon request 
+ */
 if(is_post_request()) {
   $loc_id = $_POST['loc_id'];
   if($loc_id && $user_id){

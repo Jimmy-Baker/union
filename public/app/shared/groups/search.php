@@ -2,6 +2,9 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+/** 
+ * Perform a sql search query upon request
+ */
 if(is_post_request()) {
   // Create record using post parameters
   $args = $_POST;
@@ -25,8 +28,6 @@ if(is_post_request()) {
   } else {
     $session->message('Please check your search terms and try again.', 'warning');
   }
-} else {
-  
 }
 
 $page_title = 'Find Groups';
@@ -69,7 +70,7 @@ include(SHARED_PATH . '/user-header.php');
             <div class="row ms-0 input-group">
               <select class="form-select" aria-label="Parameter type for following text input" name="inputParameter1" id="inputParameter1" required>
                 <option hidden value="">Select One</option>
-                <option value="leader_id" <?= ($_POST['inputParameter1'] ?? '') == "leader_id" ? "selected" : "" ?>>Leader ID</option>
+                <option value="owner_id" <?= ($_POST['inputParameter1'] ?? '') == "owner_id" ? "selected" : "" ?>>Leader ID</option>
                 <option value="type_abv" <?= ($_POST['inputParameter1'] ?? '') == "type_abv" ? "selected" : "" ?>>Type Abv</option>
                 <option value="group_name" <?= ($_POST['inputParameter2'] ?? '') == "group_name" ? "selected" : "" ?>>Group Name</option>
               </select>
@@ -88,7 +89,7 @@ include(SHARED_PATH . '/user-header.php');
             <div class="row ms-0 input-group">
               <select class="form-select" aria-label="Parameter type for following text input" name="inputParameter2" id="inputParameter2">
                 <option hidden value="">Select One</option>
-                <option value="leader_id" <?= ($_POST['inputParameter2'] ?? '') == "leader_id" ? "selected" : "" ?>>Leader ID</option>
+                <option value="owner_id" <?= ($_POST['inputParameter2'] ?? '') == "owner_id" ? "selected" : "" ?>>Leader ID</option>
                 <option value="type_abv" <?= ($_POST['inputParameter2'] ?? '') == "type_abv" ? "selected" : "" ?>>Type Abv</option>
                 <option value="group_name" <?= ($_POST['inputParameter2'] ?? '') == "group_name" ? "selected" : "" ?>>Group Name</option>
               </select>
@@ -106,7 +107,7 @@ include(SHARED_PATH . '/user-header.php');
           <div class="col-md-7">
             <div class="row ms-0 input-group">
               <select class="form-select" aria-label="Parameter selection for following text input" name="inputParameter1" value="<?= $_POST['inputParameter1'] ?? '';?>" required>
-                <option value="leader_id">Leader ID</option>
+                <option value="owner_id">Leader ID</option>
                 <option value="type_abv">Group Type</option>
               </select>
               <input type="text" class="form-control w-50" name="inputValue1" value="<?= $_POST['inputValue1'] ?? '';?>" required>
@@ -155,7 +156,7 @@ include(SHARED_PATH . '/user-header.php');
             <?php foreach($groups as $group) { ?>
             <tr class="align-middle text-nowrap">
               <td><?= h($group->id) ?></td>
-              <td><?= h($group->leader_id) ?></td>
+              <td><?= h($group->owner_id) ?></td>
               <td><?= h($group->type_abv) ?></td>
               <td>
                 <div class="btn-group" role="group" aria-label="group actions">

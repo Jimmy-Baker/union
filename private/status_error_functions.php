@@ -1,5 +1,8 @@
 <?php
 
+/** 
+ * Validates that the user has logged in or else redirects
+ */
 function require_login() {
   global $session;
   if(!$session->is_logged_in()) {
@@ -10,6 +13,11 @@ function require_login() {
   }
 }
 
+/** 
+ * Validates that the user has a minimum access level or else redirects
+ *  
+ * @param string $abv The minimum access required
+ */
 function require_access($abv) {
   global $session;
   $types = ['XX'=>0,'AA'=>1,'GM'=>2,'GS'=>3,'MM'=>4];
@@ -22,6 +30,12 @@ function require_access($abv) {
   }  
 }
 
+/** 
+ * Tests if the user has a minimum access level
+ *  
+ * @param string $abv The minimum access level
+ * @return boolean ex. True if the user's access level is greater than the minimum 
+ */
 function test_access($abv) {
   global $session;
   $types = ['XX'=>0,'AA'=>1,'GM'=>2,'GS'=>3,'MM'=>4];
@@ -34,6 +48,13 @@ function test_access($abv) {
   }
 }
 
+/** 
+ * Provides an arrayed response for an array of access levels
+ *  
+ * @param array $a The array of access levels
+ * @param array $b The array of responses
+ * @return string The resonse for a matched access level 
+ */
 function access(array $a, array $c) {
   global $session;
   $key = array_search($session->access_abv, $a);
@@ -44,11 +65,12 @@ function access(array $a, array $c) {
   }
 }
 
-function test_path(){
-  echo basename($_SERVER["SCRIPT_NAME"]);
-}
-
-
+/** 
+ * Iterates through an error array to produce a javascript function
+ *  
+ * @param array $error_array An array of HTML objects and messages 
+ * @return string A javascript function 
+ */
 function display_errors($error_array=array()) {
   if(!empty($error_array)) {
     $script = "<script defer>";
@@ -69,6 +91,11 @@ function display_errors($error_array=array()) {
   }
 }
 
+/** 
+ * Provides a session message to the user
+ *
+ * @return string A HTML div populated with a message 
+ */
 function display_session_message() {
   global $session;
   $msg = $session->message();

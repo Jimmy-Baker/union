@@ -1,8 +1,10 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 
+/** 
+ * Create a database record upon request
+ */
 if(is_post_request()) {
-  // Create record using post parameters
   $args = $_POST['user'];
   $user = new User($args);
   $result = $user->save();

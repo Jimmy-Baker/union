@@ -9,14 +9,12 @@ if(!isset($_GET['key']) && !isset($_POST['key'])) {
 $email = $_GET['email'] ?? $_POST['email'];
 $key = $_GET['key'] ?? $_POST['key'];
 
+/** 
+ * Save a database record upon request
+ */
 if(is_post_request()) {
-  // Validations
-  
-  // if there were no errors, try to find user
   if(empty($error_array)) {
-    //lookup user by email and confirm key
     $user = User::find_by_email($email);
-
     if($user) {
       $request = Request::find_by_param('user_id', $user->id);
       if($request){
@@ -45,8 +43,6 @@ if(is_post_request()) {
   } else {
     $session->message('Please check your input and try again.', 'warning');
   }
-} else {
-  
 }
 
 $page_title = 'Password Reset';
@@ -54,7 +50,6 @@ include(SHARED_PATH . '/public-header.php');
 ?>
 
 <main class="container-md p-4 mt-5" id="main">
-
   <? display_errors($error_array); ?>
   <form action="restore.php?email=<?= u($email) ?>&key=<?= u($key) ?>" method="post">
     <h1><?= $page_title ?></h1>

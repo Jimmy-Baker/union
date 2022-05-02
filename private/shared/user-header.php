@@ -14,7 +14,7 @@
     <meta name="author" content="Jimmy Baker">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="<?= url_for("/css/theme.css");?>">
+    <link rel="stylesheet" href="<?= url_for("/css/theme-min.css");?>">
     <link rel="stylesheet" href="<?= url_for("/node_modules/@fortawesome/fontawesome-free/css/all.min.css");?>">
     <link rel="stylesheet" href="https://use.typekit.net/fup0mom.css">
     <link rel="stylesheet" href="<?= url_for("/css/style.css");?>">

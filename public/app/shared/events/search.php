@@ -2,8 +2,10 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+/** 
+ * Perform a sql search query upon request
+ */
 if(is_post_request()) {
-  // Create record using post parameters
   $args = $_POST;
   $search = new Search($args);
   $search->table = "events";

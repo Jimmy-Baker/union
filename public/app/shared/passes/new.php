@@ -2,8 +2,10 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+/** 
+ * Create a database record upon request
+ */
 if(is_post_request()) {
-  // Create record using post parameters
   $args = $_POST['pass'];
   $pass = new Pass($args);
   $result = $pass->save();
@@ -12,7 +14,7 @@ if(is_post_request()) {
     $new_id = $pass->id;
     $pro = $pass->provision();
     $session->message('The pass was created successfully.', 'success');
-    // redirect_to(url_for('/app/shared/passes/view.php?id=' . $new_id));
+    redirect_to(url_for('/app/shared/passes/view.php?id=' . $new_id));
   } else {
     $session->message('Pass creation failed. Please evaluate your input and try again.', 'warning');
   }

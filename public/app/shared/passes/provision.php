@@ -5,6 +5,9 @@ require_login();
 $pass_types = PASS::PASS_TYPES;
 $gyms = Gym::find_all();
 
+/** 
+ * Create a database record upon request
+ */
 if(is_post_request()) {
   switch ($_POST['inputParameter1']) {
     case "id":
@@ -43,9 +46,6 @@ if(is_post_request()) {
     // user sql query failed
     $session->message("That user could not be found", "warning");
   }
-  
-} else {
-
 }
 
 $page_title = 'Provision A Pass';

@@ -6,6 +6,7 @@ if(!isset($_GET['id'])) {
   $session->message("No event was identified.", "warning");
   redirect_to(url_for('/app/shared/events/events.php'));
 }
+
 $id = $_GET['id'];
 $event = Event::find_by_id($id);
 if($event == false) {
@@ -13,8 +14,10 @@ if($event == false) {
   redirect_to(url_for('/app/shared/events/events.php'));
 }
 
+/** 
+ * Delete a database record upon request
+ */
 if(is_post_request()) {
-  // Delete location
   $result = $event->delete();
   if($result === true) {
     $session->message('The event was deleted successfully.', 'success');
@@ -22,9 +25,7 @@ if(is_post_request()) {
   } else {
     $session->message('The event deletion failed. Please try again.', 'warning');
   }
-} else {
-  // Display form
-}
+} 
 
 $page_title = 'Delete Event: ' . h($event->event_name());
 include(SHARED_PATH . '/user-header.php');
@@ -42,7 +43,7 @@ include(SHARED_PATH . '/user-header.php');
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
           <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/events/events.php'); ?>">Events</a></li>
-          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/events/view.php?id=' . u($event->id)); ?>"><?= h($event->full_name()); ?></a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/events/view.php?id=' . u($event->id)); ?>"><?= h($event->name()); ?></a></li>
           <li class="breadcrumb-item active text-primary" aria-current="page">Delete Event</li>
         </ol>
       </nav>

@@ -1,4 +1,14 @@
 <?php
+
+/** 
+ * Uploads a cropped user-supplied image
+ *  
+ * @param string $string The image's associated post variable
+ * @param object $object The root object to upload the image for
+ * @param string $location The path to place the image in within the upload folder
+ * @param int $num The key for images uploaded as part of a JSON object
+ * @returns {type} 
+ */
 function imageUpload($string, $object, $location, $num=''){
   $file = new Bulletproof\Image($_FILES);
 

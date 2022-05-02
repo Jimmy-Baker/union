@@ -52,7 +52,7 @@ include(SHARED_PATH . '/user-header.php');
           <div class="card-text">
             <dl class="row">
               <dt class="col-sm-4 text-sm-end">Leader ID</dt>
-              <dd class="col-sm-8"><?= d($group->leader_id); ?></dd>
+              <dd class="col-sm-8"><?= d($group->owner_id); ?></dd>
               <dt class="col-sm-4 text-sm-end">Group Type</dt>
               <dd class="col-sm-8"><?= d($group->type_abv); ?></dd>
             </dl>

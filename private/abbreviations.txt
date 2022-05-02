@@ -25,6 +25,8 @@ II - Institution Group
 
 PP - Private Group
 
+SS - School Group
+
 XC - Change Into Location
 XE - Edit Events
 XI - Edit Gym Info

@@ -13,11 +13,11 @@ if($pass == false) {
   redirect_to(url_for('/app/shared/passes/passes.php'));
 }
  
-
+/** 
+ * Delete a database record upon request
+ */
 if(is_post_request()) {
-  // Delete pass line items
   PassItem::delete_all($pass->id);
-  // Delete the pass
   $result = $pass->delete();
   if($result === true) {
     $session->message('The pass was deleted successfully.', 'success');
@@ -25,8 +25,6 @@ if(is_post_request()) {
   } else {
     $session->message('The pass deletion failed. Please try again.', 'warning');
   }
-} else {
-  // Display form
 }
 
 $page_title = 'Delete Pass: ' . h($pass->id);

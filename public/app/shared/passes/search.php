@@ -2,8 +2,10 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+/** 
+ * Create a database record upon request
+ */
 if(is_post_request()) {
-  // Create record using post parameters
   $args = $_POST;
   $search = new Search($args);
   $search->table = "passes";
@@ -25,8 +27,6 @@ if(is_post_request()) {
   } else {
     $session->message('Please check your search terms and try again.', 'warning');
   }
-} else {
-  
 }
 
 $page_title = 'Find Passes';
