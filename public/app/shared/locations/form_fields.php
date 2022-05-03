@@ -34,6 +34,7 @@ $gyms = Gym::find_all();
       </div>
       <div class="col-md-7">
         <select name="location[gym_id]" value="<?= h($location->gym_id); ?>" class="form-select" id="inputGymId" aria-describedby="helpGymId" required>
+          <option hidden value="">Select One</option>
           <?php foreach($gyms as $gym) { ?>
           <option value="<?= h($gym->id) ?>" <?= ($gym->id == $location->gym_id) ? 'selected' : '';?>><?= h($gym->gym_name); ?></option>
           <?php } ?>
@@ -68,6 +69,7 @@ $gyms = Gym::find_all();
       </div>
       <div class="col-md-7">
         <select name="location[state_abv]" class="form-select" id="inputStateAbv" aria-describedby="helpStateAbv" required>
+          <option hidden value="">Select One</option>
           <?php foreach($states as $state) { ?>
           <option value="<?= h($state->abv) ?>" <?= ($location->state_abv == $state->abv) ? 'selected' : '';?>><?= h($state->state_name); ?></option>
           <?php } ?>
@@ -92,6 +94,7 @@ $gyms = Gym::find_all();
       </div>
       <div class="col-md-7">
         <select name="location[country_abv]" class="form-select" id="inputCountryAbv" aria-describedby="helpCountryAbv">
+          <option hidden value="">Select One</option>
           <?php foreach($countries as $country) { ?>
           <option value="<?= h($country->abv) ?>" <?= ($location->country_abv == $country->abv) ? 'selected' : '';?>><?= h($country->country_name); ?></option>
           <?php } ?>

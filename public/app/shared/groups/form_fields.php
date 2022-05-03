@@ -43,6 +43,7 @@ $today = date('Y-m-d');
       </div>
       <div class="col-md-7">
         <select name="group[type_abv]" class="form-select" id="inputGroupType" aria-describedby="helpGroupType" required>
+          <option hidden value="">Select One</option>
           <?php foreach($types as $type) { ?>
           <option value="<?= h($type->abv) ?>" <?= ($group->type_abv == $type->abv) ? 'selected' : ''; ?>><?= h($type->description) ?></option>
           <?php } ?>

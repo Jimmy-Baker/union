@@ -1,5 +1,28 @@
 @import url("https://use.typekit.net/fup0mom.css");
 
+:root {
+  --bs-primary: #213e66;
+  --bs-secondary: #fea91b;
+  --bs-success: #537a5a;
+  --bs-info: #86b4ed;
+  --bs-warning: #f97068;
+  --bs-danger: #93032e;
+  --bs-light: #f7eDDe;
+  --bs-dark: #000b29;
+  --bs-primary-rgb: 33, 62, 102;
+  --bs-secondary-rgb: 254, 169, 27;
+  --bs-success-rgb: 83, 122, 90;
+  --bs-info-rgb: 134, 180, 237;
+  --bs-warning-rgb: 249, 112, 104;
+  --bs-danger-rgb: 147, 3, 46;
+  --bs-light-rgb: 247, 237, 222;
+  --bs-dark-rgb: 0, 11, 41;
+  --bs-white-rgb: 255, 255, 255;
+  --bs-black-rgb: 0, 0, 0;
+  --bs-body-color-rgb: 33, 37, 41;
+  --bs-body-bg-rgb: 255, 255, 255;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,7 +30,7 @@
 }
 
 body {
-  background: url("/public/img/rope.png") calc(120px + 75%)/contain no-repeat;
+  background: url("/public/img/background-white.png") calc(360px + 80%)/contain no-repeat;
 }
 
 main {
@@ -36,10 +59,14 @@ main>header img {
 }
 
 main>header span {
-  color: var(--dark);
+  color: var(--bs-primary);
   display: block;
   font: 2rem "Cubano Sharp", cubano-sharp, sans-serif;
   padding-left: .5rem;
+}
+
+main>header span:hover {
+  color: rgba(var(--bs-primary-rgb), .8);
 }
 
 main>div {

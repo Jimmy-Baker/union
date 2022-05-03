@@ -159,6 +159,7 @@ include(SHARED_PATH . '/public-header.php');
           </div>
           <div class="col-md-7">
             <select name="user[country_abv]" class="form-select country" id="inputCountryAbv" aria-describedby="helpCountryAbv" required>
+              <option hidden value="">Select One</option>
               <?php foreach($countries as $country) { ?>
               <option value="<?= h($country->abv) ?>" <?= (($user->country_abv == $country->abv) || (($user->country_abv == '') && ($country->abv == 'US'))) ? 'selected' : '';?>><?= h($country->country_name); ?></option>
               <?php } ?>

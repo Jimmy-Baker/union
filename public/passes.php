@@ -9,7 +9,7 @@ if($session->is_logged_in()){
 ?>
 
 <header>
-  <div class="p-5 bg-primary text-light" index="gyms-hd">
+  <div class="p-5 bg-primary text-light" id="passes-hd">
     <div class="container-fluid py-3">
       <div class="row">
         <div class="col-12 col-sm-8">

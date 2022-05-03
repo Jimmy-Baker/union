@@ -15,12 +15,30 @@
     <div class="col-6 col-lg-4">
       <h3>Site Menu</h3>
       <ul class="nav flex-column">
-        <li class="nav-item">Home</li>
-        <li class="nav-item">Passes</li>
-        <li class="nav-item">Gyms</li>
-        <li class="nav-item">Events</li>
-        <li class="nav-item">Log In / Sign Up</li>
+        <li class="nav-item"><a href="<?= url_for("/index.php") ?>" class="nav-link link-light">Home</a></li>
+        <li class="nav-item"><a href="<?= url_for("/passes.php") ?>" class="nav-link link-light">Passes</a></li>
+        <li class="nav-item"><a href="<?= url_for("/gyms.php") ?>" class="nav-link link-light">Gyms</a></li>
+        <li class="nav-item"><a href="<?= url_for("/events.php") ?>" class="nav-link link-light">Events</a></li>
       </ul>
+    </div>
+    <div class="col-6 col-sm-4">
+      <h3>My Account</h3>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a href="<?= url_for("/app/login.php") ?>" class="nav-link link-light">My Profile</a></li>
+        <li class="nav-item"><a href="<?= url_for("/app/signup.php") ?>" class="nav-link link-light">My Pass</a></li>
+        <li class="nav-item"><a href="<?= url_for("/app/reset.php") ?>" class="nav-link link-light">Reset Password</a></li>
+      </ul>
+    </div>
+    <div class="col-12 col-sm-4">
+      <h3>Contact Us</h3>
+      <address>
+        <a href="mailto:info@unionclimbing.com" class="link-secondary">info@unionclimbing.com</a>
+      </address>
+      <address>
+        <b>Union Climbing</b><br>
+        PO Box 2012<br>
+        Enka, NC 28728<br>
+      </address>
     </div>
   </div>
   <div class="row pt-4">
@@ -40,11 +58,8 @@ if(isset($error_render)) {
   echo display_errors($error_render);
 }
 ?>
-
 </body>
 
 </html>
 
-<?php
-  db_disconnect($database);
-?>
+<?php db_disconnect($database); ?>

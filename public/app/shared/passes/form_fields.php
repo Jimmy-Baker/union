@@ -26,6 +26,7 @@ $types = Pass::PASS_TYPES;
       </div>
       <div class="col-md-7">
         <select name="pass[is_active]" class="form-select" id="inputIsActive" aria-describedby="helpIsActive" required>
+          <option hidden value="">Select One</option>
           <option value='0' <?= ($pass->is_active == 0) ? 'selected' : ''; ?>>No</option>
           <option value='1' <?= ($pass->is_active == 1) ? 'selected' : ''; ?>>Yes</option>
         </select>
@@ -39,6 +40,7 @@ $types = Pass::PASS_TYPES;
       </div>
       <div class="col-md-7">
         <select name="pass[pass_type]" class="form-select" id="inputPassType" aria-describedby="helpPassType" required>
+          <option hidden value="">Select One</option>
           <?php foreach($types as $abv=>$type) { ?>
           <option value="<?= h($abv) ?>" <?= ($pass->pass_type == $abv) ? 'selected' : '';?>><?= h($type); ?></option>
           <?php } ?>

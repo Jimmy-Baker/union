@@ -102,6 +102,7 @@ include(SHARED_PATH . '/user-header.php');
           <div class="col-md-7">
             <div class="row ms-0 input-group">
               <select class="form-select" aria-label="Parameter selection for following text input" name="inputParameter1" required>
+                <option hidden value="">Select One</option>
                 <option value="id">User ID</option>
                 <option value="email">Email</option>
               </select>
@@ -118,7 +119,7 @@ include(SHARED_PATH . '/user-header.php');
           <div class="col-md-7">
             <div class="row ms-0">
               <select class="form-select" aria-label="Select role type." name="inputRoleAbv" id="inputRoleAbv" required>
-                <option value="" hidden>Select One</option>
+                <option hidden value="">Select One</option>
                 <option value="GA">Administrator</option>
                 <option value="GC">Member</option>
               </select>

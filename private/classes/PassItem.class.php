@@ -126,9 +126,13 @@ class PassItem extends DatabaseObject {
    * @return boolean ex. True if record was updated sucessfully
    */
   public function redeem_punch() {
-    $this->used += 1;
-    $result = $this->save();
-    return $result;
+    if($this->available()>0){
+      $this->used += 1;
+      $result = $this->save();
+      return $result;
+    } else {
+      return false;
+    }
   }
   
   /** 
@@ -137,9 +141,13 @@ class PassItem extends DatabaseObject {
    * @return boolean ex. True if record was updated sucessfully
    */
   public function refund_punch() {
-    $this->used -= 1;
-    $result = $this->save();
-    return $result;
+    if($this->used>0){
+      $this->used -= 1;
+      $result = $this->save();
+      return $result;
+    } else {
+      return false;
+    }
   }
   
   /** 

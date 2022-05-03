@@ -286,7 +286,7 @@ if(test_access('GM')){
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <div class="card-body text-end pt-0">
-                  <a href="<?= url_for("/app/shared/users/view.php?=" . $session->user_id); ?>" class="btn btn-primary">View My Profile</a>
+                  <a href="<?= url_for("/app/shared/users/view.php?id=" . $session->user_id); ?>" class="btn btn-primary">View My Profile</a>
                 </div>
               </div>
             </div>

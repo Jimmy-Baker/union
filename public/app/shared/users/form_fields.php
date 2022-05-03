@@ -119,6 +119,7 @@ $num=1;
       </div>
       <div class="col-md-7">
         <select name="user[state_abv]" class="form-select" id="inputStateAbv" required>
+          <option hidden value="">Select One</option>
           <?php foreach($states as $state) { ?>
           <option value="<?= h($state->abv) ?>" <?= ($user->state_abv == $state->abv) ? 'selected' : '';?>><?= h($state->state_name); ?></option>
           <?php } ?>
@@ -142,6 +143,7 @@ $num=1;
       </div>
       <div class="col-md-7">
         <select name="user[country_abv]" class="form-select country" id="inputCountryAbv" aria-describedby="helpCountryAbv" required>
+          <option hidden value="">Select One</option>
           <?php foreach($countries as $country) { ?>
           <option value="<?= h($country->abv) ?>" <?= (($user->country_abv == $country->abv) || (($user->country_abv == '') && ($country->abv == 'US'))) ? 'selected' : '';?>><?= h($country->country_name); ?></option>
           <?php } ?>
@@ -252,6 +254,7 @@ $num=1;
       </div>
       <div class="col-md-7">
         <select name="user[access_abv]" class="form-select" id="inputAccessAbv" aria-describedby="helpUserType" required>
+          <option hidden value="">Select One</option>
           <?php foreach($accesses as $abv=>$access) { ?>
           <option value="<?= h($abv) ?>" <?= ($user->access_abv == $abv) ? 'selected' : '';?>><?= h($access); ?></option>
           <?php } ?>

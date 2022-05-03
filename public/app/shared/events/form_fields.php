@@ -39,6 +39,7 @@ $today = date('Y-m-d');
       </div>
       <div class="col-md-7">
         <select name="event[location_id]" value="<?= h($event->location_id); ?>" class="form-select" id="inputLocationID" aria-describedby="helpLocationID" required>
+          <option hidden value="">Select One</option>
           <?php if(test_access('AA')){foreach($locations as $location) { ?>
           <option value="<?= h($location->id) ?>" <?= ($event->location_id == $location->id) ? 'selected' : '' ?>><?= h($location->gym_name) . ' ' . h($location->location_name) ?></option>
           <?php }} else { ?>

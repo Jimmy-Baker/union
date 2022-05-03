@@ -21,8 +21,28 @@ if($pass == false) {
 }
 
 if(is_post_request()){
-  if($punches){
-    
+  if($punches && $_POST['id']){
+    $gym_id = $_POST['id'];
+    $punch = PassItem::find_by_pass_and_gym($id, $gym_id);
+    if($_POST['method'] == 'redeem') {
+      $result = $punch->redeem_punch();
+      if($result){
+        $session->message('The punch was redeemed sucessfully.', 'success');
+      } else {
+        $session->message('The punch could not be redeemed.', 'warning');
+      }
+    } elseif($_POST['method'] == 'remove') {
+      $result = $punch->remove_punch();
+      if($result){
+        $session->message('The punch was removed sucessfully.', 'success');
+      } else {
+        $session->message('The punch could not be removed.', 'warning');
+      }
+    } else {
+      $session->message('Your request could not be completed. Please try again.', 'warning');
+    }
+  } else {
+    $session->message('Your request could not be processed.', 'warning');
   }
 }
 
@@ -108,7 +128,7 @@ include(SHARED_PATH . '/user-header.php');
               <td><?= h($punch->used) ?></td>
               <?php if(test_access('GS')){ ?>
               <td>
-                <form method="POST" action="<?= url_for('/app/shared/locations/view.php?=' . $pass->id); ?>">
+                <form method="POST" action="<?= url_for('/app/shared/locations/view.php?id=' . $pass->id); ?>">
                   <input type="hidden" name="id" value="<?= h($punch->gym_id) ?>">
                   <div class="btn-group" role="group" aria-label="location actions">
                     <button class="btn btn-primary" type="submit" name="method" value="redeem">Redeem</button>

@@ -51,4 +51,4 @@ include(SHARED_PATH . '/public-header.php');
 </main>
 
 
-<?php include(SHARED_PATH . '/user-footer.php'); ?>
+<?php include(SHARED_PATH . '/public-footer.php'); ?>

@@ -54,16 +54,16 @@
   }
 } ?>
 
-</body>
 
 <?php 
   if(isset($user)) {
     echo display_errors($user->error_array);
   }
+  if(isset($error_render)) {
+    echo display_errors($error_render);
+  }
 ?>
-
+</body>
 </html>
 
-<?php
-db_disconnect($database);
-?>
+<?php db_disconnect($database); ?>

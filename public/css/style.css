@@ -36,7 +36,14 @@ header>div:first-child {
 
 #events-hd {
   background: url(/public/img/events.png);
-  background-position: calc(80vw - 120px) calc(90% + 5vw);
+  background-position: calc(80vw - 120px) calc(110% + 5vw);
+  background-repeat: no-repeat;
+  background-size: calc(5% + 280px);
+}
+
+#passes-hd {
+  background: url(/public/img/passes.png);
+  background-position: calc(80vw - 120px) calc(95% + 5vw);
   background-repeat: no-repeat;
   background-size: calc(5% + 280px);
 }
