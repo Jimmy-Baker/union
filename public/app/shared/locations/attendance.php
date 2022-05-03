@@ -19,15 +19,15 @@ if(is_post_request()) {
           if($record){
             $result = $record->delete();
             if($result) {
-              $session->message("The attendance record was deleted.", "warning");
+              $session->message("The attendance record was deleted.", "danger");
             } else {
-              $session->message("The attendance record could not be found.", "warning");
+              $session->message("The attendance record could not be found.", "danger");
             }
           } else {
-            $session->message("The attendance record could not be found.", "warning");
+            $session->message("The attendance record could not be found.", "danger");
           }
         } else {
-          $session->message("The attendance record could not be processed.", "warning");
+          $session->message("The attendance record could not be processed.", "danger");
         }
       };
       break;
@@ -40,13 +40,13 @@ if(is_post_request()) {
             if($result) {
               $session->message("The user was checked out.", "success");
             } else {
-              $session->message("The check out could not be processed.", "warning");
+              $session->message("The check out could not be processed.", "danger");
             }
           } else {
-            $session->message("A check out has already been recorded.", "warning");
+            $session->message("A check out has already been recorded.", "danger");
           }
         } else {
-          $session->message("The attendance record could not be processed.", "warning");
+          $session->message("The attendance record could not be processed.", "danger");
         }
       };
       break;

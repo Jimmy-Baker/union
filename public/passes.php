@@ -35,7 +35,7 @@ if($session->is_logged_in()){
           <div class="card-title py-3">
             <h2 class="display-4 text-center">Base Pass</h2>
           </div>
-          <p class="card-text">The Base Pass afford members the ability to visit nearby gyms and plan for contingencies when roadtripping. </p>
+          <p class="card-text">The Base Pass afford members the ability to visit nearby gyms and plan for contingencies when roadtripping. It's the simple solution to the day pass dilema.</p>
         </div>
         <ul class="list-group list-group-flush text-center">
           <li class="list-group-item">1 Visit per Gym</li>
@@ -55,7 +55,7 @@ if($session->is_logged_in()){
           <div class="card-title py-3">
             <h2 class="display-4 text-center">Union Pass</h2>
           </div>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <p class="card-text">The classic Union Pass secures your freedom to climb like a member wherever you roam. Climb everywhere with Union.</p>
         </div>
         <ul class="list-group list-group-flush text-center">
           <li class="list-group-item">3 Visits per Gym</li>
@@ -103,7 +103,7 @@ if($session->is_logged_in()){
           <p class="lead text-center">... really ... it's that simple.</p>
           <p>Union Passes can be purchased directly from any gym in our network. Gyms that offer the Base or Union Pass make it simple to enroll and pay along with your monthly membership dues. Season Passes can also be purchased in full at partner gyms. Unlike Base and Union passes, they do not require an active membership with a partner gym.</p>
           <p>Once purchased, each pass immediately unlocks the ability to climb at every gym in the network. If you run out of passes for a particular gym and currently hold a Union Pass, you have the option to purchase a day pass at a 10% discount. Passes cannot be upgraded in the middle of a dues cycle, and pass purchases are limited to 1 per climber. Passes cannot be shared, swapped, sold, or traded with/to another climber.</p>
-          <p>For more information and details on purchasing a pass, visit a <a href="/public/gyms.php">partner gym</a> near you.</p>
+          <p>For more information and details on purchasing a pass, visit a <a href="/public/gyms.php" class="link-dark">partner gym</a> near you.</p>
         </div>
       </div>
     </div>

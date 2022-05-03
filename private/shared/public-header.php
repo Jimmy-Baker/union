@@ -10,7 +10,7 @@
   <head>
     <meta charset="utf-8">
     <title>Union Climbing <?php if(isset($page_title)) { echo '- ' . h($page_title); } ?></title>
-    <meta name="description" content="">
+    <meta name="description" content="Union Climbing">
     <meta name="author" content="Jimmy Baker">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -38,7 +38,7 @@
           </div>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"><span class="visually-hidden">Toggle Menu</span></span>
         </button>
         <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasNavbar" data-bs-scroll="true" aria-labelledby="offcanvasNavbarLabel">
           <div class="offcanvas-header text-white">

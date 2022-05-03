@@ -9,12 +9,12 @@ if(!isset($_GET['id'])) {
 $id = $_GET['id'];
 $event = Event::find_by_id($id);
 if($event == false) {
-  $session->message('No event was identified.', 'warning');
+  $session->message('No event was identified.', 'danger');
   redirect_to(url_for('/app/shared/events/events.php'));
 }
 
 if(!Permission::test_location_user_permission($event->location_id, $session->user_id, 'XE') && $session->access_abv != 'AA'){
-  $session->message("You do not have permission to edit this event.", "warning");
+  $session->message("You do not have permission to edit this event.", "danger");
   redirect_to(url_for('/app/shared/events/events.php'));
 }
 

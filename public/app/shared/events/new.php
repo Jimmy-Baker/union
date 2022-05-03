@@ -10,7 +10,7 @@ if(is_post_request()) {
   $event = new Event($args);
   
   if(!Permission::test_location_user_permission($event->location_id, $session->user_id, 'XE') && $session->access_abv != 'AA'){
-    $session->message("You do not have permission to add an event to this location.", "warning");
+    $session->message("You do not have permission to add an event to this location.", "danger");
   } else {
     $result = $event->save();
     if($result === true) {
@@ -18,7 +18,7 @@ if(is_post_request()) {
       $session->message('The event was created successfully.', 'success');
       redirect_to(url_for('/app/shared/events/view.php?id=' . u($new_id)));
     } else {
-      $session->message('Event creation failed. Please evaluate your input and try again.', 'warning');
+      $session->message('Event creation failed. Please evaluate your input and try again.', 'danger');
     }
   }
 } else {

@@ -14,7 +14,7 @@ function imageUpload($string, $object, $location, $num=''){
 
     if ($file[$string]){
       $file->setName($object->id . '-' . $location . $num);
-      $file->setSize(8, 2097152);
+      $file->setSize(8, 24000000);
       $file->setMime(array('jpeg', 'jpg', 'png'));
       $file->setLocation($_SERVER['DOCUMENT_ROOT'] . '/public/upload/' . $location);
             

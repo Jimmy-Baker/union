@@ -2,16 +2,17 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
-if(!test_access('GS') && $id!=$session->user_id) {
-  $session->message('You do not have permission to edit this user.', 'warning');
-  redirect_to(url_for('/app/shared/users/users.php'));
-}
-
 if(!isset($_GET['id'])) {
   $session->message('No user was identified.', 'warning');
   redirect_to(url_for('/app/shared/users/users.php'));
 }
 $id = $_GET['id'];
+
+if(!test_access('GS') && ($id!=$session->user_id)) {
+  $session->message('You do not have permission to edit this user.', 'warning');
+  redirect_to(url_for($session->dashboard()));
+}
+
 $user = User::find_by_id($id);
 if($user == false) {
   $session->message('No user was identified.', 'warning');
@@ -53,6 +54,7 @@ if(is_post_request()) {
           $idealHeight,
           true
         );
+        $session->reset_photo();
       } else {
         $session->message('Image could not be uploaded', 'warning');
       }

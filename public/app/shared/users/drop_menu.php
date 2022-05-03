@@ -7,7 +7,7 @@ if(count(get_included_files()) == 1) redirect_to(url_for('/app/shared/users/user
     User Menu
   </a>
   <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="userMenuLink">
-    <?php if(!test_access('GS')) { ?>
+    <?php if(test_access('GS')) { ?>
     <li><a class="dropdown-item<?= active_class('users') ?>" href="<?= url_for('app/shared/users/users.php'); ?>">All Users</a></li>
     <li><a class="dropdown-item<?= active_class('new') ?>" href="<?= url_for('app/shared/users/new.php'); ?>">New User</a></li>
     <li><a class="dropdown-item<?= active_class('search') ?>" href="<?= url_for('app/shared/users/search.php'); ?>">Find Users</a></li>

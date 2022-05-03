@@ -10,7 +10,7 @@
   <head>
     <meta charset="utf-8">
     <title>Union Climbing <?php if(isset($page_title)) { echo '- ' . h($page_title); } ?></title>
-    <meta name="description" content="">
+    <meta name="description" content="Union Climbing">
     <meta name="author" content="Jimmy Baker">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -71,7 +71,7 @@
                   </li>
                   <li><a class="dropdown-item<?= active_class('attendance') ?>" href="<?= url_for("/app/shared/locations/attendance.php") ?>">Attendance</a></li>
                   <li><a class="dropdown-item<?= active_class('checkin') ?>" href="<?= url_for("/app/shared/locations/checkin.php") ?>">Member Check In</a></li>
-                  <li><a class="dropdown-item<?= active_class('change') ?>" href="<?= url_for("/app/admin/change.php") ?>">Change Location</a></li>
+                  <li><a class="dropdown-item<?= active_class('change') ?>" href="<?= url_for("/app/dashboard/change.php") ?>">Change Location</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>

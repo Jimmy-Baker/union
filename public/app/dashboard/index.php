@@ -1,14 +1,12 @@
 <?php 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
-$page_title = 'Administrator Dashboard';
+$page_title = User::USER_TYPES[$session->access_abv] . ' Dashboard';
 include(SHARED_PATH . '/user-header.php'); 
 
 if(test_access('GM')){
   $location = Location::find_by_id($session->location);
 }
-
-
 ?>
 
 <header>
@@ -24,16 +22,6 @@ if(test_access('GM')){
           <li class="breadcrumb-item active text-primary" aria-current="page">Dashboard</li>
         </ol>
       </nav>
-      <div class="col-auto d-none d-sm-block">
-        <a class="btn btn-outline-primary btn-raise dropdown-toggle" href="#" role="button" id="userMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          Dashboard Menu
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end" aria-labelledby="userMenuLink">
-          <li>
-            <p class="dropdown-header">I may get rid of this</p>
-          </li>
-        </ul>
-      </div>
     </div>
   </div>
 </header>
@@ -48,31 +36,24 @@ if(test_access('GM')){
         <div class="col-8">
           <div class="card-body">
             <h3 class="card-title"><?= h($session->name); ?></h3>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted">Logged in as Administrator</small></p>
+            <p class="card-text">Welcome to Union! Your dashboard is your home base to manage your account and pass. Any applications you have access to can be found here as wall.</p>
+            <p class="card-text"><small class="text-muted">Logged in as <?= User::USER_TYPES[$session->access_abv] ?></small></p>
           </div>
         </div>
       </div>
     </div>
-    <div class="col card shadow me-2 ms-md-3 px-0">
-      <h5 class="card-header">My Info</h5>
+    <div class="col col-lg-4 card shadow me-2 ms-md-3 px-0">
+      <h5 class="card-header">Quick Links</h5>
       <div class="card-body row row-cols-1 g-2">
-        <a class="col btn btn-primary ">My Profile</a>
-        <a class="col btn btn-primary ">My Pass</a>
-        <a class="col btn btn-primary ">My Gym</a>
-      </div>
-    </div>
-    <div class="col card shadow ms-2 px-0">
-      <h5 class="card-header">Link group</h5>
-      <div class="card-body row row-cols-1 g-2">
-        <a class="col btn btn-primary ">Button</a>
-        <a class="col btn btn-primary ">Button</a>
-        <a class="col btn btn-primary ">Button</a>
+        <a class="col btn btn-primary" href="<?= url_for('app/shared/users/view.php?id=' . u($session->user_id)) ?>">My Profile</a>
+        <a class="col btn btn-primary" href="<?= url_for('app/shared/passes/view.php?id=' . u($session->pass_id)) ?>">My Pass</a>
+        <a class="col btn btn-primary" href="<?= url_for('app/shared/locations/view.php?id=' . u($session->location)) ?>">My Gym</a>
       </div>
     </div>
   </section>
 
   <section class="accordion shadow" id="accordionTools">
+    <?php if(test_access('AA')) { ?>
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingAdmin">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAdmin" aria-expanded="true" aria-controls="collapseAdmin">
@@ -87,7 +68,7 @@ if(test_access('GM')){
                 <div class="card-body">
                   <h5 class="card-title">User Management</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Admin Only</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Create, update, or delete users with the User Management tool.</p>
                 </div>
                 <div class="card-body text-end pt-0">
                   <a href="<?= url_for("/app/shared/users/users.php"); ?>" class="btn btn-primary">Manage Users</a>
@@ -99,7 +80,7 @@ if(test_access('GM')){
                 <div class="card-body">
                   <h5 class="card-title">Group Management</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Admin Only</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Create, update, or delete groups with the Group Management tool.</p>
                 </div>
                 <div class="card-body text-end pt-0">
                   <a href="<?= url_for("/app/shared/groups/groups.php"); ?>" class="btn btn-primary">Manage Groups</a>
@@ -111,7 +92,7 @@ if(test_access('GM')){
                 <div class="card-body">
                   <h5 class="card-title">Gym Management</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Admin Only</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Create, update, or delete gyms with the Gym Management tool.</p>
                 </div>
                 <div class="card-body text-end pt-0">
                   <a href="<?= url_for("/app/shared/gyms/gyms.php"); ?>" class="btn btn-primary">Manage Gyms</a>
@@ -123,7 +104,7 @@ if(test_access('GM')){
                 <div class="card-body">
                   <h5 class="card-title">Location Management</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Admin Only</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Create, update, or delete locations with the Location Management tool.</p>
                 </div>
                 <div class="card-body text-end pt-0">
                   <a href="<?= url_for("/app/shared/locations/locations.php"); ?>" class="btn btn-primary">Manage Locations</a>
@@ -135,7 +116,7 @@ if(test_access('GM')){
                 <div class="card-body">
                   <h5 class="card-title">Event Management</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Admin Only</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Create, update, or delete events at any location with the Event Management tool.</p>
                 </div>
                 <div class="card-body text-end pt-0">
                   <a href="<?= url_for("/app/shared/events/events.php"); ?>" class="btn btn-primary">Manage Events</a>
@@ -147,7 +128,7 @@ if(test_access('GM')){
                 <div class="card-body">
                   <h5 class="card-title">Pass Management</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Admin Only</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Create, update, or delete custom passes with the Pass Management tool.</p>
                 </div>
                 <div class="card-body text-end pt-0">
                   <a href="<?= url_for("/app/shared/passes/passes.php"); ?>" class="btn btn-primary">Manage Passes</a>
@@ -158,6 +139,8 @@ if(test_access('GM')){
         </div>
       </div>
     </div>
+    <?php } ?>
+    <?php if(test_access('GM')) { ?>
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingManager">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseManager" aria-expanded="false" aria-controls="collapseManager">
@@ -172,7 +155,7 @@ if(test_access('GM')){
                 <div class="card-body">
                   <h5 class="card-title">Manage Gym Location</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Gym Managers</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Edit your location's details for others to view.</p>
                 </div>
                 <div class="card-body text-end pt-0">
                   <a href="<?= url_for("/app/shared/locations/view.php?id=" . u($location->id)); ?>" class="btn btn-primary">Gym Location</a>
@@ -184,7 +167,7 @@ if(test_access('GM')){
                 <div class="card-body">
                   <h5 class="card-title">Manage Gym Employees</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Gym Managers</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Add or remove users to your location's employee group.</p>
                 </div>
                 <div class="card-body text-end pt-0">
                   <a href="<?= url_for("/app/shared/groups/view.php?id=" . u($location->employee_group)); ?>" class="btn btn-primary">Gym Employees</a>
@@ -196,7 +179,7 @@ if(test_access('GM')){
                 <div class="card-body">
                   <h5 class="card-title">Manage Gym Events</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Gym Managers</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Create, update, or delete events at your location.</p>
                 </div>
                 <div class="card-body text-end pt-0">
                   <a href="<?= url_for("/app/shared/events/events.php?local=true"); ?>" class="btn btn-primary">Gym Events</a>
@@ -207,6 +190,8 @@ if(test_access('GM')){
         </div>
       </div>
     </div>
+    <?php } ?>
+    <?php if(test_access('GS')) { ?>
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingStaff">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseStaff" aria-expanded="false" aria-controls="collapseStaff">
@@ -221,7 +206,7 @@ if(test_access('GM')){
                 <div class="card-body">
                   <h5 class="card-title">User Check In</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Gym Staff</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Check in users to your location and manage check-ins.</p>
                 </div>
                 <div class="card-body text-end pt-0">
                   <a href="<?= url_for("/app/shared/locations/checkin.php"); ?>" class="btn btn-primary">Check In Users</a>
@@ -233,7 +218,7 @@ if(test_access('GM')){
                 <div class="card-body">
                   <h5 class="card-title">Pass Provision</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Gym Staff</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Fully provision new passes to users.</p>
                 </div>
                 <div class="card-body text-end pt-0">
                   <a href="<?= url_for("/app/shared/passes/provision.php"); ?>" class="btn btn-primary">Provide A Pass</a>
@@ -245,7 +230,7 @@ if(test_access('GM')){
                 <div class="card-body">
                   <h5 class="card-title">Gym Attendance</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Gym Staff</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Manage users currently checked into your location.</p>
                 </div>
                 <div class="card-body text-end pt-0">
                   <a href="<?= url_for("/app/shared/locations/attendance.php"); ?>" class="btn btn-primary">View Attendance</a>
@@ -256,6 +241,8 @@ if(test_access('GM')){
         </div>
       </div>
     </div>
+    <?php } ?>
+    <?php if(test_access('MM')) { ?>
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingMember">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMember" aria-expanded="false" aria-controls="collapseMember">
@@ -270,7 +257,7 @@ if(test_access('GM')){
                 <div class="card-body">
                   <h5 class="card-title">View My Pass</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Union Member</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">View information about your pass and available punches.</p>
                 </div>
                 <div class="card-body text-end pt-0">
                   <a href="<?= url_for("/app/shared/locations/attendance.php"); ?>" class="btn btn-primary">View My Pass</a>
@@ -283,7 +270,7 @@ if(test_access('GM')){
                 <div class="card-body">
                   <h5 class="card-title">My Profile</h5>
                   <h6 class="card-subtitle mb-2 text-muted">Union Member</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">View and edit your profile information.</p>
                 </div>
                 <div class="card-body text-end pt-0">
                   <a href="<?= url_for("/app/shared/users/view.php?id=" . $session->user_id); ?>" class="btn btn-primary">View My Profile</a>
@@ -294,6 +281,7 @@ if(test_access('GM')){
         </div>
       </div>
     </div>
+    <?php } ?>
   </section>
 
 </main>

@@ -3,7 +3,7 @@
 class Event extends DatabaseObject {
 
   static protected $table_name = "events";
-  static protected $db_columns = ['id', 'start_date', 'end_date', 'location_id', 'event_name', 'participants', 'cost', 'url', 'photo_data'];
+  static protected $db_columns = ['id', 'start_date', 'end_date', 'location_id', 'event_name', 'participants', 'cost', 'url', 'photo_data', 'description'];
   
   public $id;
   public $start_date;

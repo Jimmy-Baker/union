@@ -25,7 +25,7 @@ $gyms = Gym::find_all();
       <div class="col-md-7">
         <input type="text" name="location[location_name]" value="<?= h($location->location_name); ?>" class="form-control" id="inputLocationName" maxlength="32" aria-describedby="helpLocationName" required>
       </div>
-      <div id="helpLocationName" class="form-text offset-md-3">Maximum of 32 characters</div>
+      <div id="helpLocationName" class="form-text offset-md-3">Required - Maximum of 32 characters</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -40,7 +40,7 @@ $gyms = Gym::find_all();
           <?php } ?>
         </select>
       </div>
-      <div id="helpGymId" class="form-text offset-md-3"></div>
+      <div id="helpGymId" class="form-text offset-md-3">Required</div>
     </div>
 
     <div class=" row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -50,7 +50,7 @@ $gyms = Gym::find_all();
       <div class="col-md-7">
         <input type="text" name="location[street_address]" value="<?= h($location->street_address); ?>" class="form-control" id="inputStreetAddress" maxlength="64" aria-describedby="helpStreetAddress" required>
       </div>
-      <div id="helpStreetAddress" class="form-text offset-md-3">Maximum of 64 characters</div>
+      <div id="helpStreetAddress" class="form-text offset-md-3">Required - Maximum of 64 characters</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -60,7 +60,7 @@ $gyms = Gym::find_all();
       <div class="col-md-7">
         <input type="text" name="location[city]" value="<?= h($location->city); ?>" class="form-control" id="inputCity" maxlength="64" aria-describedby="helpCity" required>
       </div>
-      <div id="helpCity" class="form-text offset-md-3">Maximum of 64 characters</div>
+      <div id="helpCity" class="form-text offset-md-3">Required - Maximum of 64 characters</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -75,7 +75,7 @@ $gyms = Gym::find_all();
           <?php } ?>
         </select>
       </div>
-      <div id="helpStateAbv" class="form-text offset-md-3"></div>
+      <div id="helpStateAbv" class="form-text offset-md-3">Required</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -110,10 +110,10 @@ $gyms = Gym::find_all();
       <div class="col-md-7">
         <div class="row ms-0 input-group">
           <input type="tel" name="location[phone_p_country]" value="<?= h($location->phone_p_country); ?>" class="form-control col ppx" id="inputPhonePCountry" list="countryPrefixes" aria-labelledby="inputPhonePrimary" readonly>
-          <input type="tel" name="location[phone_primary]" value="<?= h($location->phone_primary); ?>" class="form-control col w-75" id="inputPhonePrimary" aria-describedby="phonePrimary" required>
+          <input type="tel" name="location[phone_primary]" value="<?= h($location->phone_primary); ?>" class="form-control col w-75" id="inputPhonePrimary" aria-describedby="helpPhonePrimary" required>
         </div>
       </div>
-      <div id="helpPhonePrimary" class="form-text offset-md-3">Maximum of 12 Digits</div>
+      <div id="helpPhonePrimary" class="form-text offset-md-3">Required - Maximum of 12 Digits</div>
     </div>
   </div>
 </fieldset>

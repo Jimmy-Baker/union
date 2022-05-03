@@ -32,13 +32,13 @@ if(is_post_request()) {
         $session->message("The user was added successfully.", "success");
         redirect_to(url_for('/app/shared/groups/view.php?id=' . u($group->id)));
       } else {
-        $session->message("That user could not be added.", "warning");
+        $session->message("That user could not be added.", "danger");
       }
     } else {
-      $session->message("That user could not be found.", "warning");
+      $session->message("That user could not be found.", "danger");
     }
   } else {
-    $session->message("A valid entry is required.", "warning");
+    $session->message("A valid entry is required.", "danger");
   }
 }
 

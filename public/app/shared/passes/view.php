@@ -8,7 +8,7 @@ if(!isset($_GET['id'])) {
 }
 $id = $_GET['id'];
 
-if(!test_access('GS')) {
+if(!test_access('GS') && $session->pass_id!=$id) {
   $session->message('You do not have permission to view this pass.', 'warning');
   redirect_to(url_for($session->dashboard()));
 }
@@ -28,13 +28,15 @@ if(is_post_request()){
       $result = $punch->redeem_punch();
       if($result){
         $session->message('The punch was redeemed sucessfully.', 'success');
+        $punches = PassItem::find_by_pass($id);
       } else {
         $session->message('The punch could not be redeemed.', 'warning');
       }
     } elseif($_POST['method'] == 'remove') {
-      $result = $punch->remove_punch();
+      $result = $punch->refund_punch();
       if($result){
-        $session->message('The punch was removed sucessfully.', 'success');
+        $session->message('The punch was refunded sucessfully.', 'success');
+        $punches = PassItem::find_by_pass($id);
       } else {
         $session->message('The punch could not be removed.', 'warning');
       }
@@ -128,7 +130,7 @@ include(SHARED_PATH . '/user-header.php');
               <td><?= h($punch->used) ?></td>
               <?php if(test_access('GS')){ ?>
               <td>
-                <form method="POST" action="<?= url_for('/app/shared/locations/view.php?id=' . $pass->id); ?>">
+                <form method="POST" action="<?= url_for('/app/shared/passes/view.php?id=' . $pass->id); ?>">
                   <input type="hidden" name="id" value="<?= h($punch->gym_id) ?>">
                   <div class="btn-group" role="group" aria-label="location actions">
                     <button class="btn btn-primary" type="submit" name="method" value="redeem">Redeem</button>
@@ -163,7 +165,7 @@ include(SHARED_PATH . '/user-header.php');
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <form action="<?= url_for('/app/shared/locations/attendance.php'); ?>" method="POST">
+          <form action="<?= url_for('/app/shared/passes/view.php?id=' . u($id)); ?>" method="POST">
             <input type="hidden" name="id" value="" id="confirmInput">
             <input type="hidden" name="method" value="remove">
             <button type="submit" class="btn btn-primary" id="confirmButton">Confirm Removal</button>

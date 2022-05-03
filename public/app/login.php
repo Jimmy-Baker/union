@@ -48,11 +48,7 @@ include(SHARED_PATH . '/public-header.php');
     <div class="mb-3">
       <label for="inputPassword" class="form-label">Password</label>
       <input type="password" name="password" value="" class="form-control" id="inputPassword" aria-describedby="helpPassword" required>
-      <div id="helpPassword" class="form-text">Can't remember your password? <a href="<?= url_for('app/reset.php') ?>">Reset it</a> using your email.</div>
-    </div>
-    <div class="mb-3 form-check">
-      <input type="checkbox" class="form-check-input" id="inputRemember">
-      <label class="form-check-label" for="inputRemember">Remember Me</label>
+      <div id="helpPassword" class="form-text text-dark">Can't remember your password? <a href="<?= url_for('app/reset.php') ?>" class="link-dark">Reset it</a> using your email.</div>
     </div>
     <button type="submit" name="submit" class="btn btn-primary">Log In</button>
   </form>

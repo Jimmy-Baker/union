@@ -18,17 +18,18 @@ if(is_post_request()) {
       $args['user_id'] = $user->id;
       $args['key'] = $key;
       
+      $reset = Request::delete_all($user->id);
       $request = new Request($args);
       $result = $request->save();
       
-      if($result){
+      if($reset && $result){
         include('mail/password_reset.php');
         $session->message('An email will be sent to your address if it exists in our system.', 'success');
       } else {
-        $session->message("The request could not be completed. Please try again.", "warning");
+        $session->message("The request could not be completed. Please try again.", "danger");
       }
     } else {
-      $session->message("The request could not be generated. Please try again.", "warning");
+      $session->message("The request could not be generated. Please try again.", "danger");
     }
   }
 }
@@ -42,7 +43,8 @@ include(SHARED_PATH . '/public-header.php');
     <h1><?= $page_title ?></h1>
     <div class="mb-3">
       <label for="inputEmail" class="form-label">Email Address</label>
-      <input type="email" name="email" value="<?= h($email); ?>" class="form-control" id="inputEmail" required>
+      <input type="email" name="email" value="<?= h($email); ?>" class="form-control" id="inputEmail" aria-describedby="helpEmail" required>
+      <div id="helpEmail" class="form-text">Required</div>
     </div>
     <button type="submit" name="submit" class="btn btn-primary" id="spinButton">Reset Password</button>
   </form>

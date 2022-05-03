@@ -20,7 +20,7 @@ if($session->is_logged_in()){
           <h1 class="display-2"><?= $page_title ?></h1>
         </div>
         <div class="col-8">
-          <p>Unlock climbing access nation-wide with the largest network of independently-owned gyms. Introducing the Union Pass, available now!</p>
+          <p>Come party or throw down at a competition at a gym near you! Union members get special access and invitations to events across the country.</p>
           <a class="btn btn-secondary" href="<?= url_for('/passes.php') ?>" role="button">Explore Passes</a>
         </div>
       </div>
@@ -40,15 +40,16 @@ if($session->is_logged_in()){
           <div class="col-12 col-sm-6 col-lg-4">
             <div class="card h-100">
               <div class="card-header">
-                <h3><?= ($event->start_date == $event->end_date) ? format_date($event->start_date, '/') : format_date($event->$start_date, '/') . ' - ' . format_date($event_end_date, '/') ?></h3>
+                <h3><?= ($event->start_date == $event->end_date) ? format_date($event->start_date, '/') : (format_date($event->start_date, '/') . ' - ' . format_date($event->end_date, '/')) ?></h3>
               </div>
               <div class="card-body">
                 <h5 class="card-title"><?= $event->event_name ?></h5>
-                <h6 class="card-subtitle mb-2 text-muted">Admin Only</h6>
+                <h6 class="card-subtitle mb-2 text-muted"><?= $event->gym_name . ' ' . $event->location_name ?></h6>
                 <p class="card-text"><?= $event->description ?></p>
               </div>
               <div class="card-body text-end pt-0">
-                <a href="<?= url_for("/app/shared/gyms/gyms.php"); ?>" class="btn btn-primary">Manage Gyms</a>
+
+                <a href="<?= url_for("/app/shared/events/view.php?id=" . u($event->id)); ?>" class="btn btn-primary">More Information</a>
               </div>
             </div>
           </div>
@@ -72,15 +73,15 @@ if($session->is_logged_in()){
           <div class="col-12 col-sm-6 col-lg-4">
             <div class="card h-100">
               <div class="card-header">
-                <h3><?= ($event->start_date == $event->end_date) ? format_date($event->start_date, '/') : format_date($event->$start_date, '/') . ' - ' . format_date($event_end_date, '/') ?></h3>
+                <h3><?= ($event->start_date == $event->end_date) ? format_date($event->start_date, '/') : (format_date($event->start_date, '/') . ' - ' . format_date($event->end_date, '/')) ?></h3>
               </div>
               <div class="card-body">
                 <h5 class="card-title"><?= $event->event_name ?></h5>
-                <h6 class="card-subtitle mb-2 text-muted">Admin Only</h6>
+                <h6 class="card-subtitle mb-2 text-muted"><?= $event->gym_name . ' ' . $event->location_name ?></h6>
                 <p class="card-text"><?= $event->description ?></p>
               </div>
               <div class="card-body text-end pt-0">
-                <a href="<?= h($event->url) ?>" class="btn btn-primary">Manage Gyms</a>
+                <a href="<?= url_for("/app/shared/events/view.php?id=" . u($event->id)); ?>" class="btn btn-primary">More Information</a>
               </div>
             </div>
           </div>

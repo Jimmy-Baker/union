@@ -3,18 +3,18 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
 if(!isset($_GET['id'])) {
-  $session->message("No event was identified.", "warning");
+  $session->message("No event was identified.", "danger");
   redirect_to(url_for('/app/shared/events/events.php'));
 }
 $id = $_GET['id'];
 $event = Event::find_by_id($id);
 if($event == false) {
-  $session->message("No event was identified.", "warning");
+  $session->message("No event was identified.", "danger");
   redirect_to(url_for('/app/shared/events/events.php'));
 }
 
 if(!Permission::test_location_user_permission($event->location_id, $session->user_id, 'XE') && $session->access_abv != 'AA'){
-  $session->message("You do not have permission to delete this event.", "warning");
+  $session->message("You do not have permission to delete this event.", "danger");
   redirect_to(url_for('/app/shared/events/events.php'));
 }
 
@@ -31,7 +31,7 @@ if(is_post_request()) {
   }
 } 
 
-$page_title = 'Delete Event: ' . h($event->event_name());
+$page_title = 'Delete Event: ' . h($event->event_name);
 include(SHARED_PATH . '/user-header.php');
 ?>
 
@@ -47,7 +47,7 @@ include(SHARED_PATH . '/user-header.php');
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
           <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/events/events.php'); ?>">Events</a></li>
-          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/events/view.php?id=' . u($event->id)); ?>"><?= h($event->name()); ?></a></li>
+          <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/events/view.php?id=' . u($event->id)); ?>"><?= h($event->event_name); ?></a></li>
           <li class="breadcrumb-item active text-primary" aria-current="page">Delete Event</li>
         </ol>
       </nav>

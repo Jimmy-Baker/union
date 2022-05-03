@@ -10,7 +10,7 @@ if(count(get_included_files()) == 1) redirect_to(url_for('/app/shared/events/eve
     <?php if(test_access('GS')){ ?>
     <li><a class="dropdown-item<?= active_class('events') ?>" href="<?= url_for('app/shared/events/events.php'); ?>">All Events</a></li>
     <?php } ?>
-    <?php if(Permission::test_location_user_permission($event->location_id, $session->user_id, 'XE') || $session->access_abv == 'AA'){ ?>
+    <?php if(Permission::test_location_user_permission($session->location, $session->user_id, 'XE') || $session->access_abv == 'AA'){ ?>
     <li><a class="dropdown-item<?= active_class('new') ?>" href="<?= url_for('app/shared/events/new.php'); ?>">New Event</a></li>
     <?php } ?>
     <?php if(test_access('GS')){ ?>

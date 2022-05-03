@@ -15,7 +15,6 @@ if(is_post_request()) {
     redirect_to(url_for('/app/login.php?email=' . $user->email));
   } else {
     $session->message('Your account creation failed. Please check your input and try again', 'warning');
-    redirect_to(url_for('/app/login.php?email=' . $user->email));
   }
 } else {
   $user = new User;
@@ -49,7 +48,13 @@ include(SHARED_PATH . '/public-header.php');
 
 <main class="container-md p-4 mt-5" id="main">
 
-  <form action="signup.php" method="post">
+  <form action="signup.php" method="post" class="needs-validation" novalidate>
+    <datalist id="countryPrefixes">
+      <?php foreach($countries as $country) { ?>
+      <option value="<?= h($country->country_prefix) ?>" <?= ($user->phone_p_country == $country->country_prefix) ? 'selected' : '';?>><?= h($country->country_name); ?></option>
+      <?php } ?>
+    </datalist>
+
     <fieldset class="card shadow col-md-10 mx-auto mb-4">
       <legend class="card-header">Profile Information</legend>
       <div class="card-body">
@@ -61,7 +66,7 @@ include(SHARED_PATH . '/public-header.php');
           <div class="col-md-7">
             <input type="text" name="user[first_name]" value="<?= h($user->first_name); ?>" class="form-control" id="inputFirstName" maxlength="32" aria-describedby="helpFirstName" required>
           </div>
-          <div id="helpFirstName" class="form-text offset-md-3">Maximum of 32 characters</div>
+          <div id="helpFirstName" class="form-text offset-md-3">Required - Maximum of 32 characters</div>
         </div>
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -81,7 +86,7 @@ include(SHARED_PATH . '/public-header.php');
           <div class="col-md-7">
             <input type="text" name="user[last_name]" value="<?= h($user->last_name); ?>" class="form-control" id="inputLastName" maxlength="32" aria-describedby="helpLastName" required>
           </div>
-          <div id="helpLastName" class="form-text offset-md-3">Maximum of 32 characters</div>
+          <div id="helpLastName" class="form-text offset-md-3">Required - Maximum of 32 characters</div>
         </div>
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -101,7 +106,7 @@ include(SHARED_PATH . '/public-header.php');
           <div class="col-md-7">
             <input type="date" name="user[birth_date]" value="<?= html_date($user->birth_date); ?>" class="form-control" id="inputBirthDate" min="1902-01-01" max="<?= $today; ?>" aria-describedby="helpBirthDate" required>
           </div>
-          <div id="helpBirthDate" class="form-text offset-md-3">Must be between 01/01/1902 and <?= format_date($today, "/"); ?></div>
+          <div id="helpBirthDate" class="form-text offset-md-3">Required - Must be between 01/01/1902 and <?= format_date($today, "/"); ?></div>
         </div>
       </div>
     </fieldset>
@@ -116,7 +121,7 @@ include(SHARED_PATH . '/public-header.php');
           <div class="col-md-7">
             <input type="text" name="user[street_address]" value="<?= h($user->street_address); ?>" class="form-control" id="inputStreetAddress" minlength="6" maxlength="64" aria-describedby="helpStreetAddress" required>
           </div>
-          <div id="helpStreetAddress" class="form-text offset-md-3">Maximum of 64 characters</div>
+          <div id="helpStreetAddress" class="form-text offset-md-3">Required - Maximum of 64 characters</div>
         </div>
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -126,7 +131,7 @@ include(SHARED_PATH . '/public-header.php');
           <div class="col-md-7">
             <input type="text" name="user[city]" value="<?= h($user->city); ?>" class="form-control" id="inputCity" minlength="2" maxlength="64" aria-describedby="helpCity" required>
           </div>
-          <div id="helpCity" class="form-text offset-md-3">Maximum of 64 characters</div>
+          <div id="helpCity" class="form-text offset-md-3">Required - Maximum of 64 characters</div>
         </div>
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -134,13 +139,14 @@ include(SHARED_PATH . '/public-header.php');
             <label for="inputStateAbv" class="col-form-label">State</label>
           </div>
           <div class="col-md-7">
-            <select name="user[state_abv]" class="form-select" id="inputStateAbv" required>
+            <select name="user[state_abv]" class="form-select" id="inputStateAbv" aria-describedby="helpStateAbv" required>
               <option hidden value="">Select One</option>
               <?php foreach($states as $state) { ?>
-              <option value="<?= h($state->abv) ?>" <?= ($user->state_abv == $state->abv) ? 'selected' : '';?>><?= h($state->state_name); ?></option>
+              <option value="<?= h($state->abv) ?>" <?= ($user->state_abv == $state->abv) ? 'selected' : '';?>><?= h($state->state_name) ?? 'N/A'; ?></option>
               <?php } ?>
             </select>
           </div>
+          <div id="helpStateAbv" class="form-text offset-md-3">Required</div>
         </div>
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -150,7 +156,7 @@ include(SHARED_PATH . '/public-header.php');
           <div class="col-md-7">
             <input type="text" name="user[zip]" value="<?= h($user->zip); ?>" class="form-control" id="inputZip" minlength="5" maxlength="5" aria-describedby="helpZip" required>
           </div>
-          <div id="helpZip" class="form-text offset-md-3">Must be 5 characters</div>
+          <div id="helpZip" class="form-text offset-md-3">Required - Must be 5 characters</div>
         </div>
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -164,7 +170,7 @@ include(SHARED_PATH . '/public-header.php');
               <option value="<?= h($country->abv) ?>" <?= (($user->country_abv == $country->abv) || (($user->country_abv == '') && ($country->abv == 'US'))) ? 'selected' : '';?>><?= h($country->country_name); ?></option>
               <?php } ?>
             </select>
-            <div id="helpCountryAbv" class="form-text offset-md-3"></div>
+            <div id="helpCountryAbv" class="form-text offset-md-3">Required</div>
           </div>
         </div>
       </div>
@@ -184,7 +190,7 @@ include(SHARED_PATH . '/public-header.php');
               <input type="tel" name="user[phone_primary]" value="<?= h($user->phone_primary); ?>" class="form-control col w-75" id="inputPhonePrimary" aria-describedby="helpPhonePrimary" minlength="10" maxlength="12" required>
             </div>
           </div>
-          <div id="helpPhonePrimary" class="form-text offset-md-3">Maximum of 12 Digits</div>
+          <div id="helpPhonePrimary" class="form-text offset-md-3">Required - Maximum of 12 Digits</div>
         </div>
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -212,7 +218,7 @@ include(SHARED_PATH . '/public-header.php');
           <div class="col-md-7">
             <input type="text" name="user[first_name_emergency]" value="<?= h($user->first_name_emergency); ?>" class="form-control" id="inputEmergencyFirst" aria-describedby="helpEmergencyFirst" required>
           </div>
-          <div id="helpEmergencyFirst" class="form-text offset-md-3">Maximum of 32 Characters</div>
+          <div id="helpEmergencyFirst" class="form-text offset-md-3">Required - Maximum of 32 Characters</div>
         </div>
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -222,7 +228,7 @@ include(SHARED_PATH . '/public-header.php');
           <div class="col-md-7">
             <input type="text" name="user[last_name_emergency]" value="<?= h($user->last_name_emergency); ?>" class="form-control" id="inputEmergencyLast" aria-describedby="helpEmergencyLast" required>
           </div>
-          <div id="helpEmergencyLast" class="form-text offset-md-3">Maximum of 32 Characters</div>
+          <div id="helpEmergencyLast" class="form-text offset-md-3">Required - Maximum of 32 Characters</div>
         </div>
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -235,7 +241,7 @@ include(SHARED_PATH . '/public-header.php');
               <input type="tel" name="user[phone_emergency]" value="<?= h($user->phone_emergency); ?>" class="form-control col w-75" id="inputPhoneEmergency" aria-describedby="helpPhoneEmergency" maxlength="12" required>
             </div>
           </div>
-          <div id="helpPhoneEmergency" class="form-text offset-md-3">Maximum of 12 Digits</div>
+          <div id="helpPhoneEmergency" class="form-text offset-md-3">Required - Maximum of 12 Digits</div>
         </div>
       </div>
     </fieldset>
@@ -246,12 +252,27 @@ include(SHARED_PATH . '/public-header.php');
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
           <div class="col-md-3 text-md-end">
+            <label for="inputPrimaryLocation" class="col-form-label">Primary Location</label>
+          </div>
+          <div class="col-md-7">
+            <select name="user[primary_location]" value="<?= h($user->primary_location); ?>" class="form-select" id="inputPrimaryLocation" aria-describedby="helpPrimaryLocation" required>
+              <option hidden value="">Select One</option>
+              <?php foreach($locations as $location) { ?>
+              <option value="<?= h($location->id) ?>" <?= ($event->location_id == $location->id) ? 'selected' : '' ?>><?= h($location->gym_name) . ' ' . h($location->location_name) ?></option>
+              <?php } ?>
+            </select>
+          </div>
+          <div id="helpPrimaryLocation" class="form-text offset-md-3">Required</div>
+        </div>
+
+        <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
+          <div class="col-md-3 text-md-end">
             <label for="inputEmail" class="col-form-label">Email</label>
           </div>
           <div class="col-md-7">
             <input type="text" name="user[email]" value="<?= h($user->email); ?>" class="form-control" id="inputEmail" maxlength="255" aria-describedby="helpEmail" required>
           </div>
-          <div id="helpEmail" class="form-text offset-md-3">Maximum of 255 Characters</div>
+          <div id="helpEmail" class="form-text offset-md-3">Required - Maximum of 255 Characters</div>
         </div>
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -259,8 +280,9 @@ include(SHARED_PATH . '/public-header.php');
             <label for="inputPassword" class="col-form-label">Password</label>
           </div>
           <div class="col-md-7">
-            <input type="password" name="user[password]" value="<?= h($user->password); ?>" class="form-control" id="inputPassword" <?php if(!defined('exists')) {'required';} ?>>
+            <input type="password" name="user[password]" value="<?= h($user->password); ?>" class="form-control" id="inputPassword" <?php if(!defined('exists')) {'required';} ?> aria-describedby="helpPassword">
           </div>
+          <div id="helpPassword" class="form-text offset-md-3 col-md-7">Required - Must be at least 8 characters and contain a combination of uppercase and lowercase letters and symbols.</div>
         </div>
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -268,8 +290,9 @@ include(SHARED_PATH . '/public-header.php');
             <label for="inputConfirmPassword" class="col-form-label">Confirm Password</label>
           </div>
           <div class="col-md-7">
-            <input type="password" name="user[confirm_password]" value="<?= h($user->confirm_password); ?>" class="form-control" id="inputConfirmPassword" <?php if(!defined('exists')) {'required';} ?>>
+            <input type="password" name="user[confirm_password]" value="<?= h($user->confirm_password); ?>" class="form-control" id="inputConfirmPassword" <?php if(!defined('exists')) {'required';} ?> aria-describedby="helpConfirmPassword">
           </div>
+          <div id="helpConfirmPassword" class="form-text offset-md-3">Required - Must match the previous value.</div>
         </div>
       </div>
     </fieldset>
@@ -278,8 +301,10 @@ include(SHARED_PATH . '/public-header.php');
 
 </main>
 
-<?= 
-display_errors($user->error_array);
+<?php 
+if($user->error_array != []){ 
+  $error_render=$user->error_array;
+}
 $scripts[] = "js/country_ppx.js";
 $scripts[] = "node_modules/inputmask/dist/jquery.inputmask.js";
 

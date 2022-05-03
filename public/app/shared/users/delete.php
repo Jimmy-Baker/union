@@ -66,24 +66,26 @@ include(SHARED_PATH . '/user-header.php');
         <div class="card-text">
           <dl class="row">
             <dt class="col-sm-3">First Name</dt>
-            <dd class="col-sm-9"><?= h($user->first_name); ?></dd>
+            <dd class="col-sm-9"><?= d($user->first_name); ?></dd>
             <dt class="col-sm-3">Middle Name</dt>
-            <dd class="col-sm-9"><?= h($user->middle_name); ?></dd>
+            <dd class="col-sm-9"><?= d($user->middle_name); ?></dd>
             <dt class="col-sm-3">Last Name</dt>
-            <dd class="col-sm-9"><?= h($user->last_name); ?></dd>
+            <dd class="col-sm-9"><?= d($user->last_name); ?></dd>
             <dt class="col-sm-3">Preferred Name</dt>
-            <dd class="col-sm-9"><?= h($user->preferred_name); ?></dd>
+            <dd class="col-sm-9"><?= d($user->preferred_name); ?></dd>
             <dt class="col-sm-3">Birth Date</dt>
-            <dd class="col-sm-9"><?= h(format_date($user->birth_date, "-")); ?></dd>
-            <dt class="col-sm-3">Group ID</dt>
-            <dd class="col-sm-9"><?= h($user->group_id); ?></dd>
+            <dd class="col-sm-9"><?= d(format_date($user->birth_date, "-")); ?></dd>
+            <dt class="col-sm-3">Primary Location</dt>
+            <dd class="col-sm-9"><?= d($user->primary_location); ?></dd>
             <dt class="col-sm-3">Address</dt>
-            <dd class="col-sm-9"><?= h(format_address($user->street_address, $user->city, $user->state_abv, $user->zip, $user->country_abv)); ?></dd>
+            <dd class="col-sm-9"><?= d(format_address($user->street_address, $user->city, $user->state_abv, $user->zip, $user->country_abv)); ?></dd>
             <dt class="col-sm-3">Email</dt>
-            <dd class="col-sm-9"><?= h($user->email); ?></dd>
+            <dd class="col-sm-9"><?= d($user->email); ?></dd>
             <dt class="col-sm-3">Primary Phone</dt>
-            <dd class="col-sm-9"><?= h(format_phone($user->phone_p_country, $user->phone_primary)); ?></dd>
+            <dd class="col-sm-9"><?= d(format_phone($user->phone_p_country, $user->phone_primary)); ?></dd>
+          </dl>
         </div>
+      </div>
     </fieldset>
     <div class="row justify-content-evenly">
       <div class="col-sm-4 col-md-3 mb-3 d-grid">

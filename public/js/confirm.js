@@ -1,19 +1,19 @@
 confirmationModal();
 
 function confirmationModal() {
-	var confirmModal = document.getElementById('confirmModal');
-	var confirmButton = document.getElementById('confirmButton');
-	var noJSarray = document.querySelectorAll('.no-js');
-	var yesJSarray = document.querySelectorAll('.no-js');
+	const confirmModal = document.getElementById('confirmModal');
+	const confirmButton = document.getElementById('confirmButton');
+	const noJSarray = document.querySelectorAll('.no-js');
+	const yesJSarray = document.querySelectorAll('.yes-js');
 
-	if (noJS) {
-		noJSarray.forEach(noJS, () => {
+	if (noJSarray) {
+		noJSarray.forEach(noJS => {
 			noJS.style.display = 'none';
 		});
 	}
-	if (noJS) {
-		noJSarray.forEach(noJS, () => {
-			noJS.style.display = 'none';
+	if (yesJSarray) {
+		yesJSarray.forEach(yesJS => {
+			yesJS.style.display = 'block';
 		});
 	}
 

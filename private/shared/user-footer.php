@@ -11,7 +11,7 @@
       </div>
     </div>
   </div>
-  <div class="row pt-4">
+  <div class="row gy-4 pt-4">
     <div class="col-6 col-lg-4">
       <h3>Site Menu</h3>
       <ul class="nav flex-column">

@@ -147,13 +147,11 @@ class Pass extends DatabaseObject {
 
     if(is_blank($this->user_id)) {
       $this->error_array[] = ["UserID" => "User ID cannot be blank."];
-    } elseif(!ctype_digit($this->user_id)){
+    } elseif(!ctype_alnum($this->user_id)){
       $this->error_array[] = ["UserID" => "User ID must be a number."];
     }
     
-    if(is_blank($this->is_active)) {
-      $this->error_array[] = ["IsActive" => "An option must be selected."];
-    } elseif($this->is_active != 0 && $this->is_active != 1) {
+    if($this->is_active != 0 && $this->is_active != 1) {
       $this->error_array[] = ["IsActive" => "Possible values are limited to Yes or No."];
     }
     

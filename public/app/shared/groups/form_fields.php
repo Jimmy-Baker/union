@@ -24,7 +24,7 @@ $today = date('Y-m-d');
       <div class="col-md-7">
         <input type="text" name="group[name]" value="<?= h($group->name); ?>" class="form-control" id="inputGroupName" maxlength="32" aria-describedby="helpGroupName" required>
       </div>
-      <div id="helpGroupName" class="form-text offset-md-3">Maximum of 32 characters</div>
+      <div id="helpGroupName" class="form-text offset-md-3">Required - Maximum of 32 characters</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -34,7 +34,7 @@ $today = date('Y-m-d');
       <div class="col-md-7">
         <input type="text" name="group[owner_id]" value="<?= h($group->id) ?>" class="form-control" id="inputOwnerID" list="userIDs" aria-describedby="helpOwnerID" maxlength="8" required>
       </div>
-      <div id="helpOwnerID" class="form-text offset-md-3">Maximum of 32 characters</div>
+      <div id="helpOwnerID" class="form-text offset-md-3">Required - Maximum of 32 characters</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -49,7 +49,7 @@ $today = date('Y-m-d');
           <?php } ?>
         </select>
       </div>
-      <div id="helpGroupType" class="form-text offset-md-3">Maximum of 32 characters</div>
+      <div id="helpGroupType" class="form-text offset-md-3">Required - Maximum of 32 characters</div>
     </div>
   </div>
 </fieldset>

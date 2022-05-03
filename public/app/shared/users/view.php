@@ -68,8 +68,8 @@ include(SHARED_PATH . '/user-header.php');
               <dd class="col-sm-8"><?= d($user->preferred_name); ?></dd>
               <dt class="col-sm-4 text-sm-end">Birth Date</dt>
               <dd class="col-sm-8"><?= d(format_date($user->birth_date, "-")); ?></dd>
-              <dt class="col-sm-4 text-sm-end">Group ID</dt>
-              <dd class="col-sm-8"><?= d($user->group_id); ?></dd>
+              <dt class="col-sm-4 text-sm-end">Primary Location</dt>
+              <dd class="col-sm-8"><?= d($user->primary_location); ?></dd>
               <dt class="col-sm-4 text-sm-end">Address</dt>
               <dd class="col-sm-8"><?= d(format_address($user->street_address, $user->city, $user->state_abv, $user->zip, $user->country_abv)); ?></dd>
               <dt class="col-sm-4 text-sm-end">Email</dt>

@@ -171,6 +171,10 @@ header>div:first-child {
   top: 108%;
 }
 
+.yes-js {
+  display: none;
+}
+
 /*------------------*\
 ||   Media Queries  ||
 \*------------------*/

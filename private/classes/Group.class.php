@@ -120,7 +120,7 @@ class Group extends DatabaseObject {
    * @return boolean ex. True if the user has the role within the group
    */
   public static function test_group_user_role($group_id, $user_id, $role) {
-    $sql = "SELECT user_id FROM group_users WHERE group_id='" . parent::$database->escape_string($group_id) . "' AND user_id='" . parent::$database->escape_string($user_id) . "' AND role='" . parent::$database->escape_string($role) . "';";
+    $sql = "SELECT user_id FROM group_users WHERE group_id='" . parent::$database->escape_string($group_id) . "' AND user_id='" . parent::$database->escape_string($user_id) . "' AND role_abv='" . parent::$database->escape_string($role) . "';";
     $result = self::$database->query($sql);
     if($result->num_rows >0) {
       return true;

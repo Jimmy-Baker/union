@@ -168,6 +168,14 @@ class Session {
   public function gym_location() {
     return $this->gym_name . " " . $this->location_name;
   }
+  
+  /** 
+   * Requeries the database for a newly uploaded avatar
+   */
+  public function reset_photo() {
+    $user = User::find_by_id($this->user_id);
+    $this->avatar_url = $_SESSION['avatar_url'] = $user->avatar_url;
+  }
 }
 
 ?>

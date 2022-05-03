@@ -32,7 +32,7 @@ if(count(get_included_files()) == 1) redirect_to(url_for('/app/shared/locations/
     <?php if(test_access('GS')) { ?>
     <li><a class="dropdown-item<?= active_class('view') ?>" href="<?= url_for('app/shared/locations/view.php?id=' . u($location->id)); ?>">View Location</a></li>
     <?php } ?>
-    <?php if(test_access('AA') || (Permission::test_location_user_permission($id, $session->user_id, 'XI'))){ ?>
+    <?php if(test_access('AA') || (Permission::test_location_user_permission($location->id, $session->user_id, 'XI'))){ ?>
     <li><a class="dropdown-item<?= active_class('edit') ?>" href="<?= url_for('app/shared/locations/edit.php?id=' . u($location->id)); ?>">Edit Location</a></li>
     <?php } ?>
     <?php if(test_access('AA')){ ?>

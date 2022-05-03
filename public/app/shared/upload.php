@@ -16,9 +16,9 @@ if(count(get_included_files()) == 1) redirect_to(url_for('/app/shared/users/user
               <label for="inputImage<?= $num ?>" class="col-form-label">Image Source</label>
             </div>
             <div class="col-md-7">
-              <input type="file" name="image<?= $num ?>" value="" class="form-control" id="inputImage<?= $num ?>" accept="image/*" aria-describedby="helpImage<?= $num ?>">
+              <input type="file" name="image<?= $num ?>" class="form-control" id="inputImage<?= $num ?>" accept="image/*" aria-describedby="helpImage<?= $num ?>">
             </div>
-            <div id="helpImage<?= $num ?>" class="form-text offset-md-3">Must be an image smaller than 2MB</div>
+            <div id="helpImage<?= $num ?>" class="form-text offset-md-3">Must be an image smaller than 1MB</div>
           </div>
         </div>
         <div class="modal-footer">

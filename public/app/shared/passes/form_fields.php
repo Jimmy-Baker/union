@@ -17,7 +17,7 @@ $types = Pass::PASS_TYPES;
       <div class="col-md-7">
         <input type="text" name="pass[user_id]" value="<?= h($pass->user_id); ?>" class="form-control" id="inputUserID" maxlength="32" aria-describedby="helpUserID" required>
       </div>
-      <div id="helpUserID" class="form-text offset-md-3">Maximum of 10 digits</div>
+      <div id="helpUserID" class="form-text offset-md-3">Required - Maximum of 10 digits</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -31,7 +31,7 @@ $types = Pass::PASS_TYPES;
           <option value='1' <?= ($pass->is_active == 1) ? 'selected' : ''; ?>>Yes</option>
         </select>
       </div>
-      <div id="helpIsActive" class="form-text offset-md-3">Maximum of 32 characters</div>
+      <div id="helpIsActive" class="form-text offset-md-3">Required - Maximum of 32 characters</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -46,7 +46,7 @@ $types = Pass::PASS_TYPES;
           <?php } ?>
         </select>
       </div>
-      <div id="helpPassType" class="form-text offset-md-3">Maximum of 32 characters</div>
+      <div id="helpPassType" class="form-text offset-md-3">Required - Maximum of 32 characters</div>
     </div>
 
     <?php if(defined('exists')) { ?>

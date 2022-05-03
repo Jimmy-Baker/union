@@ -8,8 +8,9 @@ if(!isset($gym)) {
 <fieldset class="card shadow col-md-10 mx-auto mb-4">
   <legend class="card-header">Gym Information</legend>
   <div class="card-body">
-    <?php if(defined('exists')) { ?>
-    <?php for($num = 1; $num<2; $num++) { ?>
+    <?php if(defined('exists')) { 
+      $num = 1
+    ?>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
       <div class="col-md-3 text-md-end">
@@ -20,13 +21,13 @@ if(!isset($gym)) {
         <img src="<?= h($gym->avatar_url); ?>" class="rounded img-thumbnail mx-auto mb-2 avatar" alt="<?= h($gym->gym_name) ?>'s profile picture." height="200" width="200">
         <?php } ?>
         <div class="input-group">
-          <input type="text" value="<?= image_name($gym->avatar_url); ?>" name="image<?= $num ?>" class="form-control" id="inputSavedImage<?= $num ?>" aria-describedby="helpSavedImage<?= $num ?>" readonly>
-          <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#uploadModal<?= $num ?> data-bs-image=" <?= $num ?>"">Add Image</button>
+          <input type="text" value="<?= image_name($gym->avatar_url); ?>" name="image1" class="form-control" id="inputSavedImage1" aria-describedby="helpSavedImage1" readonly>
+          <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#uploadModal1">Add Image</button>
         </div>
       </div>
-      <div id="helpSavedImage<?= $num ?>" class="form-text" offset-md-3></div>
+      <div id="helpSavedImage1" class="form-text offset-md-3"></div>
     </div>
-    <?php }} ?>
+    <?php } ?>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
       <div class="col-md-3 text-md-end">
@@ -35,7 +36,7 @@ if(!isset($gym)) {
       <div class="col-md-7">
         <input type="text" name="gym[gym_name]" value="<?= h($gym->gym_name); ?>" class="form-control" id="inputGymName" maxlength="32" aria-describedby="helpGymName" required>
       </div>
-      <div id="helpGymName" class="form-text offset-md-3">Maximum of 32 characters</div>
+      <div id="helpGymName" class="form-text offset-md-3">Required - Maximum of 32 characters</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">

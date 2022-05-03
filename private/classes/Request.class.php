@@ -62,6 +62,19 @@ class Request extends DatabaseObject {
   }
   
   /** 
+   * Deletes all Request records for a given user_id
+   *  
+   * @param string $id The user_id to process 
+   * @return boolean ex. False if the delete failed 
+   */
+  public static function delete_all($id) {
+    $sql = "DELETE FROM " . static::$table_name . " ";
+    $sql .= "WHERE user_id='" . self::$database->escape_string($id) . "' ";
+    $result = self::$database->query($sql);
+    return $result;
+  }
+  
+  /** 
    * Creats a MySQL event to delete a request record after 5 minute 
    * 
    * @return boolean ex. True if event creation was succesful 

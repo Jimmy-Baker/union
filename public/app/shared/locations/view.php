@@ -13,7 +13,7 @@ if($location == false) {
   redirect_to(url_for('/app/shared/locations/locations.php'));
 }
 
-if(!test_access('GS')) {
+if(!test_access('GS') && ($session->location!=$id)) {
   $session->message('You do not have permission to view this location.', 'warning');
   redirect_to(url_for($session->dashboard()));
 }

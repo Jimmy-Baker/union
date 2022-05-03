@@ -2,7 +2,7 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 
 if(!isset($_GET['key']) && !isset($_POST['key'])) {
-  $session->message("Unauthorized access was detected. Please generate a new request try again.", "warning");
+  $session->message("Unauthorized access was detected. Please generate a new request try again.", "danger");
   redirect_to(url_for('/app/login.php'));
 }
 
@@ -13,7 +13,7 @@ $key = $_GET['key'] ?? $_POST['key'];
  * Save a database record upon request
  */
 if(is_post_request()) {
-  if(empty($error_array)) {
+  if(empty($user->error_array)) {
     $user = User::find_by_email($email);
     if($user) {
       $request = Request::find_by_param('user_id', $user->id);
@@ -50,7 +50,7 @@ include(SHARED_PATH . '/public-header.php');
 ?>
 
 <main class="container-md p-4 mt-5" id="main">
-  <? display_errors($error_array); ?>
+  <? display_errors($user->error_array); ?>
   <form action="restore.php?email=<?= u($email) ?>&key=<?= u($key) ?>" method="post">
     <h1><?= $page_title ?></h1>
     <fieldset class="card shadow col-md-10 mx-auto mb-4">
@@ -62,8 +62,8 @@ include(SHARED_PATH . '/public-header.php');
           </div>
           <div class="col-md-7">
             <input type="text" name="email" value="<?= h($email); ?>" class="form-control" id="inputEmail" maxlength="255" aria-describedby="helpEmail" required>
+            <div id="helpEmail" class="form-text offset-md-3">Required - Maximum of 255 Characters</div>
           </div>
-          <div id="helpEmail" class="form-text offset-md-3">Maximum of 255 Characters</div>
         </div>
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -71,9 +71,9 @@ include(SHARED_PATH . '/public-header.php');
             <label for="inputPassword" class="col-form-label">New Password</label>
           </div>
           <div class="col-md-7">
-            <input type="password" name="user[password]" value="" class="form-control" aria-describedby="helpPassword" id="inputPassword">
+            <input type="password" name="user[password]" value="" class="form-control" aria-describedby="helpPassword" id="inputPassword" required>
+            <div id="helpPassword" class="form-text">Required - Must be at least 8 characters and contain a combination of uppercase and lowercase letters and symbols.</div>
           </div>
-          <div id="helpPassword" class="form-text offset-md-3">Must be at least 8 characters and contain a combination of uppercase and lowercase letters and symbols.</div>
         </div>
 
         <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -81,9 +81,9 @@ include(SHARED_PATH . '/public-header.php');
             <label for="inputConfirmPassword" class="col-form-label">Confirm Password</label>
           </div>
           <div class="col-md-7">
-            <input type="password" name="user[confirm_password]" value="" class="form-control" id="inputConfirmPassword">
+            <input type="password" name="user[confirm_password]" value="" class="form-control" id="inputConfirmPassword" required>
           </div>
-          <div id="helpConfirmPassword" class="form-text offset-md-3">Must match the previous value.</div>
+          <div id="helpConfirmPassword" class="form-text offset-md-3">Required - Must match the previous value.</div>
         </div>
       </div>
     </fieldset>

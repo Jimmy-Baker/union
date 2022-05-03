@@ -7,7 +7,7 @@ if(!test_access('GS')){
   redirect_to(url_for($session->dashboard()));
 } 
 
-$pass_types = PASS::PASS_TYPES;
+$pass_types = Pass::PASS_TYPES;
 $gyms = Gym::find_all();
 
 /** 
@@ -25,7 +25,7 @@ if(is_post_request()) {
   if($user){
     $args = $_POST['pass'];
     $args['user_id'] = $user->id;
-    $args['is_active'] = '0';
+    $args['is_active'] = 0;
     $pass = new Pass($args);
     $result = $pass->save();
     if($result) {
@@ -37,19 +37,19 @@ if(is_post_request()) {
           $session->message("Pass provisioned successfully.", "primary");
           redirect_to(url_for('/app/shared/passes/view.php?id=' . u($pass->id)));
         } else {
-          $session->message("The pass could not be activated.", "warning");
+          $session->message("The pass could not be activated.", "danger");
           $pass->delete();
         }
       } else {
-        $session->message("The pass could not be provisioned.", "warning");
+        $session->message("The pass could not be provisioned.", "danger");
         $pass->delete();
       }  
     } else {
-      $session->message("The pass could not be created.", "warning");
+      $session->message("The pass could not be created.", "danger");
     }
   } else {
     // user sql query failed
-    $session->message("That user could not be found", "warning");
+    $session->message("That user could not be found", "danger");
   }
 }
 
@@ -58,7 +58,7 @@ include(SHARED_PATH . '/user-header.php');
 ?>
 
 <header>
-  <div class="p-5 bg-light text-primary">
+  <div class="p-5 bg-primary text-light">
     <div class="container-fluid py-3">
       <h1><?= $page_title ?></h1>
     </div>
@@ -69,7 +69,7 @@ include(SHARED_PATH . '/user-header.php');
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
           <li class="breadcrumb-item"><a class="link-primary" href="<?= url_for('app/shared/passes/passes.php'); ?>">Passes</a></li>
-          <li class="breadcrumb-item active text-primary" aria-current="page">Pass Provision</a></li>
+          <li class="breadcrumb-item active text-primary" aria-current="page">Pass Provision</li>
         </ol>
       </nav>
       <?php 
@@ -91,7 +91,7 @@ include(SHARED_PATH . '/user-header.php');
           </div>
           <div class="col-md-7">
             <div class="row ms-0 input-group">
-              <select class="form-select" aria-label="Parameter selection for following text input" name="inputParameter1" value="<?= $_POST['inputParameter1'] ?? '';?>" required>
+              <select class="form-select" aria-label="Parameter selection for following text input" name="inputParameter1" required>
                 <option hidden value="">Select One</option>
                 <option value="id">User ID</option>
                 <option value="email">Email</option>
@@ -177,4 +177,12 @@ include(SHARED_PATH . '/user-header.php');
   <?php } ?>
 </main>
 
-<?php include(SHARED_PATH . '/user-footer.php'); ?>
+
+<?php 
+if(isset($pass)){
+  if($pass->error_array != []){ 
+    $error_render=$user->error_array;
+  }
+}
+include(SHARED_PATH . '/user-footer.php'); 
+?>

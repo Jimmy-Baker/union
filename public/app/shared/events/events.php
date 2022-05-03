@@ -106,9 +106,6 @@ include(SHARED_PATH . '/user-header.php');
                   <th>End Date</th>
                   <th>Location ID</th>
                   <th>Event Name</th>
-                  <th>Participants</th>
-                  <th>Cost</th>
-                  <th>URL</th>
                   <th>&nbsp;</th>
                 </tr>
               </thead>
@@ -120,9 +117,6 @@ include(SHARED_PATH . '/user-header.php');
                   <td><?= h($loc_event->end_date) ?></td>
                   <td><?= h($loc_event->location_id) ?></td>
                   <td><?= h($loc_event->event_name) ?></td>
-                  <td><?= h($loc_event->participants) ?></td>
-                  <td><?= h($loc_event->cost) ?></td>
-                  <td><?= h($loc_event->url) ?></td>
                   <td>
                     <div class="btn-group" role="group" aria-label="event actions">
                       <a class="btn btn-primary" href="<?= url_for('/app/shared/events/view.php?id=' . u($loc_event->id)); ?>">View</a>
@@ -146,7 +140,7 @@ include(SHARED_PATH . '/user-header.php');
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/events/search.php'); ?>">Find Events</a>
     </div>
-    <?php if(Permission::test_location_user_permission($event->location_id, $session->user_id, 'XE') || $session->access_abv == 'AA'){ ?>
+    <?php if(Permission::test_location_user_permission($session->location, $session->user_id, 'XE') || $session->access_abv == 'AA'){ ?>
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/events/new.php'); ?>">Create A Event</a>
     </div>

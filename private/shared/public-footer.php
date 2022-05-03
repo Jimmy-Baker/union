@@ -48,22 +48,18 @@
 
 <button type="button" class="btn shadow btn-secondary rounded-circle btn-lg" id="back-to-top"><span class="visually-hidden">Back to Top</span><i class="fas fa-arrow-up"></i></button>
 
-<?php if(isset($scripts)) {
+<?php 
+if(isset($scripts)) {
   foreach($scripts as $script) {
     echo('<script src="' . url_for($script) .'" defer></script>');
   }
-} ?>
-
-
-<?php 
-  if(isset($user)) {
-    echo display_errors($user->error_array);
-  }
-  if(isset($error_render)) {
-    echo display_errors($error_render);
-  }
+}
+if(isset($error_render)) {
+  echo display_errors($error_render);
+}
 ?>
 </body>
+
 </html>
 
 <?php db_disconnect($database); ?>

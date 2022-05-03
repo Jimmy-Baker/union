@@ -4,7 +4,7 @@ require_login();
 $page_title = 'Change Location';
 
 $user_id = $_SESSION['user_id'];
-$redirect = url_for('/app/admin/change.php');
+$redirect = url_for('/app/dashboard/change.php');
 
 /** 
  * Change the user's session location upon request 
@@ -23,15 +23,15 @@ if(is_post_request()) {
         $session->message("Location successfully changed.", "success");
         redirect_to(url_for( $session->dashboard()));
       } else {
-        $session->message("You do not have permission to join that location.", "warning");
+        $session->message("You do not have permission to join that location.", "danger");
         redirect_to($redirect);
       }
     } else {
-      $session->message("You do not have permission to join that location.", "warning");
+      $session->message("You do not have permission to join that location.", "danger");
       redirect_to($redirect);
     }
   } else {
-    $session->message("Your information could not be retrieved. Please try again.", "warning");
+    $session->message("Your information could not be retrieved. Please try again.", "danger");
     redirect_to(url_for( $session->dashboard()));
   }
 } else {
@@ -63,7 +63,7 @@ include(SHARED_PATH . '/user-header.php');
 </header>
 
 <main class=" container-md p-4" id="main">
-  <form action="<?= url_for('/app/admin/change.php'); ?>" method="POST" class="mb-5">
+  <form action="<?= url_for('/app/dashboard/change.php'); ?>" method="POST" class="mb-5">
     <fieldset class="card shadow col-md-10 mx-auto mb-4">
       <legend class="card-header">Location Information</legend>
       <div class="card-body">

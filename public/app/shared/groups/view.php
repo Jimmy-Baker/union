@@ -95,7 +95,8 @@ include(SHARED_PATH . '/user-header.php');
                   <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . u($member->user_id)); ?>">View</a>
                   <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
                   <ul class="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-end text-end">
-                    <li><button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#confirmModal" data-bs-id="<?=($member->user_id) ?>">Remove User</button></li>
+                    <li><button type="submit" class="dropdown-item no-js" name="method" value="remove">Remove User</button></li>
+                    <li><button class="dropdown-item yes-js" data-bs-toggle="modal" data-bs-target="#confirmModal" data-bs-id="<?=($member->user_id) ?>">Remove User</button></li>
                   </ul>
                 </div>
               </td>
@@ -123,8 +124,8 @@ include(SHARED_PATH . '/user-header.php');
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
           <form action="<?= url_for('/app/shared/groups/remove_user.php?id=' . u($group->id))?>" method="POST">
-            <input type="hidden" name="user" id="confirmInput">
-            <button type=" submit" class="btn btn-primary" id="confirmButton">Confirm Removal</button>
+            <input type="hidden" name="user" value="" id="confirmInput">
+            <button type="submit" class="btn btn-primary" id="confirmButton">Confirm Removal</button>
           </form>
         </div>
       </div>

@@ -36,8 +36,8 @@ class Gym extends DatabaseObject {
       $this->error_array += ["GymName" => "Gym name must be less than 32 characters."];
     } elseif (has_padding($this->gym_name)) {
       $this->error_array += ["GymName" => "Gym name cannot start or end with a space."];
-    } elseif (!has_valid_name($this->gym_name)) {
-      $this->error_array += ["GymName" => "Gym name can only contain letters, dashes, and spaces."];
+    } elseif (!has_valid_text($this->gym_name)) {
+      $this->error_array += ["GymName" => "Gym name can not contain special characters."];
     }
     
     if(!is_blank($this->website)) {

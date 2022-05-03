@@ -223,6 +223,12 @@ class User extends DatabaseObject {
       $this->error_array += ["CountryAbv" => "Country must be selected."];
     }
     
+    if(is_blank($this->primary_location)) {
+      $this->error_array += ["PrimaryLocation" => "Primary location cannot be blank."];
+    } elseif (!ctype_digit($this->zip)) {
+      $this->error_array += ["PrimaryLocation" => "Primary location can only contain numerals."];
+    }
+    
     if(is_blank($this->email)) {
       $this->error_array += ["Email" => "Email cannot be blank."];
     } elseif (!has_length($this->email, array('max' => 255))) {
@@ -362,7 +368,7 @@ class User extends DatabaseObject {
    * @return object An instantiated User
    */
   static public function find_expanded_pass_by_param($param, $value){
-    $sql = "SELECT users.id, passes.id AS pass_id FROM users INNER JOIN passes ON users.id=passes.user_id";
+    $sql = "SELECT users.id, users.first_name, users.last_name, passes.id AS pass_id FROM users INNER JOIN passes ON users.id=passes.user_id";
     $sql .= " WHERE users." . self::$database->escape_string($param) . "='" . self::$database->escape_string($value) . "'";
     $sql .= " AND passes.is_active=1 ORDER BY passes.created_at LIMIT 1";
     $results = self::$database->query($sql);

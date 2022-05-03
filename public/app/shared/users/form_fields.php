@@ -5,6 +5,7 @@ if(!isset($user)) {
 
 $states = State::all_states();
 $countries = Country::all_countries();
+$locations = Location::find_all_locations_expanded();
 $today = date('Y-m-d');
 $accesses = User::USER_TYPES;
 $num=1;
@@ -45,7 +46,7 @@ $num=1;
       <div class="col-md-7">
         <input type="text" name="user[first_name]" value="<?= h($user->first_name); ?>" class="form-control" id="inputFirstName" maxlength="32" aria-describedby="helpFirstName" required>
       </div>
-      <div id="helpFirstName" class="form-text offset-md-3">Maximum of 32 characters</div>
+      <div id="helpFirstName" class="form-text offset-md-3">Required - Maximum of 32 characters</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -65,7 +66,7 @@ $num=1;
       <div class="col-md-7">
         <input type="text" name="user[last_name]" value="<?= h($user->last_name); ?>" class="form-control" id="inputLastName" maxlength="32" aria-describedby="helpLastName" required>
       </div>
-      <div id="helpLastName" class="form-text offset-md-3">Maximum of 32 characters</div>
+      <div id="helpLastName" class="form-text offset-md-3">Required - Maximum of 32 characters</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -85,7 +86,7 @@ $num=1;
       <div class="col-md-7">
         <input type="date" name="user[birth_date]" value="<?= h(html_date($user->birth_date)); ?>" class="form-control" id="inputBirthDate" min="1902-01-01" max="<?= $today; ?>" aria-describedby="helpBirthDate" required>
       </div>
-      <div id="helpBirthDate" class="form-text offset-md-3">Must be between 01/01/1902 and <?= format_date($today, "/"); ?></div>
+      <div id="helpBirthDate" class="form-text offset-md-3">Required - Must be between 01/01/1902 and <?= format_date($today, "/"); ?></div>
     </div>
   </div>
 </fieldset>
@@ -100,7 +101,7 @@ $num=1;
       <div class="col-md-7">
         <input type="text" name="user[street_address]" value="<?= h($user->street_address); ?>" class="form-control" id="inputStreetAddress" minlength="6" maxlength="64" aria-describedby="helpStreetAddress" required>
       </div>
-      <div id="helpStreetAddress" class="form-text offset-md-3">Maximum of 64 characters</div>
+      <div id="helpStreetAddress" class="form-text offset-md-3">Required - Maximum of 64 characters</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -110,7 +111,7 @@ $num=1;
       <div class="col-md-7">
         <input type="text" name="user[city]" value="<?= h($user->city); ?>" class="form-control" id="inputCity" minlength="2" maxlength="64" aria-describedby="helpCity" required>
       </div>
-      <div id="helpCity" class="form-text offset-md-3">Maximum of 64 characters</div>
+      <div id="helpCity" class="form-text offset-md-3">Required - Maximum of 64 characters</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -118,13 +119,14 @@ $num=1;
         <label for="inputStateAbv" class="col-form-label">State</label>
       </div>
       <div class="col-md-7">
-        <select name="user[state_abv]" class="form-select" id="inputStateAbv" required>
+        <select name="user[state_abv]" class="form-select" id="inputStateAbv" aria-describedby="helpStateAbv" required>
           <option hidden value="">Select One</option>
           <?php foreach($states as $state) { ?>
           <option value="<?= h($state->abv) ?>" <?= ($user->state_abv == $state->abv) ? 'selected' : '';?>><?= h($state->state_name); ?></option>
           <?php } ?>
         </select>
       </div>
+      <div id="helpStateAbv" class="form-text offset-md-3">Required</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -134,7 +136,7 @@ $num=1;
       <div class="col-md-7">
         <input type="text" name="user[zip]" value="<?= h($user->zip); ?>" class="form-control" id="inputZip" minlength="5" maxlength="5" aria-describedby="helpZip" required>
       </div>
-      <div id="helpZip" class="form-text offset-md-3">Must be 5 characters</div>
+      <div id="helpZip" class="form-text offset-md-3">Required - Must be 5 characters</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -148,7 +150,7 @@ $num=1;
           <option value="<?= h($country->abv) ?>" <?= (($user->country_abv == $country->abv) || (($user->country_abv == '') && ($country->abv == 'US'))) ? 'selected' : '';?>><?= h($country->country_name); ?></option>
           <?php } ?>
         </select>
-        <div id="helpCountryAbv" class="form-text offset-md-3"></div>
+        <div id="helpCountryAbv" class="form-text offset-md-3">Required</div>
       </div>
     </div>
   </div>
@@ -164,7 +166,7 @@ $num=1;
       <div class="col-md-7">
         <input type="text" name="user[email]" value="<?= h($user->email); ?>" class="form-control" id="inputEmail" maxlength="255" aria-describedby="helpEmail" required>
       </div>
-      <div id="helpEmail" class="form-text offset-md-3">Maximum of 255 Characters</div>
+      <div id="helpEmail" class="form-text offset-md-3">Required - Maximum of 255 Characters</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -177,7 +179,7 @@ $num=1;
           <input type="tel" name="user[phone_primary]" value="<?= h($user->phone_primary); ?>" class="form-control col w-75" id="inputPhonePrimary" aria-describedby="helpPhonePrimary" minlength="10" maxlength="12" required>
         </div>
       </div>
-      <div id="helpPhonePrimary" class="form-text offset-md-3">Maximum of 12 Digits</div>
+      <div id="helpPhonePrimary" class="form-text offset-md-3">Required - Maximum of 12 Digits</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -205,7 +207,7 @@ $num=1;
       <div class="col-md-7">
         <input type="text" name="user[first_name_emergency]" value="<?= h($user->first_name_emergency); ?>" class="form-control" id="inputEmergencyFirst" aria-describedby="helpEmergencyFirst" required>
       </div>
-      <div id="helpEmergencyFirst" class="form-text offset-md-3">Maximum of 32 Characters</div>
+      <div id="helpEmergencyFirst" class="form-text offset-md-3">Required - Maximum of 32 Characters</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -215,7 +217,7 @@ $num=1;
       <div class="col-md-7">
         <input type="text" name="user[last_name_emergency]" value="<?= h($user->last_name_emergency); ?>" class="form-control" id="inputEmergencyLast" aria-describedby="helpEmergencyLast" required>
       </div>
-      <div id="helpEmergencyLast" class="form-text offset-md-3">Maximum of 32 Characters</div>
+      <div id="helpEmergencyLast" class="form-text offset-md-3">Required - Maximum of 32 Characters</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -228,7 +230,7 @@ $num=1;
           <input type="tel" name="user[phone_emergency]" value="<?= h($user->phone_emergency); ?>" class="form-control col w-75" id="inputPhoneEmergency" aria-describedby="helpPhoneEmergency" maxlength="12" required>
         </div>
       </div>
-      <div id="helpPhoneEmergency" class="form-text offset-md-3">Maximum of 12 Digits</div>
+      <div id="helpPhoneEmergency" class="form-text offset-md-3">Required - Maximum of 12 Digits</div>
     </div>
   </div>
 </fieldset>
@@ -236,6 +238,22 @@ $num=1;
 <fieldset class="card shadow col-md-10 mx-auto mb-4">
   <legend class="card-header">Access Information</legend>
   <div class="card-body">
+
+    <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
+      <div class="col-md-3 text-md-end">
+        <label for="inputPrimaryLocation" class="col-form-label">Primary Location</label>
+      </div>
+      <div class="col-md-7">
+        <select name="user[primary_location]" class="form-select" id="inputPrimaryLocation" aria-describedby="helpPrimaryLocation" required>
+          <option hidden value="">Select One</option>
+          <?php foreach($locations as $location) { ?>
+          <option value="<?= h($location->id) ?>" <?= ($user->primary_location == $location->id) ? 'selected' : '' ?>><?= h($location->gym_name) . ' ' . h($location->location_name) ?></option>
+          <?php } ?>
+        </select>
+      </div>
+      <div id="helpPrimaryLocation" class="form-text offset-md-3">Required</div>
+    </div>
+
     <?php if(defined('exists')) { ?>
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
       <div class="col-md-3 text-md-end">
@@ -255,12 +273,13 @@ $num=1;
       <div class="col-md-7">
         <select name="user[access_abv]" class="form-select" id="inputAccessAbv" aria-describedby="helpUserType" required>
           <option hidden value="">Select One</option>
-          <?php foreach($accesses as $abv=>$access) { ?>
+          <?php foreach($accesses as $abv=>$access) { 
+            if(test_access($abv)){ ?>
           <option value="<?= h($abv) ?>" <?= ($user->access_abv == $abv) ? 'selected' : '';?>><?= h($access); ?></option>
-          <?php } ?>
+          <?php }} ?>
         </select>
       </div>
-      <div id="helpUserType" class="form-text offset-md-3">Select One</div>
+      <div id="helpUserType" class="form-text offset-md-3">Required - Select One</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -270,7 +289,7 @@ $num=1;
       <div class="col-md-7">
         <input type="password" name="user[password]" value="<?= h($user->password); ?>" class="form-control" id="inputPassword" aria-describedby="helpPassword" <?php if(!defined('exists')) {'required';} ?>>
       </div>
-      <div id="helpPassword" class="form-text offset-md-3">Must be at least 8 characters and contain a combination of uppercase and lowercase letters and symbols.</div>
+      <div id="helpPassword" class="form-text offset-md-3 col-md-7">Required - Must be at least 8 characters and contain a combination of uppercase and lowercase letters and symbols.</div>
     </div>
 
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
@@ -280,7 +299,7 @@ $num=1;
       <div class="col-md-7">
         <input type="password" name="user[confirm_password]" value="<?= h($user->confirm_password); ?>" class="form-control" aria-describedby="helpConfirmPassword" id="inputConfirmPassword" <?php if(!defined('exists')) {'required';} ?>>
       </div>
-      <div id="helpConfirmPassword" class="form-text offset-md-3">Must match the previous value.</div>
+      <div id="helpConfirmPassword" class="form-text offset-md-3">Required - Must match the previous value.</div>
     </div>
   </div>
 </fieldset>

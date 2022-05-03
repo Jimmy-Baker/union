@@ -28,7 +28,7 @@ include(SHARED_PATH . '/user-header.php');
       <nav aria-label="breadcrumb" class="col-auto">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a class="link-primary" href="<?= $session->dashboard(); ?>">Dashboard</a></li>
-          <li class="breadcrumb-item active text-primary" aria-current="page">Users</a></li>
+          <li class="breadcrumb-item active text-primary" aria-current="page">Users</li>
         </ol>
       </nav>
       <?php

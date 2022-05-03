@@ -37,35 +37,35 @@ if(is_post_request()) {
                   if($credit) {
                     $session->message("The user was successfully checked in", "success");
                   } else {
-                    $session->message("The user could not be added to the attendance list.", "warning");
+                    $session->message("The user could not be added to the attendance list.", "danger");
                   }
                 } else {
-                $session->message("A punch could not be debited.", "warning");
+                $session->message("A punch could not be debited.", "danger");
                 }
               } else {
-                $session->message("The user is already checked in.", "warning");
+                $session->message("The user is already checked in.", "danger");
               }
             } else {
-              $session->message("The user does not have remaining punches.", "warning");
+              $session->message("The user does not have remaining punches.", "danger");
             }
           } else {
             // punch could not be found within pass
-            $session->message("User's pass does not include this gym.", "warning");
+            $session->message("User's pass does not include this gym.", "danger");
           } 
         } else {
           //user not found
-          $session->message("The member with an active pass was not found.", "warning");
+          $session->message("The member with an active pass was not found.", "danger");
         }
       } else {
         // if parameter was null
-        $session->message("A valid entry is required.", "warning");
+        $session->message("A valid entry is required.", "danger");
       }
     } else {
       // if location is full
-      $session->message("The location is currently at maximum capacity.", "warning");
+      $session->message("The location is currently at maximum capacity.", "danger");
     }
   } else {
-    $session->message("Your location is not set.", "warning");
+    $session->message("Your location is not set.", "danger");
   }
 }
 
@@ -150,8 +150,7 @@ include(SHARED_PATH . '/user-header.php');
           <tbody>
             <tr class="align-middle text-nowrap">
               <td><?= h($user->id) ?></td>
-              <td><?= h($user->name()) . ' ' . h($user->last_name) ?></td>
-              <td><?= h($user->name()) . ' ' . h($user->last_name) ?></td>
+              <td><?= h($user->first_name) . ' ' . h($user->last_name) ?></td>
               <td>
                 <div class="btn-group" role="group" aria-label="user actions">
                   <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . u($user->id)); ?>">View</a>
