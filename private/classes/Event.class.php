@@ -45,9 +45,6 @@ class Event extends DatabaseObject {
     $array = [];
     while($record = $results->fetch_assoc()){
       $object = (object) $record;
-      // foreach($object as $prop=>$value){
-      //   $value = $value;
-      // }
       $array[] = $object;
     }
     $results->free(); 
@@ -61,8 +58,14 @@ class Event extends DatabaseObject {
    */
   public static function find_ex_next_month() {
     $sql = "SELECT events.*, b.location_name, b.gym_name from events LEFT JOIN (SELECT locations.id AS id, locations.location_name AS location_name, gyms.gym_name AS gym_name FROM locations LEFT JOIN gyms ON locations.gym_id = gyms.id) AS b ON events.location_id=b.id WHERE events.start_date >= (LAST_DAY(NOW()+INTERVAL 1 MONTH) + INTERVAL 1 DAY - INTERVAL 1 MONTH) AND events.start_date < (LAST_DAY(NOW() + INTERVAL 1 MONTH) + INTERVAL 1 DAY) ORDER BY start_date ASC;";
-    return parent::find_by_sql($sql);
-  }
+    $results = self::$database->query($sql);
+    $array = [];
+    while($record = $results->fetch_assoc()){
+      $object = (object) $record;
+      $array[] = $object;
+    }
+    $results->free(); 
+    return $array;   }
   
   /** 
    * Tests User properties for valid HTML input values

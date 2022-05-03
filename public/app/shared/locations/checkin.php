@@ -144,20 +144,12 @@ include(SHARED_PATH . '/user-header.php');
             <tr>
               <th>User ID</th>
               <th>Name</th>
-              <th>&nbsp;</th>
             </tr>
           </thead>
           <tbody>
             <tr class="align-middle text-nowrap">
               <td><?= h($user->id) ?></td>
               <td><?= h($user->first_name) . ' ' . h($user->last_name) ?></td>
-              <td>
-                <div class="btn-group" role="group" aria-label="user actions">
-                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/view.php?id=' . u($user->id)); ?>">View</a>
-                  <a class="btn btn-primary" href="<?= url_for('/app/shared/users/edit.php?id=' . u($user->id)); ?>">Edit</a>
-                  <a class="btn btn-danger" href="<?= url_for('/app/shared/users/delete.php?id=' . u($user->id)); ?>">Delete</a>
-                </div>
-              </td>
             </tr>
           </tbody>
         </table>

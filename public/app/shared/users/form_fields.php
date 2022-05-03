@@ -254,18 +254,6 @@ $num=1;
       <div id="helpPrimaryLocation" class="form-text offset-md-3">Required</div>
     </div>
 
-    <?php if(defined('exists')) { ?>
-    <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
-      <div class="col-md-3 text-md-end">
-        <label for="inputGroupID" class="col-form-label">Group ID</label>
-      </div>
-      <div class="col-md-7">
-        <input type="text" name="user[group_id]" value="<?= h($user->group_id); ?>" class="form-control" id="inputGroupID" aria-describedby="helpGroupID" maxlength="6">
-      </div>
-      <div id="helpGroupID" class="form-text offset-md-3">Maximum of 6 Digits</div>
-    </div>
-    <?php } ?>
-
     <div class="row row-cols-md-auto align-items-center mb-3 mb-md-4">
       <div class="col-md-3 text-md-end">
         <label for="inputAccessAbv" class="col-form-label">User Type</label>

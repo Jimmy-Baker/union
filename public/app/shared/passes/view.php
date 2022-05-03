@@ -125,7 +125,7 @@ include(SHARED_PATH . '/user-header.php');
           <tbody>
             <?php foreach($punches as $punch) { ?>
             <tr class="align-middle text-nowrap">
-              <td><?= h($punch->gym_id) ?></td>
+              <td><a href="<?= url_for('app/shared/gyms/view.php?id=' . u($punch->gym_id)) ?>"><?= h($punch->gym_id) ?></a></td>
               <td><?= h($punch->assigned) ?></td>
               <td><?= h($punch->used) ?></td>
               <?php if(test_access('GS')){ ?>

@@ -2,8 +2,8 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
-if(!test_access('GS')){
-  $session->message('You do not have permission to view event details.', 'warning');
+if(!test_access('MM')){
+  $session->message('You do not have permission to view gym details.', 'warning');
   redirect_to(url_for($session->dashboard()));
 } 
 

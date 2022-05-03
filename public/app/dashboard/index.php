@@ -260,7 +260,7 @@ if(test_access('GM')){
                   <p class="card-text">View information about your pass and available punches.</p>
                 </div>
                 <div class="card-body text-end pt-0">
-                  <a href="<?= url_for("/app/shared/locations/attendance.php"); ?>" class="btn btn-primary">View My Pass</a>
+                  <a href="<?= url_for('app/shared/passes/view.php?id=' . u($session->pass_id)) ?>" class="btn btn-primary">View My Pass</a>
                 </div>
               </div>
             </div>

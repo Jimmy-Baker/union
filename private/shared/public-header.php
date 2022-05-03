@@ -33,7 +33,7 @@
         <a class="navbar-brand col-auto py-0" href="<?= url_for("/index.php") ?>">
           <div class="row align-items-center">
             <div class="col pe-0">
-              <img src="<?=url_for("/img/union-logo-yellow.svg");?>" alt="Union mountains logo." width="45" height="29.5">
+              <img src="<?=url_for("/img/union-logo-yellow.svg");?>" alt="Union mountains logo." width="45" height="29">
             </div>
             <div class="col ps-1">
               <p class="d-inline-block h2 mb-0 col">Union</p>

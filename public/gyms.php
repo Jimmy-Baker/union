@@ -46,7 +46,7 @@ $feature = Location::find_random_expanded();
                     <h3><?= h($feature->gym_name) ?></h3>
                   </div>
                   <div class="card-body">
-                    <img src="<?= u($feature->avatar_url); ?>" class="img-fluid img-thumbnail avatar m-3 d-block mx-auto" alt="<?= h($feature->gym_name); ?> profile photo." height="200" width="200">
+                    <img src="<?= h($feature->avatar_url); ?>" class="img-fluid img-thumbnail avatar m-3 d-block mx-auto" alt="<?= h($feature->gym_name); ?> profile photo." height="200" width="200">
                     <h3 class="card-title"><?= h($feature->location_name) ?></h3>
                     <div class="card-text">
                       <address><?= h($feature->street_address) ?><br><?= h($feature->city) ?>, <?= h($feature->state_abv) ?></address>
