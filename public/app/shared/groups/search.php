@@ -2,6 +2,11 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+if(!test_access('GM')){
+  $session->message('You do not have permission to add a new group.', 'warning');
+  redirect_to(url_for('/app/shared/groups/groups.php'));
+}
+
 /** 
  * Perform a sql search query upon request
  */

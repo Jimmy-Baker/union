@@ -13,7 +13,7 @@ if($pass == false) {
   redirect_to(url_for('/app/shared/passes/passes.php'));
 }
 
-if(!test_access('GS')){
+if(!test_access('GM')){
   $session->message('You do not have permission to modify a pass.', 'warning');
   redirect_to(url_for('/app/shared/passes/view.php?id=' . u($id)));
 } 

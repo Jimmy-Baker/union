@@ -2,6 +2,11 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+if(!test_access('GS')) {
+  $session->message('You do not have permission to search all users.', 'warning');
+  redirect_to(url_for('/app/shared/users/users.php'));
+}
+
 if(is_post_request()) {
   // Create record using post parameters
   $args = $_POST;

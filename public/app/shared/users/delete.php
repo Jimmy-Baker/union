@@ -2,6 +2,11 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+if(!test_access('GM')){
+  $session->message('You do not have permission to delete this user.', 'warning');
+  redirect_to(url_for('/app/shared/users/users.php'));
+}
+
 if(!isset($_GET['id'])) {
   $session->message('No user was identified.', 'warning');
   redirect_to(url_for('/app/shared/users/users.php'));

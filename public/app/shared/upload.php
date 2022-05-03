@@ -1,3 +1,7 @@
+<?php
+if(count(get_included_files()) == 1) redirect_to(url_for('/app/shared/users/users.php'));
+?>
+
 <fieldset>
   <div class="modal fade upload-modal" id="uploadModal<?= $num ?>" tabindex="-1" aria-labelledby="labelUploadModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">

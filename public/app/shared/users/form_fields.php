@@ -1,5 +1,4 @@
 <?php
-// prevent this code from being loaded directly
 if(!isset($user)) {
   redirect_to(url_for('/staff/users/users.php'));
 }

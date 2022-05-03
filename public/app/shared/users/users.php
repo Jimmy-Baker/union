@@ -2,6 +2,11 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+if(!test_access('GS')) {
+  $session->message('You do not have permission to view all users.', 'warning');
+  redirect_to(url_for('/app/shared/users/users.php'));
+}
+
 $users = User::find_all();
 $admins = User::find_by_access("AA");
 $managers = User::find_by_access("GM");
@@ -280,15 +285,18 @@ include(SHARED_PATH . '/user-header.php');
       </div>
     </div>
   </div>
+  <?php if(test_access('GS')){ ?>
   <div class="row justify-content-evenly" role="toolbar" aria-label="User toolbar">
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/users/search.php'); ?>">Find Users</a>
     </div>
+    <?php if(test_access('GM')) { ?>
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/users/new.php'); ?>">Create A User</a>
     </div>
+    <?php } ?>
   </div>
-
+  <?php } ?>
 </main>
 
 <?php include(SHARED_PATH . '/user-footer.php'); ?>

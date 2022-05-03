@@ -7,6 +7,12 @@ if(!isset($_GET['id'])) {
   redirect_to(url_for('/app/shared/passes/passes.php'));
 }
 $id = $_GET['id'];
+
+if(!test_access('GS')) {
+  $session->message('You do not have permission to view this pass.', 'warning');
+  redirect_to(url_for($session->dashboard()));
+}
+
 $pass = Pass::find_by_id($id);
 $punches = PassItem::find_by_pass($id);
 if($pass == false) {

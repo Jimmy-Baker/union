@@ -2,6 +2,11 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
+if(!test_access('GM')){
+  $session->message('You do not have permission to view all groups.', 'warning');
+  redirect_to(url_for($session->dashboard()));
+}
+
 $groups = Group::find_all();
 $my_groups = Group::find_all_by_member($session->user_id);
 

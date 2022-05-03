@@ -13,6 +13,11 @@ if($user == false) {
   redirect_to(url_for('/app/shared/users/users.php'));
 }
 
+if(!test_access('GS') && $id!=$session->user_id) {
+  $session->message('You do not have permission to view this user.', 'warning');
+  redirect_to(url_for($session->dashboard()));
+}
+
 $page_title = 'User: ' . h($user->full_name());
 include(SHARED_PATH . '/user-header.php'); 
 ?>
@@ -89,9 +94,11 @@ include(SHARED_PATH . '/user-header.php');
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-primary" href="<?= url_for('app/shared/users/edit.php?id='. u($user->id)); ?>">Edit This User</a>
     </div>
+    <?php if(test_access('GM')){ ?>
     <div class="col-sm-4 col-md-3 mb-3 d-grid">
       <a class="btn shadow btn-danger" href="<?= url_for('app/shared/users/delete.php?id='. u($user->id)); ?>">Delete This User</a>
     </div>
+    <?php } ?>
   </div>
 </main>
 
