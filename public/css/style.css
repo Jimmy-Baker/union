@@ -22,21 +22,21 @@ header>div:first-child {
 
 #index-hd {
   background: url(/public/img/fists2.png);
-  background-position: calc(70vw - 120px) calc(100% + 2vw);
+  background-position: calc(70vw - 70px) calc(100% + 2vw);
   background-repeat: no-repeat;
   background-size: calc(15% + 280px);
 }
 
 #gyms-hd {
   background: url(/public/img/gyms2.png);
-  background-position: calc(70vw - 120px) calc(80% + 10vw);
+  background-position: calc(70vw - 100px) calc(80% + 10vw);
   background-repeat: no-repeat;
   background-size: calc(15% + 280px);
 }
 
 #events-hd {
   background: url(/public/img/events.png);
-  background-position: calc(80vw - 120px) calc(110% + 5vw);
+  background-position: calc(80vw - 80px) calc(110% + 5vw);
   background-repeat: no-repeat;
   background-size: calc(5% + 280px);
 }

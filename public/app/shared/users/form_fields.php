@@ -1,6 +1,6 @@
 <?php
 if(!isset($user)) {
-  redirect_to(url_for('/staff/users/users.php'));
+  redirect_to(url_for('/app/shared/users/users.php'));
 }
 
 $states = State::all_states();

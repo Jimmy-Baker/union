@@ -14,6 +14,9 @@
     <meta name="author" content="Jimmy Baker">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="preload" href="<?= url_for("/css/theme-min.css");?>" as="style">
+    <link rel="preload" href="<?= url_for("https://use.typekit.net/fup0mom.css");?>" as="style">
+
     <link rel="stylesheet" href="<?= url_for("/css/theme-min.css");?>">
     <link rel="stylesheet" href="<?= url_for("/node_modules/@fortawesome/fontawesome-free/css/all.min.css");?>">
     <link rel="stylesheet" href="https://use.typekit.net/fup0mom.css">
@@ -30,7 +33,7 @@
         <a class="navbar-brand col-auto py-0" href="<?= url_for("/index.php") ?>">
           <div class="row align-items-center">
             <div class="col pe-0">
-              <img src="<?=url_for("/img/union-logo-dark.svg");?>" alt="Union mountains logo." width="45">
+              <img src="<?=url_for("/img/union-logo-dark.svg");?>" alt="Union mountains logo." width="45" height="29.5">
             </div>
             <div class="col ps-1">
               <p class="h1 d-inline-block h2 mb-0 col">Union</p>

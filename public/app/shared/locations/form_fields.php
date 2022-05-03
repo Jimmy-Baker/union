@@ -1,6 +1,6 @@
 <?php
 if(!isset($location)) {
-  redirect_to(url_for('/staff/locations/locations.php'));
+  redirect_to(url_for('/app/shared/locations/locations.php'));
 }
 
 $states = State::all_states();

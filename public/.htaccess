@@ -12,3 +12,5 @@ RewriteRule ^ /%1/ [L,R=301]
 RewriteCond %{REQUEST_URI} !/public/ [NC]
 RewriteRule ^(.*?)/?$ public/$1 [L]
 
+ErrorDocument 404 /public/404.html
+

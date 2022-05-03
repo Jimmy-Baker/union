@@ -1,7 +1,7 @@
 <?php
 // prevent this code from being loaded directly
 if(!isset($event)) {
-  redirect_to(url_for('/staff/events/events.php'));
+  redirect_to(url_for('/app/shared/events/events.php'));
 }
 
 $locations = Location::find_all_locations_expanded();
